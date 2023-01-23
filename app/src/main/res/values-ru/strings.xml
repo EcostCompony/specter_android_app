@@ -78,4 +78,5 @@
     <string name="pin">Pin</string>
     <string name="channel_created">channel created</string>
     <string name="save">Save</string>
+    <string name="get_started">Get started</string>
 </resources>
