@@ -1,0 +1,7 @@
+com.ecost.specter.test.app-androidTest-0 D:\ecost\specter\app\build\generated\res\resValues\androidTest\debug
+com.ecost.specter.test.app-androidTest-1 D:\ecost\specter\app\build\generated\res\rs\androidTest\debug
+com.ecost.specter.test.app-mergeDebugAndroidTestResources-2 D:\ecost\specter\app\build\intermediates\incremental\debugAndroidTest\mergeDebugAndroidTestResources\merged.dir
+com.ecost.specter.test.app-mergeDebugAndroidTestResources-3 D:\ecost\specter\app\build\intermediates\incremental\debugAndroidTest\mergeDebugAndroidTestResources\stripped.dir
+com.ecost.specter.test.app-merged_res-4 D:\ecost\specter\app\build\intermediates\merged_res\debugAndroidTest
+com.ecost.specter.test.app-androidTest-5 D:\ecost\specter\app\src\androidTest\res
+com.ecost.specter.test.app-androidTestDebug-6 D:\ecost\specter\app\src\androidTestDebug\res

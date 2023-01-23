@@ -1,0 +1,186 @@
+1<?xml version="1.0" encoding="utf-8"?>
+2<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+3    package="com.ecost.specter"
+4    android:versionCode="82"
+5    android:versionName="Alpha 1.10.0" >
+6
+7    <uses-sdk
+8        android:minSdkVersion="23"
+8-->D:\ecost\specter\app\src\main\AndroidManifest.xml
+9        android:targetSdkVersion="33" />
+9-->D:\ecost\specter\app\src\main\AndroidManifest.xml
+10
+11    <supports-screens
+11-->D:\ecost\specter\app\src\main\AndroidManifest.xml:5:5-9:41
+12        android:largeScreens="true"
+12-->D:\ecost\specter\app\src\main\AndroidManifest.xml:8:9-36
+13        android:normalScreens="true"
+13-->D:\ecost\specter\app\src\main\AndroidManifest.xml:7:9-37
+14        android:smallScreens="false"
+14-->D:\ecost\specter\app\src\main\AndroidManifest.xml:6:9-37
+15        android:xlargeScreens="false" />
+15-->D:\ecost\specter\app\src\main\AndroidManifest.xml:9:9-38
+16
+17    <uses-permission android:name="android.permission.INTERNET" />
+17-->D:\ecost\specter\app\src\main\AndroidManifest.xml:11:5-67
+17-->D:\ecost\specter\app\src\main\AndroidManifest.xml:11:22-64
+18    <uses-permission android:name="android.permission.VIBRATE" />
+18-->D:\ecost\specter\app\src\main\AndroidManifest.xml:12:5-66
+18-->D:\ecost\specter\app\src\main\AndroidManifest.xml:12:22-63
+19
+20    <!-- Although the *SdkVersion is captured in gradle build files, this is required for non gradle builds -->
+21    <!-- <uses-sdk android:minSdkVersion="14"/> -->
+22    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+22-->[com.google.firebase:firebase-database:20.1.0] C:\Users\tebe_\.gradle\caches\transforms-3\8c51a85cc6d7be4fe4bc5ebee9cc8b68\transformed\firebase-database-20.1.0\AndroidManifest.xml:24:5-79
+22-->[com.google.firebase:firebase-database:20.1.0] C:\Users\tebe_\.gradle\caches\transforms-3\8c51a85cc6d7be4fe4bc5ebee9cc8b68\transformed\firebase-database-20.1.0\AndroidManifest.xml:24:22-76
+23
+24    <permission
+24-->[androidx.core:core:1.9.0] C:\Users\tebe_\.gradle\caches\transforms-3\d3ea32c7db12b841421e8f6d09d69de3\transformed\core-1.9.0\AndroidManifest.xml:22:5-24:47
+25        android:name="com.ecost.specter.DYNAMIC_RECEIVER_NOT_EXPORTED_PERMISSION"
+25-->[androidx.core:core:1.9.0] C:\Users\tebe_\.gradle\caches\transforms-3\d3ea32c7db12b841421e8f6d09d69de3\transformed\core-1.9.0\AndroidManifest.xml:23:9-81
+26        android:protectionLevel="signature" />
+26-->[androidx.core:core:1.9.0] C:\Users\tebe_\.gradle\caches\transforms-3\d3ea32c7db12b841421e8f6d09d69de3\transformed\core-1.9.0\AndroidManifest.xml:24:9-44
+27
+28    <uses-permission android:name="com.ecost.specter.DYNAMIC_RECEIVER_NOT_EXPORTED_PERMISSION" />
+28-->[androidx.core:core:1.9.0] C:\Users\tebe_\.gradle\caches\transforms-3\d3ea32c7db12b841421e8f6d09d69de3\transformed\core-1.9.0\AndroidManifest.xml:26:5-97
+28-->[androidx.core:core:1.9.0] C:\Users\tebe_\.gradle\caches\transforms-3\d3ea32c7db12b841421e8f6d09d69de3\transformed\core-1.9.0\AndroidManifest.xml:26:22-94
+29
+30    <application
+30-->D:\ecost\specter\app\src\main\AndroidManifest.xml:14:5-39:19
+31        android:appComponentFactory="androidx.core.app.CoreComponentFactory"
+31-->[androidx.core:core:1.9.0] C:\Users\tebe_\.gradle\caches\transforms-3\d3ea32c7db12b841421e8f6d09d69de3\transformed\core-1.9.0\AndroidManifest.xml:28:18-86
+32        android:debuggable="true"
+33        android:extractNativeLibs="false"
+34        android:icon="@mipmap/ic_launcher"
+34-->D:\ecost\specter\app\src\main\AndroidManifest.xml:15:9-43
+35        android:label="@string/app_name"
+35-->D:\ecost\specter\app\src\main\AndroidManifest.xml:16:9-41
+36        android:testOnly="true"
+37        android:theme="@style/Theme.unify.Starting" >
+37-->D:\ecost\specter\app\src\main\AndroidManifest.xml:17:9-52
+38        <activity
+38-->D:\ecost\specter\app\src\main\AndroidManifest.xml:18:9-26:20
+39            android:name="com.ecost.specter.Routing"
+39-->D:\ecost\specter\app\src\main\AndroidManifest.xml:19:13-36
+40            android:exported="true"
+40-->D:\ecost\specter\app\src\main\AndroidManifest.xml:20:13-36
+41            android:screenOrientation="nosensor" >
+41-->D:\ecost\specter\app\src\main\AndroidManifest.xml:21:13-49
+42            <intent-filter>
+42-->D:\ecost\specter\app\src\main\AndroidManifest.xml:22:13-25:29
+43                <action android:name="android.intent.action.MAIN" />
+43-->D:\ecost\specter\app\src\main\AndroidManifest.xml:23:17-69
+43-->D:\ecost\specter\app\src\main\AndroidManifest.xml:23:25-66
+44
+45                <category android:name="android.intent.category.LAUNCHER" />
+45-->D:\ecost\specter\app\src\main\AndroidManifest.xml:24:17-77
+45-->D:\ecost\specter\app\src\main\AndroidManifest.xml:24:27-74
+46            </intent-filter>
+47        </activity>
+48        <activity
+48-->D:\ecost\specter\app\src\main\AndroidManifest.xml:27:9-29:52
+49            android:name="com.ecost.specter.auth.AuthActivity"
+49-->D:\ecost\specter\app\src\main\AndroidManifest.xml:28:13-46
+50            android:screenOrientation="nosensor" />
+50-->D:\ecost\specter\app\src\main\AndroidManifest.xml:29:13-49
+51        <activity
+51-->D:\ecost\specter\app\src\main\AndroidManifest.xml:30:9-32:52
+52            android:name="com.ecost.specter.menu.MainMenuActivity"
+52-->D:\ecost\specter\app\src\main\AndroidManifest.xml:31:13-50
+53            android:screenOrientation="nosensor" />
+53-->D:\ecost\specter\app\src\main\AndroidManifest.xml:32:13-49
+54        <activity
+54-->D:\ecost\specter\app\src\main\AndroidManifest.xml:33:9-35:52
+55            android:name="com.ecost.specter.channel.ChannelActivity"
+55-->D:\ecost\specter\app\src\main\AndroidManifest.xml:34:13-52
+56            android:screenOrientation="nosensor" />
+56-->D:\ecost\specter\app\src\main\AndroidManifest.xml:35:13-49
+57        <activity
+57-->D:\ecost\specter\app\src\main\AndroidManifest.xml:36:9-38:52
+58            android:name="com.ecost.specter.OldVersionActivity"
+58-->D:\ecost\specter\app\src\main\AndroidManifest.xml:37:13-47
+59            android:screenOrientation="nosensor" />
+59-->D:\ecost\specter\app\src\main\AndroidManifest.xml:38:13-49
+60
+61        <service
+61-->[com.google.firebase:firebase-database:20.1.0] C:\Users\tebe_\.gradle\caches\transforms-3\8c51a85cc6d7be4fe4bc5ebee9cc8b68\transformed\firebase-database-20.1.0\AndroidManifest.xml:28:9-34:19
+62            android:name="com.google.firebase.components.ComponentDiscoveryService"
+62-->[com.google.firebase:firebase-database:20.1.0] C:\Users\tebe_\.gradle\caches\transforms-3\8c51a85cc6d7be4fe4bc5ebee9cc8b68\transformed\firebase-database-20.1.0\AndroidManifest.xml:29:13-84
+63            android:directBootAware="true"
+63-->[com.google.firebase:firebase-common:20.2.0] C:\Users\tebe_\.gradle\caches\transforms-3\e0863b86be8402d24b9e86de10692852\transformed\firebase-common-20.2.0\AndroidManifest.xml:34:13-43
+64            android:exported="false" >
+64-->[com.google.firebase:firebase-database:20.1.0] C:\Users\tebe_\.gradle\caches\transforms-3\8c51a85cc6d7be4fe4bc5ebee9cc8b68\transformed\firebase-database-20.1.0\AndroidManifest.xml:30:13-37
+65            <meta-data
+65-->[com.google.firebase:firebase-database:20.1.0] C:\Users\tebe_\.gradle\caches\transforms-3\8c51a85cc6d7be4fe4bc5ebee9cc8b68\transformed\firebase-database-20.1.0\AndroidManifest.xml:31:13-33:85
+66                android:name="com.google.firebase.components:com.google.firebase.database.DatabaseRegistrar"
+66-->[com.google.firebase:firebase-database:20.1.0] C:\Users\tebe_\.gradle\caches\transforms-3\8c51a85cc6d7be4fe4bc5ebee9cc8b68\transformed\firebase-database-20.1.0\AndroidManifest.xml:32:17-109
+67                android:value="com.google.firebase.components.ComponentRegistrar" />
+67-->[com.google.firebase:firebase-database:20.1.0] C:\Users\tebe_\.gradle\caches\transforms-3\8c51a85cc6d7be4fe4bc5ebee9cc8b68\transformed\firebase-database-20.1.0\AndroidManifest.xml:33:17-82
+68        </service>
+69
+70        <provider
+70-->[com.google.firebase:firebase-common:20.2.0] C:\Users\tebe_\.gradle\caches\transforms-3\e0863b86be8402d24b9e86de10692852\transformed\firebase-common-20.2.0\AndroidManifest.xml:25:9-30:39
+71            android:name="com.google.firebase.provider.FirebaseInitProvider"
+71-->[com.google.firebase:firebase-common:20.2.0] C:\Users\tebe_\.gradle\caches\transforms-3\e0863b86be8402d24b9e86de10692852\transformed\firebase-common-20.2.0\AndroidManifest.xml:26:13-77
+72            android:authorities="com.ecost.specter.firebaseinitprovider"
+72-->[com.google.firebase:firebase-common:20.2.0] C:\Users\tebe_\.gradle\caches\transforms-3\e0863b86be8402d24b9e86de10692852\transformed\firebase-common-20.2.0\AndroidManifest.xml:27:13-72
+73            android:directBootAware="true"
+73-->[com.google.firebase:firebase-common:20.2.0] C:\Users\tebe_\.gradle\caches\transforms-3\e0863b86be8402d24b9e86de10692852\transformed\firebase-common-20.2.0\AndroidManifest.xml:28:13-43
+74            android:exported="false"
+74-->[com.google.firebase:firebase-common:20.2.0] C:\Users\tebe_\.gradle\caches\transforms-3\e0863b86be8402d24b9e86de10692852\transformed\firebase-common-20.2.0\AndroidManifest.xml:29:13-37
+75            android:initOrder="100" />
+75-->[com.google.firebase:firebase-common:20.2.0] C:\Users\tebe_\.gradle\caches\transforms-3\e0863b86be8402d24b9e86de10692852\transformed\firebase-common-20.2.0\AndroidManifest.xml:30:13-36
+76
+77        <activity
+77-->[com.google.android.gms:play-services-base:18.0.1] C:\Users\tebe_\.gradle\caches\transforms-3\f2eb4ef87b00d3b21c726aefd999d4aa\transformed\play-services-base-18.0.1\AndroidManifest.xml:20:9-22:45
+78            android:name="com.google.android.gms.common.api.GoogleApiActivity"
+78-->[com.google.android.gms:play-services-base:18.0.1] C:\Users\tebe_\.gradle\caches\transforms-3\f2eb4ef87b00d3b21c726aefd999d4aa\transformed\play-services-base-18.0.1\AndroidManifest.xml:20:19-85
+79            android:exported="false"
+79-->[com.google.android.gms:play-services-base:18.0.1] C:\Users\tebe_\.gradle\caches\transforms-3\f2eb4ef87b00d3b21c726aefd999d4aa\transformed\play-services-base-18.0.1\AndroidManifest.xml:22:19-43
+80            android:theme="@android:style/Theme.Translucent.NoTitleBar" />
+80-->[com.google.android.gms:play-services-base:18.0.1] C:\Users\tebe_\.gradle\caches\transforms-3\f2eb4ef87b00d3b21c726aefd999d4aa\transformed\play-services-base-18.0.1\AndroidManifest.xml:21:19-78
+81
+82        <meta-data
+82-->[com.google.android.gms:play-services-basement:18.1.0] C:\Users\tebe_\.gradle\caches\transforms-3\f1ef7756506c6e7a1b560ed5d8620ad9\transformed\play-services-basement-18.1.0\AndroidManifest.xml:21:9-23:69
+83            android:name="com.google.android.gms.version"
+83-->[com.google.android.gms:play-services-basement:18.1.0] C:\Users\tebe_\.gradle\caches\transforms-3\f1ef7756506c6e7a1b560ed5d8620ad9\transformed\play-services-basement-18.1.0\AndroidManifest.xml:22:13-58
+84            android:value="@integer/google_play_services_version" />
+84-->[com.google.android.gms:play-services-basement:18.1.0] C:\Users\tebe_\.gradle\caches\transforms-3\f1ef7756506c6e7a1b560ed5d8620ad9\transformed\play-services-basement-18.1.0\AndroidManifest.xml:23:13-66
+85
+86        <provider
+86-->[androidx.emoji2:emoji2:1.2.0] C:\Users\tebe_\.gradle\caches\transforms-3\b0e163f17109d3ce75cced70291e3c17\transformed\emoji2-1.2.0\AndroidManifest.xml:24:9-32:20
+87            android:name="androidx.startup.InitializationProvider"
+87-->[androidx.emoji2:emoji2:1.2.0] C:\Users\tebe_\.gradle\caches\transforms-3\b0e163f17109d3ce75cced70291e3c17\transformed\emoji2-1.2.0\AndroidManifest.xml:25:13-67
+88            android:authorities="com.ecost.specter.androidx-startup"
+88-->[androidx.emoji2:emoji2:1.2.0] C:\Users\tebe_\.gradle\caches\transforms-3\b0e163f17109d3ce75cced70291e3c17\transformed\emoji2-1.2.0\AndroidManifest.xml:26:13-68
+89            android:exported="false" >
+89-->[androidx.emoji2:emoji2:1.2.0] C:\Users\tebe_\.gradle\caches\transforms-3\b0e163f17109d3ce75cced70291e3c17\transformed\emoji2-1.2.0\AndroidManifest.xml:27:13-37
+90            <meta-data
+90-->[androidx.emoji2:emoji2:1.2.0] C:\Users\tebe_\.gradle\caches\transforms-3\b0e163f17109d3ce75cced70291e3c17\transformed\emoji2-1.2.0\AndroidManifest.xml:29:13-31:52
+91                android:name="androidx.emoji2.text.EmojiCompatInitializer"
+91-->[androidx.emoji2:emoji2:1.2.0] C:\Users\tebe_\.gradle\caches\transforms-3\b0e163f17109d3ce75cced70291e3c17\transformed\emoji2-1.2.0\AndroidManifest.xml:30:17-75
+92                android:value="androidx.startup" />
+92-->[androidx.emoji2:emoji2:1.2.0] C:\Users\tebe_\.gradle\caches\transforms-3\b0e163f17109d3ce75cced70291e3c17\transformed\emoji2-1.2.0\AndroidManifest.xml:31:17-49
+93            <meta-data
+93-->[androidx.lifecycle:lifecycle-process:2.4.1] C:\Users\tebe_\.gradle\caches\transforms-3\4f71583a3c91f1517f2dac6ce46f82af\transformed\lifecycle-process-2.4.1\AndroidManifest.xml:31:13-33:52
+94                android:name="androidx.lifecycle.ProcessLifecycleInitializer"
+94-->[androidx.lifecycle:lifecycle-process:2.4.1] C:\Users\tebe_\.gradle\caches\transforms-3\4f71583a3c91f1517f2dac6ce46f82af\transformed\lifecycle-process-2.4.1\AndroidManifest.xml:32:17-78
+95                android:value="androidx.startup" />
+95-->[androidx.lifecycle:lifecycle-process:2.4.1] C:\Users\tebe_\.gradle\caches\transforms-3\4f71583a3c91f1517f2dac6ce46f82af\transformed\lifecycle-process-2.4.1\AndroidManifest.xml:33:17-49
+96        </provider>
+97
+98        <uses-library
+98-->[androidx.window:window:1.0.0] C:\Users\tebe_\.gradle\caches\transforms-3\6bf77aaecaed5f6838e4076d216a8efb\transformed\window-1.0.0\AndroidManifest.xml:25:9-27:40
+99            android:name="androidx.window.extensions"
+99-->[androidx.window:window:1.0.0] C:\Users\tebe_\.gradle\caches\transforms-3\6bf77aaecaed5f6838e4076d216a8efb\transformed\window-1.0.0\AndroidManifest.xml:26:13-54
+100            android:required="false" />
+100-->[androidx.window:window:1.0.0] C:\Users\tebe_\.gradle\caches\transforms-3\6bf77aaecaed5f6838e4076d216a8efb\transformed\window-1.0.0\AndroidManifest.xml:27:13-37
+101        <uses-library
+101-->[androidx.window:window:1.0.0] C:\Users\tebe_\.gradle\caches\transforms-3\6bf77aaecaed5f6838e4076d216a8efb\transformed\window-1.0.0\AndroidManifest.xml:28:9-30:40
+102            android:name="androidx.window.sidecar"
+102-->[androidx.window:window:1.0.0] C:\Users\tebe_\.gradle\caches\transforms-3\6bf77aaecaed5f6838e4076d216a8efb\transformed\window-1.0.0\AndroidManifest.xml:29:13-51
+103            android:required="false" />
+103-->[androidx.window:window:1.0.0] C:\Users\tebe_\.gradle\caches\transforms-3\6bf77aaecaed5f6838e4076d216a8efb\transformed\window-1.0.0\AndroidManifest.xml:30:13-37
+104    </application>
+105
+106</manifest>

@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".channel.MainMenuSettingsFragment">
+
+    <TextView
+        android:layout_width="337dp"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="4dp"
+        android:textSize="12sp"
+        android:layout_marginTop="26dp"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginStart="16dp"
+        android:fontFamily="@font/inter_semi_bold"
+        android:textColor="#C0C0C0"
+        android:text="@string/link" />
+
+    <RelativeLayout
+        android:layout_width="337dp"
+        android:layout_height="38dp"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginBottom="11dp">
+
+        <EditText
+            android:id="@+id/edit_link"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:inputType="textPersonName"
+            android:background="@drawable/input_message"
+            android:textSize="12sp"
+            android:paddingHorizontal="29dp"
+            android:fontFamily="@font/inter_semi_bold"
+            android:textColor="@color/background"
+            tools:text="fedya" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:textSize="12sp"
+            android:fontFamily="@font/inter_semi_bold"
+            android:textColor="@color/background"
+            android:gravity="center_vertical"
+            android:paddingStart="16dp"
+            android:text="@string/symbol_at" />
+    </RelativeLayout>
+
+    <TextView
+        android:layout_width="337dp"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="4dp"
+        android:textSize="12sp"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginStart="16dp"
+        android:fontFamily="@font/inter_semi_bold"
+        android:textColor="#C0C0C0"
+        android:text="@string/title" />
+
+    <EditText
+        android:id="@+id/edit_title"
+        android:layout_width="337dp"
+        android:layout_height="38dp"
+        android:inputType="textPersonName"
+        android:background="@drawable/input_message"
+        android:paddingHorizontal="16dp"
+        android:textSize="12sp"
+        android:layout_gravity="center_horizontal"
+        android:fontFamily="@font/inter_semi_bold"
+        android:textColor="@color/black"
+        android:layout_marginBottom="22dp"
+        tools:text="федя йо" />
+
+    <Button
+        android:id="@+id/button_delete_channel"
+        android:layout_width="128dp"
+        android:layout_height="37dp"
+        android:layout_gravity="center_horizontal"
+        android:background="@drawable/button_negative"
+        android:textColor="@color/red"
+        android:fontFamily="@font/inter_bold"
+        android:textAllCaps="false"
+        android:textSize="12sp"
+        android:text="@string/delete_channel" />
+
+</LinearLayout>

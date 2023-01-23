@@ -1,0 +1,19 @@
+{
+    "logs": [
+        {
+            "outputFile": "com.ecost.specter.app-mergeDebugResources-44:/values-v18/values-v18.xml",
+            "map": [
+                {
+                    "source": "C:\\Users\\tebe_\\.gradle\\caches\\transforms-3\\efa6a9b408ff4b65ac5e21d12068d5ef\\transformed\\appcompat-1.6.0\\res\\values-v18\\values-v18.xml",
+                    "from": {
+                        "startLines": "2",
+                        "startColumns": "4",
+                        "startOffsets": "55",
+                        "endColumns": "48",
+                        "endOffsets": "99"
+                    }
+                }
+            ]
+        }
+    ]
+}

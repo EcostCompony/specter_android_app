@@ -1,0 +1,86 @@
+[
+    {
+        "merged": "C:\\Users\\tebe_\\.gradle\\daemon\\7.5\\com.ecost.specter.app-mergeDebugResources-45:\\layout\\fragment_channels.xml",
+        "source": "C:\\Users\\tebe_\\.gradle\\daemon\\7.5\\com.ecost.specter.app-main-48:\\layout\\fragment_channels.xml"
+    },
+    {
+        "merged": "C:\\Users\\tebe_\\.gradle\\daemon\\7.5\\com.ecost.specter.app-mergeDebugResources-45:\\layout\\popup_window.xml",
+        "source": "C:\\Users\\tebe_\\.gradle\\daemon\\7.5\\com.ecost.specter.app-main-48:\\layout\\popup_window.xml"
+    },
+    {
+        "merged": "C:\\Users\\tebe_\\.gradle\\daemon\\7.5\\com.ecost.specter.app-mergeDebugResources-45:\\layout\\nav_header_main_menu.xml",
+        "source": "C:\\Users\\tebe_\\.gradle\\daemon\\7.5\\com.ecost.specter.app-main-48:\\layout\\nav_header_main_menu.xml"
+    },
+    {
+        "merged": "C:\\Users\\tebe_\\.gradle\\daemon\\7.5\\com.ecost.specter.app-mergeDebugResources-45:\\layout\\fragment_channel_settings.xml",
+        "source": "C:\\Users\\tebe_\\.gradle\\daemon\\7.5\\com.ecost.specter.app-main-48:\\layout\\fragment_channel_settings.xml"
+    },
+    {
+        "merged": "C:\\Users\\tebe_\\.gradle\\daemon\\7.5\\com.ecost.specter.app-mergeDebugResources-45:\\layout\\fragment_specter_auth.xml",
+        "source": "C:\\Users\\tebe_\\.gradle\\daemon\\7.5\\com.ecost.specter.app-main-48:\\layout\\fragment_specter_auth.xml"
+    },
+    {
+        "merged": "C:\\Users\\tebe_\\.gradle\\daemon\\7.5\\com.ecost.specter.app-mergeDebugResources-45:\\layout\\fragment_channel_page.xml",
+        "source": "C:\\Users\\tebe_\\.gradle\\daemon\\7.5\\com.ecost.specter.app-main-48:\\layout\\fragment_channel_page.xml"
+    },
+    {
+        "merged": "C:\\Users\\tebe_\\.gradle\\daemon\\7.5\\com.ecost.specter.app-mergeDebugResources-45:\\layout\\content_main_menu.xml",
+        "source": "C:\\Users\\tebe_\\.gradle\\daemon\\7.5\\com.ecost.specter.app-main-48:\\layout\\content_main_menu.xml"
+    },
+    {
+        "merged": "C:\\Users\\tebe_\\.gradle\\daemon\\7.5\\com.ecost.specter.app-mergeDebugResources-45:\\layout\\fragment_main_menu_settings.xml",
+        "source": "C:\\Users\\tebe_\\.gradle\\daemon\\7.5\\com.ecost.specter.app-main-48:\\layout\\fragment_main_menu_settings.xml"
+    },
+    {
+        "merged": "com.ecost.specter.app-mergeDebugResources-45:/layout/fragment_settings.xml",
+        "source": "com.ecost.specter.app-main-48:/layout/fragment_settings.xml"
+    },
+    {
+        "merged": "C:\\Users\\tebe_\\.gradle\\daemon\\7.5\\com.ecost.specter.app-mergeDebugResources-45:\\layout\\activity_new_vers.xml",
+        "source": "C:\\Users\\tebe_\\.gradle\\daemon\\7.5\\com.ecost.specter.app-main-48:\\layout\\activity_new_vers.xml"
+    },
+    {
+        "merged": "C:\\Users\\tebe_\\.gradle\\daemon\\7.5\\com.ecost.specter.app-mergeDebugResources-45:\\layout\\activity_channel.xml",
+        "source": "C:\\Users\\tebe_\\.gradle\\daemon\\7.5\\com.ecost.specter.app-main-48:\\layout\\activity_channel.xml"
+    },
+    {
+        "merged": "C:\\Users\\tebe_\\.gradle\\daemon\\7.5\\com.ecost.specter.app-mergeDebugResources-45:\\layout\\fragment_password_sign_up.xml",
+        "source": "C:\\Users\\tebe_\\.gradle\\daemon\\7.5\\com.ecost.specter.app-main-48:\\layout\\fragment_password_sign_up.xml"
+    },
+    {
+        "merged": "C:\\Users\\tebe_\\.gradle\\daemon\\7.5\\com.ecost.specter.app-mergeDebugResources-45:\\layout\\activity_auth.xml",
+        "source": "C:\\Users\\tebe_\\.gradle\\daemon\\7.5\\com.ecost.specter.app-main-48:\\layout\\activity_auth.xml"
+    },
+    {
+        "merged": "C:\\Users\\tebe_\\.gradle\\daemon\\7.5\\com.ecost.specter.app-mergeDebugResources-45:\\layout\\fragment_settings.xml",
+        "source": "C:\\Users\\tebe_\\.gradle\\daemon\\7.5\\com.ecost.specter.app-main-48:\\layout\\fragment_settings.xml"
+    },
+    {
+        "merged": "C:\\Users\\tebe_\\.gradle\\daemon\\7.5\\com.ecost.specter.app-mergeDebugResources-45:\\layout\\activity_main_menu.xml",
+        "source": "C:\\Users\\tebe_\\.gradle\\daemon\\7.5\\com.ecost.specter.app-main-48:\\layout\\activity_main_menu.xml"
+    },
+    {
+        "merged": "C:\\Users\\tebe_\\.gradle\\daemon\\7.5\\com.ecost.specter.app-mergeDebugResources-45:\\layout\\post_item.xml",
+        "source": "C:\\Users\\tebe_\\.gradle\\daemon\\7.5\\com.ecost.specter.app-main-48:\\layout\\post_item.xml"
+    },
+    {
+        "merged": "C:\\Users\\tebe_\\.gradle\\daemon\\7.5\\com.ecost.specter.app-mergeDebugResources-45:\\layout\\fragment_channel.xml",
+        "source": "C:\\Users\\tebe_\\.gradle\\daemon\\7.5\\com.ecost.specter.app-main-48:\\layout\\fragment_channel.xml"
+    },
+    {
+        "merged": "C:\\Users\\tebe_\\.gradle\\daemon\\7.5\\com.ecost.specter.app-mergeDebugResources-45:\\layout\\fragment_phone_sign_up.xml",
+        "source": "C:\\Users\\tebe_\\.gradle\\daemon\\7.5\\com.ecost.specter.app-main-48:\\layout\\fragment_phone_sign_up.xml"
+    },
+    {
+        "merged": "C:\\Users\\tebe_\\.gradle\\daemon\\7.5\\com.ecost.specter.app-mergeDebugResources-45:\\layout\\fragment_create_channel.xml",
+        "source": "C:\\Users\\tebe_\\.gradle\\daemon\\7.5\\com.ecost.specter.app-main-48:\\layout\\fragment_create_channel.xml"
+    },
+    {
+        "merged": "C:\\Users\\tebe_\\.gradle\\daemon\\7.5\\com.ecost.specter.app-mergeDebugResources-45:\\layout\\channel_item.xml",
+        "source": "C:\\Users\\tebe_\\.gradle\\daemon\\7.5\\com.ecost.specter.app-main-48:\\layout\\channel_item.xml"
+    },
+    {
+        "merged": "C:\\Users\\tebe_\\.gradle\\daemon\\7.5\\com.ecost.specter.app-mergeDebugResources-45:\\layout\\fragment_sign_in.xml",
+        "source": "C:\\Users\\tebe_\\.gradle\\daemon\\7.5\\com.ecost.specter.app-main-48:\\layout\\fragment_sign_in.xml"
+    }
+]

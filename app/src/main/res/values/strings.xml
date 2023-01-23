@@ -1,0 +1,86 @@
+<resources>
+    <string name="app_name" translatable="false">specter</string>
+
+    <string name="symbol_at" translatable="false">\@</string>
+
+    <string name="sign_in_header">Sign in with <font color="#D75026">eco</font>st</string>
+    <string name="sign_up_header">Sign up to <font color="#D75026">eco</font>st</string>
+    <string name="phone">Phone</string>
+    <string name="password">Password</string>
+    <string name="contin">Continue</string>
+    <string name="sign_in">Sign in</string>
+    <string name="reset_password">Reset password</string>
+    <string name="sign_up">Sign up</string>
+
+    <string name="phone_sign_up_description">Enter your phone number, it will be used when logging in to ecost.</string>
+
+    <string name="error_login_not_password">Ouch… To log in, enter your password.</string>
+    <string name="error_sign_in_wrong_password">The password is entered incorrectly =(</string>
+
+    <string name="input_username">Username</string>
+    <string name="input_confirm_password">Confirm password</string>
+    <string name="button_sign_up">Sign up</string>
+    <string name="nickname_signup_description">Enter your nickname. It will be used as your name.</string>
+    <string name="password_signup_description">Come up with a password that will be used to log in to your ecost account.</string>
+    <string name="error_signup_not_password">Ouch… To register, come up with a password.</string>
+
+    <string name="error_sign_up_no_username">Ouch… To register, come up with a username</string>
+    <string name="error_signup_wrong_symbol">Let\'s deal: you can use Latin letters, numbers and signs \"_\" and \".\"</string>
+    <string name="error_signup_short_username">The username is too short, try to come up with a name containing more than 3 characters</string>
+    <string name="error_signup_long_username">Too many letters!!! Shorten your username up to 16 characters.</string>
+    <string name="error_signup_not_letters">Where are the letters? The username should have at least one letter!</string>
+    <string name="error_sign_up_already_username">The phone number is already in use!</string>
+    <string name="error_signup_not_confirm_password">Ouch… To register, repeat the password.</string>
+    <string name="error_signup_short_password">They\'ll hack it… You need a password of 8 characters!</string>
+    <string name="error_signup_wrong_confirm_password">Something\'s wrong! Passwords are not similar to each other.</string>
+    <string name="error_signup_wrong_symbol_password">The password contains forbidden characters. Come up with something new!</string>
+    <string name="error_signin_not_username">Ouch… To log in, enter your username.</string>
+
+    <string name="menu_channels">Channels</string>
+    <string name="menu_create_channel">Create channels</string>
+    <string name="menu_settings">Settings</string>
+
+    <string name="search_channels">Channel name</string>
+
+    <string name="input_text">Enter the text…</string>
+    <string name="count_channel1">channel</string>
+    <string name="count_channel2">channels</string>
+    <string name="count_channel3">channels</string>
+    <string name="sign_out">Sign out</string>
+    <string name="subscriber1">subscriber</string>
+    <string name="subscribers2">subscribers</string>
+    <string name="subscribers3">subscribers</string>
+    <string name="button_subscribe">Subscribe</string>
+    <string name="edit_post">Edit post</string>
+    <string name="post_delete">Delete</string>
+    <string name="post_edit">Edit</string>
+    <string name="post_copy">Copy</string>
+    <string name="send_anon">Send without a name</string>
+    <string name="button_unsubscribe">Unsubscribe</string>
+    <string name="channel_settings">Channel settings</string>
+    <string name="delete_channel">Delete channel</string>
+    <string name="title">Title</string>
+    <string name="link">Link</string>
+    <string name="main">Main</string>
+    <string name="admins">Admins</string>
+    <string name="settings">Settings</string>
+    <string name="account">Account</string>
+    <string name="name">Name</string>
+    <string name="channel_creating">Create a channel</string>
+    <string name="choose_photo">Choose a photo</string>
+    <string name="create_channel">Create channel</string>
+    <string name="sign_in_specter">Sign in specter</string>
+    <string name="sign_outt">Sign out</string>
+    <string name="name1">Name</string>
+    <string name="error_no_ph">There is no account with this phone number</string>
+    <string name="user_photo">user_photo</string>
+    <string name="channels">Channels</string>
+    <string name="channel_photo">Channel photo</string>
+    <string name="search">search</string>
+    <string name="close">close</string>
+    <string name="avatar">avatar</string>
+    <string name="short_link">Short link</string>
+    <string name="pin">Pin</string>
+    <string name="channel_created">channel created</string>
+    <string name="save">Save</string>
+</resources>
