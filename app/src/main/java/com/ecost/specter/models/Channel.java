@@ -21,4 +21,14 @@ public class Channel {
         this.subscribers = subscribers;
     }
 
+    public Channel(Integer id, String shortLink, Integer author, String title, String body, Boolean markBody) {
+        this.id = id;
+        this.shortLink = shortLink;
+        this.author = author;
+        this.title = title;
+        this.body = body;
+        this.markBody = markBody;
+        this.subscribers = subscribers;
+    }
+
 }

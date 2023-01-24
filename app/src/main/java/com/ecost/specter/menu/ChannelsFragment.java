@@ -51,6 +51,8 @@ public class ChannelsFragment extends Fragment {
     ChaptersAdapter chaptersAdapter;
     List<Channel> channels = new ArrayList<>();
     List<Chapter> chapters = new ArrayList<>();
+    Integer chapter = 0;
+    ChildEventListener childEventListener;
     MainMenuActivity mainMenuActivity;
 
     @Override
@@ -59,7 +61,7 @@ public class ChannelsFragment extends Fragment {
 
         setHasOptionsMenu(true);
 
-        ChildEventListener childEventListener = new ChildEventListener() {
+        childEventListener = new ChildEventListener() {
             @SuppressLint("NotifyDataSetChanged")
             @Override
             public void onChildAdded(DataSnapshot dataSnapshot, String previousChildName) {
@@ -121,7 +123,6 @@ public class ChannelsFragment extends Fragment {
         chapters.add(new Chapter(0, getString(R.string.channels)));
         chapters.add(new Chapter(1, getString(R.string.special)));
         chapters.add(new Chapter(2, getString(R.string.archive)));
-        chapters.add(new Chapter(8, "+"));
 
         ChannelsAdapter.OnChannelClickListener channelClickListener = (channel, position) -> {
             Intent intent = new Intent(mainMenuActivity, ChannelActivity.class);
@@ -136,8 +137,20 @@ public class ChannelsFragment extends Fragment {
         channelsAdapter = new ChannelsAdapter(mainMenuActivity, channels, channelClickListener, channelLongClickListener);
         rChannelList.setAdapter(channelsAdapter);
 
-        ChaptersAdapter.OnChapterClickListener chapterClickListener = (chapter, position) -> {
-
+        @SuppressLint("NotifyDataSetChanged") ChaptersAdapter.OnChapterClickListener chapterClickListener = (chapter, position) -> {
+            if (!chapter.id.equals(this.chapter)) {
+                myDB.child("specter").child("channels").removeEventListener(childEventListener);
+                channels.clear();
+                tChannelsNumber.setText(dec(0));
+                if (chapter.id == 0) {
+                    myDB.child("specter").child("channels").addChildEventListener(childEventListener);
+                } else if (chapter.id == 1) {
+                    channels.add(new Channel(99194165, "favourites", 0, "Favourites", "Your favorite posts", true));
+                    tChannelsNumber.setText(dec(1));
+                }
+                this.chapter = chapter.id;
+                channelsAdapter.notifyDataSetChanged();
+            }
         };
         rChaptersList.setLayoutManager(new LinearLayoutManager(mainMenuActivity, LinearLayoutManager.HORIZONTAL, false));
         chaptersAdapter = new ChaptersAdapter(mainMenuActivity, chapters, chapterClickListener);
