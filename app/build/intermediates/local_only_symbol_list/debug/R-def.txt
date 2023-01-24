@@ -45,6 +45,7 @@ drawable input_message
 drawable logo
 drawable message_add
 drawable my_message
+drawable panel_bg
 drawable search
 drawable send
 drawable setting_2
@@ -87,6 +88,7 @@ id channel_last_post
 id channel_photo
 id channel_settings
 id channel_title
+id chapter_name
 id close
 id divider
 id drawer_layout
@@ -119,6 +121,7 @@ id post_body
 id post_rec
 id post_time
 id recycler_channels_list
+id recycler_chapters_list
 id short_user_link
 id sign_in
 id subscribe
@@ -134,6 +137,7 @@ layout activity_channel
 layout activity_main_menu
 layout activity_new_vers
 layout channel_item
+layout chapter_item
 layout content_main_menu
 layout fragment_channel
 layout fragment_channel_page
@@ -195,6 +199,7 @@ string error_signup_wrong_symbol
 string error_signup_wrong_symbol_password
 string firebase_database_url
 string gcm_defaultSenderId
+string get_started
 string google_api_key
 string google_app_id
 string google_crash_reporting_api_key

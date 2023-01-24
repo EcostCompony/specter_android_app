@@ -4,7 +4,6 @@ package com.ecost.specter.databinding;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import androidx.annotation.NonNull;
@@ -22,21 +21,20 @@ public final class FragmentChannelsBinding implements ViewBinding {
   private final LinearLayout rootView;
 
   @NonNull
-  public final Button buttonChapterChannels;
-
-  @NonNull
   public final TextView numberChannels;
 
   @NonNull
   public final RecyclerView recyclerChannelsList;
 
-  private FragmentChannelsBinding(@NonNull LinearLayout rootView,
-      @NonNull Button buttonChapterChannels, @NonNull TextView numberChannels,
-      @NonNull RecyclerView recyclerChannelsList) {
+  @NonNull
+  public final RecyclerView recyclerChaptersList;
+
+  private FragmentChannelsBinding(@NonNull LinearLayout rootView, @NonNull TextView numberChannels,
+      @NonNull RecyclerView recyclerChannelsList, @NonNull RecyclerView recyclerChaptersList) {
     this.rootView = rootView;
-    this.buttonChapterChannels = buttonChapterChannels;
     this.numberChannels = numberChannels;
     this.recyclerChannelsList = recyclerChannelsList;
+    this.recyclerChaptersList = recyclerChaptersList;
   }
 
   @Override
@@ -66,12 +64,6 @@ public final class FragmentChannelsBinding implements ViewBinding {
     // This is done to optimize the compiled bytecode for size and performance.
     int id;
     missingId: {
-      id = R.id.button_chapter_channels;
-      Button buttonChapterChannels = ViewBindings.findChildViewById(rootView, id);
-      if (buttonChapterChannels == null) {
-        break missingId;
-      }
-
       id = R.id.number_channels;
       TextView numberChannels = ViewBindings.findChildViewById(rootView, id);
       if (numberChannels == null) {
@@ -84,8 +76,14 @@ public final class FragmentChannelsBinding implements ViewBinding {
         break missingId;
       }
 
-      return new FragmentChannelsBinding((LinearLayout) rootView, buttonChapterChannels,
-          numberChannels, recyclerChannelsList);
+      id = R.id.recycler_chapters_list;
+      RecyclerView recyclerChaptersList = ViewBindings.findChildViewById(rootView, id);
+      if (recyclerChaptersList == null) {
+        break missingId;
+      }
+
+      return new FragmentChannelsBinding((LinearLayout) rootView, numberChannels,
+          recyclerChannelsList, recyclerChaptersList);
     }
     String missingId = rootView.getResources().getResourceName(id);
     throw new NullPointerException("Missing required view with ID: ".concat(missingId));

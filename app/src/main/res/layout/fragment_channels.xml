@@ -7,31 +7,13 @@
     android:background="@color/white"
     tools:context=".menu.CreateChannelFragment">
 
-    <HorizontalScrollView
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recycler_chapters_list"
         android:layout_width="match_parent"
         android:layout_height="32dp"
         android:layout_marginTop="5dp"
         android:layout_marginHorizontal="25dp"
-        android:scrollbars="none">
-
-        <LinearLayout
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:orientation="horizontal"
-            android:gravity="center_vertical">
-
-            <Button
-                android:id="@+id/button_chapter_channels"
-                android:layout_width="wrap_content"
-                android:layout_height="28dp"
-                android:background="@drawable/button_chapter"
-                android:paddingHorizontal="21dp"
-                android:textColor="@color/medium_light_grey"
-                android:fontFamily="@font/inter_extra_bold"
-                android:textSize="11sp"
-                android:text="@string/channels" />
-        </LinearLayout>
-    </HorizontalScrollView>
+        android:overScrollMode="never" />
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recycler_channels_list"

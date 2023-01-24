@@ -35,6 +35,7 @@
     <string name="error_signup_wrong_confirm_password">Что-то не так! Пароли не похожи друг на друга.</string>
     <string name="error_signup_wrong_symbol">Давайте договоримся: можно использовать только латинские буквы, цифры и символы \"_\" и \".\"</string>
     <string name="error_signup_wrong_symbol_password">Пароль содержит запрещенные символы. Придумайте что-нибудь новое!</string>
+    <string name="get_started">Get started</string>
     <string name="input_confirm_password">Повторите пароль</string>
     <string name="input_text">Введите текст поста…</string>
     <string name="input_username">Имя пользователя</string>

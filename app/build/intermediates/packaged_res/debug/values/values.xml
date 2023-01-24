@@ -55,6 +55,7 @@
     <string name="error_signup_wrong_symbol_password">The password contains forbidden characters. Come up with something new!</string>
     <string name="firebase_database_url" translatable="false">https://gorozaninconnect-1-default-rtdb.firebaseio.com</string>
     <string name="gcm_defaultSenderId" translatable="false">858981095189</string>
+    <string name="get_started">Get started</string>
     <string name="google_api_key" translatable="false">AIzaSyCtlWc1Yf6dgKNMonUpeyiruYVIjMZbQcc</string>
     <string name="google_app_id" translatable="false">1:858981095189:android:c59f9857c568fadd183b1c</string>
     <string name="google_crash_reporting_api_key" translatable="false">AIzaSyCtlWc1Yf6dgKNMonUpeyiruYVIjMZbQcc</string>

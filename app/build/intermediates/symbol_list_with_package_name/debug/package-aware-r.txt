@@ -2685,6 +2685,7 @@ drawable notification_template_icon_bg
 drawable notification_template_icon_low_bg
 drawable notification_tile_bg
 drawable notify_panel_notification_icon_bg
+drawable panel_bg
 drawable search
 drawable send
 drawable setting_2
@@ -2830,6 +2831,7 @@ id channel_last_post
 id channel_photo
 id channel_settings
 id channel_title
+id chapter_name
 id checkbox
 id checked
 id chronometer
@@ -3074,6 +3076,7 @@ id radio
 id ratio
 id rectangles
 id recycler_channels_list
+id recycler_chapters_list
 id reverseSawtooth
 id right
 id rightToLeft
@@ -3343,6 +3346,7 @@ layout activity_channel
 layout activity_main_menu
 layout activity_new_vers
 layout channel_item
+layout chapter_item
 layout content_main_menu
 layout custom_dialog
 layout design_bottom_navigation_item
@@ -3543,6 +3547,7 @@ string fab_transformation_scrim_behavior
 string fab_transformation_sheet_behavior
 string firebase_database_url
 string gcm_defaultSenderId
+string get_started
 string google_api_key
 string google_app_id
 string google_crash_reporting_api_key

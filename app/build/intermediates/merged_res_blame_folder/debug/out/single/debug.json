@@ -68,12 +68,12 @@
         "source": "C:\\Users\\tebe_\\.gradle\\daemon\\7.5\\com.ecost.specter.app-main-48:\\font\\manrope_regular.ttf"
     },
     {
-        "merged": "C:\\Users\\tebe_\\.gradle\\daemon\\7.5\\com.ecost.specter.app-merged_res-46:\\drawable-xhdpi_settings.png.flat",
-        "source": "C:\\Users\\tebe_\\.gradle\\daemon\\7.5\\com.ecost.specter.app-pngs-41:\\drawable-xhdpi\\settings.png"
-    },
-    {
         "merged": "C:\\Users\\tebe_\\.gradle\\daemon\\7.5\\com.ecost.specter.app-merged_res-46:\\drawable_button_neutral.xml.flat",
         "source": "C:\\Users\\tebe_\\.gradle\\daemon\\7.5\\com.ecost.specter.app-main-48:\\drawable\\button_neutral.xml"
+    },
+    {
+        "merged": "C:\\Users\\tebe_\\.gradle\\daemon\\7.5\\com.ecost.specter.app-merged_res-46:\\drawable-xhdpi_settings.png.flat",
+        "source": "C:\\Users\\tebe_\\.gradle\\daemon\\7.5\\com.ecost.specter.app-pngs-41:\\drawable-xhdpi\\settings.png"
     },
     {
         "merged": "C:\\Users\\tebe_\\.gradle\\daemon\\7.5\\com.ecost.specter.app-merged_res-46:\\drawable_group.xml.flat",
@@ -172,6 +172,10 @@
         "source": "C:\\Users\\tebe_\\.gradle\\daemon\\7.5\\com.ecost.specter.app-debug-47:\\mipmap-hdpi\\ic_launcher_round.png"
     },
     {
+        "merged": "com.ecost.specter.app-merged_res-46:/drawable_panel_bg.xml.flat",
+        "source": "com.ecost.specter.app-main-48:/drawable/panel_bg.xml"
+    },
+    {
         "merged": "C:\\Users\\tebe_\\.gradle\\daemon\\7.5\\com.ecost.specter.app-merged_res-46:\\font_inter_bold.otf.flat",
         "source": "C:\\Users\\tebe_\\.gradle\\daemon\\7.5\\com.ecost.specter.app-main-48:\\font\\inter_bold.otf"
     },
@@ -198,6 +202,10 @@
     {
         "merged": "C:\\Users\\tebe_\\.gradle\\daemon\\7.5\\com.ecost.specter.app-merged_res-46:\\drawable_shape_rectangle.xml.flat",
         "source": "C:\\Users\\tebe_\\.gradle\\daemon\\7.5\\com.ecost.specter.app-main-48:\\drawable\\shape_rectangle.xml"
+    },
+    {
+        "merged": "com.ecost.specter.app-merged_res-46:/layout_chapter_item.xml.flat",
+        "source": "com.ecost.specter.app-main-48:/layout/chapter_item.xml"
     },
     {
         "merged": "C:\\Users\\tebe_\\.gradle\\daemon\\7.5\\com.ecost.specter.app-merged_res-46:\\drawable-xhdpi_union.png.flat",
@@ -274,10 +282,6 @@
     {
         "merged": "C:\\Users\\tebe_\\.gradle\\daemon\\7.5\\com.ecost.specter.app-merged_res-46:\\mipmap-xxxhdpi_ic_launcher.png.flat",
         "source": "C:\\Users\\tebe_\\.gradle\\daemon\\7.5\\com.ecost.specter.app-debug-47:\\mipmap-xxxhdpi\\ic_launcher.png"
-    },
-    {
-        "merged": "com.ecost.specter.app-merged_res-46:/layout_fragment_settings.xml.flat",
-        "source": "com.ecost.specter.app-main-48:/layout/fragment_settings.xml"
     },
     {
         "merged": "C:\\Users\\tebe_\\.gradle\\daemon\\7.5\\com.ecost.specter.app-merged_res-46:\\layout_popup_window.xml.flat",
@@ -494,6 +498,10 @@
     {
         "merged": "C:\\Users\\tebe_\\.gradle\\daemon\\7.5\\com.ecost.specter.app-merged_res-46:\\drawable-mdpi_settings.png.flat",
         "source": "C:\\Users\\tebe_\\.gradle\\daemon\\7.5\\com.ecost.specter.app-pngs-41:\\drawable-mdpi\\settings.png"
+    },
+    {
+        "merged": "com.ecost.specter.app-merged_res-46:/layout_fragment_channels.xml.flat",
+        "source": "com.ecost.specter.app-main-48:/layout/fragment_channels.xml"
     },
     {
         "merged": "C:\\Users\\tebe_\\.gradle\\daemon\\7.5\\com.ecost.specter.app-merged_res-46:\\drawable-ldpi_button_mark_auth.png.flat",

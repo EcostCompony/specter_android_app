@@ -2684,6 +2684,7 @@ int drawable notification_template_icon_bg 0x7f0700fe
 int drawable notification_template_icon_low_bg 0x7f0700ff
 int drawable notification_tile_bg 0x7f070100
 int drawable notify_panel_notification_icon_bg 0x7f070101
+int drawable panel_bg 0x7f07010f
 int drawable search 0x7f070102
 int drawable send 0x7f070103
 int drawable setting_2 0x7f070104
@@ -2829,6 +2830,7 @@ int id channel_last_post 0x7f090076
 int id channel_photo 0x7f090077
 int id channel_settings 0x7f090078
 int id channel_title 0x7f090079
+int id chapter_name 0x7f0901f9
 int id checkbox 0x7f09007a
 int id checked 0x7f09007b
 int id chronometer 0x7f09007c
@@ -3073,6 +3075,7 @@ int id radio 0x7f09016a
 int id ratio 0x7f09016b
 int id rectangles 0x7f09016c
 int id recycler_channels_list 0x7f09016d
+int id recycler_chapters_list 0x7f0901fa
 int id reverseSawtooth 0x7f09016e
 int id right 0x7f09016f
 int id rightToLeft 0x7f090170
@@ -3342,6 +3345,7 @@ int layout activity_channel 0x7f0c001d
 int layout activity_main_menu 0x7f0c001e
 int layout activity_new_vers 0x7f0c001f
 int layout channel_item 0x7f0c0020
+int layout chapter_item 0x7f0c007b
 int layout content_main_menu 0x7f0c0021
 int layout custom_dialog 0x7f0c0022
 int layout design_bottom_navigation_item 0x7f0c0023
@@ -3542,6 +3546,7 @@ int string fab_transformation_scrim_behavior 0x7f130061
 int string fab_transformation_sheet_behavior 0x7f130062
 int string firebase_database_url 0x7f130063
 int string gcm_defaultSenderId 0x7f130064
+int string get_started 0x7f1300f4
 int string google_api_key 0x7f130065
 int string google_app_id 0x7f130066
 int string google_crash_reporting_api_key 0x7f130067
