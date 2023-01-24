@@ -30,8 +30,10 @@ import com.ecost.specter.channel.ChannelActivity;
 import com.ecost.specter.R;
 import com.ecost.specter.databinding.FragmentChannelsBinding;
 import com.ecost.specter.models.Channel;
+import com.ecost.specter.models.Chapter;
 import com.ecost.specter.recyclers.ChannelsAdapter;
 
+import com.ecost.specter.recyclers.ChaptersAdapter;
 import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -46,7 +48,9 @@ public class ChannelsFragment extends Fragment {
 
     TextView tChannelsNumber;
     ChannelsAdapter channelsAdapter;
+    ChaptersAdapter chaptersAdapter;
     List<Channel> channels = new ArrayList<>();
+    List<Chapter> chapters = new ArrayList<>();
     MainMenuActivity mainMenuActivity;
 
     @Override
@@ -109,9 +113,15 @@ public class ChannelsFragment extends Fragment {
         FragmentChannelsBinding binding = FragmentChannelsBinding.inflate(inflater, container, false);
         View root = binding.getRoot();
 
+        RecyclerView rChaptersList = binding.recyclerChaptersList;
         RecyclerView rChannelList = binding.recyclerChannelsList;
         tChannelsNumber = binding.numberChannels;
         mainMenuActivity = (MainMenuActivity) requireActivity();
+
+        chapters.add(new Chapter(0, getString(R.string.channels)));
+        chapters.add(new Chapter(1, getString(R.string.special)));
+        chapters.add(new Chapter(2, getString(R.string.archive)));
+        chapters.add(new Chapter(8, "+"));
 
         ChannelsAdapter.OnChannelClickListener channelClickListener = (channel, position) -> {
             Intent intent = new Intent(mainMenuActivity, ChannelActivity.class);
@@ -125,6 +135,13 @@ public class ChannelsFragment extends Fragment {
         rChannelList.setLayoutManager(new LinearLayoutManager(getActivity()));
         channelsAdapter = new ChannelsAdapter(mainMenuActivity, channels, channelClickListener, channelLongClickListener);
         rChannelList.setAdapter(channelsAdapter);
+
+        ChaptersAdapter.OnChapterClickListener chapterClickListener = (chapter, position) -> {
+
+        };
+        rChaptersList.setLayoutManager(new LinearLayoutManager(mainMenuActivity, LinearLayoutManager.HORIZONTAL, false));
+        chaptersAdapter = new ChaptersAdapter(mainMenuActivity, chapters, chapterClickListener);
+        rChaptersList.setAdapter(chaptersAdapter);
 
         return root;
     }

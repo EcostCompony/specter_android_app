@@ -3477,6 +3477,7 @@ int string admins 0x7f13001c
 int string androidx_startup 0x7f13001d
 int string app_name 0x7f13001e
 int string appbar_scrolling_view_behavior 0x7f13001f
+int string archive 0x7f1300f5
 int string avatar 0x7f130020
 int string bottom_sheet_behavior 0x7f130021
 int string bottomsheet_action_collapse 0x7f130022
@@ -3683,6 +3684,7 @@ int string sign_out 0x7f1300e9
 int string sign_outt 0x7f1300ea
 int string sign_up 0x7f1300eb
 int string sign_up_header 0x7f1300ec
+int string special 0x7f1300f6
 int string status_bar_notification_info_overflow 0x7f1300ed
 int string subscriber1 0x7f1300ee
 int string subscribers2 0x7f1300ef

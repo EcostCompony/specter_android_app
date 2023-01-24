@@ -84,4 +84,6 @@
     <string name="channel_created">channel created</string>
     <string name="save">Save</string>
     <string name="get_started">Get started</string>
+    <string name="special">Special</string>
+    <string name="archive">Archive</string>
 </resources>

@@ -19,6 +19,7 @@
     <string name="account">Account</string>
     <string name="admins">Admins</string>
     <string name="app_name" translatable="false">specter</string>
+    <string name="archive">Archive</string>
     <string name="avatar">avatar</string>
     <string name="button_sign_up">Sign up</string>
     <string name="button_subscribe">Subscribe</string>
@@ -94,6 +95,7 @@
     <string name="sign_outt">Sign out</string>
     <string name="sign_up">Sign up</string>
     <string name="sign_up_header">Sign up to <font color="#D75026">eco</font>st</string>
+    <string name="special">Special</string>
     <string name="subscriber1">subscriber</string>
     <string name="subscribers2">subscribers</string>
     <string name="subscribers3">subscribers</string>

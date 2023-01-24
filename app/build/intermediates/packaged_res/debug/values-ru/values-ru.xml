@@ -2,6 +2,7 @@
 <resources>
     <string name="account">Account</string>
     <string name="admins">Admins</string>
+    <string name="archive">Archive</string>
     <string name="avatar">avatar</string>
     <string name="button_sign_up">Регистрация</string>
     <string name="button_subscribe">Подписаться</string>
@@ -69,6 +70,7 @@
     <string name="sign_outt">Sign out</string>
     <string name="sign_up">Регистрация</string>
     <string name="sign_up_header">Регистрация в <font color="#D75026">eco</font>st</string>
+    <string name="special">Special</string>
     <string name="subscriber1">подписчик</string>
     <string name="subscribers2">подписчика</string>
     <string name="subscribers3">подписчиков</string>

@@ -3478,6 +3478,7 @@ string admins
 string androidx_startup
 string app_name
 string appbar_scrolling_view_behavior
+string archive
 string avatar
 string bottom_sheet_behavior
 string bottomsheet_action_collapse
@@ -3684,6 +3685,7 @@ string sign_out
 string sign_outt
 string sign_up
 string sign_up_header
+string special
 string status_bar_notification_info_overflow
 string subscriber1
 string subscribers2

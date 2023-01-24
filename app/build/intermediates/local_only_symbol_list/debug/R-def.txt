@@ -163,6 +163,7 @@ navigation mobile_navigation
 string account
 string admins
 string app_name
+string archive
 string avatar
 string button_sign_up
 string button_subscribe
@@ -238,6 +239,7 @@ string sign_out
 string sign_outt
 string sign_up
 string sign_up_header
+string special
 string subscriber1
 string subscribers2
 string subscribers3
