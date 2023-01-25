@@ -125,12 +125,14 @@ public class ChannelsFragment extends Fragment {
         chapters.add(new Chapter(2, getString(R.string.archive)));
 
         ChannelsAdapter.OnChannelClickListener channelClickListener = (channel, position) -> {
-            Intent intent = new Intent(mainMenuActivity, ChannelActivity.class);
-            intent.putExtra("CHANNEL_ID", String.valueOf(channel.id));
-            intent.putExtra("CHANNEL_ADMINS", channel.author);
-            intent.putExtra("CHANNEL_TITLE", channel.title);
-            intent.putExtra("CHANNEL_SHORT_LINK", String.valueOf(channel.shortLink));
-            startActivity(intent);
+            if (channel.id != 99194165) {
+                Intent intent = new Intent(mainMenuActivity, ChannelActivity.class);
+                intent.putExtra("CHANNEL_ID", String.valueOf(channel.id));
+                intent.putExtra("CHANNEL_ADMINS", channel.author);
+                intent.putExtra("CHANNEL_TITLE", channel.title);
+                intent.putExtra("CHANNEL_SHORT_LINK", String.valueOf(channel.shortLink));
+                startActivity(intent);
+            }
         };
         ChannelsAdapter.OnChannelLongClickListener channelLongClickListener = (channel, position) -> true;
         rChannelList.setLayoutManager(new LinearLayoutManager(getActivity()));
