@@ -35,7 +35,7 @@ public class ChannelsAdapter extends RecyclerView.Adapter<ChannelViewHolder> {
     public ChannelsAdapter(Context context, List<Channel> channels, OnChannelClickListener onClickListener, OnChannelLongClickListener onLongClickListener) {
         this.inflater = LayoutInflater.from(context);
         this.channels = channels;
-        this.color = ContextCompat.getColor(context, R.color.background);
+        this.color = ContextCompat.getColor(context, R.color.main_color);
         this.onClickListener = onClickListener;
         this.onLongClickListener = onLongClickListener;
     }
