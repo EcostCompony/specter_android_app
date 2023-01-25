@@ -146,7 +146,6 @@
                 android:paddingEnd="12dp"
                 android:layout_weight="1"
                 android:textColorHint="#9C9C9C"
-                android:textColor="@color/black"
                 android:textSize="12sp" />
 
             <LinearLayout
