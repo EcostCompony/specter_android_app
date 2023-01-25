@@ -30,7 +30,7 @@
                 android:paddingStart="14dp"
                 android:paddingEnd="7dp"
                 tools:text="author"
-                android:textColor="#2384DD"
+                android:textColor="@color/main_color"
                 android:fontFamily="@font/inter_bold"
                 android:textSize="13sp" />
 
@@ -63,7 +63,6 @@
             android:paddingBottom="7dp"
             android:fontFamily="@font/manrope_medium"
             tools:text="message..."
-            android:textColor="#000"
             android:textSize="13sp" />
 
     </LinearLayout>

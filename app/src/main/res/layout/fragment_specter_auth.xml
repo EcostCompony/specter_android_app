@@ -4,7 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:background="@color/white"
+    android:background="@color/background"
     tools:context=".channel.ChannelSettingsFragment">
 
     <LinearLayout
@@ -17,7 +17,6 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="21dp"
-            android:textColor="@color/black"
             android:textSize="22sp"
             android:fontFamily="@font/inter_semi_bold"
             android:text="@string/sign_in_specter" />
@@ -96,7 +95,7 @@
             android:textSize="12sp"
             android:paddingHorizontal="29dp"
             android:fontFamily="@font/inter_semi_bold"
-            android:textColor="@color/background"
+            android:textColor="@color/main_color"
             tools:text="fedya"
             android:autofillHints="" />
 
@@ -105,7 +104,7 @@
             android:layout_height="match_parent"
             android:textSize="12sp"
             android:fontFamily="@font/inter_semi_bold"
-            android:textColor="@color/background"
+            android:textColor="@color/main_color"
             android:gravity="center_vertical"
             android:paddingStart="16dp"
             android:text="@string/symbol_at" />

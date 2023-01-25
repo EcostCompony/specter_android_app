@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:gravity="center_horizontal"
-    android:background="@color/white"
+    android:background="@color/background"
     tools:context=".menu.SettingsFragment">
 
     <LinearLayout
@@ -138,7 +138,7 @@
                 android:fontFamily="@font/inter_semi_bold"
                 android:inputType="text"
                 android:paddingHorizontal="26dp"
-                android:textColor="@color/background"
+                android:textColor="@color/main_color"
                 android:textSize="12sp"
                 tools:ignore="LabelFor" />
 
@@ -149,7 +149,7 @@
                 android:gravity="center_vertical"
                 android:paddingHorizontal="13dp"
                 android:text="@string/symbol_at"
-                android:textColor="@color/background"
+                android:textColor="@color/main_color"
                 android:textSize="12sp" />
         </RelativeLayout>
 

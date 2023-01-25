@@ -4,6 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
+    android:background="@color/background"
     tools:context=".channel.MainMenuSettingsFragment">
 
     <TextView
@@ -33,7 +34,7 @@
             android:textSize="12sp"
             android:paddingHorizontal="29dp"
             android:fontFamily="@font/inter_semi_bold"
-            android:textColor="@color/background"
+            android:textColor="@color/main_color"
             tools:text="fedya" />
 
         <TextView
@@ -41,7 +42,7 @@
             android:layout_height="match_parent"
             android:textSize="12sp"
             android:fontFamily="@font/inter_semi_bold"
-            android:textColor="@color/background"
+            android:textColor="@color/main_color"
             android:gravity="center_vertical"
             android:paddingStart="16dp"
             android:text="@string/symbol_at" />

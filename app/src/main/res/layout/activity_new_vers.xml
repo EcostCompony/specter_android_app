@@ -4,7 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".OldVersionActivity">
+    tools:context=".OldVersionActivity"
+    android:background="@color/background">
 
     <TextView
         android:id="@+id/textView"
@@ -13,7 +14,7 @@
         android:layout_marginStart="150dp"
         android:layout_marginEnd="100dp"
         android:text="Данная версия устарела. Пожалуйста, обновите её, чтобы продолжить работу."
-        android:textColor="@color/black"
+        android:textColor="@color/main_text_color"
         android:textSize="20dp"
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"

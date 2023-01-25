@@ -4,7 +4,7 @@
     android:id="@+id/drawer_layout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/white">
+    android:background="@color/background">
 
     <androidx.coordinatorlayout.widget.CoordinatorLayout
         android:layout_width="match_parent"
@@ -20,7 +20,7 @@
                 android:id="@+id/toolbar"
                 android:layout_width="match_parent"
                 android:layout_height="55dp"
-                android:background="@color/white"
+                android:background="@color/background"
                 app:contentInsetStartWithNavigation="66dp"
                 app:title="@string/menu_channels"
                 app:titleTextAppearance="@style/RobotoBoldTextAppearance" />
@@ -34,10 +34,9 @@
         android:layout_width="295dp"
         android:layout_height="match_parent"
         android:layout_gravity="start"
-        android:background="@color/white"
         app:headerLayout="@layout/nav_header_main_menu"
         app:menu="@menu/activity_main_drawer"
         app:itemHorizontalPadding="31dp"
         app:itemIconPadding="14dp"
-        app:itemIconTint="@color/background" />
+        app:itemIconTint="@color/main_color" />
 </androidx.drawerlayout.widget.DrawerLayout>
