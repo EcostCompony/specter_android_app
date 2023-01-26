@@ -1,10 +1,10 @@
 package com.ecost.specter.menu;
 
 import static com.ecost.specter.Routing.authId;
-import static com.ecost.specter.Routing.authName;
 import static com.ecost.specter.Routing.authShortUserLink;
-import static com.ecost.specter.Routing.declension;
+import static com.ecost.specter.Routing.authUserName;
 import static com.ecost.specter.Routing.myDB;
+import static com.ecost.specter.Routing.pluralForm;
 
 import android.annotation.SuppressLint;
 import android.app.Activity;
@@ -168,7 +168,7 @@ public class ChannelsFragment extends Fragment {
         Objects.requireNonNull(mainMenuActivity.getSupportActionBar()).show();
         Objects.requireNonNull(mainMenuActivity.getSupportActionBar()).setHomeAsUpIndicator(R.drawable.ava_nav);
 
-        mainMenuActivity.tName.setText(authName);
+        mainMenuActivity.tName.setText(authUserName);
         mainMenuActivity.tShortUserLink.setText(getString(R.string.symbol_at) + authShortUserLink);
     }
 
@@ -228,7 +228,7 @@ public class ChannelsFragment extends Fragment {
     }
 
     public String dec(int i) {
-        return declension(i, getString(R.string.count_channel1), getString(R.string.count_channel2), getString(R.string.count_channel3), !Locale.getDefault().getLanguage().equals("ru"));
+        return Locale.getDefault().getLanguage().equals("ru") ? pluralForm(i, getString(R.string.subscriber1), getString(R.string.subscribers2), getString(R.string.subscribers3)) : pluralForm(i, getString(R.string.subscriber1), getString(R.string.subscribers2));
     }
 
 }

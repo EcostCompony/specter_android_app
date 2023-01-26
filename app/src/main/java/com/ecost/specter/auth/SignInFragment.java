@@ -5,8 +5,8 @@ import static com.ecost.specter.Routing.myDB;
 import static com.ecost.specter.Routing.pushPreferenceAuth;
 import static com.ecost.specter.Routing.pushPreferenceEcostId;
 import static com.ecost.specter.Routing.pushPreferenceId;
-import static com.ecost.specter.Routing.pushPreferenceName;
 import static com.ecost.specter.Routing.pushPreferenceShortUserLink;
+import static com.ecost.specter.Routing.pushPreferenceUserName;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -125,7 +125,7 @@ public class SignInFragment extends Fragment {
                                         pushPreferenceAuth(authActivity, true);
                                         pushPreferenceId(authActivity, user.id);
                                         pushPreferenceEcostId(authActivity, user.ecost_id);
-                                        pushPreferenceName(authActivity, user.name);
+                                        pushPreferenceUserName(authActivity, user.name);
                                         pushPreferenceShortUserLink(authActivity, user.link);
                                         startActivity(new Intent(authActivity, MainMenuActivity.class));
                                         authActivity.finish();

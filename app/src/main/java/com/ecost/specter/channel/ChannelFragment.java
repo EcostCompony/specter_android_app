@@ -1,9 +1,9 @@
 package com.ecost.specter.channel;
 
 import static com.ecost.specter.Routing.authId;
-import static com.ecost.specter.Routing.authName;
-import static com.ecost.specter.Routing.declension;
+import static com.ecost.specter.Routing.authUserName;
 import static com.ecost.specter.Routing.myDB;
+import static com.ecost.specter.Routing.pluralForm;
 
 import android.annotation.SuppressLint;
 import android.content.ClipData;
@@ -29,6 +29,7 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.ecost.specter.R;
+import com.ecost.specter.Routing;
 import com.ecost.specter.models.Post;
 import com.ecost.specter.recyclers.PostsAdapter;
 import com.google.firebase.database.ChildEventListener;
@@ -160,13 +161,13 @@ public class ChannelFragment extends Fragment {
                 Integer id = dataSnapshot.getValue(Integer.class);
                 channelActivity.subscribers.add(id);
                 if (Objects.equals(id, authId)) bSubscribe.setVisibility(View.GONE);
-                tNumberSubscribers.setText(declension(channelActivity.subscribers.size(), getString(R.string.subscriber1), getString(R.string.subscribers2), getString(R.string.subscribers3), !Locale.getDefault().getLanguage().equals("ru")));
+                tNumberSubscribers.setText(Locale.getDefault().getLanguage().equals("ru") ? pluralForm(channelActivity.subscribers.size(), getString(R.string.subscriber1), getString(R.string.subscribers2), getString(R.string.subscribers3)) : pluralForm(channelActivity.subscribers.size(), getString(R.string.subscriber1), getString(R.string.subscribers2)));
             }
 
             @Override
             public void onChildRemoved(@NonNull DataSnapshot dataSnapshot) {
                 channelActivity.subscribers.remove(dataSnapshot.getKey());
-                tNumberSubscribers.setText(declension(channelActivity.subscribers.size(), getString(R.string.subscriber1), getString(R.string.subscribers2), getString(R.string.subscribers3), !Locale.getDefault().getLanguage().equals("ru")));
+                tNumberSubscribers.setText(Locale.getDefault().getLanguage().equals("ru") ? pluralForm(channelActivity.subscribers.size(), getString(R.string.subscriber1), getString(R.string.subscribers2), getString(R.string.subscribers3)) : pluralForm(channelActivity.subscribers.size(), getString(R.string.subscriber1), getString(R.string.subscribers2)));
             }
 
             @Override public void onChildChanged(@NonNull DataSnapshot dataSnapshot, String previousChildName) {}
@@ -206,7 +207,7 @@ public class ChannelFragment extends Fragment {
                             if (Integer.parseInt(hours) < 21) hours = String.valueOf(Integer.parseInt(hours) + 3);
                             else hours = String.valueOf(Integer.parseInt(hours) + 3 - 24);
 
-                            myDB.child("specter").child("channels").child(channelId).child("posts").child(String.valueOf(posts.size())).setValue(new Post(authName, hours + ":" + minutes, text));
+                            myDB.child("specter").child("channels").child(channelId).child("posts").child(String.valueOf(posts.size())).setValue(new Post(authUserName, hours + ":" + minutes, text));
                             myDB.child("specter").child("channels").child(channelId).child("body").setValue(text);
                             myDB.child("specter").child("channels").child(channelId).child("mark_body").setValue(false);
                             recPosts.smoothScrollToPosition(posts.size());

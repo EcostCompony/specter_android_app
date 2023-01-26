@@ -1,7 +1,7 @@
 package com.ecost.specter.menu;
 
-import static com.ecost.specter.Routing.authName;
 import static com.ecost.specter.Routing.authShortUserLink;
+import static com.ecost.specter.Routing.authUserName;
 
 import android.annotation.SuppressLint;
 import android.os.Bundle;
@@ -42,7 +42,7 @@ public class MainMenuActivity extends AppCompatActivity {
         Objects.requireNonNull(getSupportActionBar()).setHomeAsUpIndicator(R.drawable.ava_nav);
         getSupportActionBar().hide();
 
-        tName.setText(authName);
+        tName.setText(authUserName);
         tShortUserLink.setText(getString(R.string.symbol_at) + authShortUserLink);
     }
 

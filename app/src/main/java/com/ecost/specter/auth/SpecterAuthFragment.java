@@ -5,8 +5,8 @@ import static com.ecost.specter.Routing.myDB;
 import static com.ecost.specter.Routing.popup;
 import static com.ecost.specter.Routing.pushPreferenceAuth;
 import static com.ecost.specter.Routing.pushPreferenceId;
-import static com.ecost.specter.Routing.pushPreferenceName;
 import static com.ecost.specter.Routing.pushPreferenceShortUserLink;
+import static com.ecost.specter.Routing.pushPreferenceUserName;
 import static com.ecost.specter.Routing.signOut;
 
 import android.content.Intent;
@@ -79,7 +79,7 @@ public class SpecterAuthFragment extends Fragment {
                             myDB.child("specter").child("users_number").setValue(uid);
                             pushPreferenceAuth(authActivity, true);
                             pushPreferenceId(authActivity, uid);
-                            pushPreferenceName(authActivity, name);
+                            pushPreferenceUserName(authActivity, name);
                             pushPreferenceShortUserLink(authActivity, shortLink);
                             startActivity(new Intent(authActivity, MainMenuActivity.class));
                             authActivity.finish();

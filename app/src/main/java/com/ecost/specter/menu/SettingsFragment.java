@@ -1,12 +1,12 @@
 package com.ecost.specter.menu;
 
 import static com.ecost.specter.Routing.authId;
-import static com.ecost.specter.Routing.authName;
 import static com.ecost.specter.Routing.authShortUserLink;
+import static com.ecost.specter.Routing.authUserName;
 import static com.ecost.specter.Routing.myDB;
 import static com.ecost.specter.Routing.popup;
-import static com.ecost.specter.Routing.pushPreferenceName;
 import static com.ecost.specter.Routing.pushPreferenceShortUserLink;
+import static com.ecost.specter.Routing.pushPreferenceUserName;
 import static com.ecost.specter.Routing.signOut;
 
 import android.content.Intent;
@@ -47,7 +47,7 @@ public class SettingsFragment extends Fragment {
         bSaveShortLink = binding.buttonSaveShortLink;
         mainMenuActivity = (MainMenuActivity) requireActivity();
 
-        eName.setText(authName);
+        eName.setText(authUserName);
         eShortLink.setText(authShortUserLink);
 
         Objects.requireNonNull(mainMenuActivity.getSupportActionBar()).hide();
@@ -69,7 +69,7 @@ public class SettingsFragment extends Fragment {
 
             @Override
             public void afterTextChanged(Editable s) {
-                if (!eName.getText().toString().equals(authName)) bSaveName.setVisibility(View.VISIBLE);
+                if (!eName.getText().toString().equals(authUserName)) bSaveName.setVisibility(View.VISIBLE);
                 else bSaveName.setVisibility(View.GONE);
             }
         });
@@ -91,7 +91,7 @@ public class SettingsFragment extends Fragment {
             if (name.equals("")) popup(mainMenuActivity, view, "error");
             else {
                 myDB.child("specter").child("users").child(String.valueOf(authId)).child("name").setValue(name);
-                pushPreferenceName(mainMenuActivity, name);
+                pushPreferenceUserName(mainMenuActivity, name);
                 bSaveName.setVisibility(View.GONE);
             }
         });
