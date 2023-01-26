@@ -120,8 +120,8 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="12dp"
             android:fontFamily="@font/manrope_extra_bold"
-            android:textColor="@color/background"
             android:visibility="gone"
+            android:textColor="@color/main_color"
             android:text="@string/edit_post" />
 
         <LinearLayout

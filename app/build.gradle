@@ -11,8 +11,8 @@ android {
         applicationId "com.ecost.specter"
         minSdkVersion 23
         targetSdkVersion 33
-        versionCode 82
-        versionName "Alpha 1.10.0"
+        versionCode 83
+        versionName "Pre-Alpha 83"
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }

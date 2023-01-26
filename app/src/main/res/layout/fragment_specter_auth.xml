@@ -116,7 +116,7 @@
         android:layout_height="37dp"
         android:layout_gravity="center_horizontal"
         android:background="@drawable/button_neutral"
-        android:textColor="@color/background"
+        android:textColor="@color/main_color"
         android:fontFamily="@font/inter_bold"
         android:textAllCaps="false"
         android:textSize="12sp"

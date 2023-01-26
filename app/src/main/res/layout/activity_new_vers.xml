@@ -14,7 +14,6 @@
         android:layout_marginStart="150dp"
         android:layout_marginEnd="100dp"
         android:text="Данная версия устарела. Пожалуйста, обновите её, чтобы продолжить работу."
-        android:textColor="@color/main_text_color"
         android:textSize="20sp"
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"

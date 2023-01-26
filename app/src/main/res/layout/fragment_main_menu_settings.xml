@@ -69,7 +69,6 @@
         android:textSize="12sp"
         android:layout_gravity="center_horizontal"
         android:fontFamily="@font/inter_semi_bold"
-        android:textColor="@color/black"
         android:layout_marginBottom="22dp"
         tools:text="федя йо" />
 

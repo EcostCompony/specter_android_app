@@ -33,7 +33,6 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="11dp"
-            android:textColor="@color/black"
             android:textSize="22sp"
             android:fontFamily="@font/inter_semi_bold"
             android:text="@string/channel_settings" />

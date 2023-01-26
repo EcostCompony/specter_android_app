@@ -9,6 +9,6 @@
     <style name="RobotoBoldTextAppearance">
         <item name="android:fontFamily">@font/inter_semi_bold</item>
         <item name="android:textSize">22sp</item>
-        <item name="android:textColor">@color/main_text_color</item>
+        <item name="android:textColor">@color/white</item>
     </style>
 </resources>
