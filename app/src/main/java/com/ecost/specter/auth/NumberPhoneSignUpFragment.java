@@ -19,54 +19,50 @@ import com.ecost.specter.R;
 
 import java.util.regex.Pattern;
 
-public class PhoneSignUpFragment extends Fragment {
+public class NumberPhoneSignUpFragment extends Fragment {
 
-    EditText ePhone;
+    EditText eNumberPhone;
     Button bContinue;
     AuthActivity authActivity;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        View inflaterView = inflater.inflate(R.layout.fragment_phone_sign_up, container, false);
+        View inflaterView = inflater.inflate(R.layout.fragment_number_phone_sign_up, container, false);
 
-        ePhone = inflaterView.findViewById(R.id.input_phone);
+        eNumberPhone = inflaterView.findViewById(R.id.input_number_phone);
         bContinue = inflaterView.findViewById(R.id.button_continue);
         authActivity = (AuthActivity) requireActivity();
 
-        InputFilter filterNumber = (source, start, end, dest, dstart, dend) -> {
+        eNumberPhone.setFilters(new InputFilter[] {(source, start, end, dest, dstart, dend) -> {
             for (int i = start; i < end; i++) {
                 if (!Pattern.compile("\\d", Pattern.CASE_INSENSITIVE).matcher(String.valueOf(source.charAt(i))).find()) {
-                    ePhone.startAnimation(AnimationUtils.loadAnimation(authActivity, R.anim.shake));
-                    ePhone.setBackground(ContextCompat.getDrawable(authActivity, R.drawable.input_auth_err));
+                    eNumberPhone.startAnimation(AnimationUtils.loadAnimation(authActivity, R.anim.input_shake));
+                    eNumberPhone.setBackground(ContextCompat.getDrawable(authActivity, R.drawable.input_auth_error));
                     return "";
                 }
             }
             return null;
-        };
-        ePhone.setFilters(new InputFilter[] { filterNumber, new InputFilter.LengthFilter(13) });
+        }, new InputFilter.LengthFilter(13)});
+
+        eNumberPhone.setOnKeyListener((view, keyCode, event) -> {
+            if (keyCode == KeyEvent.KEYCODE_ENTER) next(view);
+            return keyCode == KeyEvent.KEYCODE_ENTER;
+        });
 
         bContinue.setOnClickListener(this::next);
-
-        ePhone.setOnKeyListener((v, keyCode, event) -> {
-            if (keyCode == KeyEvent.KEYCODE_ENTER) {
-                next(getView());
-                return true;
-            }
-            return false;
-        });
 
         return inflaterView;
     }
 
     public void next(View view) {
-        String phone = ePhone.getText().toString();
+        String numberPhone = eNumberPhone.getText().toString();
 
-        if (phone.equals("")) authActivity.popupOneInput(view, getString(R.string.error_sign_up_no_username), ePhone);
+        if (numberPhone.equals("")) authActivity.popupOneInput(view, eNumberPhone, getString(R.string.error_sign_up_no_username));
         else
-            myDB.child("ecost").child("uid").child(phone).get().addOnCompleteListener(task -> {
-                if (task.getResult().getValue() != null) authActivity.popupOneInput(view, getString(R.string.error_sign_up_already_username), ePhone);
+            myDB.child("ecost").child("uid").child(numberPhone).get().addOnCompleteListener(task -> {
+                if (task.getResult().getValue() != null) authActivity.popupOneInput(view, eNumberPhone, getString(R.string.error_sign_up_already_username));
                 else {
-                    authActivity.phone = phone;
+                    authActivity.numberPhone = numberPhone;
                     authActivity.getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container_view, new PasswordSignUpFragment()).addToBackStack(null).commit();
                 }
             });

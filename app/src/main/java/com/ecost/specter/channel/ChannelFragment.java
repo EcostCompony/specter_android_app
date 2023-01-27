@@ -161,13 +161,13 @@ public class ChannelFragment extends Fragment {
                 Integer id = dataSnapshot.getValue(Integer.class);
                 channelActivity.subscribers.add(id);
                 if (Objects.equals(id, authId)) bSubscribe.setVisibility(View.GONE);
-                tNumberSubscribers.setText(Locale.getDefault().getLanguage().equals("ru") ? pluralForm(channelActivity.subscribers.size(), getString(R.string.subscriber1), getString(R.string.subscribers2), getString(R.string.subscribers3)) : pluralForm(channelActivity.subscribers.size(), getString(R.string.subscriber1), getString(R.string.subscribers2)));
+                tNumberSubscribers.setText(pluralForm(channelActivity.subscribers.size(), getString(R.string.subscriber1), getString(R.string.subscribers2), getString(R.string.subscribers3), Locale.getDefault().getLanguage().equals("ru")));
             }
 
             @Override
             public void onChildRemoved(@NonNull DataSnapshot dataSnapshot) {
                 channelActivity.subscribers.remove(dataSnapshot.getKey());
-                tNumberSubscribers.setText(Locale.getDefault().getLanguage().equals("ru") ? pluralForm(channelActivity.subscribers.size(), getString(R.string.subscriber1), getString(R.string.subscribers2), getString(R.string.subscribers3)) : pluralForm(channelActivity.subscribers.size(), getString(R.string.subscriber1), getString(R.string.subscribers2)));
+                tNumberSubscribers.setText(pluralForm(channelActivity.subscribers.size(), getString(R.string.subscriber1), getString(R.string.subscribers2), getString(R.string.subscribers3), Locale.getDefault().getLanguage().equals("ru")));
             }
 
             @Override public void onChildChanged(@NonNull DataSnapshot dataSnapshot, String previousChildName) {}

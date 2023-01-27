@@ -8,7 +8,7 @@
     <string name="reset_password">Сброс пароля</string>
     <string name="sign_up">Регистрация</string>
 
-    <string name="phone_sign_up_description">Введите ваш номер телефона, он будет использоваться при входе в ecost.</string>
+    <string name="number_phone_sign_up_description">Введите ваш номер телефона, он будет использоваться при входе в ecost.</string>
 
     <string name="error_login_not_password">Оу… Чтобы войти, введите свой пароль.</string>
     <string name="error_sign_in_wrong_password">Пароль введен неправильно =(</string>
@@ -18,7 +18,7 @@
     <string name="input_confirm_password">Повторите пароль</string>
     <string name="button_sign_up">Регистрация</string>
     <string name="nickname_signup_description">Придумайте себе имя пользователя. Оно будет использовано, как ваше имя.</string>
-    <string name="password_signup_description">Придумайте хороший пароль для вашего аккаунта.</string>
+    <string name="password_sign_up_description">Придумайте хороший пароль для вашего аккаунта.</string>
 
     <string name="input_text">Введите текст поста…</string>
     <string name="error_signup_not_password">Оу… Чтобы зарегистрироваться, стоит придумать пароль.</string>
@@ -81,4 +81,17 @@
     <string name="get_started">Get started</string>
     <string name="special">Special</string>
     <string name="archive">Archive</string>
+    <string name="input_hint_number_phone_sign_in">Number phone</string>
+    <string name="input_hint_password_sign_in">Password</string>
+    <string name="button_sign_in">Sign in</string>
+    <string name="sign_in_button_sign_up">Sign up</string>
+    <string name="sign_in_button_sign_in">Sign in</string>
+    <string name="sign_in_input_hint_password">Password</string>
+    <string name="sign_in_input_hint_number_phone">Number phone</string>
+    <string name="number_phone_sign_up_input_hint_number_phone">Number phone</string>
+    <string name="number_phone_sign_up_button_continue">Continue</string>
+    <string name="password_sign_up_input_hint_password">Password</string>
+    <string name="password_sign_up_input_hint_confirm_password">Confirm password</string>
+    <string name="password_sign_up_button_sign_up">Sign up</string>
+    <string name="specter_auth_header">Get started</string>
 </resources>

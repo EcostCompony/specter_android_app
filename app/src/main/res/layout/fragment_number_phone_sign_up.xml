@@ -6,12 +6,11 @@
     android:orientation="vertical"
     android:gravity="center"
     android:background="@color/background"
-    tools:context=".auth.PhoneSignUpFragment">
+    tools:context=".auth.NumberPhoneSignUpFragment">
 
     <TextView
         android:layout_width="326dp"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="9dp"
         android:fontFamily="@font/manrope_extra_bold"
         android:textSize="24sp"
         android:text="@string/sign_up_header" />
@@ -19,37 +18,34 @@
     <TextView
         android:layout_width="326dp"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="16dp"
-        android:textColor="@color/medium_dark_gray"
+        android:layout_marginTop="9dp"
+        android:textColor="@color/auth_description_text"
         android:fontFamily="@font/manrope_regular"
         android:textSize="14sp"
-        android:text="@string/phone_sign_up_description" />
+        android:text="@string/number_phone_sign_up_description" />
 
     <EditText
-        android:id="@+id/input_phone"
+        android:id="@+id/input_number_phone"
         android:layout_width="326dp"
         android:layout_height="55dp"
-        android:layout_marginBottom="21dp"
         android:inputType="phone"
         android:autofillHints="phone"
+        android:layout_marginTop="20dp"
         android:background="@drawable/input_auth"
         android:paddingHorizontal="17dp"
-        android:textColorHint="@color/silver_polish"
-        android:hint="@string/phone"
+        android:textColorHint="@color/auth_color_hint"
         android:fontFamily="@font/manrope_semi_bold"
-        android:textSize="16sp" />
+        android:textSize="16sp"
+        android:hint="@string/number_phone_sign_up_input_hint_number_phone" />
 
     <Button
         android:id="@+id/button_continue"
         android:layout_width="326dp"
         android:layout_height="55dp"
+        android:layout_marginTop="17dp"
         android:background="@drawable/button_auth"
-        android:textColor="@color/light_grey"
+        android:textColor="@color/auth_button_color_text"
         android:fontFamily="@font/manrope_bold"
         android:textSize="16sp"
-        android:text="@string/contin"
-        android:drawableEnd="@drawable/arrow"
-        android:drawableTint="@color/light_grey"
-        android:paddingHorizontal="90dp" />
-
+        android:text="@string/number_phone_sign_up_button_continue" />
 </LinearLayout>

@@ -21,9 +21,9 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.animation.AnimationUtils;
-import android.widget.Button;
 import android.widget.EditText;
 import android.widget.FrameLayout;
+import android.widget.LinearLayout;
 
 import com.ecost.specter.menu.MainMenuActivity;
 import com.ecost.specter.R;
@@ -34,10 +34,10 @@ import java.util.regex.Pattern;
 
 public class SignInFragment extends Fragment {
 
-    EditText ePhone, ePassword;
-    View bHidePassword;
-    FrameLayout fInputPassword;
-    Button bSignIn, bSignUp;
+    EditText eNumberPhone, ePassword;
+    FrameLayout fPassword;
+    LinearLayout bHidePassword;
+    View vHidePassword;
     Boolean passwordView = false;
     AuthActivity authActivity;
 
@@ -45,86 +45,71 @@ public class SignInFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View inflaterView = inflater.inflate(R.layout.fragment_sign_in, container, false);
 
-        ePhone = inflaterView.findViewById(R.id.input_phone);
+        eNumberPhone = inflaterView.findViewById(R.id.input_number_phone);
         ePassword = inflaterView.findViewById(R.id.input_password);
+        fPassword = inflaterView.findViewById(R.id.frame_input_password);
         bHidePassword = inflaterView.findViewById(R.id.button_hide_password);
-        fInputPassword = inflaterView.findViewById(R.id.frame_input_password);
-        bSignIn = inflaterView.findViewById(R.id.button_sign_in);
-        bSignUp = inflaterView.findViewById(R.id.button_sign_up);
+        vHidePassword = inflaterView.findViewById(R.id.icon_hide_password);
         authActivity = (AuthActivity) requireActivity();
 
-        InputFilter filterPhone = (source, start, end, dest, dstart, dend) -> {
+        eNumberPhone.setFilters(new InputFilter[] {(source, start, end, dest, dstart, dend) -> {
             for (int i = start; i < end; i++) {
                 if (!Pattern.compile("\\d", Pattern.CASE_INSENSITIVE).matcher(String.valueOf(source.charAt(i))).find()) {
-                    ePhone.startAnimation(AnimationUtils.loadAnimation(authActivity, R.anim.shake));
-                    ePhone.setBackground(ContextCompat.getDrawable(authActivity, R.drawable.input_auth_err));
+                    eNumberPhone.setBackground(ContextCompat.getDrawable(authActivity, R.drawable.input_auth_error));
+                    eNumberPhone.startAnimation(AnimationUtils.loadAnimation(authActivity, R.anim.input_shake));
                     return "";
                 }
             }
             return null;
-        };
-        ePhone.setFilters(new InputFilter[] { filterPhone, new InputFilter.LengthFilter(13) });
-        ePassword.setFilters(new InputFilter[] { new InputFilter.LengthFilter(128) });
+        }, new InputFilter.LengthFilter(13)});
+        ePassword.setFilters(new InputFilter[] {new InputFilter.LengthFilter(128)});
 
-        bSignIn.setOnClickListener(this::signIn);
-        bSignUp.setOnClickListener(view -> authActivity.getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container_view, new PhoneSignUpFragment()).addToBackStack(null).commit());
+        eNumberPhone.setOnKeyListener((view, keyCode, event) -> keyCode == KeyEvent.KEYCODE_ENTER && testNumberPhone(view, eNumberPhone.getText().toString()));
+
+        ePassword.setOnKeyListener((view, keyCode, event) -> {
+            if (keyCode == KeyEvent.KEYCODE_ENTER) signIn(view);
+            return keyCode == KeyEvent.KEYCODE_ENTER;
+        });
 
         bHidePassword.setOnClickListener(view -> {
             int select = ePassword.getSelectionStart();
-            if (!passwordView) {
-                ePassword.setInputType(InputType.TYPE_TEXT_VARIATION_PASSWORD);
-                ePassword.setSelection(select);
-                bHidePassword.setBackground(ContextCompat.getDrawable(authActivity, R.drawable.eye_slash));
-                passwordView = true;
-            } else {
-                ePassword.setInputType(InputType.TYPE_CLASS_TEXT | InputType.TYPE_TEXT_VARIATION_PASSWORD);
-                ePassword.setSelection(select);
-                bHidePassword.setBackground(ContextCompat.getDrawable(authActivity, R.drawable.eye));
-                passwordView = false;
-            }
+            ePassword.setInputType(passwordView ? InputType.TYPE_CLASS_TEXT | InputType.TYPE_TEXT_VARIATION_PASSWORD : InputType.TYPE_TEXT_VARIATION_PASSWORD);
+            vHidePassword.setBackground(ContextCompat.getDrawable(authActivity, passwordView ? R.drawable.eye : R.drawable.eye_slash));
+            ePassword.setSelection(select);
+            passwordView = !passwordView;
         });
 
-        ePhone.setOnKeyListener((v, keyCode, event) -> {
-            if (keyCode == KeyEvent.KEYCODE_ENTER) return testPhone(getView(), ePhone.getText().toString());
-            return false;
-        });
+        inflaterView.findViewById(R.id.button_sign_in).setOnClickListener(this::signIn);
 
-        ePassword.setOnKeyListener((v, keyCode, event) -> {
-            if (keyCode == KeyEvent.KEYCODE_ENTER) {
-                signIn(getView());
-                return true;
-            }
-            return false;
-        });
+        inflaterView.findViewById(R.id.button_sign_up).setOnClickListener(view -> authActivity.getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container_view, new NumberPhoneSignUpFragment()).addToBackStack(null).commit());
 
         return inflaterView;
     }
 
     public void signIn(View view) {
-        String phone = ePhone.getText().toString();
+        String numberPhone = eNumberPhone.getText().toString();
         String password = hash(ePassword.getText().toString());
 
-        if (testPhone(view, phone)) { }
-        else if (password.equals("")) authActivity.popupTwoInput(view, getString(R.string.error_login_not_password), ePassword, ePhone, fInputPassword);
+        //noinspection StatementWithEmptyBody
+        if (testNumberPhone(view, numberPhone)) { }
+        else if (password.equals("")) authActivity.popupTwoInput(view, ePassword, eNumberPhone, getString(R.string.error_login_not_password), fPassword);
         else
-            myDB.child("ecost").child("uid").child(phone).child("id").get().addOnCompleteListener(taskId -> {
+            myDB.child("ecost").child("uid").child(numberPhone).child("id").get().addOnCompleteListener(taskId -> {
                 String uid = String.valueOf(taskId.getResult().getValue());
-                if (uid.equals("null")) authActivity.popupTwoInput(view, getString(R.string.error_no_ph), ePhone, ePassword);
+                if (uid.equals("null")) authActivity.popupTwoInput(view, eNumberPhone, ePassword, getString(R.string.error_no_ph));
                 else
                     myDB.child("ecost").child("users").child(uid).child("password").get().addOnCompleteListener(taskPassword -> {
-                        if (!String.valueOf(taskPassword.getResult().getValue()).equals(password)) authActivity.popupTwoInput(view, getString(R.string.error_sign_in_wrong_password), ePassword, ePhone, fInputPassword);
+                        if (!String.valueOf(taskPassword.getResult().getValue()).equals(password)) authActivity.popupTwoInput(view, ePassword, eNumberPhone, getString(R.string.error_sign_in_wrong_password), fPassword);
                         else
                             myDB.child("ecost").child("users").child(uid).child("services").child("specter").get().addOnCompleteListener(taskSpecterId -> {
                                 String id = String.valueOf(taskSpecterId.getResult().getValue());
-                                if (id.equals("null")) {
-                                    pushPreferenceEcostId(authActivity, Integer.parseInt(uid));
-                                    authActivity.getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container_view, new SpecterAuthFragment()).addToBackStack(null).commit();
-                                } else
-                                    myDB.child("specter").child("users").child(id).get().addOnCompleteListener(taskName -> {
-                                        User user = Objects.requireNonNull(taskName.getResult().getValue(User.class));
+                                pushPreferenceEcostId(authActivity, Integer.parseInt(uid));
+                                if (id.equals("null")) authActivity.getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container_view, new SpecterAuthFragment()).commit();
+                                else
+                                    myDB.child("specter").child("users").child(id).get().addOnCompleteListener(taskUser -> {
+                                        User user = Objects.requireNonNull(taskUser.getResult().getValue(User.class));
                                         pushPreferenceAuth(authActivity, true);
                                         pushPreferenceId(authActivity, user.id);
-                                        pushPreferenceEcostId(authActivity, user.ecost_id);
                                         pushPreferenceUserName(authActivity, user.name);
                                         pushPreferenceShortUserLink(authActivity, user.link);
                                         startActivity(new Intent(authActivity, MainMenuActivity.class));
@@ -135,12 +120,9 @@ public class SignInFragment extends Fragment {
             });
     }
 
-    public boolean testPhone(View view, String phone) {
-        if (phone.equals("")) {
-            authActivity.popupTwoInput(view, getString(R.string.error_signin_not_username), ePhone, ePassword);
-            return true;
-        }
-        return false;
+    public boolean testNumberPhone(View view, String phone) {
+        if (phone.equals("")) authActivity.popupTwoInput(view, eNumberPhone, ePassword, getString(R.string.error_signin_not_username));
+        return phone.equals("");
     }
 
 }

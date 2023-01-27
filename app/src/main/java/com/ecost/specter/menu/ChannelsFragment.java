@@ -228,7 +228,7 @@ public class ChannelsFragment extends Fragment {
     }
 
     public String dec(int i) {
-        return Locale.getDefault().getLanguage().equals("ru") ? pluralForm(i, getString(R.string.subscriber1), getString(R.string.subscribers2), getString(R.string.subscribers3)) : pluralForm(i, getString(R.string.subscriber1), getString(R.string.subscribers2));
+        return pluralForm(i, getString(R.string.count_channel1), getString(R.string.count_channel2), getString(R.string.count_channel3), Locale.getDefault().getLanguage().equals("ru"));
     }
 
 }

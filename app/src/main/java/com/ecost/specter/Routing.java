@@ -101,16 +101,13 @@ public class Routing extends AppCompatActivity {
         return String.join("", arrayPassword);
     }
 
-    public static String pluralForm(Integer i, String form1, String form2, String form3) {
+    public static String pluralForm(Integer i, String form1, String form2, String form3, Boolean declination) {
+        if (i == 1) return i + " " + form1;
+        else if (!declination) return i + " " + form2;
         i = i%100;
 
         if (i == 1) return i + " " + form1;
         else if (i == 0 || (i > 4 && i < 20)) return i + " " + form3;
-        else return i + " " + form2;
-    }
-
-    public static String pluralForm(Integer i, String form1, String form2) {
-        if (i == 1) return i + " " + form1;
         else return i + " " + form2;
     }
 
