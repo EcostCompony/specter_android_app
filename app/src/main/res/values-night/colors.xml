@@ -27,4 +27,5 @@
     <color name="auth_color_hint">#C6C6C6</color>
     <color name="auth_button_color_text">#BBB</color>
     <color name="auth_description_text">#606060</color>
+    <color name="channels_menu_number_channels">#D1D1D1</color>
 </resources>

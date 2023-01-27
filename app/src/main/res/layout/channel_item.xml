@@ -11,12 +11,12 @@
         android:layout_width="40dp"
         android:layout_height="40dp"
         android:layout_marginStart="25dp"
-        app:cardCornerRadius="40dp">
+        app:cardCornerRadius="20dp">
 
         <ImageView
             android:layout_width="40dp"
             android:layout_height="40dp"
-            android:src="@drawable/user_avatar"
+            android:src="@drawable/channel_photo"
             android:contentDescription="@string/channel_photo" />
     </androidx.cardview.widget.CardView>
 

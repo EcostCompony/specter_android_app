@@ -10,7 +10,7 @@
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recycler_chapters_list"
         android:layout_width="match_parent"
-        android:layout_height="32dp"
+        android:layout_height="28dp"
         android:layout_marginTop="5dp"
         android:layout_marginHorizontal="25dp"
         android:overScrollMode="never" />
@@ -28,7 +28,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="7dp"
         android:layout_gravity="center_horizontal"
-        android:textColor="@color/chrysler_gray"
+        android:textColor="@color/channels_menu_number_channels"
         android:fontFamily="@font/inter_regular"
         android:textSize="12sp" />
 </LinearLayout>

@@ -9,6 +9,7 @@ import static com.ecost.specter.Routing.pushPreferenceShortUserLink;
 import static com.ecost.specter.Routing.pushPreferenceUserName;
 import static com.ecost.specter.Routing.signOut;
 
+import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.Editable;
@@ -37,6 +38,7 @@ public class SettingsFragment extends Fragment {
     ImageButton bSaveName, bSaveShortLink;
     MainMenuActivity mainMenuActivity;
 
+    @SuppressLint("SetTextI18n")
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         FragmentSettingsBinding binding = FragmentSettingsBinding.inflate(inflater, container, false);
         View root = binding.getRoot();
@@ -93,6 +95,7 @@ public class SettingsFragment extends Fragment {
                 myDB.child("specter").child("users").child(String.valueOf(authId)).child("name").setValue(name);
                 pushPreferenceUserName(mainMenuActivity, name);
                 bSaveName.setVisibility(View.GONE);
+                mainMenuActivity.tUserName.setText(authUserName);
             }
         });
 
@@ -110,6 +113,7 @@ public class SettingsFragment extends Fragment {
                         myDB.child("specter").child("uid").child(shortLink.replace('.', '*')).child("type").setValue("user");
                         pushPreferenceShortUserLink(mainMenuActivity, shortLink);
                         bSaveShortLink.setVisibility(View.GONE);
+                        mainMenuActivity.tShortUserLink.setText(getString(R.string.symbol_at) + authShortUserLink);
                     }
                 });
         });
