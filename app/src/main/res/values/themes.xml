@@ -27,7 +27,7 @@
 
     <style name="Theme.unify.Starting.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
 
-    <style name="RobotoBoldTextAppearance">
+    <style name="ToolBarTextAppearance">
         <item name="android:fontFamily">@font/inter_semi_bold</item>
         <item name="android:textSize">22sp</item>
     </style>

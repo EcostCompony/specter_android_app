@@ -8,12 +8,12 @@
 
     <androidx.coordinatorlayout.widget.CoordinatorLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:layout_marginTop="12dp">
 
         <com.google.android.material.appbar.AppBarLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="12dp"
             app:elevation="0dp">
 
             <androidx.appcompat.widget.Toolbar
@@ -22,8 +22,8 @@
                 android:layout_height="55dp"
                 android:background="@color/background"
                 app:contentInsetStartWithNavigation="66dp"
-                app:title="@string/menu_channels"
-                app:titleTextAppearance="@style/RobotoBoldTextAppearance" />
+                app:titleTextAppearance="@style/ToolBarTextAppearance"
+                app:title="@string/toolbar_header" />
         </com.google.android.material.appbar.AppBarLayout>
 
         <include layout="@layout/content_main_menu" />
@@ -36,7 +36,7 @@
         android:layout_gravity="start"
         app:headerLayout="@layout/nav_header_main_menu"
         app:menu="@menu/activity_main_drawer"
+        app:itemIconTint="@color/main_color"
         app:itemHorizontalPadding="31dp"
-        app:itemIconPadding="14dp"
-        app:itemIconTint="@color/main_color" />
+        app:itemIconPadding="14dp" />
 </androidx.drawerlayout.widget.DrawerLayout>

@@ -22,7 +22,7 @@ public class MainMenuActivity extends AppCompatActivity {
 
     AppBarConfiguration mAppBarConfiguration;
     NavController navController;
-    TextView tName, tShortUserLink;
+    TextView tUserName, tShortUserLink;
 
     @SuppressLint("SetTextI18n")
     @Override
@@ -33,16 +33,15 @@ public class MainMenuActivity extends AppCompatActivity {
 
         mAppBarConfiguration = new AppBarConfiguration.Builder(R.id.nav_channels, R.id.nav_create_channel, R.id.nav_settings).setOpenableLayout(binding.drawerLayout).build();
         navController = Navigation.findNavController(this, R.id.nav_host_fragment_content_main_menu);
-        tName = binding.navView.getHeaderView(0).findViewById(R.id.name);
+        tUserName = binding.navView.getHeaderView(0).findViewById(R.id.user_name);
         tShortUserLink = binding.navView.getHeaderView(0).findViewById(R.id.short_user_link);
 
         setSupportActionBar(binding.toolbar);
         NavigationUI.setupActionBarWithNavController(this, navController, mAppBarConfiguration);
         NavigationUI.setupWithNavController(binding.navView, navController);
-        Objects.requireNonNull(getSupportActionBar()).setHomeAsUpIndicator(R.drawable.ava_nav);
-        getSupportActionBar().hide();
+        Objects.requireNonNull(getSupportActionBar()).hide();
 
-        tName.setText(authUserName);
+        tUserName.setText(authUserName);
         tShortUserLink.setText(getString(R.string.symbol_at) + authShortUserLink);
     }
 

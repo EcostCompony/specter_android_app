@@ -168,7 +168,7 @@ public class ChannelsFragment extends Fragment {
         Objects.requireNonNull(mainMenuActivity.getSupportActionBar()).show();
         Objects.requireNonNull(mainMenuActivity.getSupportActionBar()).setHomeAsUpIndicator(R.drawable.ava_nav);
 
-        mainMenuActivity.tName.setText(authUserName);
+        mainMenuActivity.tUserName.setText(authUserName);
         mainMenuActivity.tShortUserLink.setText(getString(R.string.symbol_at) + authShortUserLink);
     }
 
