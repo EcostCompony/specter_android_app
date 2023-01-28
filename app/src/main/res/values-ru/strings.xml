@@ -96,4 +96,12 @@
     <string name="specter_auth_header">Get started</string>
     <string name="toolbar_header">Channels</string>
     <string name="channels_menu_parametr_channel_created">Channel created</string>
+    <string name="crate_channel_menu_content_description_close">close</string>
+    <string name="create_channel_menu_header">Create a channel</string>
+    <string name="create_channel_menu_parametr_header_title">Title</string>
+    <string name="create_channel_menu_parametr_header_short_link">Short link</string>
+    <string name="create_channel_menu_button_create_channel">Create channel</string>
+    <string name="create_channel_menu_error_not_title">error</string>
+    <string name="create_channel_menu_error_not_short_channel_link">error</string>
+    <string name="create_channel_menu_error_use_short_channel_link">ссылка занята</string>
 </resources>

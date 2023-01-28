@@ -138,7 +138,7 @@
                 android:layout_marginVertical="12dp"
                 android:layout_marginStart="13dp"
                 android:layout_marginEnd="11dp"
-                android:background="@drawable/input_message"
+                android:background="@drawable/main_input"
                 android:hint="@string/input_text"
                 android:paddingTop="7dp"
                 android:paddingBottom="7dp"
