@@ -7,12 +7,13 @@
     android:orientation="vertical"
     android:gravity="center_horizontal"
     android:background="@color/background"
-    tools:context=".menu.SettingsFragment">
+    tools:context=".menu.SettingsMenuFragment">
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="48dp"
+        android:layout_height="50dp"
         android:orientation="horizontal"
+        android:layout_marginTop="2dp"
         android:gravity="center_vertical">
 
         <androidx.cardview.widget.CardView
@@ -21,14 +22,14 @@
             android:layout_height="29dp"
             android:layout_marginStart="26dp"
             android:elevation="6dp"
-            app:cardCornerRadius="29dp">
+            app:cardCornerRadius="14.5dp">
 
-            <ImageView
+            <View
                 android:layout_width="13dp"
                 android:layout_height="13dp"
-                android:contentDescription="@string/close"
-                android:src="@drawable/union"
-                android:layout_gravity="center" />
+                android:layout_gravity="center"
+                android:background="@drawable/union"
+                android:contentDescription="@string/crate_channel_menu_content_description_close" />
         </androidx.cardview.widget.CardView>
 
         <TextView
@@ -37,132 +38,105 @@
             android:layout_marginStart="11dp"
             android:fontFamily="@font/inter_semi_bold"
             android:textSize="22sp"
-            android:text="@string/settings" />
+            android:text="@string/settings_menu_header" />
 
     </LinearLayout>
-
-    <HorizontalScrollView
-        android:layout_width="match_parent"
-        android:layout_height="32dp"
-        android:layout_marginHorizontal="25dp"
-        android:layout_marginTop="11dp"
-        android:scrollbars="none">
-
-        <LinearLayout
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:orientation="horizontal"
-            android:gravity="center_vertical">
-
-            <Button
-                android:id="@+id/button_chapter_channels"
-                android:layout_width="wrap_content"
-                android:layout_height="28dp"
-                android:background="@drawable/button_chapter"
-                android:paddingHorizontal="21dp"
-                android:textColor="@color/medium_light_grey"
-                android:fontFamily="@font/inter_extra_bold"
-                android:textSize="11sp"
-                android:text="@string/account" />
-        </LinearLayout>
-    </HorizontalScrollView>
 
     <TextView
         android:layout_width="340dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="17dp"
+        android:layout_marginTop="14dp"
         android:paddingHorizontal="13dp"
+        android:textColor="@color/parametrs_header"
         android:fontFamily="@font/inter_semi_bold"
         android:textSize="12sp"
-        android:textColor="@color/ford_autumn_smoke"
-        android:text="@string/name" />
+        android:text="@string/settings_menu_parametr_header_name" />
 
     <LinearLayout
         android:layout_width="340dp"
-        android:layout_height="wrap_content"
+        android:layout_height="38dp"
+        android:layout_marginTop="4dp"
         android:orientation="horizontal">
 
         <EditText
-            android:id="@+id/input_title"
+            android:id="@+id/input_user_name"
             android:layout_width="0dp"
-            android:layout_height="38dp"
-            android:layout_weight="1"
-            android:layout_marginTop="4dp"
-            android:autofillHints="title"
-            android:background="@drawable/main_input"
-            android:fontFamily="@font/inter_semi_bold"
+            android:layout_height="match_parent"
+            android:imeOptions="actionGo"
             android:inputType="text"
+            android:autofillHints="title"
+            android:layout_weight="1"
+            android:background="@drawable/main_input"
             android:paddingHorizontal="13dp"
+            android:fontFamily="@font/inter_semi_bold"
             android:textSize="12sp"
             tools:ignore="LabelFor" />
 
         <ImageButton
-            android:id="@+id/button_save_name"
+            android:id="@+id/button_save_user_name"
             android:layout_width="38dp"
             android:layout_height="38dp"
             android:layout_marginStart="12dp"
-            android:layout_gravity="bottom"
             android:background="@drawable/button_permissive"
+            android:src="@drawable/icon_save"
             android:visibility="gone"
-            android:src="@drawable/check_mark"
-            android:contentDescription="@string/save" />
+            android:contentDescription="@string/settings_menu_content_description_save_short_user_name" />
     </LinearLayout>
 
     <TextView
         android:layout_width="340dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="11dp"
+        android:layout_marginTop="10dp"
         android:paddingHorizontal="13dp"
+        android:textColor="@color/parametrs_header"
         android:fontFamily="@font/inter_semi_bold"
-        android:textColor="@color/ford_autumn_smoke"
         android:textSize="12sp"
-        android:text="@string/short_link" />
+        android:text="@string/settings_menu_parametr_header_short_link" />
 
     <LinearLayout
         android:layout_width="340dp"
-        android:layout_height="wrap_content"
+        android:layout_height="38dp"
+        android:layout_marginTop="4dp"
         android:orientation="horizontal">
 
         <RelativeLayout
             android:layout_width="0dp"
-            android:layout_height="38dp"
-            android:layout_weight="1"
-            android:layout_marginTop="4dp">
+            android:layout_height="match_parent"
+            android:layout_weight="1">
 
             <EditText
-                android:id="@+id/input_short_link"
+                android:id="@+id/input_short_user_link"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
+                android:imeOptions="actionGo"
+                android:inputType="text"
                 android:autofillHints="short_user_link"
                 android:background="@drawable/main_input"
-                android:fontFamily="@font/inter_semi_bold"
-                android:inputType="text"
-                android:paddingHorizontal="26dp"
+                android:paddingHorizontal="25dp"
                 android:textColor="@color/main_color"
+                android:fontFamily="@font/inter_semi_bold"
                 android:textSize="12sp"
                 tools:ignore="LabelFor" />
 
             <TextView
-                android:layout_width="wrap_content"
+                android:layout_width="25dp"
                 android:layout_height="match_parent"
-                android:fontFamily="@font/inter_semi_bold"
-                android:gravity="center_vertical"
-                android:paddingHorizontal="13dp"
-                android:text="@string/symbol_at"
+                android:gravity="center_vertical|end"
                 android:textColor="@color/main_color"
-                android:textSize="12sp" />
+                android:fontFamily="@font/inter_semi_bold"
+                android:textSize="12sp"
+                android:text="@string/symbol_at" />
         </RelativeLayout>
 
         <ImageButton
-            android:id="@+id/button_save_short_link"
+            android:id="@+id/button_save_short_user_link"
             android:layout_width="38dp"
             android:layout_height="38dp"
             android:layout_marginStart="12dp"
-            android:layout_gravity="bottom"
             android:background="@drawable/button_permissive"
+            android:src="@drawable/icon_save"
             android:visibility="gone"
-            android:src="@drawable/check_mark"
-            android:contentDescription="@string/save" />
+            android:contentDescription="@string/settings_menu_content_description_save_short_user_link" />
     </LinearLayout>
 
     <Button
@@ -172,8 +146,8 @@
         android:layout_marginTop="22dp"
         android:paddingHorizontal="19dp"
         android:background="@drawable/button_negative"
+        android:textColor="@color/button_negative_text_color"
         android:fontFamily="@font/inter_bold"
-        android:textColor="@color/red"
         android:textSize="12sp"
-        android:text="@string/sign_out" />
+        android:text="@string/settings_menu_button_sign_out" />
 </LinearLayout>

@@ -110,4 +110,15 @@
     <string name="create_channel_menu_error_not_short_channel_link">error</string>
     <string name="create_channel_menu_error_small_short_channel_link" translatable="false">ссылка маленькая</string>
     <string name="create_channel_menu_error_use_short_channel_link">ссылка занята</string>
+    <string name="settings_menu_header">Settings</string>
+    <string name="settings_menu_parametr_header_name">Name</string>
+    <string name="settings_menu_content_description_save">save</string>
+    <string name="settings_menu_parametr_header_short_link">Short link</string>
+    <string name="settings_menu_content_description_save_short_user_link">save short user link</string>
+    <string name="settings_menu_content_description_save_short_user_name">save user name</string>
+    <string name="settings_menu_button_sign_out">Sign out</string>
+    <string name="settings_menu_error_not_name">error</string>
+    <string name="settings_menu_error_not_short_user_link">error</string>
+    <string name="settings_menu_error_small_short_user_link">ссылка маленькая</string>
+    <string name="settings_menu_error_use_short_user_link">ссылка занята</string>
 </resources>
