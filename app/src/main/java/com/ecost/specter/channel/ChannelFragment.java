@@ -54,8 +54,8 @@ public class ChannelFragment extends Fragment {
     EditText ePost;
     PostsAdapter posts_adapter;
     RecyclerView recPosts;
-    String channelTitle, channelId;
-    Integer channelAdmin, editId;
+    String channelTitle;
+    Integer channelAdmin, editId, channelId;
     boolean edit;
     Post edPost;
     List<Post> posts = new ArrayList<>();
@@ -117,8 +117,8 @@ public class ChannelFragment extends Fragment {
                     clipboard.setPrimaryClip(clip);
                 } else if (items[item].equals(getString(R.string.post_delete))) {
                     posts.remove(position);
-                    myDB.child("specter").child("channels").child(channelId).child("body").setValue(posts.size() == 0 ? "not posts" : posts.get(posts.size() - 1).context);
-                    myDB.child("specter").child("channels").child(channelId).child("posts").setValue(posts.size() == 0 ? null : posts);
+                    myDB.child("specter").child("channels").child(String.valueOf(channelId)).child("body").setValue(posts.size() == 0 ? "not posts" : posts.get(posts.size() - 1).context);
+                    myDB.child("specter").child("channels").child(String.valueOf(channelId)).child("posts").setValue(posts.size() == 0 ? null : posts);
                 }
             }).create().show();
 
@@ -153,7 +153,7 @@ public class ChannelFragment extends Fragment {
             @Override public void onChildMoved(@NonNull DataSnapshot dataSnapshot, String previousChildName) {}
             @Override public void onCancelled(@NonNull DatabaseError databaseError) {}
         };
-        myDB.child("specter").child("channels").child(channelId).child("posts").addChildEventListener(childEventListenerPosts);
+        myDB.child("specter").child("channels").child(String.valueOf(channelId)).child("posts").addChildEventListener(childEventListenerPosts);
 
         childEventListenerSubscribers = new ChildEventListener() {
             @Override
@@ -174,21 +174,21 @@ public class ChannelFragment extends Fragment {
             @Override public void onChildMoved(@NonNull DataSnapshot dataSnapshot, String previousChildName) {}
             @Override public void onCancelled(@NonNull DatabaseError databaseError) {}
         };
-        myDB.child("specter").child("channels").child(channelId).child("subscribers").addChildEventListener(childEventListenerSubscribers);
+        myDB.child("specter").child("channels").child(String.valueOf(channelId)).child("subscribers").addChildEventListener(childEventListenerSubscribers);
 
         //lHeadChannel.setOnClickListener(view -> channelActivity.getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container_view, new ChannelPageFragment()).addToBackStack(null).commit());
 
         bClose.setOnClickListener(view -> channelActivity.finish());
 
-        bSubscribe.setOnClickListener(view -> myDB.child("specter").child("channels").child(channelId).child("subscribers").child(String.valueOf(channelActivity.subscribers.size())).setValue(authId));
+        bSubscribe.setOnClickListener(view -> myDB.child("specter").child("channels").child(String.valueOf(channelId)).child("subscribers").child(String.valueOf(channelActivity.subscribers.size())).setValue(authId));
 
         bSend.setOnClickListener(view -> {
             String text = ePost.getText().toString().trim();
             if (!text.equals("")) {
                 if (edit) {
                     edPost.context = text;
-                    myDB.child("specter").child("channels").child(channelId).child("posts").child(String.valueOf(editId)).setValue(edPost);
-                    if (posts.size()-1 == editId) myDB.child("channels").child(channelId).child("body").setValue(text);
+                    myDB.child("specter").child("channels").child(String.valueOf(channelId)).child("posts").child(String.valueOf(editId)).setValue(edPost);
+                    if (posts.size()-1 == editId) myDB.child("channels").child(String.valueOf(channelId)).child("body").setValue(text);
                     tEditPost.setVisibility(View.GONE);
                     LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT);
                     layoutParams.setMargins(0,0,0,0);
@@ -207,9 +207,9 @@ public class ChannelFragment extends Fragment {
                             if (Integer.parseInt(hours) < 21) hours = String.valueOf(Integer.parseInt(hours) + 3);
                             else hours = String.valueOf(Integer.parseInt(hours) + 3 - 24);
 
-                            myDB.child("specter").child("channels").child(channelId).child("posts").child(String.valueOf(posts.size())).setValue(new Post(authUserName, hours + ":" + minutes, text));
-                            myDB.child("specter").child("channels").child(channelId).child("body").setValue(text);
-                            myDB.child("specter").child("channels").child(channelId).child("mark_body").setValue(false);
+                            myDB.child("specter").child("channels").child(String.valueOf(channelId)).child("posts").child(String.valueOf(posts.size())).setValue(new Post(authUserName, hours + ":" + minutes, text));
+                            myDB.child("specter").child("channels").child(String.valueOf(channelId)).child("body").setValue(text);
+                            myDB.child("specter").child("channels").child(String.valueOf(channelId)).child("mark_body").setValue(false);
                             recPosts.smoothScrollToPosition(posts.size());
                         }
 
@@ -248,8 +248,8 @@ public class ChannelFragment extends Fragment {
                         if (Integer.parseInt(hours) < 21) hours = String.valueOf(Integer.parseInt(hours) + 3);
                         else hours = String.valueOf(Integer.parseInt(hours) + 3 - 24);
 
-                        myDB.child("specter").child("channels").child(channelId).child("posts").child(String.valueOf(posts.size())).setValue(new Post("%CHANNEL_TITLE%", hours+":"+minutes, text));
-                        myDB.child("specter").child("channels").child(channelId).child("body").setValue(text);
+                        myDB.child("specter").child("channels").child(String.valueOf(channelId)).child("posts").child(String.valueOf(posts.size())).setValue(new Post("%CHANNEL_TITLE%", hours+":"+minutes, text));
+                        myDB.child("specter").child("channels").child(String.valueOf(channelId)).child("body").setValue(text);
                         recPosts.smoothScrollToPosition(posts.size());
                     }
 
@@ -265,8 +265,8 @@ public class ChannelFragment extends Fragment {
     @Override
     public void onDestroyView() {
         super.onDestroyView();
-        myDB.child("specter").child("channels").child(channelId).child("posts").removeEventListener(childEventListenerPosts);
-        myDB.child("specter").child("channels").child(channelId).child("subscribers").removeEventListener(childEventListenerSubscribers);
+        myDB.child("specter").child("channels").child(String.valueOf(channelId)).child("posts").removeEventListener(childEventListenerPosts);
+        myDB.child("specter").child("channels").child(String.valueOf(channelId)).child("subscribers").removeEventListener(childEventListenerSubscribers);
     }
 
 }

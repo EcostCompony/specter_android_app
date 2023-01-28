@@ -33,7 +33,7 @@ public class MainMenuSettingsFragment extends Fragment {
         channelSettingsFragment.eLink.setText(channelActivity.channelLink);
 
         channelSettingsFragment.bDeleteChannel.setOnClickListener(view -> {
-            channelSettingsFragment.channels.remove(Integer.parseInt(channelActivity.channelId));
+            channelSettingsFragment.channels.remove(channelActivity.channelId);
             myDB.child("channels").setValue(channelSettingsFragment.channels);
             myDB.child("count_vlogs").setValue(channelSettingsFragment.channels.size());
             channelActivity.finish();

@@ -61,11 +61,11 @@ public class ChannelPageFragment extends Fragment {
                 subscribe(R.drawable.button_neutral, R.string.button_subscribe, R.color.background, false);
             } else {
                 subscribe(R.drawable.unsub, R.string.button_unsubscribe, R.color.red, true);
-                myDB.child("channels").child(channelActivity.channelId).child("subscribers").child(String.valueOf(channelActivity.subscribers.size())).setValue(authId);
+                myDB.child("channels").child(String.valueOf(channelActivity.channelId)).child("subscribers").child(String.valueOf(channelActivity.subscribers.size())).setValue(authId);
             }
         });
 
-        bChannelSettings.setOnClickListener(view -> channelActivity.startChannelSettingsFragment());
+        bChannelSettings.setOnClickListener(view -> channelActivity.getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container_view, new ChannelSettingsFragment()).commit());
 
         return inflaterView;
     }

@@ -113,7 +113,7 @@ public class ChannelsMenuFragment extends Fragment {
         rChannelList.setLayoutManager(new LinearLayoutManager(mainMenuActivity));
         channelsAdapter = new ChannelsAdapter(mainMenuActivity, channels, (channel, position) -> {
             Intent intent = new Intent(mainMenuActivity, ChannelActivity.class);
-            intent.putExtra("CHANNEL_ID", String.valueOf(channel.id));
+            intent.putExtra("CHANNEL_ID", channel.id);
             intent.putExtra("CHANNEL_ADMINS", channel.author);
             intent.putExtra("CHANNEL_TITLE", channel.title);
             intent.putExtra("CHANNEL_SHORT_LINK", String.valueOf(channel.shortLink));

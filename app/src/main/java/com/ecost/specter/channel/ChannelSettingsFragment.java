@@ -60,11 +60,11 @@ public class ChannelSettingsFragment extends Fragment {
         myDB.child("channels").addChildEventListener(childEventListener);
 
         bClose.setOnClickListener(view -> {
-            channelActivity.startChannelPageFragment();
+            channelActivity.getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container_view, new ChannelPageFragment()).commit();
             String link = eLink.getText().toString().trim();
             if (!eTitle.getText().toString().trim().equals("") && !link.equals("") && Pattern.compile("^[A-Z0-9_]+$", Pattern.CASE_INSENSITIVE).matcher(link).find()) {
-                myDB.child("channels").child(channelActivity.channelId).child("title").setValue(eTitle.getText().toString().trim());
-                myDB.child("channels").child(channelActivity.channelId).child("link").setValue(link);
+                myDB.child("channels").child(String.valueOf(channelActivity.channelId)).child("title").setValue(eTitle.getText().toString().trim());
+                myDB.child("channels").child(String.valueOf(channelActivity.channelId)).child("link").setValue(link);
                 channelActivity.channelTitle = eTitle.getText().toString().trim();
                 channelActivity.channelLink = link;
             }
