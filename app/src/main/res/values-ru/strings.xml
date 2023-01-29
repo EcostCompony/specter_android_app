@@ -114,4 +114,5 @@
     <string name="settings_menu_error_not_short_user_link">error</string>
     <string name="settings_menu_error_small_short_user_link">ссылка маленькая</string>
     <string name="settings_menu_error_use_short_user_link">ссылка занята</string>
+    <string name="channel_input_post_hint">Enter the text...</string>
 </resources>

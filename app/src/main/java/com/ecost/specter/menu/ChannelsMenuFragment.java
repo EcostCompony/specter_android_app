@@ -117,6 +117,7 @@ public class ChannelsMenuFragment extends Fragment {
             intent.putExtra("CHANNEL_ADMINS", channel.author);
             intent.putExtra("CHANNEL_TITLE", channel.title);
             intent.putExtra("CHANNEL_SHORT_LINK", String.valueOf(channel.shortLink));
+            intent.putExtra("USER_SUBSCRIBE", true);
             startActivity(intent);
         }, (channel, position) -> true);
         rChannelList.setAdapter(channelsAdapter);

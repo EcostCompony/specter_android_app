@@ -6,14 +6,12 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.ecost.specter.R;
 
-import java.util.ArrayList;
-import java.util.List;
-
 public class ChannelActivity extends AppCompatActivity {
 
     Integer channelId, channelAdmin;
+    Integer channelSubscribers = 0;
     String channelTitle, channelLink;
-    List<Integer> subscribers = new ArrayList<>();
+    boolean userSubscribe;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -24,6 +22,7 @@ public class ChannelActivity extends AppCompatActivity {
         channelAdmin = getIntent().getIntExtra("CHANNEL_ADMINS", 0);
         channelTitle = getIntent().getStringExtra("CHANNEL_TITLE");
         channelLink = getIntent().getStringExtra("CHANNEL_LINK");
+        userSubscribe = getIntent().getBooleanExtra("USER_SUBSCRIBE", false);
 
         getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container_view, new ChannelFragment()).commit();
     }

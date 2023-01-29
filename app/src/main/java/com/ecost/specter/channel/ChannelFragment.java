@@ -6,13 +6,13 @@ import static com.ecost.specter.Routing.myDB;
 import static com.ecost.specter.Routing.pluralForm;
 
 import android.annotation.SuppressLint;
+import android.app.AlertDialog;
 import android.content.ClipData;
 import android.content.ClipboardManager;
 import android.content.Context;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
-import androidx.appcompat.app.AlertDialog;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -24,21 +24,16 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.ImageView;
+import android.widget.FrameLayout;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.ecost.specter.R;
-import com.ecost.specter.Routing;
 import com.ecost.specter.models.Post;
 import com.ecost.specter.recyclers.PostsAdapter;
 import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
-import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.ServerValue;
-import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -47,175 +42,136 @@ import java.util.Objects;
 
 public class ChannelFragment extends Fragment {
 
-    LinearLayout lToolsMenu, lHeadChannel;
+    LinearLayout lChannelHead, bClose, bSendPost;
     TextView tChannelTitle, tNumberSubscribers, tEditPost;
-    ImageView bSend, bClose;
     Button bSubscribe;
+    RecyclerView rPostsList;
+    FrameLayout fToolsMenu;
     EditText ePost;
-    PostsAdapter posts_adapter;
-    RecyclerView recPosts;
-    String channelTitle;
-    Integer channelAdmin, editId, channelId;
-    boolean edit;
-    Post edPost;
+    ChildEventListener childEventListenerPosts, childEventListenerSub;
+    PostsAdapter postsAdapter;
+    Post postEdit;
     List<Post> posts = new ArrayList<>();
     ChannelActivity channelActivity;
-    ChildEventListener childEventListenerPosts, childEventListenerSubscribers;
 
     @SuppressLint("NotifyDataSetChanged")
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View inflaterView = inflater.inflate(R.layout.fragment_channel, container, false);
 
-        lToolsMenu = inflaterView.findViewById(R.id.tools_menu);
-        lHeadChannel = inflaterView.findViewById(R.id.channel_head);
-        tChannelTitle = inflaterView.findViewById(R.id.title_channel);
+        lChannelHead = inflaterView.findViewById(R.id.channel_header);
+        tChannelTitle = inflaterView.findViewById(R.id.channel_title);
         tNumberSubscribers = inflaterView.findViewById(R.id.number_subscribers);
-        tEditPost = inflaterView.findViewById(R.id.edit_post);
-        bSend = inflaterView.findViewById(R.id.button_enter);
-        bClose = inflaterView.findViewById(R.id.button_close);
         bSubscribe = inflaterView.findViewById(R.id.button_subscribe);
-        recPosts = inflaterView.findViewById(R.id.post_rec);
+        bClose = inflaterView.findViewById(R.id.button_close);
+        rPostsList = inflaterView.findViewById(R.id.recycler_posts_list);
+        fToolsMenu = inflaterView.findViewById(R.id.tools_menu);
+        tEditPost = inflaterView.findViewById(R.id.edit_post);
         ePost = inflaterView.findViewById(R.id.input_post);
+        bSendPost = inflaterView.findViewById(R.id.button_send);
         channelActivity = (ChannelActivity) requireActivity();
-        channelAdmin = channelActivity.channelAdmin;
-        channelId = channelActivity.channelId;
-        channelTitle = channelActivity.channelTitle;
 
-        channelActivity.subscribers.clear();
-
-        registerForContextMenu(bSend);
-
-        tChannelTitle.setText(channelTitle);
-        if (!channelAdmin.equals(authId)) {
-            lToolsMenu.setVisibility(View.GONE);
-            LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT);
-            layoutParams.setMargins(0,0,0,60);
-            recPosts.setLayoutParams(layoutParams);
-        }
+        registerForContextMenu(bSendPost);
+        tChannelTitle.setText(channelActivity.channelTitle);
+        if (!channelActivity.userSubscribe) bSubscribe.setVisibility(View.VISIBLE);
+        if (channelActivity.channelAdmin.equals(authId)) fToolsMenu.setVisibility(View.VISIBLE);
 
         PostsAdapter.OnPostLongClickListener postLongClickListener = (post, position) -> {
-            CharSequence[] items;
+            CharSequence[] items = channelActivity.channelAdmin.equals(authId) ? new String[]{getString(R.string.post_edit), getString(R.string.post_copy), getString(R.string.post_delete)} : new String[]{getString(R.string.post_copy)};
             AlertDialog.Builder builder = new AlertDialog.Builder(inflater.getContext());
-
-            if (channelAdmin.equals(authId)) items = new String[]{getString(R.string.post_edit), getString(R.string.post_copy), getString(R.string.post_delete)};
-            else items = new String[]{getString(R.string.post_copy)};
 
             builder.setItems(items, (dialog, item) -> {
                 if (items[item].equals(getString(R.string.post_edit))) {
-                    edit = true;
-                    edPost = post;
-                    editId = position;
+                    postEdit = post;
                     tEditPost.setVisibility(View.VISIBLE);
                     ePost.setText(post.context);
-                    LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT);
-                    layoutParams.setMargins(0,0,0,40);
-                    recPosts.setLayoutParams(layoutParams);
-                } else if (items[item].equals(getString(R.string.post_copy))) {
-                    ClipboardManager clipboard = (ClipboardManager) inflater.getContext().getSystemService(Context.CLIPBOARD_SERVICE);
-                    ClipData clip = ClipData.newPlainText("post", post.context);
-                    clipboard.setPrimaryClip(clip);
-                } else if (items[item].equals(getString(R.string.post_delete))) {
-                    posts.remove(position);
-                    myDB.child("specter").child("channels").child(String.valueOf(channelId)).child("body").setValue(posts.size() == 0 ? "not posts" : posts.get(posts.size() - 1).context);
-                    myDB.child("specter").child("channels").child(String.valueOf(channelId)).child("posts").setValue(posts.size() == 0 ? null : posts);
+                } else if (items[item].equals(getString(R.string.post_copy))) ((ClipboardManager) inflater.getContext().getSystemService(Context.CLIPBOARD_SERVICE)).setPrimaryClip(ClipData.newPlainText("post", post.context));
+                else if (items[item].equals(getString(R.string.post_delete))) {
+                    posts.remove(post.id);
+                    myDB.child("specter").child("channels").child(String.valueOf(channelActivity.channelId)).child("body").setValue(posts.size() == 0 ? "not posts" : posts.get(posts.size() - 1).context);
+                    myDB.child("specter").child("channels").child(String.valueOf(channelActivity.channelId)).child("markBody").setValue(posts.size() == 0);
+                    myDB.child("specter").child("channels").child(String.valueOf(channelActivity.channelId)).child("posts").setValue(posts.size() == 0 ? null : posts);
+                    for (int i = 0; i < posts.size(); i++) {
+                        posts.get(i).id = i;
+                        myDB.child("specter").child("channels").child(String.valueOf(channelActivity.channelId)).child("posts").child(String.valueOf(i)).setValue(posts.get(i));
+                    }
                 }
             }).create().show();
 
             return true;
         };
-        recPosts.setLayoutManager(new LinearLayoutManager(channelActivity));
-        posts_adapter = new PostsAdapter(channelActivity, posts, postLongClickListener);
-        recPosts.setAdapter(posts_adapter);
+        rPostsList.setLayoutManager(new LinearLayoutManager(channelActivity));
+        postsAdapter = new PostsAdapter(channelActivity, posts, postLongClickListener);
+        rPostsList.setAdapter(postsAdapter);
 
         childEventListenerPosts = new ChildEventListener() {
             @Override
             public void onChildAdded(@NonNull DataSnapshot dataSnapshot, String previousChildName) {
                 Post post = Objects.requireNonNull(dataSnapshot.getValue(Post.class));
-                if (Objects.equals(post.author, "%CHANNEL_TITLE%")) post.author = channelTitle;
+                if (Objects.equals(post.author, "%CHANNEL_TITLE%")) post.author = channelActivity.channelTitle;
                 posts.add(post);
-                posts_adapter.notifyDataSetChanged();
-                recPosts.smoothScrollToPosition(posts.size());
+                postsAdapter.notifyDataSetChanged();
+                rPostsList.smoothScrollToPosition(posts.size());
             }
 
             @Override
             public void onChildChanged(@NonNull DataSnapshot dataSnapshot, String previousChildName) {
                 posts.set(Integer.parseInt(Objects.requireNonNull(dataSnapshot.getKey())), dataSnapshot.getValue(Post.class));
-                posts_adapter.notifyDataSetChanged();
+                postsAdapter.notifyDataSetChanged();
             }
 
             @Override
             public void onChildRemoved(@NonNull DataSnapshot dataSnapshot) {
-                posts.remove(dataSnapshot.getKey());
-                posts_adapter.notifyDataSetChanged();
+                if (!channelActivity.channelAdmin.equals(authId)) posts.remove(Integer.parseInt(Objects.requireNonNull(dataSnapshot.getKey())));
+                postsAdapter.notifyDataSetChanged();
             }
 
             @Override public void onChildMoved(@NonNull DataSnapshot dataSnapshot, String previousChildName) {}
             @Override public void onCancelled(@NonNull DatabaseError databaseError) {}
         };
-        myDB.child("specter").child("channels").child(String.valueOf(channelId)).child("posts").addChildEventListener(childEventListenerPosts);
+        myDB.child("specter").child("channels").child(String.valueOf(channelActivity.channelId)).child("posts").addChildEventListener(childEventListenerPosts);
 
-        childEventListenerSubscribers = new ChildEventListener() {
+        childEventListenerSub = new ChildEventListener() {
             @Override
             public void onChildAdded(@NonNull DataSnapshot dataSnapshot, String previousChildName) {
-                Integer id = dataSnapshot.getValue(Integer.class);
-                channelActivity.subscribers.add(id);
-                if (Objects.equals(id, authId)) bSubscribe.setVisibility(View.GONE);
-                tNumberSubscribers.setText(pluralForm(channelActivity.subscribers.size(), getString(R.string.subscriber1), getString(R.string.subscribers2), getString(R.string.subscribers3), Locale.getDefault().getLanguage().equals("ru")));
+                channelActivity.channelSubscribers++;
+                tNumberSubscribers.setText(pluralForm(channelActivity.channelSubscribers, getString(R.string.subscriber1), getString(R.string.subscribers2), getString(R.string.subscribers3), Locale.getDefault().getLanguage().equals("ru")));
             }
 
             @Override
             public void onChildRemoved(@NonNull DataSnapshot dataSnapshot) {
-                channelActivity.subscribers.remove(dataSnapshot.getKey());
-                tNumberSubscribers.setText(pluralForm(channelActivity.subscribers.size(), getString(R.string.subscriber1), getString(R.string.subscribers2), getString(R.string.subscribers3), Locale.getDefault().getLanguage().equals("ru")));
+                channelActivity.channelSubscribers--;
+                tNumberSubscribers.setText(pluralForm(channelActivity.channelSubscribers, getString(R.string.subscriber1), getString(R.string.subscribers2), getString(R.string.subscribers3), Locale.getDefault().getLanguage().equals("ru")));
             }
 
             @Override public void onChildChanged(@NonNull DataSnapshot dataSnapshot, String previousChildName) {}
             @Override public void onChildMoved(@NonNull DataSnapshot dataSnapshot, String previousChildName) {}
             @Override public void onCancelled(@NonNull DatabaseError databaseError) {}
         };
-        myDB.child("specter").child("channels").child(String.valueOf(channelId)).child("subscribers").addChildEventListener(childEventListenerSubscribers);
-
-        //lHeadChannel.setOnClickListener(view -> channelActivity.getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container_view, new ChannelPageFragment()).addToBackStack(null).commit());
+        myDB.child("specter").child("channels").child(String.valueOf(channelActivity.channelId)).child("subscribers").addChildEventListener(childEventListenerSub);
 
         bClose.setOnClickListener(view -> channelActivity.finish());
 
-        bSubscribe.setOnClickListener(view -> myDB.child("specter").child("channels").child(String.valueOf(channelId)).child("subscribers").child(String.valueOf(channelActivity.subscribers.size())).setValue(authId));
+        lChannelHead.setOnClickListener(view -> channelActivity.getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container_view, new ChannelPageFragment()).addToBackStack(null).commit());
 
-        bSend.setOnClickListener(view -> {
+        bSubscribe.setOnClickListener(view -> {
+            myDB.child("specter").child("channels").child(String.valueOf(channelActivity.channelId)).child("subscribers").child(String.valueOf(channelActivity.channelSubscribers)).setValue(authId);
+            channelActivity.channelSubscribers++;
+            channelActivity.userSubscribe = true;
+            bSubscribe.setVisibility(View.GONE);
+            tNumberSubscribers.setText(pluralForm(channelActivity.channelSubscribers, getString(R.string.subscriber1), getString(R.string.subscribers2), getString(R.string.subscribers3), Locale.getDefault().getLanguage().equals("ru")));
+        });
+
+        bSendPost.setOnClickListener(view -> {
             String text = ePost.getText().toString().trim();
             if (!text.equals("")) {
-                if (edit) {
-                    edPost.context = text;
-                    myDB.child("specter").child("channels").child(String.valueOf(channelId)).child("posts").child(String.valueOf(editId)).setValue(edPost);
-                    if (posts.size()-1 == editId) myDB.child("channels").child(String.valueOf(channelId)).child("body").setValue(text);
-                    tEditPost.setVisibility(View.GONE);
-                    LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT);
-                    layoutParams.setMargins(0,0,0,0);
-                    recPosts.setLayoutParams(layoutParams);
-                    edit = false;
-                } else {
-                    DatabaseReference userLastOnlineRef = FirebaseDatabase.getInstance().getReference("users/joe/lastOnline");
-                    userLastOnlineRef.onDisconnect().setValue(ServerValue.TIMESTAMP);
-                    userLastOnlineRef.addValueEventListener(new ValueEventListener() {
-                        @SuppressLint("SimpleDateFormat")
-                        @Override
-                        public void onDataChange(@NonNull DataSnapshot snapshot) {
-                            long unixTime = Objects.requireNonNull(snapshot.getValue(Long.class));
-                            String hours = new java.text.SimpleDateFormat("HH").format(new java.util.Date(unixTime));
-                            String minutes = new java.text.SimpleDateFormat("mm").format(new java.util.Date(unixTime));
-                            if (Integer.parseInt(hours) < 21) hours = String.valueOf(Integer.parseInt(hours) + 3);
-                            else hours = String.valueOf(Integer.parseInt(hours) + 3 - 24);
-
-                            myDB.child("specter").child("channels").child(String.valueOf(channelId)).child("posts").child(String.valueOf(posts.size())).setValue(new Post(authUserName, hours + ":" + minutes, text));
-                            myDB.child("specter").child("channels").child(String.valueOf(channelId)).child("body").setValue(text);
-                            myDB.child("specter").child("channels").child(String.valueOf(channelId)).child("mark_body").setValue(false);
-                            recPosts.smoothScrollToPosition(posts.size());
-                        }
-
-                        @Override public void onCancelled(@NonNull DatabaseError error) {}
-                    });
-                }
+                if (postEdit != null) postEdit.context = text;
+                if (postEdit == null || posts.size() - 1 == postEdit.id) myDB.child("specter").child("channels").child(String.valueOf(channelActivity.channelId)).child("body").setValue(text);
+                if (postEdit == null) myDB.child("specter").child("channels").child(String.valueOf(channelActivity.channelId)).child("markBody").setValue(false);
+                if (postEdit == null) rPostsList.smoothScrollToPosition(posts.size());
+                myDB.child("specter").child("channels").child(String.valueOf(channelActivity.channelId)).child("posts").child(String.valueOf(postEdit != null ? postEdit.id : posts.size())).setValue(postEdit != null ? postEdit : new Post(posts.size(), authUserName, "15:23", text));
+                tEditPost.setVisibility(View.GONE);
+                postEdit = null;
             }
             ePost.setText("");
         });
@@ -224,49 +180,31 @@ public class ChannelFragment extends Fragment {
     }
 
     @Override
-    public void onCreateContextMenu(@NonNull ContextMenu menu, @NonNull View v, ContextMenu.ContextMenuInfo menuInfo) {
-        if (!edit) {
-            super.onCreateContextMenu(menu, v, menuInfo);
-            menu.add(0, v.getId(), 0, R.string.send_anon);
-        }
+    public void onCreateContextMenu(@NonNull ContextMenu menu, @NonNull View view, ContextMenu.ContextMenuInfo menuInfo) {
+        super.onCreateContextMenu(menu, view, menuInfo);
+        if (postEdit == null) menu.add(0, view.getId(), 0, R.string.send_anon);
     }
 
     @Override
-    public boolean onContextItemSelected(MenuItem item) {
-        if (item.getTitle() == getString(R.string.send_anon)) {
-            String text = ePost.getText().toString().trim();
-            if (!text.equals("")) {
-                DatabaseReference userLastOnlineRef = FirebaseDatabase.getInstance().getReference("users/joe/lastOnline");
-                userLastOnlineRef.onDisconnect().setValue(ServerValue.TIMESTAMP);
-                userLastOnlineRef.addValueEventListener(new ValueEventListener() {
-                    @SuppressLint("SimpleDateFormat")
-                    @Override
-                    public void onDataChange(@NonNull DataSnapshot snapshot) {
-                        long unixTime = Objects.requireNonNull(snapshot.getValue(Long.class));
-                        String hours = new java.text.SimpleDateFormat("HH").format(new java.util.Date(unixTime));
-                        String minutes = new java.text.SimpleDateFormat("mm").format(new java.util.Date(unixTime));
-                        if (Integer.parseInt(hours) < 21) hours = String.valueOf(Integer.parseInt(hours) + 3);
-                        else hours = String.valueOf(Integer.parseInt(hours) + 3 - 24);
-
-                        myDB.child("specter").child("channels").child(String.valueOf(channelId)).child("posts").child(String.valueOf(posts.size())).setValue(new Post("%CHANNEL_TITLE%", hours+":"+minutes, text));
-                        myDB.child("specter").child("channels").child(String.valueOf(channelId)).child("body").setValue(text);
-                        recPosts.smoothScrollToPosition(posts.size());
-                    }
-
-                    @Override public void onCancelled(@NonNull DatabaseError error) {}
-                });
-            }
-            ePost.setText("");
+    public boolean onContextItemSelected(@NonNull MenuItem item) {
+        String text = ePost.getText().toString().trim();
+        if (!text.equals("")) {
+            myDB.child("specter").child("channels").child(String.valueOf(channelActivity.channelId)).child("posts").child(String.valueOf(posts.size())).setValue(new Post(posts.size(), "%CHANNEL_TITLE%", "15:23", text));
+            myDB.child("specter").child("channels").child(String.valueOf(channelActivity.channelId)).child("body").setValue(text);
+            myDB.child("specter").child("channels").child(String.valueOf(channelActivity.channelId)).child("markBody").setValue(false);
+            rPostsList.smoothScrollToPosition(posts.size());
         }
-
+        ePost.setText("");
         return true;
     }
 
     @Override
     public void onDestroyView() {
         super.onDestroyView();
-        myDB.child("specter").child("channels").child(String.valueOf(channelId)).child("posts").removeEventListener(childEventListenerPosts);
-        myDB.child("specter").child("channels").child(String.valueOf(channelId)).child("subscribers").removeEventListener(childEventListenerSubscribers);
+        posts.clear();
+        channelActivity.channelSubscribers = 0;
+        myDB.child("specter").child("channels").child(String.valueOf(channelActivity.channelId)).child("posts").removeEventListener(childEventListenerPosts);
+        myDB.child("specter").child("channels").child(String.valueOf(channelActivity.channelId)).child("subscribers").removeEventListener(childEventListenerSub);
     }
 
 }

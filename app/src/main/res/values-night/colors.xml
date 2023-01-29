@@ -30,4 +30,7 @@
     <color name="channels_menu_number_channels">#D1D1D1</color>
     <color name="parametrs_header">#C0C0C0</color>
     <color name="button_negative_text_color">#E55454</color>
+    <color name="channel_number_subscribers_color">#9C9C9C</color>
+    <color name="devider_color">#EAEAEA</color>
+    <color name="channel_input_post_color_hint">#9C9C9C</color>
 </resources>

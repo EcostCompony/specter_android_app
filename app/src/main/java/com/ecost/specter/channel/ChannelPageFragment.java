@@ -32,7 +32,7 @@ public class ChannelPageFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View inflaterView = inflater.inflate(R.layout.fragment_channel_page, container, false);
 
-        bBack = inflaterView.findViewById(R.id.back);
+        /*bBack = inflaterView.findViewById(R.id.back);
         tTitle = inflaterView.findViewById(R.id.title);
         tLink = inflaterView.findViewById(R.id.url);
         bChannelSettings = inflaterView.findViewById(R.id.channel_settings);
@@ -66,15 +66,15 @@ public class ChannelPageFragment extends Fragment {
         });
 
         bChannelSettings.setOnClickListener(view -> channelActivity.getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container_view, new ChannelSettingsFragment()).commit());
-
+*/
         return inflaterView;
     }
 
-    public void subscribe(int drawable, int string, int color, boolean sub) {
+    /*public void subscribe(int drawable, int string, int color, boolean sub) {
         bSubscribe.setBackground(ContextCompat.getDrawable(channelActivity, drawable));
         bSubscribe.setText(string);
         bSubscribe.setTextColor(getResources().getColor(color));
         subscribe = sub;
-    }
+    }*/
 
 }
