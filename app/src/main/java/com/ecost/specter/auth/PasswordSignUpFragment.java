@@ -74,7 +74,7 @@ public class PasswordSignUpFragment extends Fragment {
             int select = editText.getSelectionStart();
 
             editText.setInputType(pView ? InputType.TYPE_CLASS_TEXT | InputType.TYPE_TEXT_VARIATION_PASSWORD : InputType.TYPE_TEXT_VARIATION_PASSWORD);
-            icon.setBackground(ContextCompat.getDrawable(authActivity, pView ? R.drawable.eye : R.drawable.eye_slash));
+            icon.setBackground(ContextCompat.getDrawable(authActivity, pView ? R.drawable.icon_eye : R.drawable.icon_eye_slash));
             editText.setSelection(select);
             if (view == bHidePassword) passwordView = !pView;
             else confirmPasswordView = !pView;

@@ -33,4 +33,6 @@
     <color name="channel_number_subscribers_color">#9C9C9C</color>
     <color name="devider_color">#EAEAEA</color>
     <color name="channel_input_post_color_hint">#9C9C9C</color>
+    <color name="post_item_time_color">#9C9C9C</color>
+    <color name="channel_page_header_background_color">#F8F8F8</color>
 </resources>

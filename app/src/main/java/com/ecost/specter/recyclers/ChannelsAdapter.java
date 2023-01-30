@@ -1,7 +1,6 @@
 package com.ecost.specter.recyclers;
 
 import android.content.Context;
-import android.graphics.Color;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -14,7 +13,6 @@ import com.ecost.specter.R;
 import com.ecost.specter.models.Channel;
 
 import java.util.List;
-import java.util.Objects;
 
 public class ChannelsAdapter extends RecyclerView.Adapter<ChannelViewHolder> {
 

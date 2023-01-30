@@ -16,4 +16,5 @@ public class ChannelViewHolder extends RecyclerView.ViewHolder {
         tTitle = itemView.findViewById(R.id.channel_title);
         tLastPost = itemView.findViewById(R.id.channel_last_post);
     }
+
 }

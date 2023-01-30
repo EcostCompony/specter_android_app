@@ -74,7 +74,7 @@ public class SignInFragment extends Fragment {
         bHidePassword.setOnClickListener(view -> {
             int select = ePassword.getSelectionStart();
             ePassword.setInputType(passwordView ? InputType.TYPE_CLASS_TEXT | InputType.TYPE_TEXT_VARIATION_PASSWORD : InputType.TYPE_TEXT_VARIATION_PASSWORD);
-            vHidePassword.setBackground(ContextCompat.getDrawable(authActivity, passwordView ? R.drawable.eye : R.drawable.eye_slash));
+            vHidePassword.setBackground(ContextCompat.getDrawable(authActivity, passwordView ? R.drawable.icon_eye : R.drawable.icon_eye_slash));
             ePassword.setSelection(select);
             passwordView = !passwordView;
         });

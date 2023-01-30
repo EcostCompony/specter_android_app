@@ -13,7 +13,7 @@ public class PostViewHolder extends RecyclerView.ViewHolder {
 
     public PostViewHolder(View itemView) {
         super(itemView);
-        text = itemView.findViewById(R.id.post_body);
+        text = itemView.findViewById(R.id.post_text);
         author = itemView.findViewById(R.id.post_author);
         time = itemView.findViewById(R.id.post_time);
     }

@@ -6,12 +6,12 @@
     <group android:checkableBehavior="single">
         <item
             android:id="@+id/nav_create_channel"
-            android:icon="@drawable/add"
+            android:icon="@drawable/icon_plus"
             android:title="@string/menu_create_channel" />
 
         <item
             android:id="@+id/nav_settings"
-            android:icon="@drawable/settings"
+            android:icon="@drawable/icon_settings"
             android:title="@string/menu_settings" />
     </group>
 </menu>

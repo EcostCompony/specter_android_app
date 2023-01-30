@@ -17,6 +17,7 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.util.DisplayMetrics;
 import android.view.ContextMenu;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
@@ -75,7 +76,13 @@ public class ChannelFragment extends Fragment {
         registerForContextMenu(bSendPost);
         tChannelTitle.setText(channelActivity.channelTitle);
         if (!channelActivity.userSubscribe) bSubscribe.setVisibility(View.VISIBLE);
-        if (channelActivity.channelAdmin.equals(authId)) fToolsMenu.setVisibility(View.VISIBLE);
+        if (channelActivity.channelAdmin.equals(authId)) {
+            DisplayMetrics displayMetrics = channelActivity.getResources().getDisplayMetrics();
+            LinearLayout.LayoutParams params = (LinearLayout.LayoutParams) rPostsList.getLayoutParams();
+            params.topMargin = Math.round(65 * (displayMetrics.xdpi / DisplayMetrics.DENSITY_DEFAULT));
+            rPostsList.setLayoutParams(params);
+            fToolsMenu.setVisibility(View.VISIBLE);
+        }
 
         PostsAdapter.OnPostLongClickListener postLongClickListener = (post, position) -> {
             CharSequence[] items = channelActivity.channelAdmin.equals(authId) ? new String[]{getString(R.string.post_edit), getString(R.string.post_copy), getString(R.string.post_delete)} : new String[]{getString(R.string.post_copy)};

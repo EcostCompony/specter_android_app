@@ -22,7 +22,7 @@
             android:layout_width="23dp"
             android:layout_height="23dp"
             android:layout_gravity="center_vertical"
-            app:srcCompat="@drawable/popup_icon"
+            app:srcCompat="@drawable/icon_error"
             tools:ignore="ContentDescription" />
 
         <TextView
