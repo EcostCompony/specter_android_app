@@ -71,6 +71,7 @@ public class ChannelFragment extends Fragment {
         bSendPost = inflaterView.findViewById(R.id.button_send);
         channelActivity = (ChannelActivity) requireActivity();
 
+        channelActivity.channelSubscribers = 0;
         registerForContextMenu(bSendPost);
         tChannelTitle.setText(channelActivity.channelTitle);
         if (!channelActivity.userSubscribe) bSubscribe.setVisibility(View.VISIBLE);
@@ -202,7 +203,6 @@ public class ChannelFragment extends Fragment {
     public void onDestroyView() {
         super.onDestroyView();
         posts.clear();
-        channelActivity.channelSubscribers = 0;
         myDB.child("specter").child("channels").child(String.valueOf(channelActivity.channelId)).child("posts").removeEventListener(childEventListenerPosts);
         myDB.child("specter").child("channels").child(String.valueOf(channelActivity.channelId)).child("subscribers").removeEventListener(childEventListenerSub);
     }

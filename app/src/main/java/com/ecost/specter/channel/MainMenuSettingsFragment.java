@@ -30,7 +30,7 @@ public class MainMenuSettingsFragment extends Fragment {
         channelActivity = (ChannelActivity) requireActivity();
 
         channelSettingsFragment.eTitle.setText(channelActivity.channelTitle);
-        channelSettingsFragment.eLink.setText(channelActivity.channelLink);
+        channelSettingsFragment.eLink.setText(channelActivity.channelShortLink);
 
         channelSettingsFragment.bDeleteChannel.setOnClickListener(view -> {
             channelSettingsFragment.channels.remove(channelActivity.channelId);

@@ -22,10 +22,8 @@ import com.ecost.specter.channel.ChannelActivity;
 import com.ecost.specter.R;
 import com.ecost.specter.databinding.FragmentChannelsMenuBinding;
 import com.ecost.specter.models.Channel;
-import com.ecost.specter.models.Chapter;
 import com.ecost.specter.recyclers.ChannelsAdapter;
 
-import com.ecost.specter.recyclers.ChaptersAdapter;
 import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -37,10 +35,8 @@ import java.util.Objects;
 
 public class ChannelsMenuFragment extends Fragment {
 
-    ChaptersAdapter chaptersAdapter;
     ChannelsAdapter channelsAdapter;
     TextView tChannelsNumber;
-    List<Chapter> chapters = new ArrayList<>();
     List<Channel> channels = new ArrayList<>();
     ChildEventListener childEventListener;
     MainMenuActivity mainMenuActivity;
@@ -103,12 +99,9 @@ public class ChannelsMenuFragment extends Fragment {
         FragmentChannelsMenuBinding binding = FragmentChannelsMenuBinding.inflate(inflater, container, false);
         View root = binding.getRoot();
 
-        RecyclerView rChaptersList = binding.recyclerChaptersList;
         RecyclerView rChannelList = binding.recyclerChannelsList;
         tChannelsNumber = binding.numberChannels;
         mainMenuActivity = (MainMenuActivity) requireActivity();
-
-        chapters.add(new Chapter(0, getString(R.string.channels)));
 
         rChannelList.setLayoutManager(new LinearLayoutManager(mainMenuActivity));
         channelsAdapter = new ChannelsAdapter(mainMenuActivity, channels, (channel, position) -> {
@@ -121,10 +114,6 @@ public class ChannelsMenuFragment extends Fragment {
             startActivity(intent);
         }, (channel, position) -> true);
         rChannelList.setAdapter(channelsAdapter);
-
-        rChaptersList.setLayoutManager(new LinearLayoutManager(mainMenuActivity, LinearLayoutManager.HORIZONTAL, false));
-        chaptersAdapter = new ChaptersAdapter(mainMenuActivity, chapters, (chapter, position) -> {});
-        rChaptersList.setAdapter(chaptersAdapter);
 
         return root;
     }

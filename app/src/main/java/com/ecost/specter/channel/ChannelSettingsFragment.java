@@ -66,7 +66,7 @@ public class ChannelSettingsFragment extends Fragment {
                 myDB.child("channels").child(String.valueOf(channelActivity.channelId)).child("title").setValue(eTitle.getText().toString().trim());
                 myDB.child("channels").child(String.valueOf(channelActivity.channelId)).child("link").setValue(link);
                 channelActivity.channelTitle = eTitle.getText().toString().trim();
-                channelActivity.channelLink = link;
+                channelActivity.channelShortLink = link;
             }
         });
 
