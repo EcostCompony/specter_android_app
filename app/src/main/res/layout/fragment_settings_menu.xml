@@ -28,7 +28,7 @@
                 android:layout_width="13dp"
                 android:layout_height="13dp"
                 android:layout_gravity="center"
-                android:background="@drawable/union"
+                android:background="@drawable/button_cross"
                 android:contentDescription="@string/crate_channel_menu_content_description_close" />
         </androidx.cardview.widget.CardView>
 
@@ -39,7 +39,6 @@
             android:fontFamily="@font/inter_semi_bold"
             android:textSize="22sp"
             android:text="@string/settings_menu_header" />
-
     </LinearLayout>
 
     <TextView

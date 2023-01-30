@@ -116,4 +116,14 @@
     <string name="settings_menu_error_use_short_user_link">ссылка занята</string>
     <string name="channel_input_post_hint">Enter the text...</string>
     <string name="channel_page_button_subscribe">Subscribe</string>
+    <string name="channel_settings_header">Channel settings</string>
+    <string name="channel_settings_parametr_header_short_link">Short link</string>
+    <string name="channel_settings_content_description_save_short_channel_link">save short channel link</string>
+    <string name="channel_settings_parametr_header_title">Title</string>
+    <string name="channel_settings_content_description_save_channel_title">save channel title</string>
+    <string name="channel_settings_button_delete_channel">Delete channel</string>
+    <string name="channel_settings_error_not_channel_title">error</string>
+    <string name="channel_settings_error_not_short_channel_title">error</string>
+    <string name="channel_settings_error_small_short_channel_link">ссылка маленькая</string>
+    <string name="channel_settings_error_use_short_channel_link">ссылка занята</string>
 </resources>
