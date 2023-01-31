@@ -19,7 +19,7 @@ import com.ecost.specter.R;
 
 import java.util.regex.Pattern;
 
-public class NumberPhoneSignUpFragment extends Fragment {
+public class PhoneNumberSignUpFragment extends Fragment {
 
     EditText eNumberPhone;
     Button bContinue;
@@ -27,7 +27,7 @@ public class NumberPhoneSignUpFragment extends Fragment {
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        View inflaterView = inflater.inflate(R.layout.fragment_number_phone_sign_up, container, false);
+        View inflaterView = inflater.inflate(R.layout.fragment_phone_number_sign_up, container, false);
 
         eNumberPhone = inflaterView.findViewById(R.id.input_number_phone);
         bContinue = inflaterView.findViewById(R.id.button_continue);
@@ -57,10 +57,10 @@ public class NumberPhoneSignUpFragment extends Fragment {
     public void next(View view) {
         String numberPhone = eNumberPhone.getText().toString();
 
-        if (numberPhone.equals("")) authActivity.popupOneInput(view, eNumberPhone, getString(R.string.error_sign_up_no_username));
+        if (numberPhone.equals("")) authActivity.popupOneInput(view, eNumberPhone, getString(R.string.phone_number_sign_up_error_not_username));
         else
             myDB.child("ecost").child("uid").child(numberPhone).get().addOnCompleteListener(task -> {
-                if (task.getResult().getValue() != null) authActivity.popupOneInput(view, eNumberPhone, getString(R.string.error_sign_up_already_username));
+                if (task.getResult().getValue() != null) authActivity.popupOneInput(view, eNumberPhone, getString(R.string.phone_number_sign_up_error_already_phone_number));
                 else {
                     authActivity.numberPhone = numberPhone;
                     authActivity.getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container_view, new PasswordSignUpFragment()).addToBackStack(null).commit();

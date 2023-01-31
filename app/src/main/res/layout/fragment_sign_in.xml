@@ -27,7 +27,7 @@
         android:textColorHint="@color/auth_color_hint"
         android:fontFamily="@font/manrope_semi_bold"
         android:textSize="16sp"
-        android:hint="@string/sign_in_input_hint_number_phone" />
+        android:hint="@string/sign_in_input_hint_phone_number" />
 
     <FrameLayout
         android:id="@+id/frame_input_password"

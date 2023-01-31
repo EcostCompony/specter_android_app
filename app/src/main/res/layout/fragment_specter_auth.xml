@@ -28,7 +28,7 @@
             android:layout_marginStart="10dp"
             android:layout_marginEnd="20dp"
             android:layout_gravity="center_vertical|end"
-            android:text="@string/sign_outt"
+            android:text="@string/specter_auth_button_sign_out"
             android:paddingStart="10dp"
             android:paddingEnd="10dp"
             android:fontFamily="@font/inter_bold"
@@ -47,7 +47,7 @@
         android:layout_marginStart="16dp"
         android:fontFamily="@font/inter_semi_bold"
         android:textColor="#C0C0C0"
-        android:text="@string/name1" />
+        android:text="@string/specter_auth_edit_text_header_name" />
 
     <EditText
         android:id="@+id/edit_name"
@@ -71,7 +71,7 @@
         android:layout_marginStart="16dp"
         android:fontFamily="@font/inter_semi_bold"
         android:textColor="#C0C0C0"
-        android:text="@string/link" />
+        android:text="@string/specter_auth_edit_text_header_short_user_link" />
 
     <RelativeLayout
         android:layout_width="337dp"
@@ -113,5 +113,5 @@
         android:fontFamily="@font/inter_bold"
         android:textAllCaps="false"
         android:textSize="12sp"
-        android:text="@string/sign_in" />
+        android:text="@string/specter_auth_button_sign_in" />
 </LinearLayout>

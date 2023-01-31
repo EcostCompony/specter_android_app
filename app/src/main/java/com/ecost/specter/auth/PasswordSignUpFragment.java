@@ -94,10 +94,10 @@ public class PasswordSignUpFragment extends Fragment {
         myDB.child("ecost").child("users_number").get().addOnCompleteListener(task -> {
             Integer uid = Integer.parseInt(String.valueOf(task.getResult().getValue()))+1;
 
-            if (password.equals("")) authActivity.popupTwoInput(view, ePassword, eConfirmPassword, getString(R.string.error_signup_not_password), fPassword);
-            else if (confirmPassword.equals("")) authActivity.popupTwoInput(view, eConfirmPassword, ePassword, getString(R.string.error_signup_not_confirm_password), fConfirmPassword);
-            else if (password.length() < 8) authActivity.popupTwoInput(view, ePassword, eConfirmPassword, getString(R.string.error_signup_short_password), fPassword);
-            else if (!password.equals(confirmPassword)) authActivity.popupTwoInput(view, eConfirmPassword, ePassword, getString(R.string.error_signup_wrong_confirm_password), fConfirmPassword);
+            if (password.equals("")) authActivity.popupTwoInput(view, ePassword, eConfirmPassword, getString(R.string.password_sign_up_error_not_password), fPassword);
+            else if (confirmPassword.equals("")) authActivity.popupTwoInput(view, eConfirmPassword, ePassword, getString(R.string.password_sign_up_error_not_confirm_password), fConfirmPassword);
+            else if (password.length() < 8) authActivity.popupTwoInput(view, ePassword, eConfirmPassword, getString(R.string.password_sign_up_error_short_password), fPassword);
+            else if (!password.equals(confirmPassword)) authActivity.popupTwoInput(view, eConfirmPassword, ePassword, getString(R.string.password_sign_up_error_wrong_confirm_password), fConfirmPassword);
             else {
                 myDB.child("ecost").child("users").child(String.valueOf(uid)).child("phone").setValue(authActivity.numberPhone);
                 myDB.child("ecost").child("users").child(String.valueOf(uid)).child("password").setValue(hash(password));

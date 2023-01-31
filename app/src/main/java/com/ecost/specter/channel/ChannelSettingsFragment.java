@@ -108,7 +108,7 @@ public class ChannelSettingsFragment extends Fragment {
         else if (shortChannelLink.length() < 3) popup(channelActivity, view, getString(R.string.channel_settings_error_small_short_channel_link));
         else
             myDB.child("specter").child("uid").child(shortChannelLink.replace('.', '*')).child("id").get().addOnCompleteListener(taskTestShortChannelLink -> {
-                if (taskTestShortChannelLink.getResult().getValue() != null) popup(channelActivity, view, getString(R.string.channel_settings_error_use_short_channel_link));
+                if (taskTestShortChannelLink.getResult().getValue() != null) popup(channelActivity, view, getString(R.string.channel_settings_error_busy_short_channel_link));
                 else {
                     myDB.child("specter").child("uid").child(channelActivity.channelShortLink.replace(".", "*")).setValue(null);
                     myDB.child("specter").child("channels").child(String.valueOf(channelActivity.channelId)).child("shortLink").setValue(shortChannelLink);

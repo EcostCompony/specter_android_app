@@ -70,7 +70,7 @@ public class CreateChannelMenuFragment extends Fragment {
         else if (shortChannelLink.length() < 3) popup(mainMenuActivity, view, getString(R.string.create_channel_menu_error_small_short_channel_link));
         else
             myDB.child("specter").child("uid").child(shortChannelLink.replace(".", "*")).child("id").get().addOnCompleteListener(taskTestShortChannelLink -> {
-                if (taskTestShortChannelLink.getResult().getValue() != null) popup(mainMenuActivity, view, getString(R.string.create_channel_menu_error_use_short_channel_link));
+                if (taskTestShortChannelLink.getResult().getValue() != null) popup(mainMenuActivity, view, getString(R.string.create_channel_menu_error_busy_short_channel_link));
                 else
                     myDB.child("specter").child("channels_number").get().addOnCompleteListener(taskId -> {
                         Integer id = Integer.parseInt(String.valueOf(taskId.getResult().getValue()));

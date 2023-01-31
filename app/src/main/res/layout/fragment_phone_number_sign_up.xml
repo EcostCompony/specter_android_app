@@ -6,7 +6,7 @@
     android:orientation="vertical"
     android:gravity="center"
     android:background="@color/background"
-    tools:context=".auth.NumberPhoneSignUpFragment">
+    tools:context=".auth.PhoneNumberSignUpFragment">
 
     <TextView
         android:layout_width="326dp"
@@ -22,7 +22,7 @@
         android:textColor="@color/auth_description_text"
         android:fontFamily="@font/manrope_regular"
         android:textSize="14sp"
-        android:text="@string/number_phone_sign_up_description" />
+        android:text="@string/phone_number_sign_up_header_description" />
 
     <EditText
         android:id="@+id/input_number_phone"
@@ -36,7 +36,7 @@
         android:textColorHint="@color/auth_color_hint"
         android:fontFamily="@font/manrope_semi_bold"
         android:textSize="16sp"
-        android:hint="@string/number_phone_sign_up_input_hint_number_phone" />
+        android:hint="@string/phone_number_sign_up_input_hint_phone_number" />
 
     <Button
         android:id="@+id/button_continue"
@@ -47,5 +47,5 @@
         android:textColor="@color/auth_button_color_text"
         android:fontFamily="@font/manrope_bold"
         android:textSize="16sp"
-        android:text="@string/number_phone_sign_up_button_continue" />
+        android:text="@string/phone_number_sign_up_button_continue" />
 </LinearLayout>

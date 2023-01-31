@@ -81,7 +81,7 @@ public class SignInFragment extends Fragment {
 
         inflaterView.findViewById(R.id.button_sign_in).setOnClickListener(this::signIn);
 
-        inflaterView.findViewById(R.id.button_sign_up).setOnClickListener(view -> authActivity.getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container_view, new NumberPhoneSignUpFragment()).addToBackStack(null).commit());
+        inflaterView.findViewById(R.id.button_sign_up).setOnClickListener(view -> authActivity.getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container_view, new PhoneNumberSignUpFragment()).addToBackStack(null).commit());
 
         return inflaterView;
     }
@@ -92,14 +92,14 @@ public class SignInFragment extends Fragment {
 
         //noinspection StatementWithEmptyBody
         if (testNumberPhone(view, numberPhone)) { }
-        else if (password.equals("")) authActivity.popupTwoInput(view, ePassword, eNumberPhone, getString(R.string.error_login_not_password), fPassword);
+        else if (password.equals("")) authActivity.popupTwoInput(view, ePassword, eNumberPhone, getString(R.string.sign_in_error_not_password), fPassword);
         else
             myDB.child("ecost").child("uid").child(numberPhone).child("id").get().addOnCompleteListener(taskId -> {
                 String uid = String.valueOf(taskId.getResult().getValue());
-                if (uid.equals("null")) authActivity.popupTwoInput(view, eNumberPhone, ePassword, getString(R.string.error_no_ph));
+                if (uid.equals("null")) authActivity.popupTwoInput(view, eNumberPhone, ePassword, getString(R.string.sign_in_error_not_account));
                 else
                     myDB.child("ecost").child("users").child(uid).child("password").get().addOnCompleteListener(taskPassword -> {
-                        if (!String.valueOf(taskPassword.getResult().getValue()).equals(password)) authActivity.popupTwoInput(view, ePassword, eNumberPhone, getString(R.string.error_sign_in_wrong_password), fPassword);
+                        if (!String.valueOf(taskPassword.getResult().getValue()).equals(password)) authActivity.popupTwoInput(view, ePassword, eNumberPhone, getString(R.string.sign_in_error_wrong_password), fPassword);
                         else
                             myDB.child("ecost").child("users").child(uid).child("services").child("specter").get().addOnCompleteListener(taskSpecterId -> {
                                 String id = String.valueOf(taskSpecterId.getResult().getValue());
@@ -121,7 +121,7 @@ public class SignInFragment extends Fragment {
     }
 
     public boolean testNumberPhone(View view, String phone) {
-        if (phone.equals("")) authActivity.popupTwoInput(view, eNumberPhone, ePassword, getString(R.string.error_signin_not_username));
+        if (phone.equals("")) authActivity.popupTwoInput(view, eNumberPhone, ePassword, getString(R.string.sign_in_error_not_phone_number));
         return phone.equals("");
     }
 

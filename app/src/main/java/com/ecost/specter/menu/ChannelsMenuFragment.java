@@ -52,9 +52,9 @@ public class ChannelsMenuFragment extends Fragment {
                 Channel channel = Objects.requireNonNull(dataSnapshot.getValue(Channel.class));
                 for (int i = 0; i < channel.subscribers.size(); i++) {
                     if (channel.subscribers.get(i).equals(authId)) {
-                        channel.body = channel.body.replace("%CHANNEL_CREATED%", getString(R.string.channels_menu_parametr_channel_created));
+                        channel.body = channel.body.replace("%CHANNEL_CREATED%", getString(R.string.channels_menu_attribute_channel_created));
                         channels.add(channel);
-                        tChannelsNumber.setText(pluralForm(channelsAdapter.getItemCount(), getString(R.string.count_channel1), getString(R.string.count_channel2), getString(R.string.count_channel3), Locale.getDefault().getLanguage().equals("ru")));
+                        tChannelsNumber.setText(pluralForm(channelsAdapter.getItemCount(), getString(R.string.number_channels_nominative_case), getString(R.string.number_channels_genitive_case), getString(R.string.number_channels_plural_genitive_case), Locale.getDefault().getLanguage().equals("ru")));
                         channelsAdapter.notifyDataSetChanged();
                         break;
                     }
@@ -81,7 +81,7 @@ public class ChannelsMenuFragment extends Fragment {
                 for (int i = 0; i < channels.size(); i++) {
                     if (channels.get(i).id.equals(channel.id)) {
                         channels.remove(i);
-                        tChannelsNumber.setText(pluralForm(channelsAdapter.getItemCount(), getString(R.string.count_channel1), getString(R.string.count_channel2), getString(R.string.count_channel3), Locale.getDefault().getLanguage().equals("ru")));
+                        tChannelsNumber.setText(pluralForm(channelsAdapter.getItemCount(), getString(R.string.number_channels_nominative_case), getString(R.string.number_channels_genitive_case), getString(R.string.number_channels_plural_genitive_case), Locale.getDefault().getLanguage().equals("ru")));
                         channelsAdapter.notifyDataSetChanged();
                         break;
                     }

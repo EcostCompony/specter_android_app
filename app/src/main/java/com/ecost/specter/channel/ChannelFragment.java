@@ -85,16 +85,16 @@ public class ChannelFragment extends Fragment {
         }
 
         PostsAdapter.OnPostLongClickListener postLongClickListener = (post, position) -> {
-            CharSequence[] items = channelActivity.channelAdmin.equals(authId) ? new String[]{getString(R.string.post_edit), getString(R.string.post_copy), getString(R.string.post_delete)} : new String[]{getString(R.string.post_copy)};
+            CharSequence[] items = channelActivity.channelAdmin.equals(authId) ? new String[]{getString(R.string.channel_alert_dialog_item_edit), getString(R.string.channel_alert_dialog_item_copy), getString(R.string.channel_alert_dialog_item_delete)} : new String[]{getString(R.string.channel_alert_dialog_item_copy)};
             AlertDialog.Builder builder = new AlertDialog.Builder(inflater.getContext());
 
             builder.setItems(items, (dialog, item) -> {
-                if (items[item].equals(getString(R.string.post_edit))) {
+                if (items[item].equals(getString(R.string.channel_alert_dialog_item_edit))) {
                     postEdit = post;
                     tEditPost.setVisibility(View.VISIBLE);
                     ePost.setText(post.context);
-                } else if (items[item].equals(getString(R.string.post_copy))) ((ClipboardManager) inflater.getContext().getSystemService(Context.CLIPBOARD_SERVICE)).setPrimaryClip(ClipData.newPlainText("post", post.context));
-                else if (items[item].equals(getString(R.string.post_delete))) {
+                } else if (items[item].equals(getString(R.string.channel_alert_dialog_item_copy))) ((ClipboardManager) inflater.getContext().getSystemService(Context.CLIPBOARD_SERVICE)).setPrimaryClip(ClipData.newPlainText("post", post.context));
+                else if (items[item].equals(getString(R.string.channel_alert_dialog_item_delete))) {
                     posts.remove(post.id);
                     myDB.child("specter").child("channels").child(String.valueOf(channelActivity.channelId)).child("body").setValue(posts.size() == 0 ? "not posts" : posts.get(posts.size() - 1).context);
                     myDB.child("specter").child("channels").child(String.valueOf(channelActivity.channelId)).child("markBody").setValue(posts.size() == 0);
@@ -143,13 +143,13 @@ public class ChannelFragment extends Fragment {
             @Override
             public void onChildAdded(@NonNull DataSnapshot dataSnapshot, String previousChildName) {
                 channelActivity.channelSubscribers++;
-                tNumberSubscribers.setText(pluralForm(channelActivity.channelSubscribers, getString(R.string.subscriber1), getString(R.string.subscribers2), getString(R.string.subscribers3), Locale.getDefault().getLanguage().equals("ru")));
+                tNumberSubscribers.setText(pluralForm(channelActivity.channelSubscribers, getString(R.string.number_subscribers_nominative_case), getString(R.string.number_subscribers_genitive_case), getString(R.string.number_subscribers_plural_genitive_case), Locale.getDefault().getLanguage().equals("ru")));
             }
 
             @Override
             public void onChildRemoved(@NonNull DataSnapshot dataSnapshot) {
                 channelActivity.channelSubscribers--;
-                tNumberSubscribers.setText(pluralForm(channelActivity.channelSubscribers, getString(R.string.subscriber1), getString(R.string.subscribers2), getString(R.string.subscribers3), Locale.getDefault().getLanguage().equals("ru")));
+                tNumberSubscribers.setText(pluralForm(channelActivity.channelSubscribers, getString(R.string.number_subscribers_nominative_case), getString(R.string.number_subscribers_genitive_case), getString(R.string.number_subscribers_plural_genitive_case), Locale.getDefault().getLanguage().equals("ru")));
             }
 
             @Override public void onChildChanged(@NonNull DataSnapshot dataSnapshot, String previousChildName) {}
@@ -167,7 +167,7 @@ public class ChannelFragment extends Fragment {
             channelActivity.channelSubscribers++;
             channelActivity.userSubscribe = true;
             bSubscribe.setVisibility(View.GONE);
-            tNumberSubscribers.setText(pluralForm(channelActivity.channelSubscribers, getString(R.string.subscriber1), getString(R.string.subscribers2), getString(R.string.subscribers3), Locale.getDefault().getLanguage().equals("ru")));
+            tNumberSubscribers.setText(pluralForm(channelActivity.channelSubscribers, getString(R.string.number_subscribers_nominative_case), getString(R.string.number_subscribers_genitive_case), getString(R.string.number_subscribers_plural_genitive_case), Locale.getDefault().getLanguage().equals("ru")));
         });
 
         bSendPost.setOnClickListener(view -> {
@@ -190,7 +190,7 @@ public class ChannelFragment extends Fragment {
     @Override
     public void onCreateContextMenu(@NonNull ContextMenu menu, @NonNull View view, ContextMenu.ContextMenuInfo menuInfo) {
         super.onCreateContextMenu(menu, view, menuInfo);
-        if (postEdit == null) menu.add(0, view.getId(), 0, R.string.send_anon);
+        if (postEdit == null) menu.add(0, view.getId(), 0, R.string.channel_context_menu_item_send_without_name);
     }
 
     @Override

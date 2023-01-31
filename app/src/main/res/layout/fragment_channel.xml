@@ -74,7 +74,7 @@
                 android:background="@drawable/button_subscribe"
                 android:fontFamily="@font/inter_bold"
                 android:paddingHorizontal="10dp"
-                android:text="@string/button_subscribe"
+                android:text="@string/channel_button_subscribe"
                 android:textColor="@color/white"
                 android:textSize="12sp"
                 android:visibility="gone" />
@@ -130,7 +130,7 @@
                 android:textColor="@color/main_color"
                 android:fontFamily="@font/manrope_extra_bold"
                 android:textSize="13sp"
-                android:text="@string/edit_post"
+                android:text="@string/channel_text_edit_post"
                 android:visibility="gone" />
 
             <EditText
@@ -149,7 +149,7 @@
                 android:textColorHint="@color/channel_input_post_color_hint"
                 android:fontFamily="@font/inter_medium"
                 android:textSize="12sp"
-                android:hint="@string/channel_input_post_hint" />
+                android:hint="@string/channel_input_hint_post" />
 
             <LinearLayout
                 android:id="@+id/button_send"

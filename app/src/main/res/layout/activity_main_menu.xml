@@ -23,7 +23,7 @@
                 android:background="@color/background"
                 app:contentInsetStartWithNavigation="66dp"
                 app:titleTextAppearance="@style/ToolBarTextAppearance"
-                app:title="@string/toolbar_header" />
+                app:title="@string/channels_menu_header" />
         </com.google.android.material.appbar.AppBarLayout>
 
         <include layout="@layout/content_main_menu" />

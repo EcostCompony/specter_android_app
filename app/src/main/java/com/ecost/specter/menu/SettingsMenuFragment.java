@@ -128,7 +128,7 @@ public class SettingsMenuFragment extends Fragment {
         else if (shortUserLink.length() < 3) popup(mainMenuActivity, view, getString(R.string.settings_menu_error_small_short_user_link));
         else
             myDB.child("specter").child("uid").child(shortUserLink.replace('.', '*')).child("id").get().addOnCompleteListener(taskTestShortUserLink -> {
-                if (taskTestShortUserLink.getResult().getValue() != null) popup(mainMenuActivity, view, getString(R.string.settings_menu_error_use_short_user_link));
+                if (taskTestShortUserLink.getResult().getValue() != null) popup(mainMenuActivity, view, getString(R.string.settings_menu_error_busy_short_user_link));
                 else {
                     myDB.child("specter").child("uid").child(authShortUserLink.replace(".", "*")).setValue(null);
                     myDB.child("specter").child("users").child(String.valueOf(authId)).child("link").setValue(shortUserLink);
