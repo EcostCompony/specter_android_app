@@ -46,7 +46,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="14dp"
         android:paddingHorizontal="13dp"
-        android:textColor="@color/parametrs_header"
+        android:textColor="@color/parameters_header"
         android:fontFamily="@font/inter_semi_bold"
         android:textSize="12sp"
         android:text="@string/channel_settings_parameter_header_title" />
@@ -87,7 +87,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="10dp"
         android:paddingHorizontal="13dp"
-        android:textColor="@color/parametrs_header"
+        android:textColor="@color/parameters_header"
         android:fontFamily="@font/inter_semi_bold"
         android:textSize="12sp"
         android:text="@string/channel_settings_parameter_header_short_channel_link" />

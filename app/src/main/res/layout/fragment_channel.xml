@@ -98,7 +98,7 @@
             android:layout_height="1dp"
             android:layout_gravity="bottom"
             android:layout_marginHorizontal="12dp"
-            android:background="@color/devider_color" />
+            android:background="@color/divider_color" />
     </FrameLayout>
 
     <LinearLayout
