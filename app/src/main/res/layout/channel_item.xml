@@ -14,8 +14,8 @@
         app:cardCornerRadius="20dp">
 
         <ImageView
-            android:layout_width="40dp"
-            android:layout_height="40dp"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
             android:src="@drawable/channel_photo"
             android:contentDescription="@string/channel_item_content_description_channel_photo" />
     </androidx.cardview.widget.CardView>

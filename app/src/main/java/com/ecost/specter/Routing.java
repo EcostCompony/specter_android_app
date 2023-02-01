@@ -6,6 +6,7 @@ import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
+import android.os.Build;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.view.Gravity;
@@ -33,7 +34,11 @@ public class Routing extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        SplashScreen.installSplashScreen(this).setKeepOnScreenCondition(() -> true );
+        if (Build.VERSION.SDK_INT < 31) {
+            setContentView(R.layout.splash_screen);
+        } else {
+            SplashScreen.installSplashScreen(this).setKeepOnScreenCondition(() -> true);
+        }
 
         auth = PreferenceManager.getDefaultSharedPreferences(this).getBoolean("AUTH", false);
         authId = PreferenceManager.getDefaultSharedPreferences(this).getInt("SPECTER_ID", 0);
