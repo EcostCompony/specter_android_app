@@ -72,9 +72,15 @@
     <string name="specter_auth_edit_text_header_short_user_link">Link</string>
     <string name="specter_auth_button_sign_in">Sign in</string>
 
+    <!-- toolbar items -->
+    <string name="toolbar_item_search">Найти канал</string>
+
     <!-- drawer items -->
     <string name="drawer_item_create_channel">Create channels</string>
     <string name="drawer_item_settings">Settings</string>
+
+    <!-- channels search -->
+    <string name="channels_search_input_channel_title_hint">Название канала</string>
 
     <!-- create channel menu -->
     <string name="create_channel_menu_parameter_header_title">Title</string>
