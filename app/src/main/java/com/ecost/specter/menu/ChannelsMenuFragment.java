@@ -8,12 +8,9 @@ import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
-import android.view.Menu;
-import android.view.MenuInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
-import android.widget.Toolbar;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -55,7 +52,8 @@ public class ChannelsMenuFragment extends Fragment {
                 Channel channel = Objects.requireNonNull(dataSnapshot.getValue(Channel.class));
                 for (int i = 0; i < channel.subscribers.size(); i++) {
                     if (channel.subscribers.get(i).equals(authId)) {
-                        channel.body = channel.body.replace("%CHANNEL_CREATED%", getString(R.string.channels_menu_attribute_channel_created));
+                        if (channel.body.equals("%CHANNEL_CREATED%")) channel.body = getString(R.string.channels_menu_attribute_channel_created);
+                        else if (channel.body.equals("%NOT_POSTS%")) channel.body = getString(R.string.channels_menu_attribute_not_posts);
                         channels.add(channel);
                         tChannelsNumber.setText(pluralForm(channelsAdapter.getItemCount(), getString(R.string.number_channels_nominative_case), getString(R.string.number_channels_genitive_case), getString(R.string.number_channels_plural_genitive_case), Locale.getDefault().getLanguage().equals("ru")));
                         channelsAdapter.notifyDataSetChanged();
@@ -70,6 +68,7 @@ public class ChannelsMenuFragment extends Fragment {
                 Channel channel = Objects.requireNonNull(dataSnapshot.getValue(Channel.class));
                 for (int i = 0; i < channelsAdapter.getItemCount(); i++) {
                     if (channels.get(i).id.equals(channel.id)) {
+                        if (channel.body.equals("%NOT_POSTS%")) channel.body = getString(R.string.channels_menu_attribute_not_posts);
                         channels.set(i, channel);
                         channelsAdapter.notifyDataSetChanged();
                         break;

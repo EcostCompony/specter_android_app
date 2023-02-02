@@ -27,13 +27,14 @@ public class ChannelsAdapter extends RecyclerView.Adapter<ChannelViewHolder> {
     OnChannelClickListener onClickListener;
     OnChannelLongClickListener onLongClickListener;
     List<Channel> channels;
-    Integer color;
+    Integer colorMain, colorBody;
     LayoutInflater inflater;
 
     public ChannelsAdapter(Context context, List<Channel> channels, OnChannelClickListener onClickListener, OnChannelLongClickListener onLongClickListener) {
         this.inflater = LayoutInflater.from(context);
         this.channels = channels;
-        this.color = ContextCompat.getColor(context, R.color.main_color);
+        this.colorMain = ContextCompat.getColor(context, R.color.main_color);
+        this.colorBody = ContextCompat.getColor(context, R.color.channel_body_color);
         this.onClickListener = onClickListener;
         this.onLongClickListener = onLongClickListener;
     }
@@ -50,7 +51,7 @@ public class ChannelsAdapter extends RecyclerView.Adapter<ChannelViewHolder> {
         Channel channel = channels.get(position);
         holder.tTitle.setText(channel.title);
         holder.tLastPost.setText(channel.body);
-        if (channel.markBody) holder.tLastPost.setTextColor(color);
+        holder.tLastPost.setTextColor(channel.markBody ? colorMain : colorBody);
         holder.itemView.setOnClickListener(v -> onClickListener.onChannelClick(channel, position));
         holder.itemView.setOnLongClickListener(v -> onLongClickListener.onChannelLongClick(channel, position));
     }

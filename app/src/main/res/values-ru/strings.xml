@@ -1,6 +1,7 @@
 <resources>
     <!-- attributes -->
     <string name="channels_menu_attribute_channel_created">Канал создан</string>
+    <string name="channels_menu_attribute_not_posts">Нет постов</string>
 
     <!-- cases -->
     <string name="number_channels_nominative_case">канал</string>
@@ -113,4 +114,6 @@
     <string name="channel_item_content_description_channel_photo">Фото канала</string>
     <string name="channel_settings_button_content_description_save_channel_title">Сохранить название канала</string>
     <string name="channel_settings_button_content_description_save_short_channel_link">Сохранить короткую ссылку канала</string>
+
+    <!-- TODO: sort (do not delete the comment) -->
 </resources>

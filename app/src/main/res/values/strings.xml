@@ -1,10 +1,12 @@
 <resources>
     <string name="app_name" translatable="false">specter</string>
 
+    <!-- symbols -->
     <string name="symbol_at" translatable="false">\@</string>
 
     <!-- attributes -->
     <string name="channels_menu_attribute_channel_created">Channel created</string>
+    <string name="channels_menu_attribute_not_posts">Нет постов</string>
 
     <!-- cases -->
     <string name="number_channels_nominative_case">channel</string>
@@ -117,4 +119,6 @@
     <string name="channel_item_content_description_channel_photo">Channel photo</string>
     <string name="channel_settings_button_content_description_save_channel_title">save channel title</string>
     <string name="channel_settings_button_content_description_save_short_channel_link">save short channel link</string>
+
+    <!-- TODO: sort (do not delete the comment) -->
 </resources>
