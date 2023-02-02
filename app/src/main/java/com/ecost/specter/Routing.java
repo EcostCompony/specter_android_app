@@ -50,9 +50,10 @@ public class Routing extends AppCompatActivity {
             myDB.child("specter").child("users").child(String.valueOf(authId)).get().addOnCompleteListener(taskTestUser ->
                 myDB.child("specter").child("users").child(String.valueOf(authId)).child("app_version").get().addOnCompleteListener(taskUserVersion -> {
                     if (Integer.parseInt(String.valueOf(taskSupportVersion.getResult().getValue())) > VERSION_CODE) startActivity(new Intent(this, OldVersionActivity.class));
-                    else if (auth && taskTestUser.getResult().getValue() != null) startActivity(new Intent(this, MainMenuActivity.class));
-                    else {
+                    else if (auth && taskTestUser.getResult().getValue() != null) {
                         if (!String.valueOf(taskUserVersion.getResult().getValue()).equals(String.valueOf(VERSION_CODE))) myDB.child("specter").child("users").child(String.valueOf(authId)).child("app_version").setValue(VERSION_CODE);
+                        startActivity(new Intent(this, MainMenuActivity.class));
+                    } else {
                         signOut(this);
                         startActivity(new Intent(this, AuthActivity.class));
                     }
