@@ -7,4 +7,5 @@
     <color name="button_auth">#606060</color>
     <color name="popup_text_color">#716E6E</color>
     <color name="input_color_auth_error">#851A1A</color>
+    <color name="channel_page_header_background_color">#353535</color>
 </resources>

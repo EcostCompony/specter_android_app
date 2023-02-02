@@ -56,6 +56,7 @@ public class Routing extends AppCompatActivity {
                         signOut(this);
                         startActivity(new Intent(this, AuthActivity.class));
                     }
+                    finish();
                 })
             )
         );
