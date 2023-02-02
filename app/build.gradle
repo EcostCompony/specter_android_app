@@ -11,8 +11,8 @@ android {
         applicationId "com.ecost.specter"
         minSdkVersion 23
         targetSdkVersion 33
-        versionCode 83
-        versionName "Pre-Alpha 83"
+        versionCode 84
+        versionName "Pre-Alpha 84"
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
@@ -35,7 +35,7 @@ android {
 
 dependencies {
     implementation 'androidx.appcompat:appcompat:1.6.0'
-    implementation 'com.google.android.material:material:1.7.0'
+    implementation 'com.google.android.material:material:1.8.0'
     implementation platform('com.google.firebase:firebase-bom:31.1.1')
     implementation 'com.google.firebase:firebase-database'
     implementation 'androidx.core:core-splashscreen:1.0.0'

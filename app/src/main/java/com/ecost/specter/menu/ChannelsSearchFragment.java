@@ -60,8 +60,10 @@ public class ChannelsSearchFragment extends Fragment {
 
         Objects.requireNonNull(mainMenuActivity.getSupportActionBar()).hide();
         eChannelTitle.requestFocus();
-        InputMethodManager imm = (InputMethodManager) mainMenuActivity.getSystemService(Context.INPUT_METHOD_SERVICE);
-        imm.toggleSoftInput(InputMethodManager.SHOW_FORCED, 0);
+        eChannelTitle.postDelayed(() -> {
+            InputMethodManager inputMethodManager = (InputMethodManager) mainMenuActivity.getSystemService(Context.INPUT_METHOD_SERVICE);
+            inputMethodManager.showSoftInput(eChannelTitle, InputMethodManager.SHOW_IMPLICIT);
+        }, 1);
 
         rChannelList.setLayoutManager(new LinearLayoutManager(mainMenuActivity));
         channelsAdapter = new ChannelsAdapter(mainMenuActivity, channels, (channel, position) -> {
@@ -109,7 +111,10 @@ public class ChannelsSearchFragment extends Fragment {
             @Override public void afterTextChanged(Editable s) {}
         });
 
-        bClose.setOnClickListener(view -> mainMenuActivity.navController.navigate(R.id.nav_channels));
+        bClose.setOnClickListener(view -> {
+            ((InputMethodManager) mainMenuActivity.getSystemService(Context.INPUT_METHOD_SERVICE)).hideSoftInputFromWindow(view.getWindowToken(), 0);
+            mainMenuActivity.navController.navigate(R.id.nav_channels);
+        });
 
         return inflaterView;
     }

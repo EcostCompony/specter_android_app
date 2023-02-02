@@ -55,7 +55,7 @@ public class ChannelsMenuFragment extends Fragment {
                         if (channel.body.equals("%CHANNEL_CREATED%")) channel.body = getString(R.string.channels_menu_attribute_channel_created);
                         else if (channel.body.equals("%NOT_POSTS%")) channel.body = getString(R.string.channels_menu_attribute_not_posts);
                         channels.add(channel);
-                        tChannelsNumber.setText(pluralForm(channelsAdapter.getItemCount(), getString(R.string.number_channels_nominative_case), getString(R.string.number_channels_genitive_case), getString(R.string.number_channels_plural_genitive_case), Locale.getDefault().getLanguage().equals("ru")));
+                        tChannelsNumber.setText(pluralForm(channelsAdapter.getItemCount(), mainMenuActivity.getString(R.string.number_channels_nominative_case), mainMenuActivity.getString(R.string.number_channels_genitive_case), mainMenuActivity.getString(R.string.number_channels_plural_genitive_case), Locale.getDefault().getLanguage().equals("ru")));
                         channelsAdapter.notifyDataSetChanged();
                         break;
                     }
