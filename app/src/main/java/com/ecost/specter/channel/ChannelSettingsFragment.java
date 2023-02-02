@@ -82,6 +82,10 @@ public class ChannelSettingsFragment extends Fragment {
             return keyCode == KeyEvent.KEYCODE_ENTER;
         });
 
+        bSaveChannelTitle.setOnClickListener(this::saveChannelTitle);
+
+        bSaveShortChannelLink.setOnClickListener(this::saveShortChannelLink);
+
         inflaterView.findViewById(R.id.button_delete_channel).setOnClickListener(view -> {
             myDB.child("specter").child("channels").child(String.valueOf(channelActivity.channelId)).setValue(null);
             channelActivity.finish();
