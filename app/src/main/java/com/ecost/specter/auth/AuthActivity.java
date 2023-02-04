@@ -1,6 +1,5 @@
 package com.ecost.specter.auth;
 
-import static com.ecost.specter.Routing.authEcostId;
 import static com.ecost.specter.Routing.popup;
 
 import android.os.Bundle;
@@ -22,8 +21,7 @@ public class AuthActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_auth);
-
-        getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container_view, authEcostId != 0 ? new SpecterAuthFragment() : new SignInFragment()).commit();
+        getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container_view, new SignInFragment()).commit();
     }
 
     public void popupOneInput(View view, EditText editText, String text) {

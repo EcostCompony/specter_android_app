@@ -104,7 +104,7 @@ public class SignInFragment extends Fragment {
                             myDB.child("ecost").child("users").child(uid).child("services").child("specter").get().addOnCompleteListener(taskSpecterId -> {
                                 String id = String.valueOf(taskSpecterId.getResult().getValue());
                                 pushPreferenceEcostId(authActivity, Integer.parseInt(uid));
-                                if (id.equals("null")) authActivity.getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container_view, new SpecterAuthFragment()).commit();
+                                if (id.equals("null")) new SpecterStartFragment().show(authActivity.getSupportFragmentManager(), new SpecterStartFragment().getTag());
                                 else
                                     myDB.child("specter").child("users").child(id).get().addOnCompleteListener(taskUser -> {
                                         User user = Objects.requireNonNull(taskUser.getResult().getValue(User.class));

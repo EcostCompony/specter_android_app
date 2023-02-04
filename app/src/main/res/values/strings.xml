@@ -19,7 +19,7 @@
     <!-- headers -->
     <string name="sign_in_header">Sign in with <font color="#D75026">eco</font>st</string>
     <string name="sign_up_header">Sign up to <font color="#D75026">eco</font>st</string>
-    <string name="specter_auth_header">Get started</string>
+    <string name="specter_start_header">Get started</string>
     <string name="channels_menu_header">Channels</string>
     <string name="create_channel_menu_header">Create a channel</string>
     <string name="settings_menu_header">Settings</string>
@@ -69,10 +69,9 @@
     <string name="password_sign_up_button_sign_up">Sign up</string>
 
     <!-- specter auth -->
-    <string name="specter_auth_button_sign_out">Sign out</string>
-    <string name="specter_auth_edit_text_header_name">Name</string>
-    <string name="specter_auth_edit_text_header_short_user_link">Link</string>
-    <string name="specter_auth_button_sign_in">Sign in</string>
+    <string name="specter_start_parameter_header_name">Name</string>
+    <string name="specter_start_parameter_header_short_user_link">Link</string>
+    <string name="specter_start_button_start">Sign in</string>
 
     <!-- toolbar items -->
     <string name="toolbar_item_search">Найти канал</string>

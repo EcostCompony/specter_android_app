@@ -109,7 +109,7 @@
                 android:layout_height="match_parent"
                 android:imeOptions="actionGo"
                 android:inputType="text"
-                android:autofillHints="short_user_link"
+                android:autofillHints="short_channel_link"
                 android:background="@drawable/input"
                 android:paddingHorizontal="25dp"
                 android:textColor="@color/main_color"

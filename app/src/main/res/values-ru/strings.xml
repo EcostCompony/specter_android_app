@@ -14,7 +14,7 @@
     <!-- headers -->
     <string name="sign_in_header">Войти с <font color="#D75026">eco</font>st</string>
     <string name="sign_up_header">Регистрация в <font color="#D75026">eco</font>st</string>
-    <string name="specter_auth_header">Давайте начнём</string>
+    <string name="specter_start_header">Давайте начнём</string>
     <string name="channels_menu_header">Каналы</string>
     <string name="create_channel_menu_header">Создание канала</string>
     <string name="settings_menu_header">Настройки</string>
@@ -64,10 +64,9 @@
     <string name="password_sign_up_button_sign_up">Зарегистрироваться</string>
 
     <!-- specter auth -->
-    <string name="specter_auth_button_sign_out">Выйти</string>
-    <string name="specter_auth_edit_text_header_name">Имя</string>
-    <string name="specter_auth_edit_text_header_short_user_link">Короткая ссылка</string>
-    <string name="specter_auth_button_sign_in">Начать</string>
+    <string name="specter_start_parameter_header_name">Имя</string>
+    <string name="specter_start_parameter_header_short_user_link">Короткая ссылка</string>
+    <string name="specter_start_button_start">Начать</string>
 
     <!-- toolbar items -->
     <string name="toolbar_item_search">Найти канал</string>

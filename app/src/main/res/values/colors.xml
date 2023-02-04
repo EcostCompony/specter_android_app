@@ -27,4 +27,5 @@
     <color name="channel_input_post_color_hint">#9C9C9C</color>
     <color name="post_item_time_color">#9C9C9C</color>
     <color name="channel_page_header_background_color">#F8F8F8</color>
+    <color name="bottom_sheet_divider_color">#EFEFEF</color>
 </resources>

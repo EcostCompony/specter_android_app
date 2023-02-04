@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_gravity="bottom">
+
+    <View
+        android:layout_width="100dp"
+        android:layout_height="5dp"
+        android:layout_gravity="center_horizontal"
+        android:background="@drawable/bottom_sheet_divider" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_marginTop="14dp"
+        android:gravity="center_horizontal"
+        android:background="@drawable/bottom_sheet">
+
+        <TextView
+            android:layout_width="337dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:paddingHorizontal="5dp"
+            android:fontFamily="@font/inter_semi_bold"
+            android:textSize="22sp"
+            android:text="@string/specter_start_header" />
+
+        <TextView
+            android:layout_width="337dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="21dp"
+            android:paddingHorizontal="16dp"
+            android:textColor="@color/parameters_header"
+            android:fontFamily="@font/inter_semi_bold"
+            android:textSize="12sp"
+            android:text="@string/specter_start_parameter_header_name" />
+
+        <EditText
+            android:id="@+id/input_user_name"
+            android:layout_width="337dp"
+            android:layout_height="38dp"
+            android:inputType="text"
+            android:autofillHints="name"
+            android:layout_marginTop="4dp"
+            android:background="@drawable/input"
+            android:paddingHorizontal="13dp"
+            android:fontFamily="@font/inter_semi_bold"
+            android:textSize="12sp"
+            tools:ignore="LabelFor" />
+
+        <TextView
+            android:layout_width="337dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="11dp"
+            android:paddingHorizontal="16dp"
+            android:textColor="@color/parameters_header"
+            android:fontFamily="@font/inter_semi_bold"
+            android:textSize="12sp"
+            android:text="@string/specter_start_parameter_header_short_user_link" />
+
+        <RelativeLayout
+            android:layout_width="337dp"
+            android:layout_height="38dp"
+            android:layout_marginTop="4dp">
+
+            <EditText
+                android:id="@+id/input_short_user_link"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:inputType="text"
+                android:autofillHints="short_user_link"
+                android:background="@drawable/input"
+                android:paddingStart="25dp"
+                android:paddingEnd="13dp"
+                android:textColor="@color/main_color"
+                android:fontFamily="@font/inter_semi_bold"
+                android:textSize="12sp"
+                tools:ignore="LabelFor" />
+
+            <TextView
+                android:layout_width="25dp"
+                android:layout_height="match_parent"
+                android:gravity="center_vertical|end"
+                android:textColor="@color/main_color"
+                android:fontFamily="@font/inter_semi_bold"
+                android:textSize="12sp"
+                android:text="@string/symbol_at" />
+        </RelativeLayout>
+
+        <Button
+            android:id="@+id/button_start"
+            android:layout_width="337dp"
+            android:layout_height="37dp"
+            android:layout_marginVertical="22dp"
+            android:background="@drawable/button_neutral"
+            android:textColor="@color/main_color"
+            android:fontFamily="@font/inter_bold"
+            android:textSize="12sp"
+            android:text="@string/specter_start_button_start" />
+    </LinearLayout>
+</FrameLayout>

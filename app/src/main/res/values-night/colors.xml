@@ -8,4 +8,5 @@
     <color name="popup_text_color">#716E6E</color>
     <color name="input_color_auth_error">#851A1A</color>
     <color name="channel_page_header_background_color">#353535</color>
+    <color name="bottom_sheet_divider_color">#EFEFEF</color>
 </resources>
