@@ -18,6 +18,7 @@
     <string name="channels_menu_header">Каналы</string>
     <string name="create_channel_menu_header">Создание канала</string>
     <string name="settings_menu_header">Настройки</string>
+    <string name="comments_header">Комментарии</string>
     <string name="channel_settings_header">Настройки канала</string>
 
     <!-- descriptions -->

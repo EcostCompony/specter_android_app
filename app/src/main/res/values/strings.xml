@@ -119,6 +119,7 @@
     <string name="channel_settings_button_content_description_save_channel_title">save channel title</string>
     <string name="channel_settings_button_content_description_save_short_channel_link">save short channel link</string>
     <string name="channel_alert_dialog_item_comments">Комментарии</string>
+    <string name="comments_header">Комментарии</string>
 
     <!-- TODO: sort (do not delete the comment) -->
 </resources>
