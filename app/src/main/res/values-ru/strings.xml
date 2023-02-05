@@ -94,6 +94,7 @@
     <string name="channel_input_hint_post">Введите текст…</string>
 
     <!-- channel alert dialog items -->
+    <string name="channel_alert_dialog_item_comments">Комментарии</string>
     <string name="channel_alert_dialog_item_edit">Редактировать пост</string>
     <string name="channel_alert_dialog_item_copy">Копировать текст</string>
     <string name="channel_alert_dialog_item_delete">Удалить пост</string>
@@ -113,6 +114,4 @@
     <string name="channel_item_content_description_channel_photo">Фото канала</string>
     <string name="channel_settings_button_content_description_save_channel_title">Сохранить название канала</string>
     <string name="channel_settings_button_content_description_save_short_channel_link">Сохранить короткую ссылку канала</string>
-
-    <!-- TODO: sort (do not delete the comment) -->
 </resources>

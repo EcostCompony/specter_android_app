@@ -85,11 +85,12 @@ public class ChannelFragment extends Fragment {
         }
 
         PostsAdapter.OnPostLongClickListener postLongClickListener = (post, position) -> {
-            CharSequence[] items = channelActivity.channelAdmin.equals(authId) ? new String[]{getString(R.string.channel_alert_dialog_item_edit), getString(R.string.channel_alert_dialog_item_copy), getString(R.string.channel_alert_dialog_item_delete)} : new String[]{getString(R.string.channel_alert_dialog_item_copy)};
+            CharSequence[] items = channelActivity.channelAdmin.equals(authId) ? new String[]{getString(R.string.channel_alert_dialog_item_comments), getString(R.string.channel_alert_dialog_item_edit), getString(R.string.channel_alert_dialog_item_copy), getString(R.string.channel_alert_dialog_item_delete)} : new String[]{getString(R.string.channel_alert_dialog_item_comments), getString(R.string.channel_alert_dialog_item_copy)};
             AlertDialog.Builder builder = new AlertDialog.Builder(inflater.getContext());
 
             builder.setItems(items, (dialog, item) -> {
-                if (items[item].equals(getString(R.string.channel_alert_dialog_item_edit))) {
+                if (items[item].equals(getString(R.string.channel_alert_dialog_item_comments))) channelActivity.getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container_view, new CommentsFragment()).addToBackStack(null).commit();
+                else if (items[item].equals(getString(R.string.channel_alert_dialog_item_edit))) {
                     postEdit = post;
                     tEditPost.setVisibility(View.VISIBLE);
                     ePost.setText(post.context);
