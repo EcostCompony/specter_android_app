@@ -89,8 +89,10 @@ public class ChannelFragment extends Fragment {
             AlertDialog.Builder builder = new AlertDialog.Builder(inflater.getContext());
 
             builder.setItems(items, (dialog, item) -> {
-                if (items[item].equals(getString(R.string.channel_alert_dialog_item_comments))) channelActivity.getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container_view, new CommentsFragment()).addToBackStack(null).commit();
-                else if (items[item].equals(getString(R.string.channel_alert_dialog_item_edit))) {
+                if (items[item].equals(getString(R.string.channel_alert_dialog_item_comments))) {
+                    channelActivity.getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container_view, new CommentsFragment()).addToBackStack(null).commit();
+                    channelActivity.postId = post.id;
+                } else if (items[item].equals(getString(R.string.channel_alert_dialog_item_edit))) {
                     postEdit = post;
                     tEditPost.setVisibility(View.VISIBLE);
                     ePost.setText(post.context);

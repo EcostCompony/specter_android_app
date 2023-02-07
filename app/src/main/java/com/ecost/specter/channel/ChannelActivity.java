@@ -8,7 +8,7 @@ import com.ecost.specter.R;
 
 public class ChannelActivity extends AppCompatActivity {
 
-    Integer channelId, channelAdmin;
+    Integer channelId, channelAdmin, postId;
     Integer channelSubscribers = 0;
     String channelTitle, channelShortLink;
     boolean userSubscribe;

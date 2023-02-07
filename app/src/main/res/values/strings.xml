@@ -120,6 +120,7 @@
     <string name="channel_settings_button_content_description_save_short_channel_link">save short channel link</string>
     <string name="channel_alert_dialog_item_comments">Комментарии</string>
     <string name="comments_header">Комментарии</string>
+    <string name="channel_text_edit_comment">Редактировать комментарий</string>
 
     <!-- TODO: sort (do not delete the comment) -->
 </resources>
