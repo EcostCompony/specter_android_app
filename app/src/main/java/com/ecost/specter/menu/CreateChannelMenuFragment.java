@@ -76,7 +76,7 @@ public class CreateChannelMenuFragment extends Fragment {
                         Integer id = Integer.parseInt(String.valueOf(taskId.getResult().getValue()));
                         List<Integer> subscribers = new ArrayList<>();
                         subscribers.add(authId);
-                        myDB.child("specter").child("channels").child(String.valueOf(id)).setValue(new Channel(id, shortChannelLink, authId, title, "%CHANNEL_CREATED%", true, subscribers));
+                        myDB.child("specter").child("channels").child(String.valueOf(id)).setValue(new Channel(id, shortChannelLink, authId, 0, title, "%CHANNEL_CREATED%", true, subscribers));
                         myDB.child("specter").child("uid").child(shortChannelLink.replace('.', '*')).child("id").setValue(id);
                         myDB.child("specter").child("uid").child(shortChannelLink.replace('.', '*')).child("type").setValue("channel");
                         myDB.child("specter").child("channels_number").setValue(id + 1);

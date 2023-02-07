@@ -8,7 +8,7 @@ import com.ecost.specter.R;
 
 public class ChannelActivity extends AppCompatActivity {
 
-    Integer channelId, channelAdmin, postId;
+    Integer channelId, channelAdmin, postId, postsNumber;
     Integer channelSubscribers = 0;
     String channelTitle, channelShortLink;
     boolean userSubscribe;
@@ -20,6 +20,7 @@ public class ChannelActivity extends AppCompatActivity {
 
         channelId = getIntent().getIntExtra("CHANNEL_ID", 0);
         channelAdmin = getIntent().getIntExtra("CHANNEL_ADMINS", 0);
+        postsNumber = getIntent().getIntExtra("CHANNEL_POSTS_NUMBER", 0);
         channelTitle = getIntent().getStringExtra("CHANNEL_TITLE");
         channelShortLink = getIntent().getStringExtra("CHANNEL_SHORT_LINK");
         userSubscribe = getIntent().getBooleanExtra("USER_SUBSCRIBE", false);

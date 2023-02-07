@@ -30,6 +30,7 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.ecost.specter.R;
+import com.ecost.specter.models.Channel;
 import com.ecost.specter.models.Post;
 import com.ecost.specter.recyclers.PostsAdapter;
 import com.google.firebase.database.ChildEventListener;
@@ -98,14 +99,9 @@ public class ChannelFragment extends Fragment {
                     ePost.setText(post.context);
                 } else if (items[item].equals(getString(R.string.channel_alert_dialog_item_copy))) ((ClipboardManager) inflater.getContext().getSystemService(Context.CLIPBOARD_SERVICE)).setPrimaryClip(ClipData.newPlainText("post", post.context));
                 else if (items[item].equals(getString(R.string.channel_alert_dialog_item_delete))) {
-                    posts.remove(post.id);
                     myDB.child("specter").child("channels").child(String.valueOf(channelActivity.channelId)).child("body").setValue(posts.size() == 0 ? "%NOT_POSTS%" : posts.get(posts.size() - 1).context);
                     myDB.child("specter").child("channels").child(String.valueOf(channelActivity.channelId)).child("markBody").setValue(posts.size() == 0);
-                    myDB.child("specter").child("channels").child(String.valueOf(channelActivity.channelId)).child("posts").setValue(posts.size() == 0 ? null : posts);
-                    for (int i = 0; i < posts.size(); i++) {
-                        posts.get(i).id = i;
-                        myDB.child("specter").child("channels").child(String.valueOf(channelActivity.channelId)).child("posts").child(String.valueOf(i)).setValue(posts.get(i));
-                    }
+                    myDB.child("specter").child("channels").child(String.valueOf(channelActivity.channelId)).child("posts").child(String.valueOf(post.id)).setValue(null);
                 }
             }).create().show();
 
@@ -127,14 +123,26 @@ public class ChannelFragment extends Fragment {
 
             @Override
             public void onChildChanged(@NonNull DataSnapshot dataSnapshot, String previousChildName) {
-                posts.set(Integer.parseInt(Objects.requireNonNull(dataSnapshot.getKey())), dataSnapshot.getValue(Post.class));
-                postsAdapter.notifyDataSetChanged();
+                Post post = Objects.requireNonNull(dataSnapshot.getValue(Post.class));
+                for (int i = 0; i < postsAdapter.getItemCount(); i++) {
+                    if (posts.get(i).id == post.id) {
+                        posts.set(i, post);
+                        postsAdapter.notifyDataSetChanged();
+                        break;
+                    }
+                }
             }
 
             @Override
             public void onChildRemoved(@NonNull DataSnapshot dataSnapshot) {
-                if (!channelActivity.channelAdmin.equals(authId)) posts.remove(Integer.parseInt(Objects.requireNonNull(dataSnapshot.getKey())));
-                postsAdapter.notifyDataSetChanged();
+                Post post = Objects.requireNonNull(dataSnapshot.getValue(Post.class));
+                for (int i = 0; i < posts.size(); i++) {
+                    if (posts.get(i).id == post.id) {
+                        posts.remove(i);
+                        postsAdapter.notifyDataSetChanged();
+                        break;
+                    }
+                }
             }
 
             @Override public void onChildMoved(@NonNull DataSnapshot dataSnapshot, String previousChildName) {}
@@ -176,11 +184,15 @@ public class ChannelFragment extends Fragment {
         bSendPost.setOnClickListener(view -> {
             String text = ePost.getText().toString().trim();
             if (!text.equals("")) {
-                if (postEdit != null) postEdit.context = text;
-                if (postEdit == null || posts.size() - 1 == postEdit.id) myDB.child("specter").child("channels").child(String.valueOf(channelActivity.channelId)).child("body").setValue(text);
-                if (postEdit == null) myDB.child("specter").child("channels").child(String.valueOf(channelActivity.channelId)).child("markBody").setValue(false);
-                if (postEdit == null) rPostsList.smoothScrollToPosition(posts.size());
-                myDB.child("specter").child("channels").child(String.valueOf(channelActivity.channelId)).child("posts").child(String.valueOf(postEdit != null ? postEdit.id : posts.size())).setValue(postEdit != null ? postEdit : new Post(posts.size(), authUserName, "15:23", text));
+                if (postEdit != null) myDB.child("specter").child("channels").child(String.valueOf(channelActivity.channelId)).child("posts").child(String.valueOf(postEdit.id)).child("context").setValue(text);
+                if (postEdit == null || channelActivity.postsNumber == postEdit.id) myDB.child("specter").child("channels").child(String.valueOf(channelActivity.channelId)).child("body").setValue(text);
+                if (postEdit == null) {
+                    myDB.child("specter").child("channels").child(String.valueOf(channelActivity.channelId)).child("posts").child(String.valueOf(channelActivity.postsNumber)).setValue(new Post(channelActivity.postsNumber, authUserName, "15:23", text));
+                    myDB.child("specter").child("channels").child(String.valueOf(channelActivity.channelId)).child("postsNumber").setValue(channelActivity.postsNumber + 1);
+                    myDB.child("specter").child("channels").child(String.valueOf(channelActivity.channelId)).child("markBody").setValue(false);
+                    channelActivity.postsNumber++;
+                    rPostsList.smoothScrollToPosition(posts.size());
+                }
                 tEditPost.setVisibility(View.GONE);
                 postEdit = null;
             }

@@ -1,9 +1,14 @@
 package com.ecost.specter.channel;
 
+import static com.ecost.specter.Routing.authId;
 import static com.ecost.specter.Routing.authUserName;
 import static com.ecost.specter.Routing.myDB;
 
 import android.annotation.SuppressLint;
+import android.app.AlertDialog;
+import android.content.ClipData;
+import android.content.ClipboardManager;
+import android.content.Context;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -51,7 +56,29 @@ public class CommentsFragment extends Fragment {
         bSendComment = inflaterView.findViewById(R.id.button_send);
         channelActivity = (ChannelActivity) requireActivity();
 
-        PostsAdapter.OnPostLongClickListener postLongClickListener = (post, position) -> true;
+        PostsAdapter.OnPostLongClickListener postLongClickListener = (comment, position) -> {
+            CharSequence[] items = comment.senderId == authId ? new String[]{getString(R.string.channel_alert_dialog_item_edit), getString(R.string.channel_alert_dialog_item_copy), getString(R.string.channel_alert_dialog_item_delete)} : new String[]{getString(R.string.channel_alert_dialog_item_copy)};
+            AlertDialog.Builder builder = new AlertDialog.Builder(inflater.getContext());
+
+            builder.setItems(items, (dialog, item) -> {
+                if (items[item].equals(getString(R.string.channel_alert_dialog_item_edit))) {
+                    commentEdit = comment;
+                    tEditComment.setVisibility(View.VISIBLE);
+                    eComment.setText(comment.context);
+                } else if (items[item].equals(getString(R.string.channel_alert_dialog_item_copy))) ((ClipboardManager) inflater.getContext().getSystemService(Context.CLIPBOARD_SERVICE)).setPrimaryClip(ClipData.newPlainText("comment", comment.context));
+                else if (items[item].equals(getString(R.string.channel_alert_dialog_item_delete))) {
+                    comments.remove(comment.id);
+                    myDB.child("specter").child("channels").child(String.valueOf(channelActivity.channelId)).child("posts").child(String.valueOf(channelActivity.postId)).child("comments").setValue(comments.size() == 0 ? null : comments);
+                    for (int i = 0; i < comments.size(); i++) {
+                        comments.get(i).id = i;
+                        myDB.child("specter").child("channels").child(String.valueOf(channelActivity.channelId)).child("posts").child(String.valueOf(channelActivity.postId)).child("comments").child(String.valueOf(i)).setValue(comments.get(i));
+                    }
+                }
+            }).create().show();
+
+            return true;
+        };
+
         rCommentsList.setLayoutManager(new LinearLayoutManager(channelActivity));
         postsAdapter = new PostsAdapter(channelActivity, comments, postLongClickListener);
         rCommentsList.setAdapter(postsAdapter);
@@ -73,7 +100,13 @@ public class CommentsFragment extends Fragment {
                 postsAdapter.notifyDataSetChanged();
             }
 
-            @Override public void onChildRemoved(@NonNull DataSnapshot dataSnapshot) {}
+            @Override
+            public void onChildRemoved(@NonNull DataSnapshot dataSnapshot) {
+                Post comment = Objects.requireNonNull(dataSnapshot.getValue(Post.class));
+                if (comment.senderId != authId) comments.set(Integer.parseInt(Objects.requireNonNull(dataSnapshot.getKey())), comment);
+                postsAdapter.notifyDataSetChanged();
+            }
+
             @Override public void onChildMoved(@NonNull DataSnapshot dataSnapshot, String previousChildName) {}
             @Override public void onCancelled(@NonNull DatabaseError databaseError) {}
         };
@@ -86,7 +119,7 @@ public class CommentsFragment extends Fragment {
             if (!text.equals("")) {
                 if (commentEdit != null) commentEdit.context = text;
                 if (commentEdit == null) rCommentsList.smoothScrollToPosition(comments.size());
-                myDB.child("specter").child("channels").child(String.valueOf(channelActivity.channelId)).child("posts").child(String.valueOf(channelActivity.postId)).child("comments").child(String.valueOf(commentEdit != null ? commentEdit.id : comments.size())).setValue(commentEdit != null ? commentEdit : new Post(comments.size(), authUserName, "15:23", text));
+                myDB.child("specter").child("channels").child(String.valueOf(channelActivity.channelId)).child("posts").child(String.valueOf(channelActivity.postId)).child("comments").child(String.valueOf(commentEdit != null ? commentEdit.id : comments.size())).setValue(commentEdit != null ? commentEdit : new Post(comments.size(), authId, authUserName, "15:23", text));
                 tEditComment.setVisibility(View.GONE);
                 commentEdit = null;
             }
