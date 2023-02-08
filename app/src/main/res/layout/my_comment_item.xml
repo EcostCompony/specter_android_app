@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:clipToPadding="false"
+    android:paddingVertical="3.5dp"
+    android:paddingStart="90dp"
+    android:paddingEnd="16dp">
+
+    <FrameLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="end"
+        android:minWidth="125dp"
+        android:background="@drawable/my_comment_background"
+        tools:ignore="UselessParent">
+
+        <TextView
+            android:id="@+id/post_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginVertical="7dp"
+            android:layout_marginStart="14dp"
+            android:layout_marginEnd="5dp"
+            android:textColor="@color/white"
+            android:fontFamily="@font/manrope_medium"
+            android:textSize="13sp"
+            tools:text="message..." />
+
+        <TextView
+            android:id="@+id/post_time"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="end|bottom"
+            android:layout_marginEnd="16dp"
+            android:layout_marginBottom="4dp"
+            android:fontFamily="@font/inter_regular"
+            android:textColor="@color/my_comment_time_color"
+            android:textSize="10sp"
+            tools:ignore="SmallSp"
+            tools:text="15:24" />
+    </FrameLayout>
+</FrameLayout>

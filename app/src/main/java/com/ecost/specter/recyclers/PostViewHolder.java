@@ -18,5 +18,4 @@ public class PostViewHolder extends RecyclerView.ViewHolder {
         time = itemView.findViewById(R.id.post_time);
     }
 
-
 }

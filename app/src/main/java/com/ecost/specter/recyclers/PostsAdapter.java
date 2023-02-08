@@ -1,9 +1,10 @@
 package com.ecost.specter.recyclers;
 
+import static com.ecost.specter.Routing.authId;
+
 import android.annotation.SuppressLint;
 import android.content.Context;
 import android.view.LayoutInflater;
-import android.view.View;
 import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
@@ -30,18 +31,23 @@ public class PostsAdapter extends RecyclerView.Adapter<PostViewHolder> {
         this.onLongClickListener = onLongClickListener;
     }
 
+    @Override
+    public int getItemViewType(int position) {
+        if (posts.get(position).senderId == authId) return R.layout.my_comment_item;
+        return R.layout.post_item;
+    }
+
     @NonNull
     @Override
     public PostViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view = inflater.inflate(R.layout.post_item, parent, false);
-        return new PostViewHolder(view);
+        return new PostViewHolder(inflater.inflate(viewType, parent, false));
     }
 
     @Override
     public void onBindViewHolder(@NonNull PostViewHolder holder, @SuppressLint("RecyclerView") int position) {
         Post post = posts.get(position);
         holder.text.setText(post.context);
-        holder.author.setText(post.author);
+        if (holder.author != null) holder.author.setText(post.author);
         holder.time.setText(post.time);
         holder.itemView.setOnLongClickListener(v -> onLongClickListener.onPostLongClick(post, position));
     }
