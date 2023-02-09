@@ -99,8 +99,8 @@ public class ChannelFragment extends Fragment {
                     ePost.setText(post.context);
                 } else if (items[item].equals(getString(R.string.channel_alert_dialog_item_copy))) ((ClipboardManager) inflater.getContext().getSystemService(Context.CLIPBOARD_SERVICE)).setPrimaryClip(ClipData.newPlainText("post", post.context));
                 else if (items[item].equals(getString(R.string.channel_alert_dialog_item_delete))) {
-                    myDB.child("specter").child("channels").child(String.valueOf(channelActivity.channelId)).child("body").setValue(posts.size() == 0 ? "%NOT_POSTS%" : posts.get(posts.size() - 1).context);
-                    myDB.child("specter").child("channels").child(String.valueOf(channelActivity.channelId)).child("markBody").setValue(posts.size() == 0);
+                    myDB.child("specter").child("channels").child(String.valueOf(channelActivity.channelId)).child("body").setValue(posts.size() - 1 == 0 ? "%NOT_POSTS%" : (posts.get(posts.size() - 1).id == post.id ? posts.get(posts.size() - 2).context : posts.get(posts.size() - 1).context));
+                    myDB.child("specter").child("channels").child(String.valueOf(channelActivity.channelId)).child("markBody").setValue(posts.size() - 1 == 0);
                     myDB.child("specter").child("channels").child(String.valueOf(channelActivity.channelId)).child("posts").child(String.valueOf(post.id)).setValue(null);
                 }
             }).create().show();
