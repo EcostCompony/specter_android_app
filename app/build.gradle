@@ -11,8 +11,8 @@ android {
         applicationId "com.ecost.specter"
         minSdkVersion 23
         targetSdkVersion 33
-        versionCode 84
-        versionName "Pre-Alpha 84"
+        versionCode 85
+        versionName "Pre-Alpha 85"
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
@@ -34,7 +34,7 @@ android {
 }
 
 dependencies {
-    implementation 'androidx.appcompat:appcompat:1.6.0'
+    implementation 'androidx.appcompat:appcompat:1.6.1'
     implementation 'com.google.android.material:material:1.8.0'
     implementation platform('com.google.firebase:firebase-bom:31.1.1')
     implementation 'com.google.firebase:firebase-database'
