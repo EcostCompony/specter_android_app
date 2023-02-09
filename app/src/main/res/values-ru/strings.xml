@@ -103,6 +103,14 @@
     <!-- channel context menu items -->
     <string name="channel_context_menu_item_send_without_name">Отправить без имени</string>
 
+    <!-- comments -->
+    <string name="channel_text_edit_comment">Редактировать комментарий</string>
+
+    <!-- comments alert dialog items -->
+    <string name="comments_alert_dialog_item_edit">Редактировать комментарий</string>
+    <string name="comments_alert_dialog_item_copy">Копировать текст</string>
+    <string name="comments_alert_dialog_item_delete">Удалить комментарий</string>
+
     <!-- channel settings -->
     <string name="channel_settings_parameter_header_title">Название</string>
     <string name="channel_settings_parameter_header_short_channel_link">Короткая ссылка</string>
@@ -115,5 +123,4 @@
     <string name="channel_item_content_description_channel_photo">Фото канала</string>
     <string name="channel_settings_button_content_description_save_channel_title">Сохранить название канала</string>
     <string name="channel_settings_button_content_description_save_short_channel_link">Сохранить короткую ссылку канала</string>
-    <string name="channel_text_edit_comment">Редактировать комментарий</string>
 </resources>

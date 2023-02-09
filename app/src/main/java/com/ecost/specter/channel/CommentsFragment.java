@@ -14,7 +14,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
-import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -29,8 +28,6 @@ import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 
-import org.w3c.dom.Text;
-
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
@@ -40,7 +37,6 @@ public class CommentsFragment extends Fragment {
     RecyclerView rCommentsList;
     TextView tEditComment;
     EditText eComment;
-    LinearLayout bSendComment;
     PostsAdapter postsAdapter;
     List<Post> comments = new ArrayList<>();
     Post commentEdit;
@@ -53,11 +49,10 @@ public class CommentsFragment extends Fragment {
         rCommentsList = inflaterView.findViewById(R.id.recycler_comments_list);
         tEditComment = inflaterView.findViewById(R.id.edit_comment);
         eComment = inflaterView.findViewById(R.id.input_comment);
-        bSendComment = inflaterView.findViewById(R.id.button_send);
         channelActivity = (ChannelActivity) requireActivity();
 
         PostsAdapter.OnPostLongClickListener postLongClickListener = (comment, position) -> {
-            CharSequence[] items = comment.senderId == authId ? new String[]{getString(R.string.channel_alert_dialog_item_edit), getString(R.string.channel_alert_dialog_item_copy), getString(R.string.channel_alert_dialog_item_delete)} : new String[]{getString(R.string.channel_alert_dialog_item_copy)};
+            CharSequence[] items = comment.senderId == authId ? new String[]{getString(R.string.comments_alert_dialog_item_edit), getString(R.string.comments_alert_dialog_item_copy), getString(R.string.comments_alert_dialog_item_delete)} : new String[]{getString(R.string.comments_alert_dialog_item_copy)};
             AlertDialog.Builder builder = new AlertDialog.Builder(inflater.getContext());
 
             builder.setItems(items, (dialog, item) -> {
@@ -78,7 +73,6 @@ public class CommentsFragment extends Fragment {
 
             return true;
         };
-
         rCommentsList.setLayoutManager(new LinearLayoutManager(channelActivity));
         postsAdapter = new PostsAdapter(channelActivity, comments, postLongClickListener);
         rCommentsList.setAdapter(postsAdapter);
@@ -102,8 +96,7 @@ public class CommentsFragment extends Fragment {
 
             @Override
             public void onChildRemoved(@NonNull DataSnapshot dataSnapshot) {
-                Post comment = Objects.requireNonNull(dataSnapshot.getValue(Post.class));
-                if (comment.senderId != authId) comments.set(Integer.parseInt(Objects.requireNonNull(dataSnapshot.getKey())), comment);
+                if (Objects.requireNonNull(dataSnapshot.getValue(Post.class)).senderId != authId) comments.remove(Integer.parseInt(Objects.requireNonNull(dataSnapshot.getKey())));
                 postsAdapter.notifyDataSetChanged();
             }
 
@@ -114,7 +107,7 @@ public class CommentsFragment extends Fragment {
 
         inflaterView.findViewById(R.id.button_close).setOnClickListener(view -> channelActivity.getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container_view, new ChannelFragment()).commit());
 
-        bSendComment.setOnClickListener(view -> {
+        inflaterView.findViewById(R.id.button_send).setOnClickListener(view -> {
             String text = eComment.getText().toString().trim();
             if (!text.equals("")) {
                 if (commentEdit != null) commentEdit.context = text;

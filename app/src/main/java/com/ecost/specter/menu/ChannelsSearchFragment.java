@@ -70,6 +70,7 @@ public class ChannelsSearchFragment extends Fragment {
             Intent intent = new Intent(mainMenuActivity, ChannelActivity.class);
             intent.putExtra("CHANNEL_ID", channel.id);
             intent.putExtra("CHANNEL_ADMINS", channel.author);
+            intent.putExtra("CHANNEL_POSTS_NUMBER", channel.postsNumber);
             intent.putExtra("CHANNEL_TITLE", channel.title);
             intent.putExtra("CHANNEL_SHORT_LINK", String.valueOf(channel.shortLink));
             intent.putExtra("USER_SUBSCRIBE", false);

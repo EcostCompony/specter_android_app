@@ -121,6 +121,7 @@
     <string name="channel_alert_dialog_item_comments">Комментарии</string>
     <string name="comments_header">Комментарии</string>
     <string name="channel_text_edit_comment">Редактировать комментарий</string>
-
-    <!-- TODO: sort (do not delete the comment) -->
+    <string name="comments_alert_dialog_item_edit">Редактировать комментарий</string>
+    <string name="comments_alert_dialog_item_copy">Копировать текст</string>
+    <string name="comments_alert_dialog_item_delete">Удалить комментарий</string>
 </resources>
