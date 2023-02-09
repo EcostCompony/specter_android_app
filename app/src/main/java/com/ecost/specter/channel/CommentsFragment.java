@@ -52,7 +52,7 @@ public class CommentsFragment extends Fragment {
         channelActivity = (ChannelActivity) requireActivity();
 
         PostsAdapter.OnPostLongClickListener postLongClickListener = (comment, position) -> {
-            CharSequence[] items = comment.senderId == authId ? new String[]{getString(R.string.comments_alert_dialog_item_edit), getString(R.string.comments_alert_dialog_item_copy), getString(R.string.comments_alert_dialog_item_delete)} : new String[]{getString(R.string.comments_alert_dialog_item_copy)};
+            CharSequence[] items = comment.senderId == authId ? new String[]{getString(R.string.comments_alert_dialog_item_edit), getString(R.string.comments_alert_dialog_item_copy), getString(R.string.comments_alert_dialog_item_delete)} : (channelActivity.channelAdmin.equals(authId) ? new String[]{getString(R.string.comments_alert_dialog_item_copy), getString(R.string.comments_alert_dialog_item_delete)} : new String[]{getString(R.string.comments_alert_dialog_item_copy)});
             AlertDialog.Builder builder = new AlertDialog.Builder(inflater.getContext());
 
             builder.setItems(items, (dialog, item) -> {
@@ -96,7 +96,7 @@ public class CommentsFragment extends Fragment {
 
             @Override
             public void onChildRemoved(@NonNull DataSnapshot dataSnapshot) {
-                if (Objects.requireNonNull(dataSnapshot.getValue(Post.class)).senderId != authId) comments.remove(Integer.parseInt(Objects.requireNonNull(dataSnapshot.getKey())));
+                if (Objects.requireNonNull(dataSnapshot.getValue(Post.class)).senderId != authId && !channelActivity.channelAdmin.equals(authId)) comments.remove(Integer.parseInt(Objects.requireNonNull(dataSnapshot.getKey())));
                 postsAdapter.notifyDataSetChanged();
             }
 
