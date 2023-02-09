@@ -56,12 +56,12 @@ public class CommentsFragment extends Fragment {
             AlertDialog.Builder builder = new AlertDialog.Builder(inflater.getContext());
 
             builder.setItems(items, (dialog, item) -> {
-                if (items[item].equals(getString(R.string.channel_alert_dialog_item_edit))) {
+                if (items[item].equals(getString(R.string.comments_alert_dialog_item_edit))) {
                     commentEdit = comment;
                     tEditComment.setVisibility(View.VISIBLE);
                     eComment.setText(comment.context);
-                } else if (items[item].equals(getString(R.string.channel_alert_dialog_item_copy))) ((ClipboardManager) inflater.getContext().getSystemService(Context.CLIPBOARD_SERVICE)).setPrimaryClip(ClipData.newPlainText("comment", comment.context));
-                else if (items[item].equals(getString(R.string.channel_alert_dialog_item_delete))) {
+                } else if (items[item].equals(getString(R.string.comments_alert_dialog_item_copy))) ((ClipboardManager) inflater.getContext().getSystemService(Context.CLIPBOARD_SERVICE)).setPrimaryClip(ClipData.newPlainText("comment", comment.context));
+                else if (items[item].equals(getString(R.string.comments_alert_dialog_item_delete))) {
                     comments.remove(comment.id);
                     myDB.child("specter").child("channels").child(String.valueOf(channelActivity.channelId)).child("posts").child(String.valueOf(channelActivity.postId)).child("comments").setValue(comments.size() == 0 ? null : comments);
                     for (int i = 0; i < comments.size(); i++) {
