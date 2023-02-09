@@ -12,7 +12,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="end"
-        android:minWidth="140dp"
+        android:minWidth="90dp"
         android:background="@drawable/my_comment_background"
         tools:ignore="UselessParent">
 
@@ -22,11 +22,11 @@
             android:layout_height="wrap_content"
             android:layout_marginVertical="7dp"
             android:layout_marginStart="14dp"
-            android:layout_marginEnd="5dp"
+            android:layout_marginEnd="50dp"
             android:textColor="@color/white"
             android:fontFamily="@font/manrope_medium"
             android:textSize="13sp"
-            tools:text="message..." />
+            tools:text="ф" />
 
         <TextView
             android:id="@+id/post_time"
