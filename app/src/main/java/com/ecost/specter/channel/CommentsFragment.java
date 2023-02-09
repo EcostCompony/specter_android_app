@@ -13,6 +13,7 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
 import android.widget.TextView;
 
@@ -51,6 +52,8 @@ public class CommentsFragment extends Fragment {
         eComment = inflaterView.findViewById(R.id.input_comment);
         channelActivity = (ChannelActivity) requireActivity();
 
+        inflaterView.postDelayed(() -> rCommentsList.scrollToPosition(comments.size() - 1), 50);
+
         PostsAdapter.OnPostLongClickListener postLongClickListener = (comment, position) -> {
             CharSequence[] items = comment.senderId == authId ? new String[]{getString(R.string.comments_alert_dialog_item_edit), getString(R.string.comments_alert_dialog_item_copy), getString(R.string.comments_alert_dialog_item_delete)} : (channelActivity.channelAdmin.equals(authId) ? new String[]{getString(R.string.comments_alert_dialog_item_copy), getString(R.string.comments_alert_dialog_item_delete)} : new String[]{getString(R.string.comments_alert_dialog_item_copy)});
             AlertDialog.Builder builder = new AlertDialog.Builder(inflater.getContext());
@@ -81,11 +84,8 @@ public class CommentsFragment extends Fragment {
         ChildEventListener childEventListener = new ChildEventListener() {
             @Override
             public void onChildAdded(@NonNull DataSnapshot dataSnapshot, String previousChildName) {
-                Post comment = Objects.requireNonNull(dataSnapshot.getValue(Post.class));
-                if (Objects.equals(comment.author, "%CHANNEL_TITLE%")) comment.author = channelActivity.channelTitle;
-                comments.add(comment);
+                comments.add(Objects.requireNonNull(dataSnapshot.getValue(Post.class)));
                 postsAdapter.notifyDataSetChanged();
-                rCommentsList.smoothScrollToPosition(comments.size());
             }
 
             @Override
@@ -96,8 +96,9 @@ public class CommentsFragment extends Fragment {
 
             @Override
             public void onChildRemoved(@NonNull DataSnapshot dataSnapshot) {
-                if (Objects.requireNonNull(dataSnapshot.getValue(Post.class)).senderId != authId && !channelActivity.channelAdmin.equals(authId)) comments.remove(Integer.parseInt(Objects.requireNonNull(dataSnapshot.getKey())));
-                postsAdapter.notifyDataSetChanged();
+                comments.clear();
+                myDB.child("specter").child("channels").child(String.valueOf(channelActivity.channelId)).child("posts").child(String.valueOf(channelActivity.postId)).child("comments").removeEventListener(this);
+                myDB.child("specter").child("channels").child(String.valueOf(channelActivity.channelId)).child("posts").child(String.valueOf(channelActivity.postId)).child("comments").addChildEventListener(this);
             }
 
             @Override public void onChildMoved(@NonNull DataSnapshot dataSnapshot, String previousChildName) {}
