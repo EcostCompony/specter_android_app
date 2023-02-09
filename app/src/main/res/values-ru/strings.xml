@@ -34,17 +34,17 @@
     <string name="phone_number_sign_up_error_already_phone_number">Аккаунт с таким номером уже есть</string>
     <string name="password_sign_up_error_not_password">Ой, чтобы зарегистрироваться, стоит придумать пароль</string>
     <string name="password_sign_up_error_not_confirm_password">Ой, чтобы зарегистрироваться, стоит повторить пароль</string>
-    <string name="password_sign_up_error_short_password">Его же взламают… Придумайте пароль, содержащий более 7 символов</string>
+    <string name="password_sign_up_error_short_password">Его же взломают… Придумайте пароль, содержащий более 7 символов</string>
     <string name="password_sign_up_error_wrong_confirm_password">Что-то не так! Ваши пароли не похожи друг на друга</string>
     <string name="create_channel_menu_error_not_title">Ой, чтобы создать канал, стоит придумать название для него</string>
     <string name="create_channel_menu_error_not_short_channel_link">Ой, чтобы создать канал, стоит придумать короткую ссылку для него</string>
     <string name="create_channel_menu_error_small_short_channel_link">Придумайте короткую ссылку, содержащую более 3 символов</string>
     <string name="create_channel_menu_error_busy_short_channel_link">Короткая ссылка должна быть уникальной! Кто-то уже её занял =(</string>
-    <string name="settings_menu_error_not_name">Имя должно содержать хотябы 1 символ</string>
+    <string name="settings_menu_error_not_name">Имя должно содержать хотя бы 1 символ</string>
     <string name="settings_menu_error_not_short_user_link">Короткая ссылка должна содержать более 3 символов</string>
     <string name="settings_menu_error_small_short_user_link">Придумайте короткую ссылку, содержащую более 3 символов</string>
     <string name="settings_menu_error_busy_short_user_link">Короткая ссылка должна быть уникальной! Кто-то уже её занял =(</string>
-    <string name="channel_settings_error_not_channel_title">Название должно содержать хотябы 1 символ</string>
+    <string name="channel_settings_error_not_channel_title">Название должно содержать хотя бы 1 символ</string>
     <string name="channel_settings_error_not_short_channel_title">Короткая ссылка должна содержать более 3 символов</string>
     <string name="channel_settings_error_small_short_channel_link">Придумайте короткую ссылку, содержащую более 3 символов</string>
     <string name="channel_settings_error_busy_short_channel_link">Короткая ссылка должна быть уникальной! Кто-то уже её занял =(</string>
