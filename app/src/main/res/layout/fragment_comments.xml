@@ -78,7 +78,7 @@
                 android:textColorHint="@color/channel_input_post_color_hint"
                 android:fontFamily="@font/inter_medium"
                 android:textSize="12sp"
-                android:hint="@string/channel_input_hint_post" />
+                android:hint="@string/comments_input_hint_comment" />
 
             <LinearLayout
                 android:id="@+id/button_send"

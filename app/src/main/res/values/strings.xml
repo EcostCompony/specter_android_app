@@ -37,22 +37,22 @@
     <string name="sign_in_error_wrong_password">You have entered the wrong password =( </string>
     <string name="phone_number_sign_up_error_not_username">Oops… You need to enter your phone number to sign up</string>
     <string name="phone_number_sign_up_error_already_phone_number">There\'s already an account linked to this phone number</string>
-    <string name="password_sign_up_error_not_password">Ой, чтобы зарегистрироваться, стоит придумать пароль</string>
-    <string name="password_sign_up_error_not_confirm_password">Ой, чтобы зарегистрироваться, стоит повторить пароль</string>
+    <string name="password_sign_up_error_not_password">Oops… You need to come up with your password to register</string>
+    <string name="password_sign_up_error_not_confirm_password">Oops… You need to confirm with your password to register</string>
     <string name="password_sign_up_error_short_password">The password is too weak… Try more than 7 characters and we\'re good</string>
     <string name="password_sign_up_error_wrong_confirm_password">Something\'s wrong! These passwords don\'t look alike</string>
     <string name="create_channel_menu_error_not_title">You need to come up with a name for your channel</string>
     <string name="create_channel_menu_error_not_short_channel_link">You need to enter a short link</string>
-    <string name="create_channel_menu_error_small_short_channel_link">The link must contain more than 3 characters</string>
+    <string name="create_channel_menu_error_small_short_channel_link">The short link must contain more than 3 characters</string>
     <string name="create_channel_menu_error_busy_short_channel_link">The link is already taken =(</string>
     <string name="settings_menu_error_not_name">You can\'t be unnamed in our area</string>
-    <string name="settings_menu_error_not_short_user_link">Короткая ссылка должна содержать более 3 символов</string>
-    <string name="settings_menu_error_small_short_user_link">Придумайте короткую ссылку, содержащую более 3 символов</string>
-    <string name="settings_menu_error_busy_short_user_link">Короткая ссылка должна быть уникальной! Кто-то уже её занял =(</string>
-    <string name="channel_settings_error_not_channel_title">Название должно содержать хотябы 1 символ</string>
-    <string name="channel_settings_error_not_short_channel_title">Короткая ссылка должна содержать более 3 символов</string>
-    <string name="channel_settings_error_small_short_channel_link">Придумайте короткую ссылку, содержащую более 3 символов</string>
-    <string name="channel_settings_error_busy_short_channel_link">Короткая ссылка должна быть уникальной! Кто-то уже её занял =(</string>
+    <string name="settings_menu_error_not_short_user_link">The short link must contain more than 3 characters</string>
+    <string name="settings_menu_error_small_short_user_link">Come up with a short link containing more than 3 characters</string>
+    <string name="settings_menu_error_busy_short_user_link">It looks like this short link is already taken =(</string>
+    <string name="channel_settings_error_not_channel_title">Channel name must contain at least 1 character</string>
+    <string name="channel_settings_error_not_short_channel_title">The short link must contain more than 3 characters</string>
+    <string name="channel_settings_error_small_short_channel_link">Come up with a short link containing more than 3 characters</string>
+    <string name="channel_settings_error_busy_short_channel_link">It looks like this short link is already taken =(</string>
 
     <!-- sign in -->
     <string name="sign_in_input_hint_phone_number">Phone number</string>
@@ -61,71 +61,72 @@
     <string name="sign_in_button_sign_up">Sign up</string>
 
     <!-- phone number sign up -->
-    <string name="phone_number_sign_up_input_hint_phone_number">Номер телефона</string>
-    <string name="phone_number_sign_up_button_continue">Продолжить</string>
+    <string name="phone_number_sign_up_input_hint_phone_number">Phone number</string>
+    <string name="phone_number_sign_up_button_continue">Continue</string>
 
     <!-- password sign up -->
-    <string name="password_sign_up_input_hint_password">Пароль</string>
-    <string name="password_sign_up_input_hint_confirm_password">Подтверждение пароля</string>
-    <string name="password_sign_up_button_sign_up">Зарегистрироваться</string>
+    <string name="password_sign_up_input_hint_password">Password</string>
+    <string name="password_sign_up_input_hint_confirm_password">Confirm password</string>
+    <string name="password_sign_up_button_sign_up">Sign up</string>
 
     <!-- specter auth -->
-    <string name="specter_start_parameter_header_name">Имя</string>
-    <string name="specter_start_parameter_header_short_user_link">Короткая ссылка</string>
-    <string name="specter_start_button_start">Начать</string>
+    <string name="specter_start_parameter_header_name">Name</string>
+    <string name="specter_start_parameter_header_short_user_link">Short link</string>
+    <string name="specter_start_button_start">Start</string>
 
     <!-- toolbar items -->
-    <string name="toolbar_item_search">Найти канал</string>
+    <string name="toolbar_item_search">Search channels</string>
 
     <!-- drawer items -->
-    <string name="drawer_item_create_channel">Создать канал</string>
-    <string name="drawer_item_settings">Настройки</string>
+    <string name="drawer_item_create_channel">Create a channel</string>
+    <string name="drawer_item_settings">Settings</string>
 
     <!-- channels search -->
-    <string name="channels_search_input_channel_title_hint">Название канала</string>
+    <string name="channels_search_input_channel_title_hint">Channel name</string>
 
     <!-- create channel menu -->
-    <string name="create_channel_menu_parameter_header_title">Название</string>
-    <string name="create_channel_menu_parameter_header_short_channel_link">Короткая ссылка</string>
-    <string name="create_channel_menu_button_create_channel">Создать канал</string>
+    <string name="create_channel_menu_parameter_header_title">Channel name</string>
+    <string name="create_channel_menu_parameter_header_short_channel_link">Short link</string>
+    <string name="create_channel_menu_button_create_channel">Create</string>
 
     <!-- settings menu -->
-    <string name="settings_menu_parameter_header_name">Имя</string>
-    <string name="settings_menu_parameter_header_short_user_link">Короткая ссылка</string>
+    <string name="settings_menu_parameter_header_name">Name</string>
+    <string name="settings_menu_parameter_header_short_user_link">Short link</string>
     <string name="settings_menu_button_sign_out">Log out</string>
 
     <!-- channel -->
-    <string name="channel_button_subscribe">Подписаться</string>
-    <string name="channel_text_edit_post">Редактирование поста</string>
-    <string name="channel_input_hint_post">Введите текст…</string>
+    <string name="channel_button_subscribe">Subscribe</string>
+    <string name="channel_text_edit_post">Edit post</string>
+    <string name="channel_input_hint_post">Broadcast</string>
 
     <!-- channel alert dialog items -->
-    <string name="channel_alert_dialog_item_comments">Комментарии</string>
-    <string name="channel_alert_dialog_item_edit">Редактировать пост</string>
-    <string name="channel_alert_dialog_item_copy">Копировать текст</string>
-    <string name="channel_alert_dialog_item_delete">Удалить пост</string>
+    <string name="channel_alert_dialog_item_comments">Comments</string>
+    <string name="channel_alert_dialog_item_edit">Edit</string>
+    <string name="channel_alert_dialog_item_copy">Copy</string>
+    <string name="channel_alert_dialog_item_delete">Delete</string>
 
     <!-- channel context menu items -->
-    <string name="channel_context_menu_item_send_without_name">Отправить без имени</string>
+    <string name="channel_context_menu_item_send_without_name">Send anonymously</string>
 
     <!-- comments -->
-    <string name="channel_text_edit_comment">Редактировать комментарий</string>
+    <string name="channel_text_edit_comment">Edit comment</string>
+    <string name="comments_input_hint_comment">Write a comment</string>
 
     <!-- comments alert dialog items -->
-    <string name="comments_alert_dialog_item_edit">Редактировать комментарий</string>
-    <string name="comments_alert_dialog_item_copy">Копировать текст</string>
-    <string name="comments_alert_dialog_item_delete">Удалить комментарий</string>
+    <string name="comments_alert_dialog_item_edit">Edit</string>
+    <string name="comments_alert_dialog_item_copy">Copy</string>
+    <string name="comments_alert_dialog_item_delete">Delete</string>
 
     <!-- channel settings -->
-    <string name="channel_settings_parameter_header_title">Название</string>
-    <string name="channel_settings_parameter_header_short_channel_link">Короткая ссылка</string>
-    <string name="channel_settings_button_delete_channel">Удалить канал</string>
+    <string name="channel_settings_parameter_header_title">Channel name</string>
+    <string name="channel_settings_parameter_header_short_channel_link">Short link</string>
+    <string name="channel_settings_button_delete_channel">Delete channel</string>
 
     <!-- content descriptions -->
-    <string name="main_menu_button_content_description_close">Закрыть</string>
-    <string name="settings_menu_content_description_save_user_name">Сохранить имя</string>
-    <string name="settings_menu_button_content_description_save_short_user_link">Сохранить короткую ссылку пользователя</string>
+    <string name="main_menu_button_content_description_close">Close</string>
+    <string name="settings_menu_content_description_save_user_name">Save name</string>
+    <string name="settings_menu_button_content_description_save_short_user_link">Save short link</string>
     <string name="channel_item_content_description_channel_photo">Channel photo</string>
-    <string name="channel_settings_button_content_description_save_channel_title">Сохранить название канала</string>
-    <string name="channel_settings_button_content_description_save_short_channel_link">Сохранить короткую ссылку канала</string>
+    <string name="channel_settings_button_content_description_save_channel_title">Save channel name</string>
+    <string name="channel_settings_button_content_description_save_short_channel_link">Save short link</string>
 </resources>
