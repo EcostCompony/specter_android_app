@@ -51,11 +51,10 @@ public class Routing extends AppCompatActivity {
         authShortUserLink = PreferenceManager.getDefaultSharedPreferences(this).getString("SHORT_USER_LINK", null);
         appLanguage = PreferenceManager.getDefaultSharedPreferences(this).getString("LANGUAGE", null);
 
-        if (appLanguage == null) pushPreferenceLanguage(this, getResources().getStringArray(R.array.setting_array_language)[1]);
-
         myDB.child("specter").child("support_version").get().addOnCompleteListener(taskSupportVersion ->
             myDB.child("specter").child("users").child(String.valueOf(authId)).get().addOnCompleteListener(taskTestUser ->
                 myDB.child("specter").child("users").child(String.valueOf(authId)).child("app_version").get().addOnCompleteListener(taskUserVersion -> {
+                    if (appLanguage == null) pushPreferenceLanguage(this, getResources().getStringArray(R.array.setting_array_language)[Locale.getDefault().getLanguage().equals("ru") ? 0 : 1]);
                     if (Objects.equals(appLanguage, getResources().getStringArray(R.array.setting_array_language)[0])) changeLocale(this, new Locale("ru"));
                     else changeLocale(this, new Locale("en"));
                     if (Integer.parseInt(String.valueOf(taskSupportVersion.getResult().getValue())) > VERSION_CODE) startActivity(new Intent(this, OldVersionActivity.class));
