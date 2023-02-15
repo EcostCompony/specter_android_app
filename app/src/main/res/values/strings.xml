@@ -92,6 +92,11 @@
     <!-- settings menu -->
     <string name="settings_menu_parameter_header_name">Name</string>
     <string name="settings_menu_parameter_header_short_user_link">Short link</string>
+    <string name="settings_menu_parameter_header_language">Язык</string>
+    <string-array name="setting_array_language">
+        <item>Русский</item>
+        <item>Английский</item>
+    </string-array>
     <string name="settings_menu_button_sign_out">Log out</string>
 
     <!-- channel -->

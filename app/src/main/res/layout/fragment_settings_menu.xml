@@ -120,11 +120,11 @@
             <TextView
                 android:layout_width="25dp"
                 android:layout_height="match_parent"
-                android:gravity="center_vertical|end"
-                android:textColor="@color/main_color"
                 android:fontFamily="@font/inter_semi_bold"
-                android:textSize="12sp"
-                android:text="@string/symbol_at" />
+                android:gravity="center_vertical|end"
+                android:text="@string/symbol_at"
+                android:textColor="@color/main_color"
+                android:textSize="12sp" />
         </RelativeLayout>
 
         <ImageButton
@@ -137,6 +137,37 @@
             android:visibility="gone"
             android:contentDescription="@string/settings_menu_button_content_description_save_short_user_link" />
     </LinearLayout>
+
+    <TextView
+        android:layout_width="340dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:paddingHorizontal="13dp"
+        android:textColor="@color/parameters_header"
+        android:fontFamily="@font/inter_semi_bold"
+        android:textSize="12sp"
+        android:text="@string/settings_menu_parameter_header_language" />
+
+    <FrameLayout
+        android:layout_width="340dp"
+        android:layout_height="38dp"
+        android:layout_marginTop="4dp">
+
+        <Spinner
+            android:id="@+id/spinner_language"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@drawable/input"
+            android:paddingHorizontal="13dp" />
+
+        <ImageView
+            android:id="@+id/imageView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="18dp"
+            android:layout_gravity="end|center_vertical"
+            android:src="@drawable/icon_arrow_down" />
+    </FrameLayout>
 
     <Button
         android:id="@+id/button_sign_out"

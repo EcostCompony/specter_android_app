@@ -87,6 +87,11 @@
     <!-- settings menu -->
     <string name="settings_menu_parameter_header_name">Имя</string>
     <string name="settings_menu_parameter_header_short_user_link">Короткая ссылка</string>
+    <string name="settings_menu_parameter_header_language">Язык</string>
+    <string-array name="setting_array_language">
+        <item>Русский</item>
+        <item>Английский</item>
+    </string-array>
     <string name="settings_menu_button_sign_out">Выйти из аккаунта</string>
 
     <!-- channel -->

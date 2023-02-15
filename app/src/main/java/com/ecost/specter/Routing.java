@@ -6,6 +6,7 @@ import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
+import android.content.res.Configuration;
 import android.os.Build;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
@@ -24,12 +25,15 @@ import com.ecost.specter.menu.MainMenuActivity;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
+import java.util.Locale;
+import java.util.Objects;
+
 public class Routing extends AppCompatActivity {
 
     public static final DatabaseReference myDB = FirebaseDatabase.getInstance().getReference();
     public static boolean auth;
     public static Integer authId, authEcostId;
-    public static String authUserName, authShortUserLink;
+    public static String authUserName, authShortUserLink, appLanguage;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -45,10 +49,15 @@ public class Routing extends AppCompatActivity {
         authEcostId = PreferenceManager.getDefaultSharedPreferences(this).getInt("ECOST_ID", 0);
         authUserName = PreferenceManager.getDefaultSharedPreferences(this).getString("USER_NAME", null);
         authShortUserLink = PreferenceManager.getDefaultSharedPreferences(this).getString("SHORT_USER_LINK", null);
+        appLanguage = PreferenceManager.getDefaultSharedPreferences(this).getString("LANGUAGE", null);
+
+        if (appLanguage == null) pushPreferenceLanguage(this, getResources().getStringArray(R.array.setting_array_language)[1]);
 
         myDB.child("specter").child("support_version").get().addOnCompleteListener(taskSupportVersion ->
             myDB.child("specter").child("users").child(String.valueOf(authId)).get().addOnCompleteListener(taskTestUser ->
                 myDB.child("specter").child("users").child(String.valueOf(authId)).child("app_version").get().addOnCompleteListener(taskUserVersion -> {
+                    if (Objects.equals(appLanguage, getResources().getStringArray(R.array.setting_array_language)[0])) changeLocale(this, new Locale("ru"));
+                    else changeLocale(this, new Locale("en"));
                     if (Integer.parseInt(String.valueOf(taskSupportVersion.getResult().getValue())) > VERSION_CODE) startActivity(new Intent(this, OldVersionActivity.class));
                     else if (auth && taskTestUser.getResult().getValue() != null) {
                         if (!String.valueOf(taskUserVersion.getResult().getValue()).equals(String.valueOf(VERSION_CODE))) myDB.child("specter").child("users").child(String.valueOf(authId)).child("app_version").setValue(VERSION_CODE);
@@ -86,6 +95,11 @@ public class Routing extends AppCompatActivity {
     public static void pushPreferenceShortUserLink(Context context, String value) {
         PreferenceManager.getDefaultSharedPreferences(context).edit().putString("SHORT_USER_LINK", value).apply();
         authShortUserLink = value;
+    }
+
+    public static void pushPreferenceLanguage(Context context, String value) {
+        PreferenceManager.getDefaultSharedPreferences(context).edit().putString("LANGUAGE", value).apply();
+        appLanguage = value;
     }
 
     public static void signOut(Context context) {
@@ -136,6 +150,12 @@ public class Routing extends AppCompatActivity {
                 e.printStackTrace();
             }
         }).start();
+    }
+
+    public static void changeLocale(Activity activity, Locale locale) {
+        Configuration configuration = new Configuration();
+        configuration.setLocale(locale);
+        activity.getBaseContext().getResources().updateConfiguration(configuration, activity.getBaseContext().getResources().getDisplayMetrics());
     }
 
 }

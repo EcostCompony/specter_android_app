@@ -30,7 +30,6 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.ecost.specter.R;
-import com.ecost.specter.models.Channel;
 import com.ecost.specter.models.Post;
 import com.ecost.specter.recyclers.PostsAdapter;
 import com.google.firebase.database.ChildEventListener;

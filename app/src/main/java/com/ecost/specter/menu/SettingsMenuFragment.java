@@ -19,8 +19,10 @@ import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.ImageButton;
+import android.widget.Spinner;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
@@ -36,6 +38,7 @@ public class SettingsMenuFragment extends Fragment {
 
     EditText eUserName, eShortUserLink;
     ImageButton bSaveUserName, bSaveShortUserLink;
+    Spinner sLanguage;
     MainMenuActivity mainMenuActivity;
 
     @SuppressLint("SetTextI18n")
@@ -47,11 +50,17 @@ public class SettingsMenuFragment extends Fragment {
         eShortUserLink = binding.inputShortUserLink;
         bSaveUserName = binding.buttonSaveUserName;
         bSaveShortUserLink = binding.buttonSaveShortUserLink;
+        sLanguage = binding.spinnerLanguage;
         mainMenuActivity = (MainMenuActivity) requireActivity();
 
         Objects.requireNonNull(mainMenuActivity.getSupportActionBar()).hide();
         eUserName.setText(authUserName);
         eShortUserLink.setText(authShortUserLink);
+
+        ArrayAdapter<CharSequence> languageAdapter = ArrayAdapter.createFromResource(mainMenuActivity, R.array.setting_array_language, R.layout.spinner_item);
+        languageAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        sLanguage.setAdapter(languageAdapter);
+        sLanguage.setOnItemSelectedListener(mainMenuActivity);
 
         eUserName.setFilters(new InputFilter[] {new InputFilter.LengthFilter(16)});
         eShortUserLink.setFilters(new InputFilter[] {(source, start, end, dest, dstart, dend) -> {

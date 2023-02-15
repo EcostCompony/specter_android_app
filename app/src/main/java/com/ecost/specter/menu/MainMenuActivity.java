@@ -1,16 +1,20 @@
 package com.ecost.specter.menu;
 
+import static com.ecost.specter.Routing.appLanguage;
 import static com.ecost.specter.Routing.authShortUserLink;
 import static com.ecost.specter.Routing.authUserName;
+import static com.ecost.specter.Routing.changeLocale;
+import static com.ecost.specter.Routing.pushPreferenceLanguage;
 
 import android.annotation.SuppressLint;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
-import android.view.MenuInflater;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.AdapterView;
 import android.widget.TextView;
 
-import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
@@ -20,12 +24,14 @@ import androidx.navigation.ui.NavigationUI;
 import com.ecost.specter.R;
 import com.ecost.specter.databinding.ActivityMainMenuBinding;
 
+import java.util.Locale;
 import java.util.Objects;
 
-public class MainMenuActivity extends AppCompatActivity {
+public class MainMenuActivity extends AppCompatActivity implements AdapterView.OnItemSelectedListener {
 
     AppBarConfiguration mAppBarConfiguration;
     NavController navController;
+    int check = 0;
     TextView tUserName, tShortUserLink;
 
     @SuppressLint("SetTextI18n")
@@ -72,4 +78,19 @@ public class MainMenuActivity extends AppCompatActivity {
 
         return super.onOptionsItemSelected(item);
     }
+
+    @Override
+    public void onItemSelected(AdapterView<?> adapterView, View view, int position, long l) {
+        if (++check <= 2 && !Objects.equals(appLanguage, getResources().getStringArray(R.array.setting_array_language)[0]) || check <= 1) {
+            if (Objects.equals(appLanguage, getResources().getStringArray(R.array.setting_array_language)[1])) adapterView.setSelection(1);
+            return;
+        }
+        changeLocale(this, new Locale(adapterView.getItemAtPosition(position).toString().equals(getResources().getStringArray(R.array.setting_array_language)[0]) ? "ru" : "en"));
+        pushPreferenceLanguage(this, getResources().getStringArray(R.array.setting_array_language)[adapterView.getItemAtPosition(position).toString().equals(getResources().getStringArray(R.array.setting_array_language)[0]) ? 0 : 1]);
+        startActivity(new Intent(this, MainMenuActivity.class));
+        finish();
+    }
+
+    @Override public void onNothingSelected(AdapterView<?> adapterView) {}
+
 }
