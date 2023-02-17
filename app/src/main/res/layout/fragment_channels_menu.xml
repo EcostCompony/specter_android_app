@@ -14,7 +14,6 @@
         android:layout_marginTop="12dp">
 
         <androidx.cardview.widget.CardView
-            android:id="@+id/button_navigate"
             android:layout_width="29dp"
             android:layout_height="29dp"
             android:layout_marginStart="25dp"
@@ -40,9 +39,17 @@
             android:id="@+id/button_search"
             android:layout_width="14dp"
             android:layout_height="14dp"
-            android:layout_marginEnd="26dp"
+            android:layout_marginEnd="60dp"
             android:layout_gravity="center_vertical|end"
             android:background="@drawable/icon_magnifier" />
+
+        <View
+            android:id="@+id/button_navigate"
+            android:layout_width="14dp"
+            android:layout_height="12dp"
+            android:layout_marginEnd="25dp"
+            android:layout_gravity="center_vertical|end"
+            android:background="@drawable/icon_burger" />
     </FrameLayout>
 
     <androidx.recyclerview.widget.RecyclerView
