@@ -29,9 +29,7 @@ import androidx.fragment.app.Fragment;
 
 import com.ecost.specter.R;
 import com.ecost.specter.auth.AuthActivity;
-import com.ecost.specter.databinding.FragmentSettingsMenuBinding;
 
-import java.util.Objects;
 import java.util.regex.Pattern;
 
 public class SettingsMenuFragment extends Fragment {
@@ -43,17 +41,15 @@ public class SettingsMenuFragment extends Fragment {
 
     @SuppressLint("SetTextI18n")
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        FragmentSettingsMenuBinding binding = FragmentSettingsMenuBinding.inflate(inflater, container, false);
-        View root = binding.getRoot();
+        View inflaterView = inflater.inflate(R.layout.fragment_settings_menu, container, false);
 
-        eUserName = binding.inputUserName;
-        eShortUserLink = binding.inputShortUserLink;
-        bSaveUserName = binding.buttonSaveUserName;
-        bSaveShortUserLink = binding.buttonSaveShortUserLink;
-        sLanguage = binding.spinnerLanguage;
+        eUserName = inflaterView.findViewById(R.id.input_user_name);
+        eShortUserLink = inflaterView.findViewById(R.id.input_short_user_link);
+        bSaveUserName = inflaterView.findViewById(R.id.button_save_user_name);
+        bSaveShortUserLink = inflaterView.findViewById(R.id.button_save_short_user_link);
+        sLanguage = inflaterView.findViewById(R.id.spinner_language);
         mainMenuActivity = (MainMenuActivity) requireActivity();
 
-        Objects.requireNonNull(mainMenuActivity.getSupportActionBar()).hide();
         eUserName.setText(authUserName);
         eShortUserLink.setText(authShortUserLink);
 
@@ -72,7 +68,7 @@ public class SettingsMenuFragment extends Fragment {
             return null;
         }, new InputFilter.LengthFilter(16)});
 
-        binding.buttonClose.setOnClickListener(view -> mainMenuActivity.navController.navigate(R.id.nav_channels));
+        inflaterView.findViewById(R.id.button_close).setOnClickListener(view -> mainMenuActivity.getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container_view, new ChannelsMenuFragment()).commit());
 
         eUserName.addTextChangedListener(new TextWatcher() {
             @Override
@@ -108,13 +104,13 @@ public class SettingsMenuFragment extends Fragment {
 
         bSaveShortUserLink.setOnClickListener(this::saveShortUserLink);
 
-        binding.buttonSignOut.setOnClickListener(view -> {
+        inflaterView.findViewById(R.id.button_sign_out).setOnClickListener(view -> {
             signOut(mainMenuActivity);
             startActivity(new Intent(mainMenuActivity, AuthActivity.class));
             mainMenuActivity.finish();
         });
 
-        return root;
+        return inflaterView;
     }
 
     public void saveUserName(View view) {
@@ -124,7 +120,6 @@ public class SettingsMenuFragment extends Fragment {
         else {
             myDB.child("specter").child("users").child(String.valueOf(authId)).child("name").setValue(userName);
             pushPreferenceUserName(mainMenuActivity, userName);
-            mainMenuActivity.tUserName.setText(userName);
             bSaveUserName.setVisibility(View.GONE);
         }
     }
@@ -144,7 +139,6 @@ public class SettingsMenuFragment extends Fragment {
                     myDB.child("specter").child("uid").child(shortUserLink.replace('.', '*')).child("id").setValue(authId);
                     myDB.child("specter").child("uid").child(shortUserLink.replace('.', '*')).child("type").setValue("user");
                     pushPreferenceShortUserLink(mainMenuActivity, shortUserLink);
-                    mainMenuActivity.tShortUserLink.setText(getString(R.string.symbol_at) + authShortUserLink);
                     bSaveShortUserLink.setVisibility(View.GONE);
                 }
             });

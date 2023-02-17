@@ -112,7 +112,9 @@ public class SignInFragment extends Fragment {
                                         pushPreferenceId(authActivity, user.id);
                                         pushPreferenceUserName(authActivity, user.name);
                                         pushPreferenceShortUserLink(authActivity, user.link);
-                                        startActivity(new Intent(authActivity, MainMenuActivity.class));
+                                        Intent intent = new Intent(authActivity, MainMenuActivity.class);
+                                        intent.putExtra("CREATE", true);
+                                        startActivity(intent);
                                         authActivity.finish();
                                     });
                             });

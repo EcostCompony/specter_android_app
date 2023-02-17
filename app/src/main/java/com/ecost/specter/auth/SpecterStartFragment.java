@@ -69,7 +69,9 @@ public class SpecterStartFragment extends BottomSheetDialogFragment {
                             pushPreferenceId(authActivity, uid);
                             pushPreferenceUserName(authActivity, name);
                             pushPreferenceShortUserLink(authActivity, shortUserLink);
-                            startActivity(new Intent(authActivity, MainMenuActivity.class));
+                            Intent intent = new Intent(authActivity, MainMenuActivity.class);
+                            intent.putExtra("CREATE", true);
+                            startActivity(intent);
                             authActivity.finish();
                         });
                 });

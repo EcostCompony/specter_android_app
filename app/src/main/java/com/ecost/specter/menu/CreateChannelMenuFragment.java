@@ -16,12 +16,10 @@ import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 
 import com.ecost.specter.R;
-import com.ecost.specter.databinding.FragmentCreateChannelMenuBinding;
 import com.ecost.specter.models.Channel;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Objects;
 import java.util.regex.Pattern;
 
 public class CreateChannelMenuFragment extends Fragment {
@@ -30,14 +28,11 @@ public class CreateChannelMenuFragment extends Fragment {
     MainMenuActivity mainMenuActivity;
 
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        FragmentCreateChannelMenuBinding binding = FragmentCreateChannelMenuBinding.inflate(inflater, container, false);
-        View root = binding.getRoot();
+        View inflaterView = inflater.inflate(R.layout.fragment_create_channel_menu, container, false);
 
-        eTitle = binding.inputTitle;
-        eShortChannelLink = binding.inputShortChannelLink;
+        eTitle = inflaterView.findViewById(R.id.input_title);
+        eShortChannelLink = inflaterView.findViewById(R.id.input_short_channel_link);
         mainMenuActivity = (MainMenuActivity) requireActivity();
-
-        Objects.requireNonNull(mainMenuActivity.getSupportActionBar()).hide();
 
         eTitle.setFilters(new InputFilter[] {new InputFilter.LengthFilter(32)});
         eShortChannelLink.setFilters(new InputFilter[] {(source, start, end, dest, dstart, dend) -> {
@@ -49,16 +44,16 @@ public class CreateChannelMenuFragment extends Fragment {
             return null;
         }, new InputFilter.LengthFilter(16)});
 
-        binding.buttonClose.setOnClickListener(view -> mainMenuActivity.navController.navigate(R.id.nav_channels));
+        inflaterView.findViewById(R.id.button_close).setOnClickListener(view -> mainMenuActivity.getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container_view, new ChannelsMenuFragment()).commit());
 
         eShortChannelLink.setOnKeyListener((view, keyCode, event) -> {
             if (keyCode == KeyEvent.KEYCODE_ENTER) createChannel(view);
             return keyCode == KeyEvent.KEYCODE_ENTER;
         });
 
-        binding.buttonCreateChannel.setOnClickListener(this::createChannel);
+        inflaterView.findViewById(R.id.button_create_channel).setOnClickListener(this::createChannel);
 
-        return root;
+        return inflaterView;
     }
 
     public void createChannel(View view) {
@@ -80,7 +75,7 @@ public class CreateChannelMenuFragment extends Fragment {
                         myDB.child("specter").child("uid").child(shortChannelLink.replace('.', '*')).child("id").setValue(id);
                         myDB.child("specter").child("uid").child(shortChannelLink.replace('.', '*')).child("type").setValue("channel");
                         myDB.child("specter").child("channels_number").setValue(id + 1);
-                        mainMenuActivity.navController.navigate(R.id.nav_channels);
+                        mainMenuActivity.getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container_view, new ChannelsMenuFragment()).commit();
                     });
             });
     }

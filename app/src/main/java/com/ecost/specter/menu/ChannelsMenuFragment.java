@@ -13,14 +13,12 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.ecost.specter.channel.ChannelActivity;
 import com.ecost.specter.R;
-import com.ecost.specter.databinding.FragmentChannelsMenuBinding;
 import com.ecost.specter.models.Channel;
 import com.ecost.specter.recyclers.ChannelsAdapter;
 
@@ -38,14 +36,30 @@ public class ChannelsMenuFragment extends Fragment {
     ChannelsAdapter channelsAdapter;
     TextView tChannelsNumber;
     List<Channel> channels = new ArrayList<>();
-    ChildEventListener childEventListener;
     MainMenuActivity mainMenuActivity;
 
     @Override
-    public void onCreate(@Nullable Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
+    public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+        View inflaterView = inflater.inflate(R.layout.fragment_channels_menu, container, false);
 
-        childEventListener = new ChildEventListener() {
+        RecyclerView rChannelList = inflaterView.findViewById(R.id.recycler_channels_list);
+        tChannelsNumber = inflaterView.findViewById(R.id.number_channels);
+        mainMenuActivity = (MainMenuActivity) requireActivity();
+
+        rChannelList.setLayoutManager(new LinearLayoutManager(mainMenuActivity));
+        channelsAdapter = new ChannelsAdapter(mainMenuActivity, channels, (channel, position) -> {
+            Intent intent = new Intent(mainMenuActivity, ChannelActivity.class);
+            intent.putExtra("CHANNEL_ID", channel.id);
+            intent.putExtra("CHANNEL_ADMINS", channel.author);
+            intent.putExtra("CHANNEL_POSTS_NUMBER", channel.postsNumber);
+            intent.putExtra("CHANNEL_TITLE", channel.title);
+            intent.putExtra("CHANNEL_SHORT_LINK", String.valueOf(channel.shortLink));
+            intent.putExtra("USER_SUBSCRIBE", true);
+            startActivity(intent);
+        }, (channel, position) -> true);
+        rChannelList.setAdapter(channelsAdapter);
+
+        ChildEventListener childEventListener = new ChildEventListener() {
             @SuppressLint("NotifyDataSetChanged")
             @Override
             public void onChildAdded(@NonNull DataSnapshot dataSnapshot, String previousChildName) {
@@ -94,38 +108,17 @@ public class ChannelsMenuFragment extends Fragment {
             @Override public void onCancelled(@NonNull DatabaseError databaseError) { }
         };
         myDB.child("specter").child("channels").addChildEventListener(childEventListener);
+
+        inflaterView.findViewById(R.id.button_navigate).setOnClickListener(view -> new NavigationFragment().show(mainMenuActivity.getSupportFragmentManager(), new NavigationFragment().getTag()));
+
+        inflaterView.findViewById(R.id.button_search).setOnClickListener(view -> mainMenuActivity.getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container_view, new ChannelsSearchFragment()).commit());
+
+        return inflaterView;
     }
 
     @Override
-    public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        FragmentChannelsMenuBinding binding = FragmentChannelsMenuBinding.inflate(inflater, container, false);
-        View root = binding.getRoot();
-
-        RecyclerView rChannelList = binding.recyclerChannelsList;
-        tChannelsNumber = binding.numberChannels;
-        mainMenuActivity = (MainMenuActivity) requireActivity();
-
-        rChannelList.setLayoutManager(new LinearLayoutManager(mainMenuActivity));
-        channelsAdapter = new ChannelsAdapter(mainMenuActivity, channels, (channel, position) -> {
-            Intent intent = new Intent(mainMenuActivity, ChannelActivity.class);
-            intent.putExtra("CHANNEL_ID", channel.id);
-            intent.putExtra("CHANNEL_ADMINS", channel.author);
-            intent.putExtra("CHANNEL_POSTS_NUMBER", channel.postsNumber);
-            intent.putExtra("CHANNEL_TITLE", channel.title);
-            intent.putExtra("CHANNEL_SHORT_LINK", String.valueOf(channel.shortLink));
-            intent.putExtra("USER_SUBSCRIBE", true);
-            startActivity(intent);
-        }, (channel, position) -> true);
-        rChannelList.setAdapter(channelsAdapter);
-
-        return root;
+    public void onDestroy() {
+        super.onDestroy();
+        channels.clear();
     }
-
-    @Override
-    public void onStart() {
-        super.onStart();
-        Objects.requireNonNull(mainMenuActivity.getSupportActionBar()).show();
-        Objects.requireNonNull(mainMenuActivity.getSupportActionBar()).setHomeAsUpIndicator(R.drawable.navigate_user_photo);
-    }
-
 }

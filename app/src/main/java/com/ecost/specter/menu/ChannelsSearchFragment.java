@@ -10,7 +10,6 @@ import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
-import androidx.cardview.widget.CardView;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -41,7 +40,6 @@ import java.util.regex.Pattern;
 public class ChannelsSearchFragment extends Fragment {
 
     EditText eChannelTitle;
-    CardView bClose;
     RecyclerView rChannelList;
     TextView tChannelsNumber;
     ChannelsAdapter channelsAdapter;
@@ -53,12 +51,10 @@ public class ChannelsSearchFragment extends Fragment {
         View inflaterView = inflater.inflate(R.layout.fragment_channels_search, container, false);
 
         eChannelTitle = inflaterView.findViewById(R.id.input_channel_title);
-        bClose = inflaterView.findViewById(R.id.button_close);
         rChannelList = inflaterView.findViewById(R.id.recycler_channels_list);
         tChannelsNumber = inflaterView.findViewById(R.id.number_channels);
         mainMenuActivity = (MainMenuActivity) requireActivity();
 
-        Objects.requireNonNull(mainMenuActivity.getSupportActionBar()).hide();
         eChannelTitle.requestFocus();
         eChannelTitle.postDelayed(() -> {
             InputMethodManager inputMethodManager = (InputMethodManager) mainMenuActivity.getSystemService(Context.INPUT_METHOD_SERVICE);
@@ -112,9 +108,9 @@ public class ChannelsSearchFragment extends Fragment {
             @Override public void afterTextChanged(Editable s) {}
         });
 
-        bClose.setOnClickListener(view -> {
+        inflaterView.findViewById(R.id.button_close).setOnClickListener(view -> {
             ((InputMethodManager) mainMenuActivity.getSystemService(Context.INPUT_METHOD_SERVICE)).hideSoftInputFromWindow(view.getWindowToken(), 0);
-            mainMenuActivity.navController.navigate(R.id.nav_channels);
+            mainMenuActivity.getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container_view, new ChannelsMenuFragment()).commit();
         });
 
         return inflaterView;
