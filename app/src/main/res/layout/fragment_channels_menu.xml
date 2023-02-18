@@ -35,21 +35,34 @@
             android:textSize="22sp"
             android:text="@string/channels_menu_header" />
 
-        <View
+        <FrameLayout
             android:id="@+id/button_search"
-            android:layout_width="14dp"
-            android:layout_height="14dp"
-            android:layout_marginEnd="60dp"
-            android:layout_gravity="center_vertical|end"
-            android:background="@drawable/icon_magnifier" />
+            android:layout_width="36dp"
+            android:layout_height="match_parent"
+            android:layout_marginEnd="49dp"
+            android:layout_gravity="end">
 
-        <View
+            <View
+                android:layout_width="14dp"
+                android:layout_height="14dp"
+                android:layout_marginStart="11dp"
+                android:layout_gravity="center_vertical"
+                android:background="@drawable/icon_magnifier" />
+        </FrameLayout>
+
+        <FrameLayout
             android:id="@+id/button_navigate"
-            android:layout_width="14dp"
-            android:layout_height="12dp"
-            android:layout_marginEnd="25dp"
-            android:layout_gravity="center_vertical|end"
-            android:background="@drawable/icon_burger" />
+            android:layout_width="49dp"
+            android:layout_height="match_parent"
+            android:layout_gravity="end">
+
+            <View
+                android:layout_width="14dp"
+                android:layout_height="12dp"
+                android:layout_marginStart="10dp"
+                android:layout_gravity="center_vertical"
+                android:background="@drawable/icon_burger" />
+        </FrameLayout>
     </FrameLayout>
 
     <androidx.recyclerview.widget.RecyclerView
