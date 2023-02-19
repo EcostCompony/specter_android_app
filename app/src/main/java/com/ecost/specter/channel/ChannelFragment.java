@@ -109,6 +109,7 @@ public class ChannelFragment extends Fragment {
         rPostsList.setLayoutManager(new LinearLayoutManager(channelActivity));
         postsAdapter = new PostsAdapter(channelActivity, posts, postLongClickListener);
         rPostsList.setAdapter(postsAdapter);
+        inflaterView.postDelayed(() -> rPostsList.scrollToPosition(posts.size() - 1), 10);
 
         childEventListenerPosts = new ChildEventListener() {
             @Override
@@ -117,7 +118,7 @@ public class ChannelFragment extends Fragment {
                 if (Objects.equals(post.author, "%CHANNEL_TITLE%")) post.author = channelActivity.channelTitle;
                 posts.add(post);
                 postsAdapter.notifyDataSetChanged();
-                rPostsList.smoothScrollToPosition(posts.size());
+                rPostsList.scrollToPosition(posts.size());
             }
 
             @Override

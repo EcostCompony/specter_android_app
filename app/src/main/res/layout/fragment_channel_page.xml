@@ -75,6 +75,7 @@
             <View
                 android:layout_width="17dp"
                 android:layout_height="17dp"
+                android:backgroundTint="#9C9C9C"
                 android:background="@drawable/icon_settings" />
         </LinearLayout>
     </LinearLayout>
