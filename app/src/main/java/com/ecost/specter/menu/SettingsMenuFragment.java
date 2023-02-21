@@ -59,10 +59,10 @@ public class SettingsMenuFragment extends Fragment {
         sLanguage.setAdapter(languageAdapter);
         sLanguage.setOnItemSelectedListener(mainMenuActivity);
 
-        /*ArrayAdapter<CharSequence> themeAdapter = ArrayAdapter.createFromResource(mainMenuActivity, R.array.setting_array_theme, R.layout.spinner_item);
-        languageAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        ArrayAdapter<CharSequence> themeAdapter = ArrayAdapter.createFromResource(mainMenuActivity, R.array.setting_array_theme, R.layout.spinner_item);
+        themeAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         sTheme.setAdapter(themeAdapter);
-        sTheme.setOnItemSelectedListener(mainMenuActivity);*/
+        sTheme.setOnItemSelectedListener(mainMenuActivity);
 
         eUserName.setFilters(new InputFilter[] {new InputFilter.LengthFilter(16)});
         eShortUserLink.setFilters(new InputFilter[] {(source, start, end, dest, dstart, dend) -> {

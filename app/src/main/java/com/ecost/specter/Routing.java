@@ -33,7 +33,7 @@ public class Routing extends AppCompatActivity {
     public static final DatabaseReference myDB = FirebaseDatabase.getInstance().getReference();
     public static boolean auth;
     public static Integer authId, authEcostId;
-    public static String authUserName, authShortUserLink, appLanguage;
+    public static String authUserName, authShortUserLink, appLanguage, appTheme;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -50,6 +50,7 @@ public class Routing extends AppCompatActivity {
         authUserName = PreferenceManager.getDefaultSharedPreferences(this).getString("USER_NAME", null);
         authShortUserLink = PreferenceManager.getDefaultSharedPreferences(this).getString("SHORT_USER_LINK", null);
         appLanguage = PreferenceManager.getDefaultSharedPreferences(this).getString("LANGUAGE", null);
+        appTheme = PreferenceManager.getDefaultSharedPreferences(this).getString("THEME", null);
 
         myDB.child("specter").child("support_version").get().addOnCompleteListener(taskSupportVersion ->
             myDB.child("specter").child("users").child(String.valueOf(authId)).get().addOnCompleteListener(taskTestUser ->
@@ -101,6 +102,11 @@ public class Routing extends AppCompatActivity {
     public static void pushPreferenceLanguage(Context context, String value) {
         PreferenceManager.getDefaultSharedPreferences(context).edit().putString("LANGUAGE", value).apply();
         appLanguage = value;
+    }
+
+    public static void pushPreferenceTheme(Context context, String value) {
+        PreferenceManager.getDefaultSharedPreferences(context).edit().putString("THEME", value).apply();
+        appTheme = value;
     }
 
     public static void signOut(Context context) {
