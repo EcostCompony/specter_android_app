@@ -9,7 +9,6 @@ import static com.ecost.specter.Routing.pushPreferenceTheme;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
-import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.app.AppCompatDelegate;
@@ -36,7 +35,6 @@ public class MainMenuActivity extends AppCompatActivity implements AdapterView.O
 
     @Override
     public void onItemSelected(AdapterView<?> adapterView, View view, int position, long l) {
-
         if (adapterView.getId() == R.id.spinner_language) {
             if (++checkLanguage <= 2 && !Objects.equals(appLanguage, getResources().getStringArray(R.array.setting_array_language)[0]) || checkLanguage <= 1) {
                 if (Objects.equals(appLanguage, getResources().getStringArray(R.array.setting_array_language)[1])) adapterView.setSelection(1);

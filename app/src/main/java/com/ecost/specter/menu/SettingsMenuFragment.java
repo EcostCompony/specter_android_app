@@ -39,7 +39,7 @@ public class SettingsMenuFragment extends Fragment {
     Spinner sLanguage, sTheme;
     MainMenuActivity mainMenuActivity;
 
-    @SuppressLint({"SetTextI18n", "MissingInflatedId"})
+    @SuppressLint("SetTextI18n")
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View inflaterView = inflater.inflate(R.layout.fragment_settings_menu, container, false);
 

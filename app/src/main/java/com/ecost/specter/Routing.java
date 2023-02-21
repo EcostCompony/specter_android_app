@@ -50,8 +50,8 @@ public class Routing extends AppCompatActivity {
         authEcostId = PreferenceManager.getDefaultSharedPreferences(this).getInt("ECOST_ID", 0);
         authUserName = PreferenceManager.getDefaultSharedPreferences(this).getString("USER_NAME", null);
         authShortUserLink = PreferenceManager.getDefaultSharedPreferences(this).getString("SHORT_USER_LINK", null);
-        appLanguage = PreferenceManager.getDefaultSharedPreferences(this).getString("LANGUAGE", null);
-        appTheme = PreferenceManager.getDefaultSharedPreferences(this).getString("THEME", null);
+        appLanguage = PreferenceManager.getDefaultSharedPreferences(this).getString("APP_LANGUAGE", null);
+        appTheme = PreferenceManager.getDefaultSharedPreferences(this).getString("APP_THEME", null);
 
         myDB.child("specter").child("support_version").get().addOnCompleteListener(taskSupportVersion ->
             myDB.child("specter").child("users").child(String.valueOf(authId)).get().addOnCompleteListener(taskTestUser ->
@@ -104,12 +104,12 @@ public class Routing extends AppCompatActivity {
     }
 
     public static void pushPreferenceLanguage(Context context, String value) {
-        PreferenceManager.getDefaultSharedPreferences(context).edit().putString("LANGUAGE", value).apply();
+        PreferenceManager.getDefaultSharedPreferences(context).edit().putString("APP_LANGUAGE", value).apply();
         appLanguage = value;
     }
 
     public static void pushPreferenceTheme(Context context, String value) {
-        PreferenceManager.getDefaultSharedPreferences(context).edit().putString("THEME", value).apply();
+        PreferenceManager.getDefaultSharedPreferences(context).edit().putString("APP_THEME", value).apply();
         appTheme = value;
     }
 
