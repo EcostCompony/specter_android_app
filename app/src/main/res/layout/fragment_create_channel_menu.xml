@@ -102,6 +102,60 @@
             android:text="@string/symbol_at" />
     </RelativeLayout>
 
+    <TextView
+        android:layout_width="340dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="14dp"
+        android:paddingHorizontal="13dp"
+        android:textColor="@color/parameters_header"
+        android:fontFamily="@font/inter_semi_bold"
+        android:textSize="12sp"
+        android:text="@string/create_channel_menu_parameter_header_channel_category" />
+
+    <FrameLayout
+        android:layout_width="340dp"
+        android:layout_height="38dp"
+        android:layout_marginTop="4dp">
+
+        <Spinner
+            android:id="@+id/spinner_chanel_сategory"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@drawable/input"
+            android:paddingHorizontal="13dp" />
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="18dp"
+            android:layout_gravity="end|center_vertical"
+            android:src="@drawable/icon_arrow_down"
+            tools:ignore="ContentDescription" />
+    </FrameLayout>
+
+    <TextView
+        android:layout_width="340dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="14dp"
+        android:paddingHorizontal="13dp"
+        android:textColor="@color/parameters_header"
+        android:fontFamily="@font/inter_semi_bold"
+        android:textSize="12sp"
+        android:text="@string/create_channel_menu_parameter_header_channel_description" />
+
+    <EditText
+        android:id="@+id/input_channel_description"
+        android:layout_width="340dp"
+        android:layout_height="38dp"
+        android:inputType="text"
+        android:autofillHints="title"
+        android:layout_marginTop="4dp"
+        android:background="@drawable/input"
+        android:paddingHorizontal="13dp"
+        android:fontFamily="@font/inter_semi_bold"
+        android:textSize="12sp"
+        tools:ignore="LabelFor" />
+
     <Button
         android:id="@+id/button_create_channel"
         android:layout_width="340dp"
