@@ -57,7 +57,7 @@ public class Routing extends AppCompatActivity {
                     if (appLanguage == null) pushPreferenceLanguage(this, getResources().getStringArray(R.array.setting_array_language)[Locale.getDefault().getLanguage().equals("ru") ? 0 : 1]);
                     if (Objects.equals(appLanguage, getResources().getStringArray(R.array.setting_array_language)[0])) changeLocale(this, new Locale("ru"));
                     else changeLocale(this, new Locale("en"));
-                    if (Integer.parseInt(String.valueOf(taskSupportVersion.getResult().getValue())) > VERSION_CODE) startActivity(new Intent(this, OldVersionActivity.class));
+                    if (Integer.parseInt(String.valueOf(taskSupportVersion.getResult().getValue())) > VERSION_CODE) startActivity(new Intent(this, HardUpdateActivity.class));
                     else if (auth && taskTestUser.getResult().getValue() != null) {
                         if (!String.valueOf(taskUserVersion.getResult().getValue()).equals(String.valueOf(VERSION_CODE))) myDB.child("specter").child("users").child(String.valueOf(authId)).child("app_version").setValue(VERSION_CODE);
                         Intent intent = new Intent(this, MainMenuActivity.class);

@@ -33,7 +33,7 @@
             android:name=".channel.ChannelActivity"
             android:screenOrientation="nosensor" />
         <activity
-            android:name=".OldVersionActivity"
+            android:name=".HardUpdateActivity"
             android:screenOrientation="nosensor" />
     </application>
 </manifest>
