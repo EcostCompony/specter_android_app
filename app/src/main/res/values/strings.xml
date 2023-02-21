@@ -134,4 +134,7 @@
     <string name="channel_item_content_description_channel_photo">Channel photo</string>
     <string name="channel_settings_button_content_description_save_channel_title">Save channel name</string>
     <string name="channel_settings_button_content_description_save_short_channel_link">Save short link</string>
+    <string name="old_version_header">Версия устарела!</string>
+    <string name="old_version_description">К сожалению, мы перестали поддерживать данную версию, так как была обнаружена критическая ошибка, либо эта версия не поддерживает новую систему сервиса.\n\nНажмите на кнопку «Обновить» и скачайте последнюю версию приложения. Если вы уверены, что у вас последняя версия приложения, тогда стоит подождать. Мы уже активно работаем над новым релизом.</string>
+    <string name="old_version_button_update">Обновить</string>
 </resources>
