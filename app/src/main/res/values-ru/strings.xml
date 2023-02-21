@@ -97,6 +97,11 @@
         <item>Русский</item>
         <item>Английский</item>
     </string-array>
+    <string-array name="setting_array_theme">
+        <item>Системная</item>
+        <item>Светлая</item>
+        <item>Тёмная</item>
+    </string-array>
     <string name="settings_menu_button_sign_out">Выйти из аккаунта</string>
 
     <!-- channel -->
@@ -134,4 +139,5 @@
     <string name="channel_item_content_description_channel_photo">Фото канала</string>
     <string name="channel_settings_button_content_description_save_channel_title">Сохранить название канала</string>
     <string name="channel_settings_button_content_description_save_short_channel_link">Сохранить короткую ссылку канала</string>
+    <string name="settings_menu_parameter_header_theme">Тема</string>
 </resources>

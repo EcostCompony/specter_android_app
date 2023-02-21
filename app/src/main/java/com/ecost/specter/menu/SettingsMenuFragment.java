@@ -36,7 +36,7 @@ public class SettingsMenuFragment extends Fragment {
 
     EditText eUserName, eShortUserLink;
     ImageButton bSaveUserName, bSaveShortUserLink;
-    Spinner sLanguage;
+    Spinner sLanguage, sTheme;
     MainMenuActivity mainMenuActivity;
 
     @SuppressLint("SetTextI18n")
@@ -48,6 +48,7 @@ public class SettingsMenuFragment extends Fragment {
         bSaveUserName = inflaterView.findViewById(R.id.button_save_user_name);
         bSaveShortUserLink = inflaterView.findViewById(R.id.button_save_short_user_link);
         sLanguage = inflaterView.findViewById(R.id.spinner_language);
+        sTheme = inflaterView.findViewById(R.id.spinner_theme);
         mainMenuActivity = (MainMenuActivity) requireActivity();
 
         eUserName.setText(authUserName);
@@ -57,6 +58,11 @@ public class SettingsMenuFragment extends Fragment {
         languageAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         sLanguage.setAdapter(languageAdapter);
         sLanguage.setOnItemSelectedListener(mainMenuActivity);
+
+        ArrayAdapter<CharSequence> themeAdapter = ArrayAdapter.createFromResource(mainMenuActivity, R.array.setting_array_theme, R.layout.spinner_item);
+        themeAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        sTheme.setAdapter(themeAdapter);
+        sTheme.setOnItemSelectedListener(mainMenuActivity);
 
         eUserName.setFilters(new InputFilter[] {new InputFilter.LengthFilter(16)});
         eShortUserLink.setFilters(new InputFilter[] {(source, start, end, dest, dstart, dend) -> {
