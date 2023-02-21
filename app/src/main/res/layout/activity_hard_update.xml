@@ -19,7 +19,7 @@
             android:layout_marginStart="14dp"
             android:fontFamily="@font/inter_bold"
             android:textSize="16sp"
-            android:text="@string/old_version_header" />
+            android:text="@string/hard_update_header" />
 
         <TextView
             android:layout_width="wrap_content"
@@ -28,7 +28,7 @@
             android:layout_marginHorizontal="13dp"
             android:fontFamily="@font/inter_regular"
             android:textSize="12sp"
-            android:text="@string/old_version_description" />
+            android:text="@string/hard_update_description" />
 
         <FrameLayout
             android:id="@+id/button_update"
@@ -44,7 +44,7 @@
                 android:fontFamily="@font/inter_bold"
                 android:textColor="@color/main_color"
                 android:textSize="12sp"
-                android:text="@string/old_version_button_update" />
+                android:text="@string/hard_update_button_update" />
         </FrameLayout>
     </LinearLayout>
 </FrameLayout>

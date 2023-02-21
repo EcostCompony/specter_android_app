@@ -12,6 +12,7 @@
     <string name="number_subscribers_plural_genitive_case">подписчиков</string>
 
     <!-- headers -->
+    <string name="hard_update_header">Версия устарела!</string>
     <string name="sign_in_header">Войти с <font color="#D75026">eco</font>st</string>
     <string name="sign_up_header">Регистрация в <font color="#D75026">eco</font>st</string>
     <string name="specter_start_header">Давайте начнём</string>
@@ -48,6 +49,10 @@
     <string name="channel_settings_error_not_short_channel_title">Короткая ссылка должна содержать более 3 символов</string>
     <string name="channel_settings_error_small_short_channel_link">Придумайте короткую ссылку, содержащую более 3 символов</string>
     <string name="channel_settings_error_busy_short_channel_link">Короткая ссылка должна быть уникальной! Кто-то уже её занял =(</string>
+
+    <!-- hard update-->
+    <string name="hard_update_description">К сожалению, мы перестали поддерживать данную версию, так как была обнаружена критическая ошибка, либо эта версия не поддерживает новую систему сервиса.\n\nНажмите на кнопку «Обновить» и скачайте последнюю версию приложения. Если вы уверены, что у вас последняя версия приложения, тогда стоит подождать. Мы уже активно работаем над новым релизом.</string>
+    <string name="hard_update_button_update">Обновить</string>
 
     <!-- sign in -->
     <string name="sign_in_input_hint_phone_number">Номер телефона</string>
@@ -129,7 +134,4 @@
     <string name="channel_item_content_description_channel_photo">Фото канала</string>
     <string name="channel_settings_button_content_description_save_channel_title">Сохранить название канала</string>
     <string name="channel_settings_button_content_description_save_short_channel_link">Сохранить короткую ссылку канала</string>
-    <string name="old_version_header">Версия устарела!</string>
-    <string name="old_version_description">К сожалению, мы перестали поддерживать данную версию, так как была обнаружена критическая ошибка, либо эта версия не поддерживает новую систему сервиса.\n\nНажмите на кнопку «Обновить» и скачайте последнюю версию приложения. Если вы уверены, что у вас последняя версия приложения, тогда стоит подождать. Мы уже активно работаем над новым релизом.</string>
-    <string name="old_version_button_update">Обновить</string>
 </resources>
