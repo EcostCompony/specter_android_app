@@ -146,7 +146,7 @@
         android:textColor="@color/parameters_header"
         android:fontFamily="@font/inter_semi_bold"
         android:textSize="12sp"
-        android:text="@string/settings_menu_parameter_header_language" />
+        android:text="@string/settings_menu_parameter_header_theme" />
 
     <FrameLayout
         android:layout_width="340dp"
@@ -154,7 +154,7 @@
         android:layout_marginTop="4dp">
 
         <Spinner
-            android:id="@+id/spinner_language"
+            android:id="@+id/spinner_theme"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:background="@drawable/input"
@@ -176,7 +176,7 @@
         android:textColor="@color/parameters_header"
         android:fontFamily="@font/inter_semi_bold"
         android:textSize="12sp"
-        android:text="@string/settings_menu_parameter_header_theme" />
+        android:text="@string/settings_menu_parameter_header_language" />
 
     <FrameLayout
         android:layout_width="340dp"
@@ -184,7 +184,7 @@
         android:layout_marginTop="4dp">
 
         <Spinner
-            android:id="@+id/spinner_theme"
+            android:id="@+id/spinner_language"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:background="@drawable/input"

@@ -47,11 +47,13 @@ public class MainMenuActivity extends AppCompatActivity implements AdapterView.O
         } else {
             if (++checkTheme <= 2 && !Objects.equals(appTheme, getResources().getStringArray(R.array.setting_array_theme)[0]) || checkTheme <= 1) {
                 if (Objects.equals(appTheme, getResources().getStringArray(R.array.setting_array_theme)[1])) adapterView.setSelection(1);
+                else if (Objects.equals(appTheme, getResources().getStringArray(R.array.setting_array_theme)[2])) adapterView.setSelection(2);
                 return;
             }
-            if (adapterView.getItemAtPosition(position).toString().equals(getResources().getStringArray(R.array.setting_array_theme)[1])) AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES);
-            else AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
-            pushPreferenceTheme(this, getResources().getStringArray(R.array.setting_array_theme)[adapterView.getItemAtPosition(position).toString().equals(getResources().getStringArray(R.array.setting_array_theme)[0]) ? 0 : 1]);
+            if (adapterView.getItemAtPosition(position).toString().equals(getResources().getStringArray(R.array.setting_array_theme)[2])) AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES);
+            else if (adapterView.getItemAtPosition(position).toString().equals(getResources().getStringArray(R.array.setting_array_theme)[1])) AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
+            else AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_FOLLOW_SYSTEM);
+            pushPreferenceTheme(this, getResources().getStringArray(R.array.setting_array_theme)[adapterView.getItemAtPosition(position).toString().equals(getResources().getStringArray(R.array.setting_array_theme)[0]) ? 0 : (adapterView.getItemAtPosition(position).toString().equals(getResources().getStringArray(R.array.setting_array_theme)[1]) ? 1 : 2)]);
         }
         recreate();
     }

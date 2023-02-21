@@ -98,6 +98,7 @@
         <item>Английский</item>
     </string-array>
     <string-array name="setting_array_theme">
+        <item>Системная</item>
         <item>Светлая</item>
         <item>Тёмная</item>
     </string-array>

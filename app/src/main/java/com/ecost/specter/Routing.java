@@ -18,6 +18,7 @@ import android.widget.PopupWindow;
 import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.app.AppCompatDelegate;
 import androidx.core.splashscreen.SplashScreen;
 
 import com.ecost.specter.auth.AuthActivity;
@@ -56,8 +57,11 @@ public class Routing extends AppCompatActivity {
             myDB.child("specter").child("users").child(String.valueOf(authId)).get().addOnCompleteListener(taskTestUser ->
                 myDB.child("specter").child("users").child(String.valueOf(authId)).child("app_version").get().addOnCompleteListener(taskUserVersion -> {
                     if (appLanguage == null) pushPreferenceLanguage(this, getResources().getStringArray(R.array.setting_array_language)[Locale.getDefault().getLanguage().equals("ru") ? 0 : 1]);
+                    if (appTheme == null) pushPreferenceTheme(this, getResources().getStringArray(R.array.setting_array_theme)[0]);
                     if (Objects.equals(appLanguage, getResources().getStringArray(R.array.setting_array_language)[0])) changeLocale(this, new Locale("ru"));
                     else changeLocale(this, new Locale("en"));
+                    if (Objects.equals(appTheme, getResources().getStringArray(R.array.setting_array_theme)[1])) AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
+                    else if (Objects.equals(appTheme, getResources().getStringArray(R.array.setting_array_theme)[2])) AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES);
                     if (Integer.parseInt(String.valueOf(taskSupportVersion.getResult().getValue())) > VERSION_CODE) startActivity(new Intent(this, OldVersionActivity.class));
                     else if (auth && taskTestUser.getResult().getValue() != null) {
                         if (!String.valueOf(taskUserVersion.getResult().getValue()).equals(String.valueOf(VERSION_CODE))) myDB.child("specter").child("users").child(String.valueOf(authId)).child("app_version").setValue(VERSION_CODE);
