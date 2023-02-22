@@ -66,7 +66,7 @@ public class ChannelsMenuFragment extends Fragment {
                 Channel channel = Objects.requireNonNull(dataSnapshot.getValue(Channel.class));
                 for (int i = 0; i < channel.subscribers.size(); i++) {
                     if (channel.subscribers.get(i).equals(authId)) {
-                        if (channel.body.equals("%CHANNEL_CREATED%")) channel.body = getString(R.string.channels_menu_attribute_channel_created);
+                        if (channel.body.equals("%CHANNEL_CREATED%")) channel.body = mainMenuActivity.getString(R.string.channels_menu_attribute_channel_created);
                         else if (channel.body.equals("%NOT_POSTS%")) channel.body = getString(R.string.channels_menu_attribute_not_posts);
                         channels.add(channel);
                         tChannelsNumber.setText(pluralForm(channelsAdapter.getItemCount(), mainMenuActivity.getString(R.string.number_channels_nominative_case), mainMenuActivity.getString(R.string.number_channels_genitive_case), mainMenuActivity.getString(R.string.number_channels_plural_genitive_case), Locale.getDefault().getLanguage().equals("ru")));
@@ -97,7 +97,7 @@ public class ChannelsMenuFragment extends Fragment {
                 for (int i = 0; i < channels.size(); i++) {
                     if (channels.get(i).id.equals(channel.id)) {
                         channels.remove(i);
-                        tChannelsNumber.setText(pluralForm(channelsAdapter.getItemCount(), getString(R.string.number_channels_nominative_case), getString(R.string.number_channels_genitive_case), getString(R.string.number_channels_plural_genitive_case), Locale.getDefault().getLanguage().equals("ru")));
+                        tChannelsNumber.setText(pluralForm(channelsAdapter.getItemCount(), mainMenuActivity.getString(R.string.number_channels_nominative_case), mainMenuActivity.getString(R.string.number_channels_genitive_case), mainMenuActivity.getString(R.string.number_channels_plural_genitive_case), Locale.getDefault().getLanguage().equals("ru")));
                         channelsAdapter.notifyDataSetChanged();
                         break;
                     }

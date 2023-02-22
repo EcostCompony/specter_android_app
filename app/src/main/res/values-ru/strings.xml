@@ -88,6 +88,11 @@
     <string name="create_channel_menu_parameter_header_title">Название</string>
     <string name="create_channel_menu_parameter_header_short_channel_link">Короткая ссылка</string>
     <string name="create_channel_menu_button_create_channel">Создать канал</string>
+    <string-array name="create_channel_array_category">
+        <item>Не выбрано</item>
+        <item>Блог</item>
+        <item>Новости</item>
+    </string-array>
 
     <!-- settings menu -->
     <string name="settings_menu_parameter_header_name">Имя</string>
@@ -131,6 +136,11 @@
     <string name="channel_settings_parameter_header_title">Название</string>
     <string name="channel_settings_parameter_header_short_channel_link">Короткая ссылка</string>
     <string name="channel_settings_button_delete_channel">Удалить канал</string>
+    <string-array name="channel_settings_array_category">
+        <item>Не выбрано</item>
+        <item>Блог</item>
+        <item>Новости</item>
+    </string-array>
 
     <!-- content descriptions -->
     <string name="main_menu_button_content_description_close">Закрыть</string>
