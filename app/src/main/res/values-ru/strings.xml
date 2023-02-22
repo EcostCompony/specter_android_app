@@ -152,4 +152,6 @@
     <string name="settings_menu_parameter_header_theme">Тема</string>
     <string name="create_channel_menu_parameter_header_channel_description">Описание канала</string>
     <string name="create_channel_menu_parameter_header_channel_category">Категория</string>
+    <string name="channel_settings_parameter_header_category">Категория</string>
+    <string name="channel_settings_parameter_header_description">Описание</string>
 </resources>

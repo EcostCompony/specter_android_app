@@ -152,4 +152,6 @@
     <string name="channel_item_content_description_channel_photo">Channel photo</string>
     <string name="channel_settings_button_content_description_save_channel_title">Save channel name</string>
     <string name="channel_settings_button_content_description_save_short_channel_link">Save short link</string>
+    <string name="channel_settings_parameter_header_category">Категория</string>
+    <string name="channel_settings_parameter_header_description">Описание</string>
 </resources>
