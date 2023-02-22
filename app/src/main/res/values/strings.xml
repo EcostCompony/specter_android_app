@@ -93,7 +93,7 @@
     <string name="create_channel_menu_parameter_header_title">Channel name</string>
     <string name="create_channel_menu_parameter_header_short_channel_link">Short link</string>
     <string name="create_channel_menu_parameter_header_channel_category">Категория</string>
-    <string name="create_channel_menu_parameter_header_channel_description">Описание канала</string>
+    <string name="create_channel_menu_parameter_header_channel_description">Описание</string>
     <string name="create_channel_menu_button_create_channel">Create</string>
 
     <!-- settings menu -->
@@ -138,12 +138,14 @@
     <!-- channel settings -->
     <string name="channel_settings_parameter_header_title">Channel name</string>
     <string name="channel_settings_parameter_header_short_channel_link">Short link</string>
-    <string name="channel_settings_button_delete_channel">Delete channel</string>
+    <string name="channel_settings_parameter_header_category">Категория</string>
     <string-array name="channel_settings_array_category">
         <item>Не выбрано</item>
         <item>Блог</item>
         <item>Новости</item>
     </string-array>
+    <string name="channel_settings_parameter_header_description">Описание</string>
+    <string name="channel_settings_button_delete_channel">Delete channel</string>
 
     <!-- content descriptions -->
     <string name="main_menu_button_content_description_close">Close</string>
@@ -152,6 +154,4 @@
     <string name="channel_item_content_description_channel_photo">Channel photo</string>
     <string name="channel_settings_button_content_description_save_channel_title">Save channel name</string>
     <string name="channel_settings_button_content_description_save_short_channel_link">Save short link</string>
-    <string name="channel_settings_parameter_header_category">Категория</string>
-    <string name="channel_settings_parameter_header_description">Описание</string>
 </resources>

@@ -87,25 +87,23 @@
     <!-- create channel menu -->
     <string name="create_channel_menu_parameter_header_title">Название</string>
     <string name="create_channel_menu_parameter_header_short_channel_link">Короткая ссылка</string>
+    <string name="create_channel_menu_parameter_header_channel_category">Категория</string>
+    <string name="create_channel_menu_parameter_header_channel_description">Описание</string>
     <string name="create_channel_menu_button_create_channel">Создать канал</string>
-    <string-array name="create_channel_array_category">
-        <item>Не выбрано</item>
-        <item>Блог</item>
-        <item>Новости</item>
-    </string-array>
 
     <!-- settings menu -->
     <string name="settings_menu_parameter_header_name">Имя</string>
     <string name="settings_menu_parameter_header_short_user_link">Короткая ссылка</string>
-    <string name="settings_menu_parameter_header_language">Язык</string>
-    <string-array name="setting_array_language">
-        <item>Русский</item>
-        <item>Английский</item>
-    </string-array>
+    <string name="settings_menu_parameter_header_theme">Тема</string>
     <string-array name="setting_array_theme">
         <item>Системная</item>
         <item>Светлая</item>
         <item>Тёмная</item>
+    </string-array>
+    <string name="settings_menu_parameter_header_language">Язык</string>
+    <string-array name="setting_array_language">
+        <item>Русский</item>
+        <item>Английский</item>
     </string-array>
     <string name="settings_menu_button_sign_out">Выйти из аккаунта</string>
 
@@ -135,12 +133,14 @@
     <!-- channel settings -->
     <string name="channel_settings_parameter_header_title">Название</string>
     <string name="channel_settings_parameter_header_short_channel_link">Короткая ссылка</string>
-    <string name="channel_settings_button_delete_channel">Удалить канал</string>
+    <string name="channel_settings_parameter_header_category">Категория</string>
     <string-array name="channel_settings_array_category">
         <item>Не выбрано</item>
         <item>Блог</item>
         <item>Новости</item>
     </string-array>
+    <string name="channel_settings_parameter_header_description">Описание</string>
+    <string name="channel_settings_button_delete_channel">Удалить канал</string>
 
     <!-- content descriptions -->
     <string name="main_menu_button_content_description_close">Закрыть</string>
@@ -149,9 +149,4 @@
     <string name="channel_item_content_description_channel_photo">Фото канала</string>
     <string name="channel_settings_button_content_description_save_channel_title">Сохранить название канала</string>
     <string name="channel_settings_button_content_description_save_short_channel_link">Сохранить короткую ссылку канала</string>
-    <string name="settings_menu_parameter_header_theme">Тема</string>
-    <string name="create_channel_menu_parameter_header_channel_description">Описание канала</string>
-    <string name="create_channel_menu_parameter_header_channel_category">Категория</string>
-    <string name="channel_settings_parameter_header_category">Категория</string>
-    <string name="channel_settings_parameter_header_description">Описание</string>
 </resources>

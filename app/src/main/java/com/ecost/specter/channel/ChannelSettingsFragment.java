@@ -4,9 +4,6 @@ import static com.ecost.specter.Routing.myDB;
 import static com.ecost.specter.Routing.popup;
 
 import android.os.Bundle;
-
-import androidx.fragment.app.Fragment;
-
 import android.text.Editable;
 import android.text.InputFilter;
 import android.text.TextWatcher;
@@ -14,17 +11,26 @@ import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.ImageButton;
+import android.widget.Spinner;
+
+import androidx.fragment.app.Fragment;
 
 import com.ecost.specter.R;
 
+import java.util.Objects;
 import java.util.regex.Pattern;
 
 public class ChannelSettingsFragment extends Fragment {
 
-    EditText eChannelTitle, eShortChannelLink;
-    ImageButton bSaveChannelTitle, bSaveShortChannelLink;
+    EditText eChannelTitle, eShortChannelLink, eDescription;
+    Spinner sCategory;
+    ImageButton bSaveChannelTitle, bSaveShortChannelLink, bSaveChannelDescription, bSaveChannelCategory;
+    int categoryId = 0;
+    int check = 0;
     ChannelActivity channelActivity;
 
     @Override
@@ -33,12 +39,35 @@ public class ChannelSettingsFragment extends Fragment {
 
         eChannelTitle = inflaterView.findViewById(R.id.input_channel_title);
         eShortChannelLink = inflaterView.findViewById(R.id.input_short_channel_link);
+        eDescription = inflaterView.findViewById(R.id.input_channel_description);
+        sCategory = inflaterView.findViewById(R.id.spinner_chanel_сategory);
         bSaveChannelTitle = inflaterView.findViewById(R.id.button_save_channel_title);
         bSaveShortChannelLink = inflaterView.findViewById(R.id.button_save_short_channel_link);
+        bSaveChannelCategory = inflaterView.findViewById(R.id.button_save_channel_сategory);
+        bSaveChannelDescription = inflaterView.findViewById(R.id.button_save_channel_description);
         channelActivity = (ChannelActivity) requireActivity();
+
+        ArrayAdapter<CharSequence> categoryAdapter = ArrayAdapter.createFromResource(channelActivity, R.array.channel_settings_array_category, R.layout.spinner_item);
+        categoryAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        sCategory.setAdapter(categoryAdapter);
+        sCategory.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> adapterView, View view, int position, long l) {
+                if (++check <= 2 && !Objects.equals(getResources().getStringArray(R.array.channel_settings_array_category)[channelActivity.categoryId], getResources().getStringArray(R.array.channel_settings_array_category)[0]) || check <= 1) {
+                    if (Objects.equals(getResources().getStringArray(R.array.channel_settings_array_category)[channelActivity.categoryId], getResources().getStringArray(R.array.channel_settings_array_category)[1])) adapterView.setSelection(channelActivity.categoryId);
+                    categoryId = position;
+                    return;
+                }
+                bSaveChannelCategory.setVisibility(position == channelActivity.categoryId ? View.GONE : View.VISIBLE);
+                categoryId = position;
+            }
+
+            @Override public void onNothingSelected(AdapterView<?> adapterView) {}
+        });
 
         eChannelTitle.setText(channelActivity.channelTitle);
         eShortChannelLink.setText(channelActivity.channelShortLink);
+        eDescription.setText(channelActivity.channelDescription);
 
         eChannelTitle.setFilters(new InputFilter[] {new InputFilter.LengthFilter(32)});
         eShortChannelLink.setFilters(new InputFilter[] {(source, start, end, dest, dstart, dend) -> {
@@ -72,6 +101,16 @@ public class ChannelSettingsFragment extends Fragment {
             @Override public void onTextChanged(CharSequence s, int start, int before, int count) { }
         });
 
+        eDescription.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void afterTextChanged(Editable s) {
+                bSaveChannelDescription.setVisibility(eDescription.getText().toString().equals(channelActivity.channelDescription) ? View.GONE : View.VISIBLE);
+            }
+
+            @Override public void beforeTextChanged(CharSequence s, int start, int count, int after) { }
+            @Override public void onTextChanged(CharSequence s, int start, int before, int count) { }
+        });
+
         eChannelTitle.setOnKeyListener((view, keyCode, event) -> {
             if (keyCode == KeyEvent.KEYCODE_ENTER && !eChannelTitle.getText().toString().equals(channelActivity.channelTitle)) saveChannelTitle(view);
             return keyCode == KeyEvent.KEYCODE_ENTER;
@@ -82,9 +121,22 @@ public class ChannelSettingsFragment extends Fragment {
             return keyCode == KeyEvent.KEYCODE_ENTER;
         });
 
+        eDescription.setOnKeyListener((view, keyCode, event) -> {
+            if (keyCode == KeyEvent.KEYCODE_ENTER && !eDescription.getText().toString().equals(channelActivity.channelDescription)) saveChannelDescription(view);
+            return keyCode == KeyEvent.KEYCODE_ENTER;
+        });
+
         bSaveChannelTitle.setOnClickListener(this::saveChannelTitle);
 
         bSaveShortChannelLink.setOnClickListener(this::saveShortChannelLink);
+
+        bSaveChannelDescription.setOnClickListener(this::saveChannelDescription);
+
+        bSaveChannelCategory.setOnClickListener(view -> {
+            myDB.child("specter").child("channels").child(String.valueOf(channelActivity.channelId)).child("categoryId").setValue(categoryId);
+            channelActivity.categoryId = categoryId;
+            bSaveChannelCategory.setVisibility(View.GONE);
+        });
 
         inflaterView.findViewById(R.id.button_delete_channel).setOnClickListener(view -> {
             myDB.child("specter").child("uid").child(channelActivity.channelShortLink).setValue(null);
@@ -123,6 +175,14 @@ public class ChannelSettingsFragment extends Fragment {
                     bSaveShortChannelLink.setVisibility(View.GONE);
                 }
             });
+    }
+
+    public void saveChannelDescription(View view) {
+        String channelDescription = eDescription.getText().toString();
+
+        myDB.child("specter").child("channels").child(String.valueOf(channelActivity.channelId)).child("description").setValue(channelDescription);
+        channelActivity.channelDescription = channelDescription;
+        bSaveChannelDescription.setVisibility(View.GONE);
     }
 
 }

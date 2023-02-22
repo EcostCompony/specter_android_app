@@ -8,9 +8,9 @@ import com.ecost.specter.R;
 
 public class ChannelActivity extends AppCompatActivity {
 
-    Integer channelId, channelAdmin, postId, postsNumber;
+    Integer channelId, channelAdmin, postId, postsNumber, categoryId;
     Integer channelSubscribers = 0;
-    String channelTitle, channelShortLink;
+    String channelTitle, channelShortLink, channelDescription;
     boolean userSubscribe;
 
     @Override
@@ -23,6 +23,8 @@ public class ChannelActivity extends AppCompatActivity {
         postsNumber = getIntent().getIntExtra("CHANNEL_POSTS_NUMBER", 0);
         channelTitle = getIntent().getStringExtra("CHANNEL_TITLE");
         channelShortLink = getIntent().getStringExtra("CHANNEL_SHORT_LINK");
+        categoryId = getIntent().getIntExtra("CHANNEL_CATEGORY", 0);
+        channelDescription = getIntent().getStringExtra("CHANNEL_DESCRIPTION");
         userSubscribe = getIntent().getBooleanExtra("USER_SUBSCRIBE", false);
 
         getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container_view, new ChannelFragment()).commit();
