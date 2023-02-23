@@ -12,6 +12,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.inputmethod.InputMethodManager;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.Spinner;
@@ -30,6 +31,7 @@ public class CreateChannelMenuFragment extends Fragment {
 
     EditText eTitle, eShortChannelLink, eDescription;
     Spinner sCategory;
+    int categoryId = 0;
     MainMenuActivity mainMenuActivity;
 
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -44,7 +46,14 @@ public class CreateChannelMenuFragment extends Fragment {
         ArrayAdapter<CharSequence> categoryAdapter = ArrayAdapter.createFromResource(mainMenuActivity, R.array.channel_settings_array_category, R.layout.spinner_item);
         categoryAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         sCategory.setAdapter(categoryAdapter);
-        sCategory.setOnItemSelectedListener(mainMenuActivity);
+        sCategory.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                categoryId = position;
+            }
+
+            @Override public void onNothingSelected(AdapterView<?> parent) {}
+        });
 
         eTitle.setFilters(new InputFilter[] {new InputFilter.LengthFilter(32)});
         eShortChannelLink.setFilters(new InputFilter[] {(source, start, end, dest, dstart, dend) -> {
@@ -88,7 +97,7 @@ public class CreateChannelMenuFragment extends Fragment {
                         Integer id = Integer.parseInt(String.valueOf(taskId.getResult().getValue()));
                         List<Integer> subscribers = new ArrayList<>();
                         subscribers.add(authId);
-                        myDB.child("specter").child("channels").child(String.valueOf(id)).setValue(new Channel(id, shortChannelLink, authId, 0, title, mainMenuActivity.categoryId == 0 ? null : mainMenuActivity.categoryId, eDescription.getText().toString().equals("") ? null : eDescription.getText().toString(), "%CHANNEL_CREATED%", true, subscribers));
+                        myDB.child("specter").child("channels").child(String.valueOf(id)).setValue(new Channel(id, shortChannelLink, authId, 0, title, categoryId == 0 ? null : categoryId, eDescription.getText().toString().equals("") ? null : eDescription.getText().toString(), "%CHANNEL_CREATED%", true, subscribers));
                         myDB.child("specter").child("uid").child(shortChannelLink.replace('.', '*')).child("id").setValue(id);
                         myDB.child("specter").child("uid").child(shortChannelLink.replace('.', '*')).child("type").setValue("channel");
                         myDB.child("specter").child("channels_number").setValue(id + 1);
