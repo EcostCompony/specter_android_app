@@ -54,8 +54,10 @@ public class ChannelSettingsFragment extends Fragment {
             @Override
             public void onItemSelected(AdapterView<?> adapterView, View view, int position, long l) {
                 if (++check <= 2 && !Objects.equals(getResources().getStringArray(R.array.channel_settings_array_category)[channelActivity.categoryId], getResources().getStringArray(R.array.channel_settings_array_category)[0]) || check <= 1) {
-                    if (Objects.equals(getResources().getStringArray(R.array.channel_settings_array_category)[channelActivity.categoryId], getResources().getStringArray(R.array.channel_settings_array_category)[1])) adapterView.setSelection(channelActivity.categoryId);
-                    categoryId = position;
+                    if (!Objects.equals(getResources().getStringArray(R.array.channel_settings_array_category)[channelActivity.categoryId], getResources().getStringArray(R.array.channel_settings_array_category)[0])) {
+                        adapterView.setSelection(channelActivity.categoryId);
+                        categoryId = channelActivity.categoryId;
+                    }
                     return;
                 }
                 bSaveChannelCategory.setVisibility(position == channelActivity.categoryId ? View.GONE : View.VISIBLE);
