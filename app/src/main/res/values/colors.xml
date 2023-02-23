@@ -30,4 +30,5 @@
     <color name="bottom_sheet_divider_color">#EFEFEF</color>
     <color name="my_comment_background_color">#BC2384DD</color>
     <color name="my_comment_time_color">#EAEAEA</color>
+    <color name="channel_page_category_color">#9C9C9C</color>
 </resources>

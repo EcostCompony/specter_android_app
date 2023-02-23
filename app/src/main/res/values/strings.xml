@@ -3,6 +3,7 @@
 
     <!-- symbols -->
     <string name="symbol_at" translatable="false">\@</string>
+    <string name="symbol_dot" translatable="false">·</string>
 
     <!-- attributes -->
     <string name="channels_menu_attribute_channel_created">Channel created</string>
@@ -134,6 +135,9 @@
     <string name="comments_alert_dialog_item_edit">Edit</string>
     <string name="comments_alert_dialog_item_copy">Copy</string>
     <string name="comments_alert_dialog_item_delete">Delete</string>
+
+    <!-- channel page -->
+    <string name="channel_page_description_header">Описание</string>
 
     <!-- channel settings -->
     <string name="channel_settings_parameter_header_title">Channel name</string>

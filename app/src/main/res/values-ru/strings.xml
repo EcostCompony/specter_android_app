@@ -130,6 +130,9 @@
     <string name="comments_alert_dialog_item_copy">Копировать текст</string>
     <string name="comments_alert_dialog_item_delete">Удалить комментарий</string>
 
+    <!-- channel page -->
+    <string name="channel_page_description_header">Описание</string>
+
     <!-- channel settings -->
     <string name="channel_settings_parameter_header_title">Название</string>
     <string name="channel_settings_parameter_header_short_channel_link">Короткая ссылка</string>

@@ -42,15 +42,32 @@
                 android:orientation="vertical"
                 android:layout_marginStart="13dp">
 
-                <TextView
-                    android:id="@+id/channel_title"
+                <LinearLayout
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:maxLines="1"
-                    android:singleLine="true"
-                    android:fontFamily="@font/inter_bold"
-                    android:textSize="18sp"
-                    tools:text="федя йо" />
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:id="@+id/channel_title"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:maxLines="1"
+                        android:singleLine="true"
+                        android:fontFamily="@font/inter_bold"
+                        android:textSize="18sp"
+                        tools:text="федя йо" />
+
+                    <TextView
+                        android:id="@+id/channel_category"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:layout_marginStart="3dp"
+                        android:fontFamily="@font/inter_medium"
+                        android:textColor="@color/channel_page_category_color"
+                        tools:text="· блог"
+                        android:visibility="gone" />
+                </LinearLayout>
 
                 <TextView
                     android:id="@+id/short_channel_link"
@@ -78,5 +95,37 @@
                 android:backgroundTint="#9C9C9C"
                 android:background="@drawable/icon_settings" />
         </LinearLayout>
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/channel_description_block"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_marginTop="6dp"
+        android:layout_marginHorizontal="20dp"
+        android:paddingBottom="10dp"
+        android:paddingTop="10dp"
+        android:background="@drawable/header_background"
+        android:visibility="gone">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="15dp"
+            android:fontFamily="@font/inter_bold"
+            android:textSize="12sp"
+            android:text="@string/channel_page_description_header" />
+
+        <TextView
+            android:id="@+id/channel_text_description"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="15dp"
+            android:layout_marginTop="5dp"
+            android:fontFamily="@font/inter_regular"
+            android:textSize="10sp"
+            tools:text="Текст описания\nТекст описания\nТекст описания\nТекст описания\nТекст описания"
+            tools:ignore="SmallSp" />
     </LinearLayout>
 </LinearLayout>
