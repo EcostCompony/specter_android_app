@@ -106,10 +106,10 @@
         <item>Светлая</item>
         <item>Тёмная</item>
     </string-array>
-    <string name="settings_menu_parameter_header_language">Язык</string>
-    <string-array name="setting_array_language">
+    <string name="settings_menu_parameter_header_language">Language</string>
+    <string-array name="setting_array_language" translatable="false">
         <item>Русский</item>
-        <item>Английский</item>
+        <item>English</item>
     </string-array>
     <string name="settings_menu_button_sign_out">Log out</string>
 
