@@ -65,7 +65,7 @@ public class CreateChannelMenuFragment extends Fragment {
             return null;
         }, new InputFilter.LengthFilter(16)});
 
-        inflaterView.findViewById(R.id.button_close).setOnClickListener(view -> mainMenuActivity.getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container_view, new ChannelsMenuFragment()).commit());
+        inflaterView.findViewById(R.id.button_close).setOnClickListener(view -> mainMenuActivity.getSupportFragmentManager().popBackStackImmediate());
 
         eShortChannelLink.setOnKeyListener((view, keyCode, event) -> {
             if (keyCode == KeyEvent.KEYCODE_ENTER) ((InputMethodManager) mainMenuActivity.getSystemService(Context.INPUT_METHOD_SERVICE)).hideSoftInputFromWindow(view.getWindowToken(), 0);
@@ -101,7 +101,7 @@ public class CreateChannelMenuFragment extends Fragment {
                         myDB.child("specter").child("uid").child(shortChannelLink.replace('.', '*')).child("id").setValue(id);
                         myDB.child("specter").child("uid").child(shortChannelLink.replace('.', '*')).child("type").setValue("channel");
                         myDB.child("specter").child("channels_number").setValue(id + 1);
-                        mainMenuActivity.getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container_view, new ChannelsMenuFragment()).commit();
+                        mainMenuActivity.getSupportFragmentManager().popBackStackImmediate();
                     });
             });
     }

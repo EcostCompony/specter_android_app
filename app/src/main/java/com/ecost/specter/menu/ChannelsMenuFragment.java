@@ -46,6 +46,8 @@ public class ChannelsMenuFragment extends Fragment {
         tChannelsNumber = inflaterView.findViewById(R.id.number_channels);
         mainMenuActivity = (MainMenuActivity) requireActivity();
 
+        channels.clear();
+
         rChannelList.setLayoutManager(new LinearLayoutManager(mainMenuActivity));
         channelsAdapter = new ChannelsAdapter(mainMenuActivity, channels, (channel, position) -> {
             Intent intent = new Intent(mainMenuActivity, ChannelActivity.class);
@@ -113,15 +115,9 @@ public class ChannelsMenuFragment extends Fragment {
 
         inflaterView.findViewById(R.id.button_navigate).setOnClickListener(view -> new NavigationFragment().show(mainMenuActivity.getSupportFragmentManager(), new NavigationFragment().getTag()));
 
-        inflaterView.findViewById(R.id.button_search).setOnClickListener(view -> mainMenuActivity.getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container_view, new ChannelsSearchFragment()).commit());
+        inflaterView.findViewById(R.id.button_search).setOnClickListener(view -> mainMenuActivity.getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container_view, new ChannelsSearchFragment()).addToBackStack(null).commit());
 
         return inflaterView;
-    }
-
-    @Override
-    public void onDestroy() {
-        super.onDestroy();
-        channels.clear();
     }
 
 }

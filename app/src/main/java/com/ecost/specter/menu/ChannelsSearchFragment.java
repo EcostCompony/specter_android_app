@@ -110,7 +110,7 @@ public class ChannelsSearchFragment extends Fragment {
 
         inflaterView.findViewById(R.id.button_close).setOnClickListener(view -> {
             ((InputMethodManager) mainMenuActivity.getSystemService(Context.INPUT_METHOD_SERVICE)).hideSoftInputFromWindow(view.getWindowToken(), 0);
-            mainMenuActivity.getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container_view, new ChannelsMenuFragment()).commit();
+            mainMenuActivity.getSupportFragmentManager().popBackStackImmediate();
         });
 
         return inflaterView;

@@ -33,12 +33,12 @@ public class NavigationFragment extends BottomSheetDialogFragment {
 
         inflaterView.findViewById(R.id.button_create_channel).setOnClickListener(view -> {
             dismiss();
-            mainMenuActivity.getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container_view, new CreateChannelMenuFragment()).commit();
+            mainMenuActivity.getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container_view, new CreateChannelMenuFragment()).addToBackStack(null).commit();
         });
 
         inflaterView.findViewById(R.id.button_settings).setOnClickListener(view -> {
             dismiss();
-            mainMenuActivity.getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container_view, new SettingsMenuFragment()).commit();
+            mainMenuActivity.getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container_view, new SettingsMenuFragment()).addToBackStack(null).commit();
         });
 
         return inflaterView;

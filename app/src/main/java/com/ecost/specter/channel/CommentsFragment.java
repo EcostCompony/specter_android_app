@@ -106,7 +106,7 @@ public class CommentsFragment extends Fragment {
         };
         myDB.child("specter").child("channels").child(String.valueOf(channelActivity.channelId)).child("posts").child(String.valueOf(channelActivity.postId)).child("comments").addChildEventListener(childEventListener);
 
-        inflaterView.findViewById(R.id.button_close).setOnClickListener(view -> channelActivity.getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container_view, new ChannelFragment()).commit());
+        inflaterView.findViewById(R.id.button_close).setOnClickListener(view -> channelActivity.getSupportFragmentManager().popBackStackImmediate());
 
         inflaterView.findViewById(R.id.button_send).setOnClickListener(view -> {
             String text = eComment.getText().toString().trim();

@@ -47,7 +47,7 @@ public class ChannelPageFragment extends Fragment {
             lDescription.setVisibility(View.VISIBLE);
         }
 
-        bBack.setOnClickListener(view -> channelActivity.getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container_view, new ChannelFragment()).commit());
+        bBack.setOnClickListener(view -> channelActivity.getSupportFragmentManager().popBackStackImmediate());
 
         bChannelSettings.setOnClickListener(view -> channelActivity.getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container_view, new ChannelSettingsFragment()).addToBackStack(null).commit());
 

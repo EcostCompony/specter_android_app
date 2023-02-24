@@ -104,7 +104,7 @@ public class PasswordSignUpFragment extends Fragment {
                 myDB.child("ecost").child("uid").child(authActivity.numberPhone).child("id").setValue(uid);
                 myDB.child("ecost").child("users_number").setValue(uid);
                 pushPreferenceEcostId(authActivity, uid);
-                authActivity.getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container_view, new SignInFragment()).addToBackStack(null).commit();
+                authActivity.getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container_view, new SignInFragment()).commit();
                 new SpecterStartFragment().show(authActivity.getSupportFragmentManager(), new SpecterStartFragment().getTag());
             }
         });

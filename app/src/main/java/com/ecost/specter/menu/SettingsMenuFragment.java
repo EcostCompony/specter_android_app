@@ -114,7 +114,7 @@ public class SettingsMenuFragment extends Fragment {
             return null;
         }, new InputFilter.LengthFilter(16)});
 
-        inflaterView.findViewById(R.id.button_close).setOnClickListener(view -> mainMenuActivity.getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container_view, new ChannelsMenuFragment()).commit());
+        inflaterView.findViewById(R.id.button_close).setOnClickListener(view -> mainMenuActivity.getSupportFragmentManager().popBackStackImmediate());
 
         eUserName.addTextChangedListener(new TextWatcher() {
             @Override

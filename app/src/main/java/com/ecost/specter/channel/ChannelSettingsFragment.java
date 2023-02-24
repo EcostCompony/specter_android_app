@@ -81,7 +81,7 @@ public class ChannelSettingsFragment extends Fragment {
             return null;
         }, new InputFilter.LengthFilter(16)});
 
-        inflaterView.findViewById(R.id.button_close).setOnClickListener(view -> channelActivity.getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container_view, new ChannelFragment()).commit());
+        inflaterView.findViewById(R.id.button_close).setOnClickListener(view -> channelActivity.getSupportFragmentManager().popBackStackImmediate());
 
         eChannelTitle.addTextChangedListener(new TextWatcher() {
             @Override
