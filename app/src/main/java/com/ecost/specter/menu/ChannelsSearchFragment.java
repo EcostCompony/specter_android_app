@@ -62,16 +62,7 @@ public class ChannelsSearchFragment extends Fragment {
         }, 1);
 
         rChannelList.setLayoutManager(new LinearLayoutManager(mainMenuActivity));
-        channelsAdapter = new ChannelsAdapter(mainMenuActivity, channels, (channel, position) -> {
-            Intent intent = new Intent(mainMenuActivity, ChannelActivity.class);
-            intent.putExtra("CHANNEL_ID", channel.id);
-            intent.putExtra("CHANNEL_ADMINS", channel.author);
-            intent.putExtra("CHANNEL_POSTS_NUMBER", channel.postsNumber);
-            intent.putExtra("CHANNEL_TITLE", channel.title);
-            intent.putExtra("CHANNEL_SHORT_LINK", String.valueOf(channel.shortLink));
-            intent.putExtra("USER_SUBSCRIBE", false);
-            startActivity(intent);
-        }, (channel, position) -> true);
+        channelsAdapter = new ChannelsAdapter(mainMenuActivity, channels, (channel, position) -> mainMenuActivity.startChannel(channel), (channel, position) -> true);
         rChannelList.setAdapter(channelsAdapter);
 
         eChannelTitle.addTextChangedListener(new TextWatcher() {

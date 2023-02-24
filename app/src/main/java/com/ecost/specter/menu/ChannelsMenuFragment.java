@@ -49,18 +49,7 @@ public class ChannelsMenuFragment extends Fragment {
         channels.clear();
 
         rChannelList.setLayoutManager(new LinearLayoutManager(mainMenuActivity));
-        channelsAdapter = new ChannelsAdapter(mainMenuActivity, channels, (channel, position) -> {
-            Intent intent = new Intent(mainMenuActivity, ChannelActivity.class);
-            intent.putExtra("CHANNEL_ID", channel.id);
-            intent.putExtra("CHANNEL_ADMINS", channel.author);
-            intent.putExtra("CHANNEL_POSTS_NUMBER", channel.postsNumber);
-            intent.putExtra("CHANNEL_TITLE", channel.title);
-            intent.putExtra("CHANNEL_SHORT_LINK", String.valueOf(channel.shortLink));
-            intent.putExtra("CHANNEL_CATEGORY", channel.categoryId);
-            intent.putExtra("CHANNEL_DESCRIPTION", channel.description);
-            intent.putExtra("USER_SUBSCRIBE", true);
-            startActivity(intent);
-        }, (channel, position) -> true);
+        channelsAdapter = new ChannelsAdapter(mainMenuActivity, channels, (channel, position) -> mainMenuActivity.startChannel(channel), (channel, position) -> true);
         rChannelList.setAdapter(channelsAdapter);
 
         ChildEventListener childEventListener = new ChildEventListener() {
