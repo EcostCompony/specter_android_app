@@ -98,6 +98,8 @@
     <string name="create_channel_menu_button_create_channel">Create</string>
 
     <!-- settings menu -->
+    <string name="settings_menu_section_account">Аккаунт</string>
+    <string name="settings_menu_section_app">Приложение</string>
     <string name="settings_menu_parameter_header_name">Name</string>
     <string name="settings_menu_parameter_header_short_user_link">Short link</string>
     <string name="settings_menu_parameter_header_theme">Тема</string>

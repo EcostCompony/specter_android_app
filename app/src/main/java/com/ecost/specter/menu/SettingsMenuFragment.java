@@ -33,10 +33,14 @@ import android.widget.Spinner;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatDelegate;
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.ecost.specter.R;
 import com.ecost.specter.auth.AuthActivity;
+import com.ecost.specter.recyclers.SectionsAdapter;
 
+import java.util.Arrays;
 import java.util.Locale;
 import java.util.Objects;
 import java.util.regex.Pattern;
@@ -54,6 +58,7 @@ public class SettingsMenuFragment extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View inflaterView = inflater.inflate(R.layout.fragment_settings_menu, container, false);
 
+        RecyclerView rSectionsList = inflaterView.findViewById(R.id.recycler_sections_list);
         eUserName = inflaterView.findViewById(R.id.input_user_name);
         eShortUserLink = inflaterView.findViewById(R.id.input_short_user_link);
         bSaveUserName = inflaterView.findViewById(R.id.button_save_user_name);
@@ -64,6 +69,9 @@ public class SettingsMenuFragment extends Fragment {
 
         eUserName.setText(authUserName);
         eShortUserLink.setText(authShortUserLink);
+
+        rSectionsList.setLayoutManager(new LinearLayoutManager(mainMenuActivity, LinearLayoutManager.HORIZONTAL, false));
+        rSectionsList.setAdapter(new SectionsAdapter(mainMenuActivity, Arrays.asList(getString(R.string.settings_menu_section_account), getString(R.string.settings_menu_section_app))));
 
         ArrayAdapter<CharSequence> languageAdapter = ArrayAdapter.createFromResource(mainMenuActivity, R.array.setting_array_language, R.layout.spinner_item);
         languageAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);

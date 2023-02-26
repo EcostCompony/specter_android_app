@@ -11,4 +11,6 @@
     <color name="bottom_sheet_divider_color">#EFEFEF</color>
     <color name="my_comment_background_color">#BC2384DD</color>
     <color name="my_comment_time_color">#EAEAEA</color>
+    <color name="section_background_color">#F8F8F8</color>
+    <color name="section_text_color">#9C9C9C</color>
 </resources>
