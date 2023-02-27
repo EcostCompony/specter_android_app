@@ -19,18 +19,26 @@ public class SectionsAdapter extends RecyclerView.Adapter<SectionViewHolder> {
 
     SectionsAdapter.OnSectionClickListener onClickListener;
     List<String> names;
+    Integer sectionPosition;
     LayoutInflater inflater;
 
-    public SectionsAdapter(Context context, List<String> names, SectionsAdapter.OnSectionClickListener onClickListener) {
+    public SectionsAdapter(Context context, List<String> names, Integer sectionPosition, SectionsAdapter.OnSectionClickListener onClickListener) {
         this.inflater = LayoutInflater.from(context);
         this.names = names;
+        this.sectionPosition = sectionPosition;
         this.onClickListener = onClickListener;
+    }
+
+    @Override
+    public int getItemViewType(int position) {
+        if (sectionPosition == position) return R.layout.section_mark_item;
+        return R.layout.section_item;
     }
 
     @NonNull
     @Override
     public SectionViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        return new SectionViewHolder(inflater.inflate(R.layout.section_item, parent, false));
+        return new SectionViewHolder(inflater.inflate(viewType, parent, false));
     }
 
     @Override

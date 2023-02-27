@@ -3,7 +3,6 @@ package com.ecost.specter.menu;
 import static com.ecost.specter.Routing.pushPreferenceSettingsSection;
 import static com.ecost.specter.Routing.settingsSection;
 
-import android.annotation.SuppressLint;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -21,22 +20,19 @@ import java.util.Arrays;
 
 public class SettingsMenuFragment extends Fragment {
 
-    MainMenuActivity mainMenuActivity;
-
-    @SuppressLint("SetTextI18n")
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View inflaterView = inflater.inflate(R.layout.fragment_settings_menu, container, false);
 
         RecyclerView rSectionsList = inflaterView.findViewById(R.id.recycler_sections_list);
-        mainMenuActivity = (MainMenuActivity) requireActivity();
+        MainMenuActivity mainMenuActivity = (MainMenuActivity) requireActivity();
 
-        SectionsAdapter.OnSectionClickListener onClickListener = position -> {
+        rSectionsList.setLayoutManager(new LinearLayoutManager(mainMenuActivity, LinearLayoutManager.HORIZONTAL, false));
+        rSectionsList.setAdapter(new SectionsAdapter(mainMenuActivity, Arrays.asList(getString(R.string.settings_menu_section_account), getString(R.string.settings_menu_section_app)), settingsSection,  position -> {
             if (settingsSection == position) return;
             getChildFragmentManager().beginTransaction().replace(R.id.child_fragment_container_view, position == 0 ? new AccountSettingsMenuFragment() : new AppSettingsMenuFragment()).commit();
             pushPreferenceSettingsSection(mainMenuActivity, position);
-        };
-        rSectionsList.setLayoutManager(new LinearLayoutManager(mainMenuActivity, LinearLayoutManager.HORIZONTAL, false));
-        rSectionsList.setAdapter(new SectionsAdapter(mainMenuActivity, Arrays.asList(getString(R.string.settings_menu_section_account), getString(R.string.settings_menu_section_app)), onClickListener));
+            mainMenuActivity.recreate();
+        }));
 
         getChildFragmentManager().beginTransaction().replace(R.id.child_fragment_container_view, settingsSection == 0 ? new AccountSettingsMenuFragment() : new AppSettingsMenuFragment()).commit();
 
