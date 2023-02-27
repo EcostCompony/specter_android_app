@@ -18,7 +18,7 @@
     <string name="number_subscribers_plural_genitive_case">subscribers</string>
 
     <!-- headers -->
-    <string name="hard_update_header">Версия устарела!</string>
+    <string name="hard_update_header">Your version is outdated!</string>
     <string name="sign_in_header">Log in with <font color="#D75026">eco</font>st</string>
     <string name="sign_up_header">Sign up to <font color="#D75026">eco</font>st</string>
     <string name="specter_start_header">Let\'s start</string>
@@ -57,8 +57,8 @@
     <string name="channel_settings_error_busy_short_channel_link">It looks like this short link is already taken =(</string>
 
     <!-- hard update-->
-    <string name="hard_update_description">К сожалению, мы перестали поддерживать данную версию, так как была обнаружена критическая ошибка, либо эта версия не поддерживает новую систему сервиса.\n\nНажмите на кнопку «Обновить» и скачайте последнюю версию приложения. Если вы уверены, что у вас последняя версия приложения, тогда стоит подождать. Мы уже активно работаем над новым релизом.</string>
-    <string name="hard_update_button_update">Обновить</string>
+    <string name="hard_update_description">Unfortunately, we stopped supporting this version because a critical error was found, or this version does not support the new service system.\n\nClick on the «Update» button and download the latest version of the application. If you are sure that you have the latest version of the app, then it's worth waiting. We are already actively working on a new release.</string>
+    <string name="hard_update_button_update">Update</string>
 
     <!-- sign in -->
     <string name="sign_in_input_hint_phone_number">Phone number</string>
@@ -93,8 +93,8 @@
     <!-- create channel menu -->
     <string name="create_channel_menu_parameter_header_title">Channel name</string>
     <string name="create_channel_menu_parameter_header_short_channel_link">Short link</string>
-    <string name="create_channel_menu_parameter_header_channel_category">Категория</string>
-    <string name="create_channel_menu_parameter_header_channel_description">Описание</string>
+    <string name="create_channel_menu_parameter_header_channel_category">Category</string>
+    <string name="create_channel_menu_parameter_header_channel_description">Description</string>
     <string name="create_channel_menu_button_create_channel">Create</string>
 
     <!-- settings menu -->
@@ -102,11 +102,11 @@
     <string name="settings_menu_section_app">Приложение</string>
     <string name="settings_menu_parameter_header_name">Name</string>
     <string name="settings_menu_parameter_header_short_user_link">Short link</string>
-    <string name="settings_menu_parameter_header_theme">Тема</string>
+    <string name="settings_menu_parameter_header_theme">Theme</string>
     <string-array name="setting_array_theme">
-        <item>Системная</item>
-        <item>Светлая</item>
-        <item>Тёмная</item>
+        <item>System</item>
+        <item>Light</item>
+        <item>Dark</item>
     </string-array>
     <string name="settings_menu_parameter_header_language">Language</string>
     <string-array name="setting_array_language" translatable="false">
@@ -139,18 +139,18 @@
     <string name="comments_alert_dialog_item_delete">Delete</string>
 
     <!-- channel page -->
-    <string name="channel_page_description_header">Описание</string>
+    <string name="channel_page_description_header">Description</string>
 
     <!-- channel settings -->
     <string name="channel_settings_parameter_header_title">Channel name</string>
     <string name="channel_settings_parameter_header_short_channel_link">Short link</string>
-    <string name="channel_settings_parameter_header_category">Категория</string>
+    <string name="channel_settings_parameter_header_category">Category</string>
     <string-array name="channel_settings_array_category">
-        <item>Не выбрано</item>
-        <item>Блог</item>
-        <item>Новости</item>
+        <item>Not selected</item>
+        <item>Blog</item>
+        <item>News</item>
     </string-array>
-    <string name="channel_settings_parameter_header_description">Описание</string>
+    <string name="channel_settings_parameter_header_description">Description</string>
     <string name="channel_settings_button_delete_channel">Delete channel</string>
 
     <!-- content descriptions -->
