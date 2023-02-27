@@ -33,7 +33,7 @@ public class Routing extends AppCompatActivity {
 
     public static final DatabaseReference myDB = FirebaseDatabase.getInstance().getReference();
     public static boolean auth;
-    public static Integer authId, authEcostId;
+    public static Integer authId, authEcostId, settingsSection;
     public static String authUserName, authShortUserLink, appLanguage, appTheme;
 
     @Override
@@ -52,6 +52,7 @@ public class Routing extends AppCompatActivity {
         authShortUserLink = PreferenceManager.getDefaultSharedPreferences(this).getString("SHORT_USER_LINK", null);
         appLanguage = PreferenceManager.getDefaultSharedPreferences(this).getString("APP_LANGUAGE", null);
         appTheme = PreferenceManager.getDefaultSharedPreferences(this).getString("APP_THEME", null);
+        settingsSection = PreferenceManager.getDefaultSharedPreferences(this).getInt("SETTINGS_SECTION", 0);
 
         myDB.child("specter").child("support_version").get().addOnCompleteListener(taskSupportVersion ->
             myDB.child("specter").child("users").child(String.valueOf(authId)).get().addOnCompleteListener(taskTestUser ->
@@ -111,6 +112,11 @@ public class Routing extends AppCompatActivity {
     public static void pushPreferenceTheme(Context context, String value) {
         PreferenceManager.getDefaultSharedPreferences(context).edit().putString("APP_THEME", value).apply();
         appTheme = value;
+    }
+
+    public static void pushPreferenceSettingsSection(Context context, Integer value) {
+        PreferenceManager.getDefaultSharedPreferences(context).edit().putInt("SETTINGS_SECTION", value).apply();
+        settingsSection = value;
     }
 
     public static void signOut(Context context) {

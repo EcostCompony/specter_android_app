@@ -13,12 +13,18 @@ import java.util.List;
 
 public class SectionsAdapter extends RecyclerView.Adapter<SectionViewHolder> {
 
+    public interface OnSectionClickListener {
+        void onSectionClick(int position);
+    }
+
+    SectionsAdapter.OnSectionClickListener onClickListener;
     List<String> names;
     LayoutInflater inflater;
 
-    public SectionsAdapter(Context context, List<String> names) {
+    public SectionsAdapter(Context context, List<String> names, SectionsAdapter.OnSectionClickListener onClickListener) {
         this.inflater = LayoutInflater.from(context);
         this.names = names;
+        this.onClickListener = onClickListener;
     }
 
     @NonNull
@@ -30,6 +36,7 @@ public class SectionsAdapter extends RecyclerView.Adapter<SectionViewHolder> {
     @Override
     public void onBindViewHolder(@NonNull SectionViewHolder holder, int position) {
         holder.name.setText(names.get(position));
+        holder.itemView.setOnClickListener(v -> onClickListener.onSectionClick(position));
     }
 
     @Override
