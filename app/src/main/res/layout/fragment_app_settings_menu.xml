@@ -10,7 +10,7 @@
     <TextView
         android:layout_width="340dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
+        android:layout_marginTop="15dp"
         android:paddingHorizontal="13dp"
         android:textColor="@color/parameters_header"
         android:fontFamily="@font/inter_semi_bold"

@@ -57,7 +57,7 @@
     <string name="channel_settings_error_busy_short_channel_link">It looks like this short link is already taken =(</string>
 
     <!-- hard update-->
-    <string name="hard_update_description">Unfortunately, we stopped supporting this version because a critical error was found, or this version does not support the new service system.\n\nClick on the «Update» button and download the latest version of the application. If you are sure that you have the latest version of the app, then it's worth waiting. We are already actively working on a new release.</string>
+    <string name="hard_update_description">Unfortunately, we stopped supporting this version because a critical error was found, or this version does not support the new service system.\n\nClick on the \«Update\» button and download the latest version of the application. If you are sure that you have the latest version of the app, then it\'s worth waiting. We are already actively working on a new release.</string>
     <string name="hard_update_button_update">Update</string>
 
     <!-- sign in -->
