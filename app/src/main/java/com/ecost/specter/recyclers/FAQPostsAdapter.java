@@ -30,8 +30,8 @@ public class FAQPostsAdapter extends RecyclerView.Adapter<FAQPostViewHolder> {
 
     @Override
     public int getItemViewType(int position) {
-        if (faqPosts.get(position).type == 1) return R.layout.my_comment_item;
-        return R.layout.post_item;
+        if (faqPosts.get(position).type == 1) return R.layout.faq_question_item;
+        return R.layout.faq_answer_item;
     }
 
     @NonNull

@@ -19,6 +19,8 @@
     <string name="channels_menu_header">Каналы</string>
     <string name="create_channel_menu_header">Создание канала</string>
     <string name="settings_menu_header">Настройки</string>
+    <string name="support_header">Поддержка</string>
+    <string name="faq_support_header">Часто задаваемые вопросы</string>
     <string name="comments_header">Комментарии</string>
     <string name="channel_settings_header">Настройки канала</string>
 
@@ -80,6 +82,7 @@
     <!-- drawer items -->
     <string name="drawer_item_create_channel">Создать канал</string>
     <string name="drawer_item_settings">Настройки</string>
+    <string name="drawer_item_support">Поддержка</string>
 
     <!-- channels search -->
     <string name="channels_search_input_channel_title_hint">Название канала</string>
@@ -144,8 +147,9 @@
     <string name="channel_settings_button_delete_channel">Удалить канал</string>
 
     <!-- faq support -->
-    <string name="drawer_item_support">Поддержка</string>
+    <string name="faq_answer_item_author">Поддержка</string>
     <string name="faq_support_post_copy">Текст скопирован</string>
+    <string name="faq_support_input_hint_faq_post">Напишите текст</string>
     <string name="faq_support_context_menu_item_send_question">Отпрваить вопрос</string>
 
     <!-- content descriptions -->
@@ -155,7 +159,4 @@
     <string name="channel_item_content_description_channel_photo">Фото канала</string>
     <string name="channel_settings_button_content_description_save_channel_title">Сохранить название канала</string>
     <string name="channel_settings_button_content_description_save_short_channel_link">Сохранить короткую ссылку канала</string>
-    <string name="support_header">Поддержка</string>
-    <string name="faq_support_header">Часто задаваемые вопросы</string>
-    <string name="faq_support_input_hint_faq_post">Напишите текст</string>
 </resources>
