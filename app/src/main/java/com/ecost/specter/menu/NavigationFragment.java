@@ -4,6 +4,7 @@ import static com.ecost.specter.Routing.authShortUserLink;
 import static com.ecost.specter.Routing.authUserName;
 
 import android.annotation.SuppressLint;
+import android.content.Intent;
 import android.os.Bundle;
 
 import android.view.LayoutInflater;
@@ -12,6 +13,7 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.ecost.specter.R;
+import com.ecost.specter.support.SupportActivity;
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment;
 
 public class NavigationFragment extends BottomSheetDialogFragment {
@@ -39,6 +41,11 @@ public class NavigationFragment extends BottomSheetDialogFragment {
         inflaterView.findViewById(R.id.button_settings).setOnClickListener(view -> {
             dismiss();
             mainMenuActivity.getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container_view, new SettingsMenuFragment()).addToBackStack(null).commit();
+        });
+
+        inflaterView.findViewById(R.id.button_support).setOnClickListener(view -> {
+            dismiss();
+            startActivity(new Intent(mainMenuActivity, SupportActivity.class));
         });
 
         return inflaterView;
