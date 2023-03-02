@@ -1,13 +1,135 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="@color/background"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".support.FAQSupportFragment">
 
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="Это фрагмент поддержки. Пошли нахуй" />
 
-</FrameLayout>
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:orientation="horizontal"
+            android:layout_marginTop="2dp"
+            android:gravity="center_vertical">
+
+            <androidx.cardview.widget.CardView
+                android:id="@+id/button_close"
+                android:layout_width="29dp"
+                android:layout_height="29dp"
+                android:layout_marginStart="26dp"
+                android:elevation="6dp"
+                app:cardCornerRadius="14.5dp">
+
+                <View
+                    android:layout_width="13dp"
+                    android:layout_height="13dp"
+                    android:layout_gravity="center"
+                    android:background="@drawable/icon_cross"
+                    android:contentDescription="@string/main_menu_button_content_description_close" />
+            </androidx.cardview.widget.CardView>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginStart="18dp"
+                android:gravity="center_vertical"
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/inter_bold"
+                    android:textSize="13sp"
+                    android:text="Поддержка" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/inter_medium"
+                    android:textSize="10sp"
+                    android:textColor="@color/channel_body_color"
+                    android:text="Часто задоваемые вопросы" />
+            </LinearLayout>
+        </LinearLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_gravity="bottom"
+            android:layout_marginHorizontal="12dp"
+            android:background="@color/divider_color" />
+    </FrameLayout>
+
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/recycler_comments_list"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom"
+            android:layout_marginBottom="65dp"
+            android:overScrollMode="never" />
+
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="65dp"
+            android:layout_gravity="bottom"
+            android:visibility="visible"
+            android:background="@color/background">
+
+            <TextView
+                android:id="@+id/edit_comment"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="25dp"
+                android:textColor="@color/main_color"
+                android:fontFamily="@font/manrope_extra_bold"
+                android:textSize="13sp"
+                android:text="@string/channel_text_edit_comment"
+                android:visibility="gone" />
+
+            <EditText
+                android:id="@+id/input_comment"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:inputType="text"
+                android:autofillHints="comment text"
+                android:layout_marginVertical="14dp"
+                android:layout_marginStart="13dp"
+                android:layout_marginEnd="50dp"
+                android:background="@drawable/input"
+                android:paddingHorizontal="14dp"
+                android:paddingVertical="7dp"
+                android:textColorHint="@color/channel_input_post_color_hint"
+                android:fontFamily="@font/inter_medium"
+                android:textSize="12sp"
+                android:hint="@string/comments_input_hint_comment" />
+
+            <LinearLayout
+                android:id="@+id/button_send"
+                android:layout_width="50dp"
+                android:layout_height="match_parent"
+                android:layout_gravity="end|center_vertical"
+                android:gravity="center">
+
+                <View
+                    android:layout_width="25dp"
+                    android:layout_height="25dp"
+                    android:background="@drawable/icon_send" />
+            </LinearLayout>
+        </FrameLayout>
+    </FrameLayout>
+
+
+</LinearLayout>
