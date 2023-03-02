@@ -143,6 +143,11 @@
     <string name="channel_settings_parameter_header_description">Описание</string>
     <string name="channel_settings_button_delete_channel">Удалить канал</string>
 
+    <!-- faq support -->
+    <string name="drawer_item_support">Поддержка</string>
+    <string name="faq_support_post_copy">Текст скопирован</string>
+    <string name="faq_support_context_menu_item_send_question">Отпрваить вопрос</string>
+
     <!-- content descriptions -->
     <string name="main_menu_button_content_description_close">Закрыть</string>
     <string name="settings_menu_content_description_save_user_name">Сохранить имя</string>
@@ -150,5 +155,4 @@
     <string name="channel_item_content_description_channel_photo">Фото канала</string>
     <string name="channel_settings_button_content_description_save_channel_title">Сохранить название канала</string>
     <string name="channel_settings_button_content_description_save_short_channel_link">Сохранить короткую ссылку канала</string>
-    <string name="drawer_item_support">Поддержка</string>
 </resources>

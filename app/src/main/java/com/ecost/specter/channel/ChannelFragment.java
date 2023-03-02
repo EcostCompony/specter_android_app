@@ -43,7 +43,7 @@ import java.util.Objects;
 
 public class ChannelFragment extends Fragment {
 
-    LinearLayout lChannelHead, bClose, bSendPost;
+    LinearLayout lChannelHead, bSendPost;
     TextView tChannelTitle, tNumberSubscribers, tEditPost;
     Button bSubscribe;
     RecyclerView rPostsList;
@@ -64,7 +64,6 @@ public class ChannelFragment extends Fragment {
         tChannelTitle = inflaterView.findViewById(R.id.channel_title);
         tNumberSubscribers = inflaterView.findViewById(R.id.number_subscribers);
         bSubscribe = inflaterView.findViewById(R.id.button_subscribe);
-        bClose = inflaterView.findViewById(R.id.button_close);
         rPostsList = inflaterView.findViewById(R.id.recycler_posts_list);
         fToolsMenu = inflaterView.findViewById(R.id.tools_menu);
         tEditPost = inflaterView.findViewById(R.id.edit_post);
@@ -169,7 +168,7 @@ public class ChannelFragment extends Fragment {
         };
         myDB.child("specter").child("channels").child(String.valueOf(channelActivity.channelId)).child("subscribers").addChildEventListener(childEventListenerSub);
 
-        bClose.setOnClickListener(view -> channelActivity.finish());
+        inflaterView.findViewById(R.id.button_close).setOnClickListener(view -> channelActivity.finish());
 
         lChannelHead.setOnClickListener(view -> channelActivity.getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container_view, new ChannelPageFragment()).addToBackStack(null).commit());
 

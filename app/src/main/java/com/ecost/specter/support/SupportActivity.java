@@ -12,7 +12,7 @@ public class SupportActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_support);
-
         getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container_view, new FAQSupportFragment()).commit();
     }
+
 }

@@ -8,7 +8,6 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".support.FAQSupportFragment">
 
-
     <FrameLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
@@ -82,10 +81,11 @@
             android:overScrollMode="never" />
 
         <FrameLayout
+            android:id="@+id/sender_menu"
             android:layout_width="match_parent"
             android:layout_height="65dp"
             android:layout_gravity="bottom"
-            android:visibility="visible"
+            android:visibility="gone"
             android:background="@color/background">
 
             <EditText
