@@ -42,7 +42,7 @@ public class ChannelPageFragment extends Fragment {
             tChannelCategory.setText(getString(R.string.symbol_dot) + " " + getResources().getStringArray(R.array.channel_settings_array_category)[channelActivity.categoryId].toLowerCase());
             tChannelCategory.setVisibility(View.VISIBLE);
         }
-        if (channelActivity.channelDescription != null) {
+        if (channelActivity.channelDescription != null && !channelActivity.channelDescription.equals("")) {
             tChannelDescription.setText(channelActivity.channelDescription);
             lDescription.setVisibility(View.VISIBLE);
         }

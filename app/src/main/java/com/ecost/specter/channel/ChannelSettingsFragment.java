@@ -106,7 +106,7 @@ public class ChannelSettingsFragment extends Fragment {
         eDescription.addTextChangedListener(new TextWatcher() {
             @Override
             public void afterTextChanged(Editable s) {
-                bSaveChannelDescription.setVisibility(eDescription.getText().toString().equals(channelActivity.channelDescription) ? View.GONE : View.VISIBLE);
+                bSaveChannelDescription.setVisibility(eDescription.getText().toString().trim().equals(channelActivity.channelDescription) ? View.GONE : View.VISIBLE);
             }
 
             @Override public void beforeTextChanged(CharSequence s, int start, int count, int after) { }
@@ -124,7 +124,7 @@ public class ChannelSettingsFragment extends Fragment {
         });
 
         eDescription.setOnKeyListener((view, keyCode, event) -> {
-            if (keyCode == KeyEvent.KEYCODE_ENTER && !eDescription.getText().toString().equals(channelActivity.channelDescription)) saveChannelDescription(view);
+            if (keyCode == KeyEvent.KEYCODE_ENTER && !eDescription.getText().toString().trim().equals(channelActivity.channelDescription)) saveChannelDescription(view);
             return keyCode == KeyEvent.KEYCODE_ENTER;
         });
 
@@ -180,7 +180,7 @@ public class ChannelSettingsFragment extends Fragment {
     }
 
     public void saveChannelDescription(View view) {
-        String channelDescription = eDescription.getText().toString();
+        String channelDescription = eDescription.getText().toString().trim();
 
         myDB.child("specter").child("channels").child(String.valueOf(channelActivity.channelId)).child("description").setValue(channelDescription);
         channelActivity.channelDescription = channelDescription;
