@@ -74,7 +74,7 @@
         android:layout_height="match_parent">
 
         <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/recycler_comments_list"
+            android:id="@+id/recycler_support_message_list"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="bottom"
@@ -88,19 +88,8 @@
             android:visibility="visible"
             android:background="@color/background">
 
-            <TextView
-                android:id="@+id/edit_comment"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="25dp"
-                android:textColor="@color/main_color"
-                android:fontFamily="@font/manrope_extra_bold"
-                android:textSize="13sp"
-                android:text="@string/channel_text_edit_comment"
-                android:visibility="gone" />
-
             <EditText
-                android:id="@+id/input_comment"
+                android:id="@+id/input_support_post"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:inputType="text"
