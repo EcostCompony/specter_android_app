@@ -114,9 +114,9 @@
             android:orientation="horizontal">
 
             <View
-                android:layout_width="18dp"
-                android:layout_height="22dp"
-                android:layout_marginStart="24dp"
+                android:layout_width="14dp"
+                android:layout_height="21dp"
+                android:layout_marginStart="26dp"
                 android:background="@drawable/icon_support" />
 
             <TextView

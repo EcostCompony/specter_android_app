@@ -55,7 +55,7 @@ public class FAQSupportFragment extends Fragment {
 
         registerForContextMenu(bSendFAQPost);
         myDB.child("specter").child("users").child(authId.toString()).child("admin").get().addOnCompleteListener(task -> {
-            if (task.getResult().getValue() != null) senderMenu.setVisibility(View.VISIBLE);
+            if (Boolean.TRUE.equals(task.getResult().getValue(Boolean.class))) senderMenu.setVisibility(View.VISIBLE);
         });
 
         rFAQPostsList.setLayoutManager(new LinearLayoutManager(supportActivity));

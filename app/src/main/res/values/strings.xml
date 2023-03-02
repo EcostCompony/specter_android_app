@@ -165,4 +165,7 @@
     <string name="channel_item_content_description_channel_photo">Channel photo</string>
     <string name="channel_settings_button_content_description_save_channel_title">Save channel name</string>
     <string name="channel_settings_button_content_description_save_short_channel_link">Save short link</string>
+    <string name="support_header">Поддержка</string>
+    <string name="faq_support_header">Часто задаваемые вопросы</string>
+    <string name="faq_support_input_hint_faq_post">Напишите текст</string>
 </resources>
