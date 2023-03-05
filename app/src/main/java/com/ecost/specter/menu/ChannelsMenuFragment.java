@@ -47,7 +47,7 @@ public class ChannelsMenuFragment extends Fragment {
         channels.clear();
 
         rChannelList.setLayoutManager(new LinearLayoutManager(mainMenuActivity));
-        channelsAdapter = new ChannelsAdapter(mainMenuActivity, channels, (channel, position) -> mainMenuActivity.startChannel(channel), (channel, position) -> true);
+        channelsAdapter = new ChannelsAdapter(mainMenuActivity, channels, (channel, position) -> mainMenuActivity.startChannel(channel, true), (channel, position) -> true);
         rChannelList.setAdapter(channelsAdapter);
 
         ChildEventListener childEventListener = new ChildEventListener() {

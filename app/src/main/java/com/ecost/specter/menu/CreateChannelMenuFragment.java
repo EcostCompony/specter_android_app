@@ -102,7 +102,7 @@ public class CreateChannelMenuFragment extends Fragment {
                         myDB.child("specter").child("uid").child(shortChannelLink.replace('.', '*')).child("id").setValue(id);
                         myDB.child("specter").child("uid").child(shortChannelLink.replace('.', '*')).child("type").setValue("channel");
                         myDB.child("specter").child("channels_number").setValue(id + 1);
-                        mainMenuActivity.startChannel(channel);
+                        mainMenuActivity.startChannel(channel, true);
                         mainMenuActivity.getSupportFragmentManager().popBackStackImmediate();
                     });
             });

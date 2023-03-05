@@ -21,7 +21,7 @@ public class MainMenuActivity extends AppCompatActivity {
         }
     }
 
-    public void startChannel(Channel channel) {
+    public void startChannel(Channel channel, boolean subscribe) {
         Intent intent = new Intent(this, ChannelActivity.class);
         intent.putExtra("CHANNEL_ID", channel.id);
         intent.putExtra("CHANNEL_ADMINS", channel.author);
@@ -30,7 +30,7 @@ public class MainMenuActivity extends AppCompatActivity {
         intent.putExtra("CHANNEL_SHORT_LINK", String.valueOf(channel.shortLink));
         intent.putExtra("CHANNEL_CATEGORY", channel.categoryId);
         intent.putExtra("CHANNEL_DESCRIPTION", channel.description);
-        intent.putExtra("USER_SUBSCRIBE", true);
+        intent.putExtra("USER_SUBSCRIBE", subscribe);
         startActivity(intent);
     }
 

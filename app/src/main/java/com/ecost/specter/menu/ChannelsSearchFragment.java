@@ -6,7 +6,6 @@ import static com.ecost.specter.Routing.pluralForm;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
-import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -24,7 +23,6 @@ import android.widget.EditText;
 import android.widget.TextView;
 
 import com.ecost.specter.R;
-import com.ecost.specter.channel.ChannelActivity;
 import com.ecost.specter.models.Channel;
 import com.ecost.specter.recyclers.ChannelsAdapter;
 import com.google.firebase.database.ChildEventListener;
@@ -62,7 +60,7 @@ public class ChannelsSearchFragment extends Fragment {
         }, 1);
 
         rChannelList.setLayoutManager(new LinearLayoutManager(mainMenuActivity));
-        channelsAdapter = new ChannelsAdapter(mainMenuActivity, channels, (channel, position) -> mainMenuActivity.startChannel(channel), (channel, position) -> true);
+        channelsAdapter = new ChannelsAdapter(mainMenuActivity, channels, (channel, position) -> mainMenuActivity.startChannel(channel, false), (channel, position) -> true);
         rChannelList.setAdapter(channelsAdapter);
 
         eChannelTitle.addTextChangedListener(new TextWatcher() {
