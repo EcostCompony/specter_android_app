@@ -152,7 +152,7 @@ public class ChannelSettingsFragment extends Fragment {
     public void saveChannelTitle(View view) {
         String channelTitle = eChannelTitle.getText().toString();
 
-        if (channelTitle.equals("")) popup(channelActivity, view, getString(R.string.channel_settings_error_not_channel_title));
+        if (channelTitle.equals("")) popup(channelActivity, view, 1, getString(R.string.channel_settings_error_not_channel_title));
         else {
             myDB.child("specter").child("channels").child(String.valueOf(channelActivity.channelId)).child("title").setValue(channelTitle);
             channelActivity.channelTitle = channelTitle;
@@ -163,11 +163,11 @@ public class ChannelSettingsFragment extends Fragment {
     public void saveShortChannelLink(View view) {
         String shortChannelLink = eShortChannelLink.getText().toString();
 
-        if (shortChannelLink.equals("")) popup(channelActivity, view, getString(R.string.channel_settings_error_not_short_channel_title));
-        else if (shortChannelLink.length() < 3) popup(channelActivity, view, getString(R.string.channel_settings_error_small_short_channel_link));
+        if (shortChannelLink.equals("")) popup(channelActivity, view, 1, getString(R.string.channel_settings_error_not_short_channel_title));
+        else if (shortChannelLink.length() < 3) popup(channelActivity, view, 1, getString(R.string.channel_settings_error_small_short_channel_link));
         else
             myDB.child("specter").child("uid").child(shortChannelLink.replace('.', '*')).child("id").get().addOnCompleteListener(taskTestShortChannelLink -> {
-                if (taskTestShortChannelLink.getResult().getValue() != null) popup(channelActivity, view, getString(R.string.channel_settings_error_busy_short_channel_link));
+                if (taskTestShortChannelLink.getResult().getValue() != null) popup(channelActivity, view, 1, getString(R.string.channel_settings_error_busy_short_channel_link));
                 else {
                     myDB.child("specter").child("uid").child(channelActivity.channelShortLink.replace(".", "*")).setValue(null);
                     myDB.child("specter").child("channels").child(String.valueOf(channelActivity.channelId)).child("shortLink").setValue(shortChannelLink);

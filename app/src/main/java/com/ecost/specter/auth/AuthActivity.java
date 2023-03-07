@@ -27,14 +27,14 @@ public class AuthActivity extends AppCompatActivity {
     public void popupOneInput(View view, EditText editText, String text) {
         editText.startAnimation(AnimationUtils.loadAnimation(this, R.anim.input_shake));
         editText.setBackground(ContextCompat.getDrawable(this, R.drawable.input_auth_error));
-        popup(this, view, text);
+        popup(this, view, 1, text);
     }
 
     public void popupTwoInput(View view, EditText editText, EditText editText2, String text, FrameLayout... frameLayout) {
         editText2.setBackground(ContextCompat.getDrawable(this, R.drawable.input_auth));
         editText.setBackground(ContextCompat.getDrawable(this, R.drawable.input_auth_error));
         (frameLayout.length != 0 ? frameLayout[0] : editText).startAnimation(AnimationUtils.loadAnimation(this, R.anim.input_shake));
-        popup(this, view, text);
+        popup(this, view, 1, text);
     }
 
 }

@@ -149,8 +149,8 @@ public class Routing extends AppCompatActivity {
         else return i + " " + form2;
     }
 
-    public static void popup(Activity activity, View view, String text) {
-        @SuppressLint("InflateParams") View popupView =  activity.getLayoutInflater().inflate(R.layout.popup_window, null);
+    public static void popup(Activity activity, View view, int type, String text) {
+        @SuppressLint("InflateParams") View popupView =  activity.getLayoutInflater().inflate(type == 2 ? R.layout.popup_window : R.layout.error_popup_window, null);
         PopupWindow popupWindow = new PopupWindow(popupView, LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT, false);
 
         ((TextView) popupView.findViewById(R.id.text_error)).setText(text);

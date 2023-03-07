@@ -51,12 +51,12 @@ public class SpecterStartFragment extends BottomSheetDialogFragment {
             String name = eName.getText().toString();
             String shortUserLink = eShortUserLink.getText().toString();
 
-            if (name.equals("")) popup(authActivity, view, "error");
-            else if (shortUserLink.equals("")) popup(authActivity, view, "error");
-            else if (shortUserLink.length() < 3) popup(authActivity, view, "ссылка маленькая");
+            if (name.equals("")) popup(authActivity, view, 1, "error");
+            else if (shortUserLink.equals("")) popup(authActivity, view, 1, "error");
+            else if (shortUserLink.length() < 3) popup(authActivity, view, 1, "ссылка маленькая");
             else
                 myDB.child("specter").child("uid").child(shortUserLink.replace('.', '*')).child("id").get().addOnCompleteListener(taskTestShortLink -> {
-                    if (taskTestShortLink.getResult().getValue() != null) popup(authActivity, view, "ссылка занята");
+                    if (taskTestShortLink.getResult().getValue() != null) popup(authActivity, view, 1, "ссылка занята");
                     else
                         myDB.child("specter").child("users_number").get().addOnCompleteListener(taskId -> {
                             Integer uid = Integer.parseInt(String.valueOf(taskId.getResult().getValue()))+1;

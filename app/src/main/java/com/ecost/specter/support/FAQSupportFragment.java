@@ -61,7 +61,7 @@ public class FAQSupportFragment extends Fragment {
         rFAQPostsList.setLayoutManager(new LinearLayoutManager(supportActivity));
         faqPostsAdapter = new FAQPostsAdapter(supportActivity, faqPosts, context -> {
             ((ClipboardManager) inflater.getContext().getSystemService(Context.CLIPBOARD_SERVICE)).setPrimaryClip(ClipData.newPlainText("post", context));
-            popup(supportActivity, requireView(), getString(R.string.faq_support_post_copy));
+            popup(supportActivity, requireView(), 2, getString(R.string.faq_support_post_copy));
             return false;
         });
         rFAQPostsList.setAdapter(faqPostsAdapter);
