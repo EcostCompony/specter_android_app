@@ -37,19 +37,9 @@ public class ChannelsMenuFragment extends Fragment {
     MainMenuActivity mainMenuActivity;
 
     @Override
-    public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        View inflaterView = inflater.inflate(R.layout.fragment_channels_menu, container, false);
-
-        RecyclerView rChannelList = inflaterView.findViewById(R.id.recycler_channels_list);
-        tChannelsNumber = inflaterView.findViewById(R.id.number_channels);
-        mainMenuActivity = (MainMenuActivity) requireActivity();
-
+    public void onStart() {
+        super.onStart();
         channels.clear();
-
-        rChannelList.setLayoutManager(new LinearLayoutManager(mainMenuActivity));
-        channelsAdapter = new ChannelsAdapter(mainMenuActivity, channels, (channel, position) -> mainMenuActivity.startChannel(channel, true), (channel, position) -> true);
-        rChannelList.setAdapter(channelsAdapter);
-
         ChildEventListener childEventListener = new ChildEventListener() {
             @SuppressLint("NotifyDataSetChanged")
             @Override
@@ -99,6 +89,19 @@ public class ChannelsMenuFragment extends Fragment {
             @Override public void onCancelled(@NonNull DatabaseError databaseError) { }
         };
         myDB.child("specter").child("channels").addChildEventListener(childEventListener);
+    }
+
+    @Override
+    public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+        View inflaterView = inflater.inflate(R.layout.fragment_channels_menu, container, false);
+
+        RecyclerView rChannelList = inflaterView.findViewById(R.id.recycler_channels_list);
+        tChannelsNumber = inflaterView.findViewById(R.id.number_channels);
+        mainMenuActivity = (MainMenuActivity) requireActivity();
+
+        rChannelList.setLayoutManager(new LinearLayoutManager(mainMenuActivity));
+        channelsAdapter = new ChannelsAdapter(mainMenuActivity, channels, (channel, position) -> mainMenuActivity.startChannel(channel, true), (channel, position) -> true);
+        rChannelList.setAdapter(channelsAdapter);
 
         inflaterView.findViewById(R.id.button_navigate).setOnClickListener(view -> new NavigationFragment().show(mainMenuActivity.getSupportFragmentManager(), new NavigationFragment().getTag()));
 

@@ -152,16 +152,11 @@ public class ChannelFragment extends Fragment {
         childEventListenerSub = new ChildEventListener() {
             @Override
             public void onChildAdded(@NonNull DataSnapshot dataSnapshot, String previousChildName) {
-                channelActivity.channelSubscribers++;
+                if (Objects.requireNonNull(dataSnapshot.getValue(Integer.class)) != 0) channelActivity.channelSubscribers++;
                 tNumberSubscribers.setText(pluralForm(channelActivity.channelSubscribers, getString(R.string.number_subscribers_nominative_case), getString(R.string.number_subscribers_genitive_case), getString(R.string.number_subscribers_plural_genitive_case), Locale.getDefault().getLanguage().equals("ru")));
             }
 
-            @Override
-            public void onChildRemoved(@NonNull DataSnapshot dataSnapshot) {
-                channelActivity.channelSubscribers--;
-                tNumberSubscribers.setText(pluralForm(channelActivity.channelSubscribers, getString(R.string.number_subscribers_nominative_case), getString(R.string.number_subscribers_genitive_case), getString(R.string.number_subscribers_plural_genitive_case), Locale.getDefault().getLanguage().equals("ru")));
-            }
-
+            @Override public void onChildRemoved(@NonNull DataSnapshot dataSnapshot) {}
             @Override public void onChildChanged(@NonNull DataSnapshot dataSnapshot, String previousChildName) {}
             @Override public void onChildMoved(@NonNull DataSnapshot dataSnapshot, String previousChildName) {}
             @Override public void onCancelled(@NonNull DatabaseError databaseError) {}
@@ -173,8 +168,8 @@ public class ChannelFragment extends Fragment {
         lChannelHead.setOnClickListener(view -> channelActivity.getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container_view, new ChannelPageFragment()).addToBackStack(null).commit());
 
         bSubscribe.setOnClickListener(view -> {
-            myDB.child("specter").child("channels").child(String.valueOf(channelActivity.channelId)).child("subscribers").child(String.valueOf(channelActivity.channelSubscribers)).setValue(authId);
-            channelActivity.channelSubscribers++;
+            myDB.child("specter").child("channels").child(String.valueOf(channelActivity.channelId)).child("subscribers").child(String.valueOf(channelActivity.subNumber)).setValue(authId);
+            myDB.child("specter").child("channels").child(String.valueOf(channelActivity.channelId)).child("subNumber").setValue(channelActivity.subNumber+1);
             channelActivity.userSubscribe = true;
             bSubscribe.setVisibility(View.GONE);
             tNumberSubscribers.setText(pluralForm(channelActivity.channelSubscribers, getString(R.string.number_subscribers_nominative_case), getString(R.string.number_subscribers_genitive_case), getString(R.string.number_subscribers_plural_genitive_case), Locale.getDefault().getLanguage().equals("ru")));

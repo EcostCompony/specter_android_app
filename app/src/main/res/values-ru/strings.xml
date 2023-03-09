@@ -132,6 +132,8 @@
     <string name="comments_alert_dialog_item_delete">Удалить комментарий</string>
 
     <!-- channel page -->
+    <string name="channel_page_button_unsubscribe">Отписаться</string>
+    <string name="channel_page_button_subscribe">Подписаться</string>
     <string name="channel_page_description_header">Описание</string>
 
     <!-- channel settings -->

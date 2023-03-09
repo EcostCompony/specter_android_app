@@ -45,6 +45,14 @@ public class ChannelsSearchFragment extends Fragment {
     MainMenuActivity mainMenuActivity;
 
     @Override
+    public void onStart() {
+        super.onStart();
+
+        channels.clear();
+        eChannelTitle.setText("");
+    }
+
+    @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View inflaterView = inflater.inflate(R.layout.fragment_channels_search, container, false);
 
