@@ -81,7 +81,7 @@ public class ChannelsSearchFragment extends Fragment {
                     public void onChildAdded(@NonNull DataSnapshot dataSnapshot, String previousChildName) {
                         Channel channel = Objects.requireNonNull(dataSnapshot.getValue(Channel.class));
                         boolean subscribe = false;
-                        if (!eChannelTitle.getText().toString().equals("") && Pattern.compile(eChannelTitle.getText().toString(), Pattern.CASE_INSENSITIVE).matcher(channel.title.toLowerCase()).find()) {
+                        if (!eChannelTitle.getText().toString().trim().equals("") && Pattern.compile(eChannelTitle.getText().toString().trim(), Pattern.CASE_INSENSITIVE).matcher(channel.title.toLowerCase()).find()) {
                             for (int i = 0; i < channel.subscribers.size(); i++) if (channel.subscribers.get(i).equals(authId)) subscribe = true;
                             if (!subscribe) {
                                 channel.body = getString(R.string.symbol_at) + channel.shortLink;
