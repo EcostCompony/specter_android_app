@@ -12,9 +12,17 @@ import com.ecost.specter.R;
 
 public class AppealSupportFragment extends Fragment {
 
+    SupportActivity supportActivity;
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        return inflater.inflate(R.layout.fragment_appeal_support, container, false);
+        View inflaterView = inflater.inflate(R.layout.fragment_appeal_support, container, false);
+
+        supportActivity = (SupportActivity) requireActivity();
+
+        inflaterView.findViewById(R.id.button_close).setOnClickListener(view -> supportActivity.getSupportFragmentManager().popBackStack());
+
+        return inflaterView;
     }
 
 }

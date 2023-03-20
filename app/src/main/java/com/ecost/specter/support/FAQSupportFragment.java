@@ -25,6 +25,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.ecost.specter.R;
+import com.ecost.specter.menu.SettingsMenuFragment;
 import com.ecost.specter.models.FAQPost;
 import com.ecost.specter.recyclers.FAQPostsAdapter;
 import com.google.firebase.database.ChildEventListener;
@@ -82,6 +83,10 @@ public class FAQSupportFragment extends Fragment {
         myDB.child("specter").child("support").child("faq").addChildEventListener(childEventListener);
 
         inflaterView.findViewById(R.id.button_close).setOnClickListener(view -> supportActivity.finish());
+
+        inflaterView.findViewById(R.id.button_contact_support).setOnClickListener(view -> supportActivity.getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container_view, new FormAppealSupportFragment()).addToBackStack(null).commit());
+
+        inflaterView.findViewById(R.id.button_open_appeals).setOnClickListener(view -> supportActivity.getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container_view, new AppealsSupportFragment()).commit());
 
         bSendFAQPost.setOnClickListener(view -> {
              myDB.child("specter").child("support").child("faq").push().setValue(new FAQPost(2, eFAQText.getText().toString()));
