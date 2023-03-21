@@ -59,6 +59,7 @@
         android:imeOptions="actionGo"
         android:inputType="text"
         android:autofillHints="topic"
+        android:maxLength="32"
         android:background="@drawable/input"
         android:paddingHorizontal="13dp"
         android:fontFamily="@font/inter_semi_bold"
@@ -87,8 +88,7 @@
         android:autofillHints="short_user_link"
         android:maxLines="16"
         android:background="@drawable/input"
-        android:paddingHorizontal="25dp"
-        android:textColor="@color/main_color"
+        android:paddingHorizontal="13dp"
         android:fontFamily="@font/inter_semi_bold"
         android:textSize="12sp"
         tools:ignore="LabelFor" />

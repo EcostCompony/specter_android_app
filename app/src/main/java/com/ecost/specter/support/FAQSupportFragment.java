@@ -25,7 +25,6 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.ecost.specter.R;
-import com.ecost.specter.menu.SettingsMenuFragment;
 import com.ecost.specter.models.FAQPost;
 import com.ecost.specter.recyclers.FAQPostsAdapter;
 import com.google.firebase.database.ChildEventListener;
@@ -54,6 +53,7 @@ public class FAQSupportFragment extends Fragment {
         bSendFAQPost = inflaterView.findViewById(R.id.button_send);
         supportActivity = (SupportActivity) requireActivity();
 
+        faqPosts.clear();
         registerForContextMenu(bSendFAQPost);
         myDB.child("specter").child("users").child(authId.toString()).child("admin").get().addOnCompleteListener(task -> {
             if (Boolean.TRUE.equals(task.getResult().getValue(Boolean.class))) senderMenu.setVisibility(View.VISIBLE);
