@@ -1,7 +1,15 @@
 package com.ecost.specter.support;
 
+import static com.ecost.specter.Routing.authEcostId;
+import static com.ecost.specter.Routing.authId;
+import static com.ecost.specter.Routing.myDB;
 import static com.ecost.specter.Routing.popup;
+import static com.ecost.specter.Routing.pushPreferenceAuth;
+import static com.ecost.specter.Routing.pushPreferenceId;
+import static com.ecost.specter.Routing.pushPreferenceShortUserLink;
+import static com.ecost.specter.Routing.pushPreferenceUserName;
 
+import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
@@ -13,6 +21,9 @@ import android.view.ViewGroup;
 import android.widget.EditText;
 
 import com.ecost.specter.R;
+import com.ecost.specter.menu.MainMenuActivity;
+import com.ecost.specter.models.FAQPost;
+import com.ecost.specter.models.User;
 
 public class FormAppealSupportFragment extends Fragment {
 
@@ -45,7 +56,21 @@ public class FormAppealSupportFragment extends Fragment {
 
         if (appealTopic.equals("")) popup(supportActivity, view, 1, "Для создания обращения введите его тему.");
         else if (appealText.equals("")) popup(supportActivity, view, 1, "Для создания обращения опишите его.");
-        else supportActivity.getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container_view, new AppealSupportFragment()).commit();
+        else {
+            myDB.child("specter").child("support").child("number_appeals").get().addOnCompleteListener(task -> {
+                Integer id = Integer.parseInt(String.valueOf(task.getResult().getValue()))+1;
+                myDB.child("specter").child("support").child("appeals").child(String.valueOf(id)).child("id").setValue(id);
+                myDB.child("specter").child("support").child("appeals").child(String.valueOf(id)).child("author").setValue(authId);
+                myDB.child("specter").child("support").child("appeals").child(String.valueOf(id)).child("topic").setValue(appealTopic);
+                myDB.child("specter").child("support").child("appeals").child(String.valueOf(id)).child("body").setValue(appealText);
+                myDB.child("specter").child("support").child("appeals").child(String.valueOf(id)).child("posts_number").setValue(0);
+                myDB.child("specter").child("support").child("appeals").child(String.valueOf(id)).child("posts").child("0").setValue(new FAQPost(1, appealText));
+                supportActivity.appealId = id;
+                supportActivity.appealAuthor = authId;
+                supportActivity.appealTopic = appealTopic;
+                supportActivity.getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container_view, new AppealSupportFragment()).commit();
+            });
+        }
     }
 
 }
