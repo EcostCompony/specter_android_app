@@ -27,7 +27,7 @@ public class SettingsMenuFragment extends Fragment {
         MainMenuActivity mainMenuActivity = (MainMenuActivity) requireActivity();
 
         rSectionsList.setLayoutManager(new LinearLayoutManager(mainMenuActivity, LinearLayoutManager.HORIZONTAL, false));
-        rSectionsList.setAdapter(new SectionsAdapter(mainMenuActivity, Arrays.asList(getString(R.string.settings_menu_section_account), getString(R.string.settings_menu_section_app)), settingsSection,  position -> {
+        rSectionsList.setAdapter(new SectionsAdapter(mainMenuActivity, Arrays.asList(getString(R.string.settings_menu_section_account), getString(R.string.settings_menu_section_app), getString(R.string.settings_menu_section_ecost_account)), settingsSection, position -> {
             if (settingsSection == position) return;
             getChildFragmentManager().beginTransaction().replace(R.id.child_fragment_container_view, position == 0 ? new AccountSettingsMenuFragment() : new AppSettingsMenuFragment()).commit();
             pushPreferenceSettingsSection(mainMenuActivity, position);
