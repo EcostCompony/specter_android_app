@@ -55,7 +55,7 @@ public class FAQSupportFragment extends Fragment {
 
         faqPosts.clear();
         registerForContextMenu(bSendFAQPost);
-        myDB.child("specter").child("users").child(authId.toString()).child("admin").get().addOnCompleteListener(task -> {
+        myDB.child("specter").child("users").child(String.valueOf(authId)).child("admin").get().addOnCompleteListener(task -> {
             if (Boolean.TRUE.equals(task.getResult().getValue(Boolean.class))) senderMenu.setVisibility(View.VISIBLE);
         });
 

@@ -34,7 +34,7 @@ public class AppealsAdapter extends RecyclerView.Adapter<AppealViewHolder> {
     @NonNull
     @Override
     public AppealViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view = inflater.inflate(R.layout.channel_item, parent, false);
+        View view = inflater.inflate(R.layout.appeal_item, parent, false);
         return new AppealViewHolder(view);
     }
 

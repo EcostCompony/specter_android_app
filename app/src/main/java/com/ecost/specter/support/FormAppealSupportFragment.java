@@ -63,7 +63,7 @@ public class FormAppealSupportFragment extends Fragment {
                 myDB.child("specter").child("support").child("appeals").child(String.valueOf(id)).child("author").setValue(authId);
                 myDB.child("specter").child("support").child("appeals").child(String.valueOf(id)).child("topic").setValue(appealTopic);
                 myDB.child("specter").child("support").child("appeals").child(String.valueOf(id)).child("body").setValue(appealText);
-                myDB.child("specter").child("support").child("appeals").child(String.valueOf(id)).child("posts_number").setValue(0);
+                myDB.child("specter").child("support").child("appeals").child(String.valueOf(id)).child("posts_number").setValue(1);
                 myDB.child("specter").child("support").child("appeals").child(String.valueOf(id)).child("posts").child("0").setValue(new FAQPost(1, appealText));
                 myDB.child("specter").child("support").child("number_appeals").setValue(id);
                 supportActivity.appealId = id;
