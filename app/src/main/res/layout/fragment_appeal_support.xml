@@ -1,11 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:orientation="vertical"
     android:background="@color/background"
-    tools:context=".support.FAQSupportFragment">
+    tools:context=".support.AppealSupportFragment">
 
     <FrameLayout
         android:layout_width="match_parent"
@@ -48,29 +49,16 @@
                     android:text="@string/support_header" />
 
                 <TextView
+                    android:id="@+id/appeal_topic"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:fontFamily="@font/inter_medium"
                     android:textSize="10sp"
                     android:textColor="@color/channel_body_color"
-                    android:text="@string/faq_support_header"
+                    tools:text="Я нашел баг"
                     tools:ignore="SmallSp" />
             </LinearLayout>
         </LinearLayout>
-
-        <FrameLayout
-            android:id="@+id/button_open_appeals"
-            android:layout_width="49dp"
-            android:layout_height="match_parent"
-            android:layout_gravity="end">
-
-            <View
-                android:layout_width="17dp"
-                android:layout_height="12dp"
-                android:layout_marginStart="10dp"
-                android:layout_gravity="center_vertical"
-                android:background="@drawable/icon_burger" />
-        </FrameLayout>
 
         <View
             android:layout_width="match_parent"
@@ -80,31 +68,10 @@
             android:background="@color/divider_color" />
     </FrameLayout>
 
-    <FrameLayout
-        android:id="@+id/button_contact_support"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="87dp"
-        android:layout_gravity="center_horizontal"
-        android:background="@drawable/popup"
-        android:elevation="13dp">
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginHorizontal="16dp"
-            android:layout_marginVertical="8dp"
-            android:fontFamily="@font/inter_semi_bold"
-            android:textColor="@color/main_color"
-            android:textSize="11sp"
-            android:text="@string/faq_support_button_contact_support" />
-    </FrameLayout>
-
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical"
-        android:layout_marginTop="72dp"
         android:layout_gravity="bottom"
         android:gravity="bottom">
 
@@ -113,14 +80,13 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="bottom"
-            android:layout_marginBottom="20dp"
+            android:layout_marginBottom="5dp"
             android:overScrollMode="never" />
 
         <FrameLayout
             android:id="@+id/sender_menu"
             android:layout_width="match_parent"
-            android:layout_height="65dp"
-            android:visibility="gone">
+            android:layout_height="65dp">
 
             <EditText
                 android:id="@+id/input_support_post"
@@ -153,4 +119,4 @@
             </LinearLayout>
         </FrameLayout>
     </LinearLayout>
-</FrameLayout>
+</LinearLayout>

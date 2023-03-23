@@ -20,7 +20,9 @@
     <string name="create_channel_menu_header">Создание канала</string>
     <string name="settings_menu_header">Настройки</string>
     <string name="support_header">Поддержка</string>
+    <string name="form_appeal_support_header">Форма обращения</string>
     <string name="faq_support_header">Часто задаваемые вопросы</string>
+    <string name="appeals_support_header">Обращения</string>
     <string name="comments_header">Комментарии</string>
     <string name="channel_settings_header">Настройки канала</string>
 
@@ -150,9 +152,15 @@
 
     <!-- faq support -->
     <string name="faq_answer_item_author">Поддержка</string>
+    <string name="faq_support_button_contact_support">Обратиться в поддержку</string>
     <string name="faq_support_post_copy">Текст скопирован</string>
     <string name="faq_support_input_hint_faq_post">Напишите текст</string>
     <string name="faq_support_context_menu_item_send_question">Отпрваить вопрос</string>
+
+    <!-- form appeal support -->
+    <string name="form_appeal_support_parameter_header_topic">Тема</string>
+    <string name="form_appeal_support_parameter_header_text">Текст обращения</string>
+    <string name="form_appeal_support_button_create_appeal">Создать обращение</string>
 
     <!-- content descriptions -->
     <string name="main_menu_button_content_description_close">Закрыть</string>

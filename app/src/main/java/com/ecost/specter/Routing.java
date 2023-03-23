@@ -32,7 +32,7 @@ import java.util.Objects;
 public class Routing extends AppCompatActivity {
 
     public static final DatabaseReference myDB = FirebaseDatabase.getInstance().getReference();
-    public static boolean auth;
+    public static boolean auth, authAdmin;
     public static Integer authId, authEcostId, settingsSection;
     public static String authUserName, authShortUserLink, appLanguage, appTheme;
 
@@ -66,10 +66,13 @@ public class Routing extends AppCompatActivity {
                     else changeLocale(this, new Locale("en"));
                     if (Integer.parseInt(String.valueOf(taskSupportVersion.getResult().getValue())) > VERSION_CODE) startActivity(new Intent(this, HardUpdateActivity.class));
                     else if (auth && taskTestUser.getResult().getValue() != null) {
-                        if (!String.valueOf(taskUserVersion.getResult().getValue()).equals(String.valueOf(VERSION_CODE))) myDB.child("specter").child("users").child(String.valueOf(authId)).child("app_version").setValue(VERSION_CODE);
-                        Intent intent = new Intent(this, MainMenuActivity.class);
-                        intent.putExtra("CREATE", true);
-                        startActivity(intent);
+                        myDB.child("specter").child("users").child(authId.toString()).child("admin").get().addOnCompleteListener(task -> {
+                            authAdmin = Boolean.TRUE.equals(task.getResult().getValue(Boolean.class));
+                            if (!String.valueOf(taskUserVersion.getResult().getValue()).equals(String.valueOf(VERSION_CODE))) myDB.child("specter").child("users").child(String.valueOf(authId)).child("app_version").setValue(VERSION_CODE);
+                            Intent intent = new Intent(this, MainMenuActivity.class);
+                            intent.putExtra("CREATE", true);
+                            startActivity(intent);
+                        });
                     } else {
                         signOut(this);
                         startActivity(new Intent(this, AuthActivity.class));

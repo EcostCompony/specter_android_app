@@ -8,6 +8,9 @@ import com.ecost.specter.R;
 
 public class SupportActivity extends AppCompatActivity {
 
+    Integer appealId, appealAuthor;
+    String appealTopic;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

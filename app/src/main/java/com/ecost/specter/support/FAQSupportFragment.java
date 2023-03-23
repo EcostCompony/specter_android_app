@@ -53,8 +53,9 @@ public class FAQSupportFragment extends Fragment {
         bSendFAQPost = inflaterView.findViewById(R.id.button_send);
         supportActivity = (SupportActivity) requireActivity();
 
+        faqPosts.clear();
         registerForContextMenu(bSendFAQPost);
-        myDB.child("specter").child("users").child(authId.toString()).child("admin").get().addOnCompleteListener(task -> {
+        myDB.child("specter").child("users").child(String.valueOf(authId)).child("admin").get().addOnCompleteListener(task -> {
             if (Boolean.TRUE.equals(task.getResult().getValue(Boolean.class))) senderMenu.setVisibility(View.VISIBLE);
         });
 
@@ -82,6 +83,10 @@ public class FAQSupportFragment extends Fragment {
         myDB.child("specter").child("support").child("faq").addChildEventListener(childEventListener);
 
         inflaterView.findViewById(R.id.button_close).setOnClickListener(view -> supportActivity.finish());
+
+        inflaterView.findViewById(R.id.button_contact_support).setOnClickListener(view -> supportActivity.getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container_view, new FormAppealSupportFragment()).addToBackStack(null).commit());
+
+        inflaterView.findViewById(R.id.button_open_appeals).setOnClickListener(view -> supportActivity.getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container_view, new AppealsSupportFragment()).commit());
 
         bSendFAQPost.setOnClickListener(view -> {
              myDB.child("specter").child("support").child("faq").push().setValue(new FAQPost(2, eFAQText.getText().toString()));
