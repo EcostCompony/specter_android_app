@@ -162,4 +162,7 @@
     <string name="channel_settings_button_content_description_save_channel_title">Сохранить название канала</string>
     <string name="channel_settings_button_content_description_save_short_channel_link">Сохранить короткую ссылку канала</string>
     <string name="settings_menu_section_ecost_account">Аккаунт «ecost»</string>
+    <string name="settings_menu_parameter_header_phone_number">Номер телефона</string>
+    <string name="settings_menu_parameter_header_password">Пароль</string>
+    <string name="ecost_settings_menu_button_change">Сменить</string>
 </resources>
