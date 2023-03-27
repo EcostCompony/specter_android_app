@@ -197,4 +197,5 @@
     <string name="aler_dialog_edit_password_header_old_password">Введите старый пароль</string>
     <string name="alert_dialog_okey">окей</string>
     <string name="alert_dialog_cance">отмена</string>
+    <string name="alert_dialog_yes">да</string>
 </resources>
