@@ -195,4 +195,6 @@
     <string name="alert_dialog_edit_number_phone_header_password">Введите пароль</string>
     <string name="aler_dialog_edit_password_header_new_password">Введите новый пароль</string>
     <string name="aler_dialog_edit_password_header_old_password">Введите старый пароль</string>
+    <string name="alert_dialog_okey">окей</string>
+    <string name="alert_dialog_cance">отмена</string>
 </resources>
