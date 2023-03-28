@@ -58,17 +58,26 @@ public class EcostSettingsMenuFragment extends Fragment {
 
         inflaterView.findViewById(R.id.setting_phone_number).setOnClickListener(view -> {
             LayoutInflater li = LayoutInflater.from(getContext());
-            View promptsView = li.inflate(R.layout.alert_dialog_edit_number_phone, null);
+            View promptsView = li.inflate(R.layout.edit_alert_dialog, null);
 
             AlertDialog.Builder mDialogBuilder = new AlertDialog.Builder(getContext());
 
             mDialogBuilder.setView(promptsView);
 
-            final EditText eNewNumberPhone = (EditText) promptsView.findViewById(R.id.input_new_number_phone);
-            final EditText ePass = (EditText) promptsView.findViewById(R.id.input_pass);
+            TextView tHeader = (TextView) promptsView.findViewById(R.id.header);
+            EditText eNewNumberPhone = (EditText) promptsView.findViewById(R.id.input_one);
+            EditText ePass = (EditText) promptsView.findViewById(R.id.input_two);
+            TextView tButtonOk = (TextView) promptsView.findViewById(R.id.button_okay);
+            TextView tButtonCancel = (TextView) promptsView.findViewById(R.id.button_cancel);
 
-            mDialogBuilder.setCancelable(false).setPositiveButton(R.string.alert_dialog_ok, (dialog, id) -> {
+            tHeader.setText(R.string.alert_dialog_edit_number_phone_header);
+            eNewNumberPhone.setHint(R.string.alert_dialog_edit_number_phone_header_number_phone);
+            ePass.setHint(R.string.alert_dialog_edit_number_phone_header_password);
 
+            eNewNumberPhone.setInputType(3); // 3 - id Input type phone
+            ePass.setInputType(129); // 129 - id Input type textPassword
+
+            tButtonOk.setOnClickListener(view1 -> {
                 myDB.child("ecost").child("users").child(String.valueOf(authEcostId)).child("password").get().addOnCompleteListener(taskPassword -> {
                     if (!String.valueOf(taskPassword.getResult().getValue()).equals(hash(ePass.getText().toString()))) popup(mainMenuActivity, view, 1, getString(R.string.ecost_settings_menu_error_wrong_password));
                     else {
@@ -85,23 +94,35 @@ public class EcostSettingsMenuFragment extends Fragment {
                             });
                     }
                 });
-            }).setNegativeButton(R.string.alert_dialog_cancel, (dialog, id) -> dialog.cancel());
+            });
 
             AlertDialog alertDialog = mDialogBuilder.create();
 
             alertDialog.show();
+
+            tButtonCancel.setOnClickListener(view1 -> alertDialog.cancel());
         });
 
         inflaterView.findViewById(R.id.setting_password).setOnClickListener(view -> {
             LayoutInflater li = LayoutInflater.from(getContext());
-            View promptsView = li.inflate(R.layout.alert_dialog_edit_password, null);
+            View promptsView = li.inflate(R.layout.edit_alert_dialog, null);
 
             AlertDialog.Builder mDialogBuilder = new AlertDialog.Builder(getContext());
 
             mDialogBuilder.setView(promptsView);
 
-            final EditText eNewPass = (EditText) promptsView.findViewById(R.id.input_new_pass);
-            final EditText eOldPass = (EditText) promptsView.findViewById(R.id.input_old_pass);
+            TextView tHeader = (TextView) promptsView.findViewById(R.id.header);
+            EditText eNewPass = (EditText) promptsView.findViewById(R.id.input_one);
+            EditText eOldPass = (EditText) promptsView.findViewById(R.id.input_two);
+            TextView tButtonOk = (TextView) promptsView.findViewById(R.id.button_okay);
+            TextView tButtonCancel = (TextView) promptsView.findViewById(R.id.button_cancel);
+
+            tHeader.setText(R.string.alert_dialog_edit_password_header);
+            eNewPass.setHint(R.string.aler_dialog_edit_password_header_new_password);
+            eOldPass.setHint(R.string.aler_dialog_edit_password_header_old_password);
+
+            eNewPass.setInputType(129);
+            eOldPass.setInputType(129);
 
             InputFilter filterPassword = (source, start, end, dest, dstart, dend) -> {
                 for (int i = start; i < end; i++) if (!Pattern.compile("^[A-ZА-Я\\d_.%+@$#!-]+$", Pattern.CASE_INSENSITIVE).matcher(String.valueOf(source.charAt(i))).find()) return "";
@@ -109,8 +130,7 @@ public class EcostSettingsMenuFragment extends Fragment {
             };
             eNewPass.setFilters(new InputFilter[] {filterPassword, new InputFilter.LengthFilter(128)});
 
-            mDialogBuilder.setCancelable(false).setPositiveButton(R.string.alert_dialog_ok, (dialog, id) -> {
-
+            tButtonOk.setOnClickListener(view1 -> {
                 myDB.child("ecost").child("users").child(String.valueOf(authEcostId)).child("password").get().addOnCompleteListener(taskPassword -> {
                     if (!String.valueOf(taskPassword.getResult().getValue()).equals(hash(eOldPass.getText().toString()))) popup(mainMenuActivity, view, 1, getString(R.string.ecost_settings_menu_error_wrong_password));
                     else {
@@ -119,11 +139,13 @@ public class EcostSettingsMenuFragment extends Fragment {
                         else myDB.child("ecost").child("users").child(String.valueOf(authEcostId)).child("password").setValue(hash(eNewPass.getText().toString()));
                     }
                 });
-            }).setNegativeButton(R.string.alert_dialog_cancel, (dialog, id) -> dialog.cancel());
+            });
 
             AlertDialog alertDialog = mDialogBuilder.create();
 
             alertDialog.show();
+
+            tButtonCancel.setOnClickListener(view1 -> alertDialog.cancel());
         });
 
         return inflaterView;
