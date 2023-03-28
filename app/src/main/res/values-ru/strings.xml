@@ -184,8 +184,8 @@
     <string name="alert_dialog_yes">да</string>
     <string name="edit_number_phone_alert_dialog_header">Сменить номер</string>
     <string name="edit_password_alert_dialog_header">Сменить пароль</string>
-    <string name="channel_settings_deleate_channel_alert_dialog_text_header">Удаление канала</string>
-    <string name="channel_settings_deleate_channel_alert_dialog_text_description">Вы уверены что хотите удалить канал?\nВсе его данные будут уничтожены.</string>
+    <string name="channel_settings_delete_channel_alert_dialog_text_header">Удаление канала</string>
+    <string name="channel_settings_delete_channel_alert_dialog_text_description">Вы уверены что хотите удалить канал?\nВсе его данные будут уничтожены.</string>
     <string name="account_settings_log_out_text_header">Выход</string>
     <string name="account_settings_log_out_text_description">Вы уверены что хотите выйти?</string>
 </resources>

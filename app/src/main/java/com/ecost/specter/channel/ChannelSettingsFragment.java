@@ -155,8 +155,8 @@ public class ChannelSettingsFragment extends Fragment {
             TextView tHeader = promptsView.findViewById(R.id.header);
             TextView description = promptsView.findViewById(R.id.description);
 
-            tHeader.setText(R.string.channel_settings_deleate_channel_alert_dialog_text_header);
-            description.setText(R.string.channel_settings_deleate_channel_alert_dialog_text_description);
+            tHeader.setText(R.string.channel_settings_delete_channel_alert_dialog_text_header);
+            description.setText(R.string.channel_settings_delete_channel_alert_dialog_text_description);
 
             promptsView.findViewById(R.id.button_yes).setOnClickListener(view1 -> {
                 myDB.child("specter").child("uid").child(channelActivity.channelShortLink).setValue(null);
