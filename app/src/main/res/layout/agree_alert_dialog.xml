@@ -26,7 +26,7 @@
         android:fontFamily="@font/inter_medium"
         android:textColor="#9C9C9C"
         android:textSize="14sp"
-        tools:text="Вы уверены что хотите удалить канал?\nВсе его данные будут уничтожены. " />
+        tools:text="Вы уверены что хотите удалить канал?\nВсе его данные будут уничтожены."/>
 
     <LinearLayout
         android:layout_width="match_parent"

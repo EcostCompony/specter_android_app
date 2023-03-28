@@ -45,10 +45,10 @@
     <string name="create_channel_menu_error_not_short_channel_link">Ой, чтобы создать канал, стоит придумать короткую ссылку для него</string>
     <string name="create_channel_menu_error_small_short_channel_link">Придумайте короткую ссылку, содержащую более 3 символов</string>
     <string name="create_channel_menu_error_busy_short_channel_link">Короткая ссылка должна быть уникальной! Кто-то уже её занял =(</string>
-    <string name="settings_menu_error_not_name">Имя должно содержать хотя бы 1 символ</string>
-    <string name="settings_menu_error_not_short_user_link">Короткая ссылка должна содержать более 3 символов</string>
-    <string name="settings_menu_error_small_short_user_link">Придумайте короткую ссылку, содержащую более 3 символов</string>
-    <string name="settings_menu_error_busy_short_user_link">Короткая ссылка должна быть уникальной! Кто-то уже её занял =(</string>
+    <string name="account_settings_error_not_name">Имя должно содержать хотя бы 1 символ</string>
+    <string name="account_settings_error_not_short_user_link">Короткая ссылка должна содержать более 3 символов</string>
+    <string name="account_settings_error_small_short_user_link">Придумайте короткую ссылку, содержащую более 3 символов</string>
+    <string name="account_settings_error_busy_short_user_link">Короткая ссылка должна быть уникальной! Кто-то уже её занял =(</string>
     <string name="channel_settings_error_not_channel_title">Название должно содержать хотя бы 1 символ</string>
     <string name="channel_settings_error_not_short_channel_title">Короткая ссылка должна содержать более 3 символов</string>
     <string name="channel_settings_error_small_short_channel_link">Придумайте короткую ссылку, содержащую более 3 символов</string>
@@ -175,13 +175,17 @@
     <string name="ecost_settings_menu_button_change">Сменить</string>
     <string name="ecost_settings_menu_error_wrong_password">Неверный пароль</string>
     <string name="ecost_settings_menu_error_small_password">Пароль должен содержать не менее 8 символов</string>
-    <string name="alert_dialog_edit_number_phone_header_number_phone">Номер телефона</string>
-    <string name="alert_dialog_edit_number_phone_header_password">Введите пароль</string>
-    <string name="aler_dialog_edit_password_header_new_password">Введите новый пароль</string>
-    <string name="aler_dialog_edit_password_header_old_password">Введите старый пароль</string>
+    <string name="edit_number_phone_alert_dialog_hint_number_phone">Номер телефона</string>
+    <string name="edit_number_phone_alert_dialog_hint_password">Введите пароль</string>
+    <string name="edit_password_alert_dialog_hint_new_password">Введите новый пароль</string>
+    <string name="edit_password_alert_dialog_hint_old_password">Введите старый пароль</string>
     <string name="alert_dialog_okey">окей</string>
     <string name="alert_dialog_cance">отмена</string>
     <string name="alert_dialog_yes">да</string>
-    <string name="alert_dialog_edit_number_phone_header">Сменить номер</string>
-    <string name="alert_dialog_edit_password_header">Сменить пароль</string>
+    <string name="edit_number_phone_alert_dialog_header">Сменить номер</string>
+    <string name="edit_password_alert_dialog_header">Сменить пароль</string>
+    <string name="channel_settings_deleate_channel_alert_dialog_text_header">Удаление канала</string>
+    <string name="channel_settings_deleate_channel_alert_dialog_text_description">Вы уверены что хотите удалить канал?\nВсе его данные будут уничтожены.</string>
+    <string name="account_settings_log_out_text_header">Выход</string>
+    <string name="account_settings_log_out_text_description">Вы уверены что хотите выйти?</string>
 </resources>
