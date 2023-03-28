@@ -28,7 +28,9 @@ import android.widget.EditText;
 import android.widget.FrameLayout;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import com.ecost.specter.DataTimeTask;
 import com.ecost.specter.R;
 import com.ecost.specter.models.Post;
 import com.ecost.specter.recyclers.PostsAdapter;
@@ -36,10 +38,13 @@ import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.Locale;
 import java.util.Objects;
+import java.util.concurrent.ExecutionException;
 
 public class ChannelFragment extends Fragment {
 
@@ -181,11 +186,21 @@ public class ChannelFragment extends Fragment {
                 if (postEdit != null) myDB.child("specter").child("channels").child(String.valueOf(channelActivity.channelId)).child("posts").child(String.valueOf(postEdit.id)).child("context").setValue(text);
                 if (postEdit == null || channelActivity.postsNumber == postEdit.id) myDB.child("specter").child("channels").child(String.valueOf(channelActivity.channelId)).child("body").setValue(text);
                 if (postEdit == null) {
-                    myDB.child("specter").child("channels").child(String.valueOf(channelActivity.channelId)).child("posts").child(String.valueOf(channelActivity.postsNumber)).setValue(new Post(channelActivity.postsNumber, authUserName, "15:23", text));
-                    myDB.child("specter").child("channels").child(String.valueOf(channelActivity.channelId)).child("postsNumber").setValue(channelActivity.postsNumber + 1);
-                    myDB.child("specter").child("channels").child(String.valueOf(channelActivity.channelId)).child("markBody").setValue(false);
-                    channelActivity.postsNumber++;
-                    rPostsList.smoothScrollToPosition(posts.size());
+                    try {
+                        long myLong = new DataTimeTask().execute("somestring").get();
+                        Date date = new java.util.Date(myLong*1000L);
+
+                        @SuppressLint("SimpleDateFormat") SimpleDateFormat sdf = new java.text.SimpleDateFormat("HH:mm");
+                        sdf.setTimeZone(java.util.TimeZone.getTimeZone("GMT+3"));
+                        String formattedDate = sdf.format(date);
+                        myDB.child("specter").child("channels").child(String.valueOf(channelActivity.channelId)).child("posts").child(String.valueOf(channelActivity.postsNumber)).setValue(new Post(channelActivity.postsNumber, authUserName, formattedDate, text));
+                        myDB.child("specter").child("channels").child(String.valueOf(channelActivity.channelId)).child("postsNumber").setValue(channelActivity.postsNumber + 1);
+                        myDB.child("specter").child("channels").child(String.valueOf(channelActivity.channelId)).child("markBody").setValue(false);
+                        channelActivity.postsNumber++;
+                        rPostsList.smoothScrollToPosition(posts.size());
+                    } catch (ExecutionException | InterruptedException e) {
+                        throw new RuntimeException(e);
+                    }
                 }
                 tEditPost.setVisibility(View.GONE);
                 postEdit = null;
