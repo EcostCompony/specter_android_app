@@ -120,6 +120,7 @@ public class ChannelFragment extends Fragment {
             public void onChildAdded(@NonNull DataSnapshot dataSnapshot, String previousChildName) {
                 Post post = Objects.requireNonNull(dataSnapshot.getValue(Post.class));
                 if (Objects.equals(post.author, "%CHANNEL_TITLE%")) post.author = channelActivity.channelTitle;
+                posts.add(new Post(1, post.date));
                 posts.add(post);
                 postsAdapter.notifyDataSetChanged();
                 rPostsList.scrollToPosition(posts.size());

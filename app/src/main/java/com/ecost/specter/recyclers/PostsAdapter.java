@@ -36,6 +36,7 @@ public class PostsAdapter extends RecyclerView.Adapter<PostViewHolder> {
     @Override
     public int getItemViewType(int position) {
         if (posts.get(position).senderId == authId) return R.layout.my_comment_item;
+        else if (posts.get(position).type == 1) return R.layout.date_post_item;
         return R.layout.post_item;
     }
 
@@ -48,15 +49,23 @@ public class PostsAdapter extends RecyclerView.Adapter<PostViewHolder> {
     @Override
     public void onBindViewHolder(@NonNull PostViewHolder holder, @SuppressLint("RecyclerView") int position) {
         Post post = posts.get(position);
-        holder.text.setText(post.context);
-        if (holder.author != null) holder.author.setText(post.author);
-        Date date = new java.util.Date(post.date*1000L);
-        @SuppressLint("SimpleDateFormat") SimpleDateFormat sdf = new java.text.SimpleDateFormat("HH:mm");
-        sdf.setTimeZone(java.util.TimeZone.getTimeZone("GMT+3"));
-        String formattedDate = sdf.format(date);
-        System.out.println(formattedDate);
-        holder.time.setText(formattedDate);
-        holder.itemView.setOnLongClickListener(v -> onLongClickListener.onPostLongClick(post, position));
+        if (post.type == 0) {
+            holder.text.setText(post.context);
+            if (holder.author != null) holder.author.setText(post.author);
+            Date date = new java.util.Date(post.date * 1000L);
+            @SuppressLint("SimpleDateFormat") SimpleDateFormat sdf = new java.text.SimpleDateFormat("HH:mm");
+            sdf.setTimeZone(java.util.TimeZone.getTimeZone("GMT+3"));
+            String formattedDate = sdf.format(date);
+            System.out.println(formattedDate);
+            holder.time.setText(formattedDate);
+            holder.itemView.setOnLongClickListener(v -> onLongClickListener.onPostLongClick(post, position));
+        } else if (post.type == 1) {
+            Date date = new java.util.Date(post.date * 1000L);
+            @SuppressLint("SimpleDateFormat") SimpleDateFormat sdf = new java.text.SimpleDateFormat("dd.MM");
+            sdf.setTimeZone(java.util.TimeZone.getTimeZone("GMT+3"));
+            String formattedDate = sdf.format(date);
+            holder.text.setText(formattedDate);
+        }
     }
 
     @Override

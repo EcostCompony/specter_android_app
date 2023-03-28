@@ -2,7 +2,7 @@ package com.ecost.specter.models;
 
 public class Post {
 
-    public int id, senderId;
+    public int id, senderId, type;
     public String author, context;
     public Long date;
 
@@ -21,6 +21,11 @@ public class Post {
         this.author = author;
         this.date = date;
         this.context = context;
+    }
+
+    public Post(int type, Long date) {
+        this.type = type;
+        this.date = date;
     }
 
 }
