@@ -13,7 +13,10 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.ecost.specter.R;
 import com.ecost.specter.models.Post;
 
+import java.lang.reflect.Array;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
 
@@ -46,6 +49,7 @@ public class PostsAdapter extends RecyclerView.Adapter<PostViewHolder> {
         return new PostViewHolder(inflater.inflate(viewType, parent, false));
     }
 
+    @SuppressLint("SetTextI18n")
     @Override
     public void onBindViewHolder(@NonNull PostViewHolder holder, @SuppressLint("RecyclerView") int position) {
         Post post = posts.get(position);
@@ -60,11 +64,13 @@ public class PostsAdapter extends RecyclerView.Adapter<PostViewHolder> {
             holder.time.setText(formattedDate);
             holder.itemView.setOnLongClickListener(v -> onLongClickListener.onPostLongClick(post, position));
         } else if (post.type == 1) {
+            List<String> months = Arrays.asList(" января", " февраля", " марта", " апреля", " мая", " июня", " июля", " августа", " сентября", " октября", " ноября", " декабря");
             Date date = new java.util.Date(post.date * 1000L);
-            @SuppressLint("SimpleDateFormat") SimpleDateFormat sdf = new java.text.SimpleDateFormat("dd.MM");
-            sdf.setTimeZone(java.util.TimeZone.getTimeZone("GMT+3"));
-            String formattedDate = sdf.format(date);
-            holder.text.setText(formattedDate);
+            @SuppressLint("SimpleDateFormat") SimpleDateFormat sdf1 = new java.text.SimpleDateFormat("dd");
+            @SuppressLint("SimpleDateFormat") SimpleDateFormat sdf2 = new java.text.SimpleDateFormat("MM");
+            sdf1.setTimeZone(java.util.TimeZone.getTimeZone("GMT+3"));
+            sdf2.setTimeZone(java.util.TimeZone.getTimeZone("GMT+3"));
+            holder.text.setText(sdf1.format(date) + months.get(Integer.parseInt(sdf2.format(date))-1));
         }
     }
 
