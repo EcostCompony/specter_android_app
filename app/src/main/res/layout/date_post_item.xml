@@ -1,11 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content">
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:clipToPadding="false"
+    android:paddingVertical="3.5dp"
+    android:paddingStart="16dp"
+    android:paddingEnd="80dp">
 
     <TextView
-        android:id="@+id/post_text"
+        android:id="@+id/date"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="9dp"
@@ -15,4 +20,49 @@
         android:textColor="#9C9C9C"
         android:textSize="12sp"
         tools:text="28 марта" />
-</FrameLayout>
+
+    <FrameLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@drawable/post_background"
+        android:elevation="2dp"
+        tools:ignore="UselessParent">
+
+        <TextView
+            android:id="@+id/post_author"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="7dp"
+            android:layout_marginStart="14dp"
+            android:layout_marginEnd="52dp"
+            android:fontFamily="@font/inter_bold"
+            android:textColor="@color/main_color"
+            android:textSize="13sp"
+            tools:text="F1kkus" />
+
+        <TextView
+            android:id="@+id/post_time"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:layout_marginEnd="16dp"
+            android:layout_gravity="end"
+            android:fontFamily="@font/inter_regular"
+            android:textColor="@color/post_item_time_color"
+            android:textSize="10sp"
+            tools:ignore="SmallSp"
+            tools:text="15:24" />
+
+        <TextView
+            android:id="@+id/post_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="24dp"
+            android:layout_marginHorizontal="14dp"
+            android:layout_marginBottom="7dp"
+            android:layout_gravity="bottom"
+            android:fontFamily="@font/manrope_medium"
+            android:textSize="13sp"
+            tools:text="И опять сломалось время отправки сообщений. Когда нибудь мы это исправим.\n\n20:19" />
+    </FrameLayout>
+</LinearLayout>

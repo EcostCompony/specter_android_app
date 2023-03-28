@@ -120,7 +120,7 @@ public class ChannelFragment extends Fragment {
             public void onChildAdded(@NonNull DataSnapshot dataSnapshot, String previousChildName) {
                 Post post = Objects.requireNonNull(dataSnapshot.getValue(Post.class));
                 if (Objects.equals(post.author, "%CHANNEL_TITLE%")) post.author = channelActivity.channelTitle;
-                if (posts.size() == 0) posts.add(new Post(1, post.date));
+                if (posts.size() == 0) post.type = 1;
                 else {
                     Date date1 = new java.util.Date(posts.get(posts.size()-1).date * 1000L);
                     Date date2 = new java.util.Date(post.date * 1000L);
@@ -130,7 +130,7 @@ public class ChannelFragment extends Fragment {
                     sdf1.setTimeZone(java.util.TimeZone.getTimeZone("GMT+3"));
                     sdf2.setTimeZone(java.util.TimeZone.getTimeZone("GMT+3"));
                     sdf3.setTimeZone(java.util.TimeZone.getTimeZone("GMT+3"));
-                    if (Integer.parseInt(sdf1.format(date1)) != Integer.parseInt(sdf1.format(date1)) || Integer.parseInt(sdf2.format(date1)) != Integer.parseInt(sdf2.format(date2)) || Integer.parseInt(sdf3.format(date1)) != Integer.parseInt(sdf3.format(date2))) posts.add(new Post(1, post.date));
+                    if (Integer.parseInt(sdf1.format(date1)) != Integer.parseInt(sdf1.format(date1)) || Integer.parseInt(sdf2.format(date1)) != Integer.parseInt(sdf2.format(date2)) || Integer.parseInt(sdf3.format(date1)) != Integer.parseInt(sdf3.format(date2))) post.type = 1;
                 }
                 posts.add(post);
                 postsAdapter.notifyDataSetChanged();

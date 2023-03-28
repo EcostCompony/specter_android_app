@@ -23,9 +23,12 @@ public class Post {
         this.context = context;
     }
 
-    public Post(int type, Long date) {
+    public Post(int id, String author, int type, Long date, String context) {
+        this.id = id;
         this.type = type;
+        this.author = author;
         this.date = date;
+        this.context = context;
     }
 
 }
