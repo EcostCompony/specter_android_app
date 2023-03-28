@@ -13,6 +13,8 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.ecost.specter.R;
 import com.ecost.specter.models.Post;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 
 public class PostsAdapter extends RecyclerView.Adapter<PostViewHolder> {
@@ -48,7 +50,12 @@ public class PostsAdapter extends RecyclerView.Adapter<PostViewHolder> {
         Post post = posts.get(position);
         holder.text.setText(post.context);
         if (holder.author != null) holder.author.setText(post.author);
-        holder.time.setText(post.time);
+        Date date = new java.util.Date(post.date*1000L);
+        @SuppressLint("SimpleDateFormat") SimpleDateFormat sdf = new java.text.SimpleDateFormat("HH:mm");
+        sdf.setTimeZone(java.util.TimeZone.getTimeZone("GMT+3"));
+        String formattedDate = sdf.format(date);
+        System.out.println(formattedDate);
+        holder.time.setText(formattedDate);
         holder.itemView.setOnLongClickListener(v -> onLongClickListener.onPostLongClick(post, position));
     }
 

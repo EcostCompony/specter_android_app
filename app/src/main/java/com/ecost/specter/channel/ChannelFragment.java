@@ -188,12 +188,7 @@ public class ChannelFragment extends Fragment {
                 if (postEdit == null) {
                     try {
                         long myLong = new DataTimeTask().execute("somestring").get();
-                        Date date = new java.util.Date(myLong*1000L);
-
-                        @SuppressLint("SimpleDateFormat") SimpleDateFormat sdf = new java.text.SimpleDateFormat("HH:mm");
-                        sdf.setTimeZone(java.util.TimeZone.getTimeZone("GMT+3"));
-                        String formattedDate = sdf.format(date);
-                        myDB.child("specter").child("channels").child(String.valueOf(channelActivity.channelId)).child("posts").child(String.valueOf(channelActivity.postsNumber)).setValue(new Post(channelActivity.postsNumber, authUserName, formattedDate, text));
+                        myDB.child("specter").child("channels").child(String.valueOf(channelActivity.channelId)).child("posts").child(String.valueOf(channelActivity.postsNumber)).setValue(new Post(channelActivity.postsNumber, authUserName, myLong, text));
                         myDB.child("specter").child("channels").child(String.valueOf(channelActivity.channelId)).child("postsNumber").setValue(channelActivity.postsNumber + 1);
                         myDB.child("specter").child("channels").child(String.valueOf(channelActivity.channelId)).child("markBody").setValue(false);
                         channelActivity.postsNumber++;
@@ -221,10 +216,15 @@ public class ChannelFragment extends Fragment {
     public boolean onContextItemSelected(@NonNull MenuItem item) {
         String text = ePost.getText().toString().trim();
         if (!text.equals("")) {
-            myDB.child("specter").child("channels").child(String.valueOf(channelActivity.channelId)).child("posts").child(String.valueOf(posts.size())).setValue(new Post(posts.size(), "%CHANNEL_TITLE%", "15:23", text));
-            myDB.child("specter").child("channels").child(String.valueOf(channelActivity.channelId)).child("body").setValue(text);
-            myDB.child("specter").child("channels").child(String.valueOf(channelActivity.channelId)).child("markBody").setValue(false);
-            rPostsList.smoothScrollToPosition(posts.size());
+            try {
+                long myLong = new DataTimeTask().execute("somestring").get();
+                myDB.child("specter").child("channels").child(String.valueOf(channelActivity.channelId)).child("posts").child(String.valueOf(posts.size())).setValue(new Post(posts.size(), "%CHANNEL_TITLE%", myLong, text));
+                myDB.child("specter").child("channels").child(String.valueOf(channelActivity.channelId)).child("body").setValue(text);
+                myDB.child("specter").child("channels").child(String.valueOf(channelActivity.channelId)).child("markBody").setValue(false);
+                rPostsList.smoothScrollToPosition(posts.size());
+            } catch (ExecutionException | InterruptedException e) {
+                throw new RuntimeException(e);
+            }
         }
         ePost.setText("");
         return true;

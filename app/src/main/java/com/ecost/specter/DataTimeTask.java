@@ -10,19 +10,20 @@ public class DataTimeTask extends AsyncTask<String, Integer, Long> {
 
     @Override
     protected Long doInBackground(String... strings) {
+        long l = 0L;
         try {
             TimeTCPClient client = new TimeTCPClient();
             try {
                 client.setDefaultTimeout(60000);
-                client.connect("utcnist2.colorado.edu");
-                return client.getTime();
+                client.connect("time-e-g.nist.gov");
+                l = client.getTime();
             } finally {
                 client.disconnect();
             }
         } catch (IOException e) {
             e.printStackTrace();
         }
-        return null;
+        return l-70L*365*24*60*60-17L*24*60*60;
     }
 
 }

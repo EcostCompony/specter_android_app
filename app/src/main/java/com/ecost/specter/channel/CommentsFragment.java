@@ -22,6 +22,7 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.ecost.specter.DataTimeTask;
 import com.ecost.specter.R;
 import com.ecost.specter.models.Post;
 import com.ecost.specter.recyclers.PostsAdapter;
@@ -32,6 +33,7 @@ import com.google.firebase.database.DatabaseError;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
+import java.util.concurrent.ExecutionException;
 
 public class CommentsFragment extends Fragment {
 
@@ -111,11 +113,16 @@ public class CommentsFragment extends Fragment {
         inflaterView.findViewById(R.id.button_send).setOnClickListener(view -> {
             String text = eComment.getText().toString().trim();
             if (!text.equals("")) {
-                if (commentEdit != null) commentEdit.context = text;
-                if (commentEdit == null) rCommentsList.smoothScrollToPosition(comments.size());
-                myDB.child("specter").child("channels").child(String.valueOf(channelActivity.channelId)).child("posts").child(String.valueOf(channelActivity.postId)).child("comments").child(String.valueOf(commentEdit != null ? commentEdit.id : comments.size())).setValue(commentEdit != null ? commentEdit : new Post(comments.size(), authId, authUserName, "15:23", text));
-                tEditComment.setVisibility(View.GONE);
-                commentEdit = null;
+                try {
+                    long myLong = new DataTimeTask().execute("somestring").get();
+                    if (commentEdit != null) commentEdit.context = text;
+                    if (commentEdit == null) rCommentsList.smoothScrollToPosition(comments.size());
+                    myDB.child("specter").child("channels").child(String.valueOf(channelActivity.channelId)).child("posts").child(String.valueOf(channelActivity.postId)).child("comments").child(String.valueOf(commentEdit != null ? commentEdit.id : comments.size())).setValue(commentEdit != null ? commentEdit : new Post(comments.size(), authId, authUserName, myLong, text));
+                    tEditComment.setVisibility(View.GONE);
+                    commentEdit = null;
+                } catch (ExecutionException | InterruptedException e) {
+                    throw new RuntimeException(e);
+                }
             }
             eComment.setText("");
         });
