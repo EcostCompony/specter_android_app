@@ -102,8 +102,8 @@ public class AccountSettingsMenuFragment extends Fragment {
             View promptsView = li.inflate(R.layout.agree_alert_dialog, null);
 
             AlertDialog.Builder mDialogBuilder = new AlertDialog.Builder(getContext());
-
             mDialogBuilder.setView(promptsView);
+
 
             TextView tHeader = promptsView.findViewById(R.id.header);
             TextView description = promptsView.findViewById(R.id.description);
@@ -111,15 +111,16 @@ public class AccountSettingsMenuFragment extends Fragment {
             tHeader.setText(R.string.account_settings_log_out_text_header);
             description.setText(R.string.account_settings_log_out_text_description);
 
+            AlertDialog alertDialog = mDialogBuilder.create();
+            alertDialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+
             promptsView.findViewById(R.id.button_yes).setOnClickListener(view1 -> {
                 signOut(mainMenuActivity);
                 startActivity(new Intent(mainMenuActivity, AuthActivity.class));
                 mainMenuActivity.finish();
+                alertDialog.cancel();
             });
 
-            AlertDialog alertDialog = mDialogBuilder.create();
-
-            alertDialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
             alertDialog.show();
 
             promptsView.findViewById(R.id.button_cancel).setOnClickListener(view1 -> alertDialog.cancel());

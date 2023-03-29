@@ -149,7 +149,6 @@ public class ChannelSettingsFragment extends Fragment {
             View promptsView = li.inflate(R.layout.agree_alert_dialog, null);
 
             AlertDialog.Builder mDialogBuilder = new AlertDialog.Builder(getContext());
-
             mDialogBuilder.setView(promptsView);
 
             TextView tHeader = promptsView.findViewById(R.id.header);
@@ -158,15 +157,17 @@ public class ChannelSettingsFragment extends Fragment {
             tHeader.setText(R.string.channel_settings_delete_channel_alert_dialog_text_header);
             description.setText(R.string.channel_settings_delete_channel_alert_dialog_text_description);
 
+            AlertDialog alertDialog = mDialogBuilder.create();
+            alertDialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+
             promptsView.findViewById(R.id.button_yes).setOnClickListener(view1 -> {
                 myDB.child("specter").child("uid").child(channelActivity.channelShortLink).setValue(null);
                 myDB.child("specter").child("channels").child(String.valueOf(channelActivity.channelId)).setValue(null);
                 channelActivity.finish();
+                alertDialog.cancel();
             });
 
-            AlertDialog alertDialog = mDialogBuilder.create();
 
-            alertDialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
             alertDialog.show();
 
             promptsView.findViewById(R.id.button_cancel).setOnClickListener(view1 -> alertDialog.cancel());

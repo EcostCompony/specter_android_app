@@ -46,7 +46,6 @@ public class EcostSettingsMenuFragment extends Fragment {
             View promptsView = li.inflate(R.layout.edit_alert_dialog, null);
 
             AlertDialog.Builder mDialogBuilder = new AlertDialog.Builder(getContext());
-
             mDialogBuilder.setView(promptsView);
 
             TextView tHeader = (TextView) promptsView.findViewById(R.id.header);
@@ -59,6 +58,9 @@ public class EcostSettingsMenuFragment extends Fragment {
 
             eNewNumberPhone.setInputType(3); // 3 - id Input type phone
             ePass.setInputType(129); // 129 - id Input type textPassword
+
+            AlertDialog alertDialog = mDialogBuilder.create();
+            alertDialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
 
             promptsView.findViewById(R.id.button_okay).setOnClickListener(view1 -> {
                 myDB.child("ecost").child("users").child(String.valueOf(authEcostId)).child("password").get().addOnCompleteListener(taskPassword -> {
@@ -77,11 +79,9 @@ public class EcostSettingsMenuFragment extends Fragment {
                             });
                     }
                 });
+                alertDialog.cancel();
             });
 
-            AlertDialog alertDialog = mDialogBuilder.create();
-
-            alertDialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
             alertDialog.show();
 
             promptsView.findViewById(R.id.button_cancel).setOnClickListener(view1 -> alertDialog.cancel());
@@ -92,7 +92,6 @@ public class EcostSettingsMenuFragment extends Fragment {
             View promptsView = li.inflate(R.layout.edit_alert_dialog, null);
 
             AlertDialog.Builder mDialogBuilder = new AlertDialog.Builder(getContext());
-
             mDialogBuilder.setView(promptsView);
 
             TextView tHeader = (TextView) promptsView.findViewById(R.id.header);
@@ -112,6 +111,9 @@ public class EcostSettingsMenuFragment extends Fragment {
             };
             eNewPass.setFilters(new InputFilter[] {filterPassword, new InputFilter.LengthFilter(128)});
 
+            AlertDialog alertDialog = mDialogBuilder.create();
+            alertDialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+
             promptsView.findViewById(R.id.button_okay).setOnClickListener(view1 -> {
                 myDB.child("ecost").child("users").child(String.valueOf(authEcostId)).child("password").get().addOnCompleteListener(taskPassword -> {
                     if (!String.valueOf(taskPassword.getResult().getValue()).equals(hash(eOldPass.getText().toString()))) popup(mainMenuActivity, view, 1, getString(R.string.ecost_settings_menu_error_wrong_password));
@@ -121,11 +123,9 @@ public class EcostSettingsMenuFragment extends Fragment {
                         else myDB.child("ecost").child("users").child(String.valueOf(authEcostId)).child("password").setValue(hash(eNewPass.getText().toString()));
                     }
                 });
+                alertDialog.cancel();
             });
 
-            AlertDialog alertDialog = mDialogBuilder.create();
-
-            alertDialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
             alertDialog.show();
 
             promptsView.findViewById(R.id.button_cancel).setOnClickListener(view1 -> alertDialog.cancel());
