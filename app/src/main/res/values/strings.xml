@@ -51,10 +51,10 @@
     <string name="create_channel_menu_error_not_short_channel_link">You need to enter a short link</string>
     <string name="create_channel_menu_error_small_short_channel_link">The short link must contain more than 3 characters</string>
     <string name="create_channel_menu_error_busy_short_channel_link">The link is already taken =(</string>
-    <string name="settings_menu_error_not_name">You can\'t be unnamed in our area</string>
-    <string name="settings_menu_error_not_short_user_link">The short link must contain more than 3 characters</string>
-    <string name="settings_menu_error_small_short_user_link">Come up with a short link containing more than 3 characters</string>
-    <string name="settings_menu_error_busy_short_user_link">It looks like this short link is already taken =(</string>
+    <string name="account_settings_error_not_name">You can\'t be unnamed in our area</string>
+    <string name="account_settings_error_not_short_user_link">The short link must contain more than 3 characters</string>
+    <string name="account_settings_error_small_short_user_link">Come up with a short link containing more than 3 characters</string>
+    <string name="account_settings_error_busy_short_user_link">It looks like this short link is already taken =(</string>
     <string name="channel_settings_error_not_channel_title">Channel name must contain at least 1 character</string>
     <string name="channel_settings_error_not_short_channel_title">The short link must contain more than 3 characters</string>
     <string name="channel_settings_error_small_short_channel_link">Come up with a short link containing more than 3 characters</string>
@@ -180,19 +180,24 @@
     <string name="channel_settings_button_content_description_save_channel_title">Save channel name</string>
     <string name="channel_settings_button_content_description_save_short_channel_link">Save short link</string>
     <string name="settings_menu_section_ecost_account">Аккаунт «ecost»</string>
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="settings_menu_parameter_header_phone_number">Номер телефона</string>
     <string name="settings_menu_parameter_header_password">Пароль</string>
     <string name="password_hide">•••••••••••</string>
     <string name="ecost_settings_menu_button_change">Сменить</string>
-    <string name="alert_dialog_ok">OK</string>
     <string name="ecost_settings_menu_error_wrong_password">Неверный пароль</string>
-    <string name="alert_dialog_cancel">Отмена</string>
     <string name="ecost_settings_menu_error_not_password">Стоит ввести новый пароль</string>
     <string name="ecost_settings_menu_error_small_password">Пароль должен содержать не менее 8 символов</string>
-    <string name="alert_dialog_edit_number_phone_header_number_phone">Введите новый номер телефона</string>
-    <string name="alert_dialog_edit_number_phone_header_password">Введите пароль</string>
-    <string name="aler_dialog_edit_password_header_new_password">Введите новый пароль</string>
-    <string name="aler_dialog_edit_password_header_old_password">Введите старый пароль</string>
+    <string name="edit_number_phone_alert_dialog_header">Сменить номер</string>
+    <string name="edit_number_phone_alert_dialog_hint_number_phone">Номер телефона</string>
+    <string name="edit_number_phone_alert_dialog_hint_password">Введите пароль</string>
+    <string name="edit_password_alert_dialog_header">Сменить пароль</string>
+    <string name="edit_password_alert_dialog_hint_new_password">Введите новый пароль</string>
+    <string name="edit_password_alert_dialog_hint_old_password">Введите старый пароль</string>
+    <string name="alert_dialog_okey">окей</string>
+    <string name="alert_dialog_cance">отмена</string>
+    <string name="alert_dialog_yes">да</string>
+    <string name="channel_settings_delete_channel_alert_dialog_text_header">Удаление канала</string>
+    <string name="channel_settings_delete_channel_alert_dialog_text_description">Вы уверены что хотите удалить канал?\nВсе его данные будут уничтожены.</string>
+    <string name="account_settings_log_out_text_header">Выход</string>
+    <string name="account_settings_log_out_text_description">Вы уверены что хотите выйти?</string>
 </resources>

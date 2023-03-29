@@ -3,6 +3,9 @@ package com.ecost.specter.channel;
 import static com.ecost.specter.Routing.myDB;
 import static com.ecost.specter.Routing.popup;
 
+import android.app.AlertDialog;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.InputFilter;
@@ -16,6 +19,7 @@ import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.Spinner;
+import android.widget.TextView;
 
 import androidx.fragment.app.Fragment;
 
@@ -141,9 +145,32 @@ public class ChannelSettingsFragment extends Fragment {
         });
 
         inflaterView.findViewById(R.id.button_delete_channel).setOnClickListener(view -> {
-            myDB.child("specter").child("uid").child(channelActivity.channelShortLink).setValue(null);
-            myDB.child("specter").child("channels").child(String.valueOf(channelActivity.channelId)).setValue(null);
-            channelActivity.finish();
+            LayoutInflater li = LayoutInflater.from(getContext());
+            View promptsView = li.inflate(R.layout.agree_alert_dialog, null);
+
+            AlertDialog.Builder mDialogBuilder = new AlertDialog.Builder(getContext());
+            mDialogBuilder.setView(promptsView);
+
+            TextView tHeader = promptsView.findViewById(R.id.header);
+            TextView description = promptsView.findViewById(R.id.description);
+
+            tHeader.setText(R.string.channel_settings_delete_channel_alert_dialog_text_header);
+            description.setText(R.string.channel_settings_delete_channel_alert_dialog_text_description);
+
+            AlertDialog alertDialog = mDialogBuilder.create();
+            alertDialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+
+            promptsView.findViewById(R.id.button_yes).setOnClickListener(view1 -> {
+                myDB.child("specter").child("uid").child(channelActivity.channelShortLink).setValue(null);
+                myDB.child("specter").child("channels").child(String.valueOf(channelActivity.channelId)).setValue(null);
+                channelActivity.finish();
+                alertDialog.cancel();
+            });
+
+
+            alertDialog.show();
+
+            promptsView.findViewById(R.id.button_cancel).setOnClickListener(view1 -> alertDialog.cancel());
         });
 
         return inflaterView;

@@ -10,7 +10,10 @@ import static com.ecost.specter.Routing.pushPreferenceUserName;
 import static com.ecost.specter.Routing.signOut;
 
 import android.annotation.SuppressLint;
+import android.app.AlertDialog;
 import android.content.Intent;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
@@ -24,6 +27,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
 import android.widget.ImageButton;
+import android.widget.TextView;
 
 import com.ecost.specter.R;
 import com.ecost.specter.auth.AuthActivity;
@@ -94,9 +98,32 @@ public class AccountSettingsMenuFragment extends Fragment {
         bSaveShortUserLink.setOnClickListener(this::saveShortUserLink);
 
         inflaterView.findViewById(R.id.button_sign_out).setOnClickListener(view -> {
-            signOut(mainMenuActivity);
-            startActivity(new Intent(mainMenuActivity, AuthActivity.class));
-            mainMenuActivity.finish();
+            LayoutInflater li = LayoutInflater.from(getContext());
+            View promptsView = li.inflate(R.layout.agree_alert_dialog, null);
+
+            AlertDialog.Builder mDialogBuilder = new AlertDialog.Builder(getContext());
+            mDialogBuilder.setView(promptsView);
+
+
+            TextView tHeader = promptsView.findViewById(R.id.header);
+            TextView description = promptsView.findViewById(R.id.description);
+
+            tHeader.setText(R.string.account_settings_log_out_text_header);
+            description.setText(R.string.account_settings_log_out_text_description);
+
+            AlertDialog alertDialog = mDialogBuilder.create();
+            alertDialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+
+            promptsView.findViewById(R.id.button_yes).setOnClickListener(view1 -> {
+                signOut(mainMenuActivity);
+                startActivity(new Intent(mainMenuActivity, AuthActivity.class));
+                mainMenuActivity.finish();
+                alertDialog.cancel();
+            });
+
+            alertDialog.show();
+
+            promptsView.findViewById(R.id.button_cancel).setOnClickListener(view1 -> alertDialog.cancel());
         });
 
         return inflaterView;
@@ -105,7 +132,7 @@ public class AccountSettingsMenuFragment extends Fragment {
     public void saveUserName(View view) {
         String userName = eUserName.getText().toString();
 
-        if (userName.equals("")) popup(mainMenuActivity, view, 1, getString(R.string.settings_menu_error_not_name));
+        if (userName.equals("")) popup(mainMenuActivity, view, 1, getString(R.string.account_settings_error_not_name));
         else {
             myDB.child("specter").child("users").child(String.valueOf(authId)).child("name").setValue(userName);
             pushPreferenceUserName(mainMenuActivity, userName);
@@ -117,11 +144,11 @@ public class AccountSettingsMenuFragment extends Fragment {
     public void saveShortUserLink(View view) {
         String shortUserLink = eShortUserLink.getText().toString();
 
-        if (shortUserLink.equals("")) popup(mainMenuActivity, view, 1, getString(R.string.settings_menu_error_not_short_user_link));
-        else if (shortUserLink.length() < 3) popup(mainMenuActivity, view, 1, getString(R.string.settings_menu_error_small_short_user_link));
+        if (shortUserLink.equals("")) popup(mainMenuActivity, view, 1, getString(R.string.account_settings_error_not_short_user_link));
+        else if (shortUserLink.length() < 3) popup(mainMenuActivity, view, 1, getString(R.string.account_settings_error_small_short_user_link));
         else
             myDB.child("specter").child("uid").child(shortUserLink.replace('.', '*')).child("id").get().addOnCompleteListener(taskTestShortUserLink -> {
-                if (taskTestShortUserLink.getResult().getValue() != null) popup(mainMenuActivity, view, 1, getString(R.string.settings_menu_error_busy_short_user_link));
+                if (taskTestShortUserLink.getResult().getValue() != null) popup(mainMenuActivity, view, 1, getString(R.string.account_settings_error_busy_short_user_link));
                 else {
                     myDB.child("specter").child("uid").child(authShortUserLink.replace(".", "*")).setValue(null);
                     myDB.child("specter").child("users").child(String.valueOf(authId)).child("link").setValue(shortUserLink);

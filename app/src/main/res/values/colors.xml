@@ -34,4 +34,5 @@
     <color name="section_background_color">#F8F8F8</color>
     <color name="section_text_color">#9C9C9C</color>
     <color name="channel_page_button_text_unsubscribe">#E55454</color>
+    <color name="alert_dialog_color_cancel">#E55353</color>
 </resources>
