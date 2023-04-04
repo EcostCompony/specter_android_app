@@ -200,4 +200,6 @@
     <string name="channel_settings_delete_channel_alert_dialog_text_description">Вы уверены что хотите удалить канал?\nВсе его данные будут уничтожены.</string>
     <string name="account_settings_log_out_text_header">Выход</string>
     <string name="account_settings_log_out_text_description">Вы уверены что хотите выйти?</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>
