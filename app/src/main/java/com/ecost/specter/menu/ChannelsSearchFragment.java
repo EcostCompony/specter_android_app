@@ -24,6 +24,7 @@ import android.widget.TextView;
 
 import com.ecost.specter.R;
 import com.ecost.specter.models.Channel;
+import com.ecost.specter.models.User;
 import com.ecost.specter.recyclers.ChannelsAdapter;
 import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
@@ -32,6 +33,7 @@ import com.google.firebase.database.DatabaseError;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
+import java.util.Map;
 import java.util.Objects;
 import java.util.regex.Pattern;
 
@@ -82,7 +84,7 @@ public class ChannelsSearchFragment extends Fragment {
                         Channel channel = Objects.requireNonNull(dataSnapshot.getValue(Channel.class));
                         boolean subscribe = false;
                         if (!eChannelTitle.getText().toString().trim().equals("") && Pattern.compile(eChannelTitle.getText().toString().trim(), Pattern.CASE_INSENSITIVE).matcher(channel.title.toLowerCase()).find()) {
-                            for (int i = 0; i < channel.subscribers.size(); i++) if (channel.subscribers.get(i).equals(authId)) subscribe = true;
+                            for (Map.Entry<String, User> entry : channel.subscribers.entrySet()) if (entry.getValue().id.equals(authId)) subscribe = true;
                             if (!subscribe) {
                                 channel.body = getString(R.string.symbol_at) + channel.shortLink;
                                 channel.markBody = true;

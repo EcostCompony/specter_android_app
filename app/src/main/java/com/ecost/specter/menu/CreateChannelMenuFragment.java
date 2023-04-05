@@ -1,6 +1,9 @@
 package com.ecost.specter.menu;
 
+import static com.ecost.specter.Routing.authEcostId;
 import static com.ecost.specter.Routing.authId;
+import static com.ecost.specter.Routing.authShortUserLink;
+import static com.ecost.specter.Routing.authUserName;
 import static com.ecost.specter.Routing.myDB;
 import static com.ecost.specter.Routing.popup;
 
@@ -22,6 +25,7 @@ import androidx.fragment.app.Fragment;
 
 import com.ecost.specter.R;
 import com.ecost.specter.models.Channel;
+import com.ecost.specter.models.User;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -95,10 +99,9 @@ public class CreateChannelMenuFragment extends Fragment {
                 else
                     myDB.child("specter").child("channels_number").get().addOnCompleteListener(taskId -> {
                         Integer id = Integer.parseInt(String.valueOf(taskId.getResult().getValue()));
-                        List<Integer> subscribers = new ArrayList<>();
-                        Channel channel = new Channel(id, shortChannelLink, authId, 0, title, categoryId == 0 ? null : categoryId, eDescription.getText().toString().trim().equals("") ? null : eDescription.getText().toString(), "%CHANNEL_CREATED%", true, subscribers, 1);
-                        subscribers.add(authId);
+                        Channel channel = new Channel(id, shortChannelLink, authId, 0, title, categoryId == 0 ? null : categoryId, eDescription.getText().toString().trim().equals("") ? null : eDescription.getText().toString(), "%CHANNEL_CREATED%", true);
                         myDB.child("specter").child("channels").child(String.valueOf(id)).setValue(channel);
+                        myDB.child("specter").child("channels").child(String.valueOf(id)).child("subscribers").push().setValue(new User(authId, authEcostId, authUserName, authShortUserLink));
                         myDB.child("specter").child("uid").child(shortChannelLink.replace('.', '*')).child("id").setValue(id);
                         myDB.child("specter").child("uid").child(shortChannelLink.replace('.', '*')).child("type").setValue("channel");
                         myDB.child("specter").child("channels_number").setValue(id + 1);

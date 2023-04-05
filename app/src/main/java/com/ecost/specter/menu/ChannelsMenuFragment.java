@@ -18,6 +18,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.ecost.specter.R;
 import com.ecost.specter.models.Channel;
+import com.ecost.specter.models.User;
 import com.ecost.specter.recyclers.ChannelsAdapter;
 
 import com.google.firebase.database.ChildEventListener;
@@ -27,6 +28,7 @@ import com.google.firebase.database.DatabaseError;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
+import java.util.Map;
 import java.util.Objects;
 
 public class ChannelsMenuFragment extends Fragment {
@@ -45,8 +47,8 @@ public class ChannelsMenuFragment extends Fragment {
             @Override
             public void onChildAdded(@NonNull DataSnapshot dataSnapshot, String previousChildName) {
                 Channel channel = Objects.requireNonNull(dataSnapshot.getValue(Channel.class));
-                for (int i = 0; i < channel.subscribers.size(); i++) {
-                    if (channel.subscribers.get(i).equals(authId)) {
+                for (Map.Entry<String, User> entry : channel.subscribers.entrySet()) {
+                    if (entry.getValue().id.equals(authId)) {
                         if (channel.body.equals("%CHANNEL_CREATED%")) channel.body = mainMenuActivity.getString(R.string.channels_menu_attribute_channel_created);
                         else if (channel.body.equals("%NOT_POSTS%")) channel.body = mainMenuActivity.getString(R.string.channels_menu_attribute_not_posts);
                         channels.add(channel);
