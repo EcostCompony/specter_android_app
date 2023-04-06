@@ -4,8 +4,10 @@ import static com.ecost.specter.Routing.authEcostId;
 import static com.ecost.specter.Routing.hash;
 import static com.ecost.specter.Routing.myDB;
 import static com.ecost.specter.Routing.popup;
+import static com.ecost.specter.Routing.signOut;
 
 import android.app.AlertDialog;
+import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
@@ -20,6 +22,7 @@ import android.widget.EditText;
 import android.widget.TextView;
 
 import com.ecost.specter.R;
+import com.ecost.specter.auth.AuthActivity;
 
 import java.util.regex.Pattern;
 
@@ -123,6 +126,35 @@ public class EcostSettingsMenuFragment extends Fragment {
                         else myDB.child("ecost").child("users").child(String.valueOf(authEcostId)).child("password").setValue(hash(eNewPass.getText().toString()));
                     }
                 });
+                alertDialog.cancel();
+            });
+
+            alertDialog.show();
+
+            promptsView.findViewById(R.id.button_cancel).setOnClickListener(view1 -> alertDialog.cancel());
+        });
+
+        inflaterView.findViewById(R.id.button_sign_out).setOnClickListener(view -> {
+            LayoutInflater li = LayoutInflater.from(getContext());
+            View promptsView = li.inflate(R.layout.agree_alert_dialog, null);
+
+            AlertDialog.Builder mDialogBuilder = new AlertDialog.Builder(getContext());
+            mDialogBuilder.setView(promptsView);
+
+
+            TextView tHeader = promptsView.findViewById(R.id.header);
+            TextView description = promptsView.findViewById(R.id.description);
+
+            tHeader.setText(R.string.account_settings_log_out_text_header);
+            description.setText(R.string.account_settings_log_out_text_description);
+
+            AlertDialog alertDialog = mDialogBuilder.create();
+            alertDialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+
+            promptsView.findViewById(R.id.button_yes).setOnClickListener(view1 -> {
+                signOut(mainMenuActivity);
+                startActivity(new Intent(mainMenuActivity, AuthActivity.class));
+                mainMenuActivity.finish();
                 alertDialog.cancel();
             });
 

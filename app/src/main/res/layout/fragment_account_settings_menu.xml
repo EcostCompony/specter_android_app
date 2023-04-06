@@ -103,16 +103,4 @@
             android:visibility="gone"
             android:contentDescription="@string/settings_menu_button_content_description_save_short_user_link" />
     </LinearLayout>
-
-    <Button
-        android:id="@+id/button_sign_out"
-        android:layout_width="wrap_content"
-        android:layout_height="37dp"
-        android:layout_marginTop="22dp"
-        android:paddingHorizontal="19dp"
-        android:background="@drawable/button_negative"
-        android:textColor="@color/button_negative_text_color"
-        android:fontFamily="@font/inter_bold"
-        android:textSize="12sp"
-        android:text="@string/settings_menu_button_sign_out" />
 </LinearLayout>
