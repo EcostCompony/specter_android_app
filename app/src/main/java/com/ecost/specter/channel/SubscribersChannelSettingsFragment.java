@@ -43,6 +43,7 @@ public class SubscribersChannelSettingsFragment extends Fragment {
     UsersAdapter usersAdapter;
     List<User> users = new ArrayList<>();
     List<String> keys = new ArrayList<>();
+    ChildEventListener childEventListenerB;
     ChannelActivity channelActivity;
 
     @Override
@@ -81,7 +82,7 @@ public class SubscribersChannelSettingsFragment extends Fragment {
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
                 users.clear();
                 keys.clear();
-                ChildEventListener childEventListenerB = new ChildEventListener() {
+                childEventListenerB = new ChildEventListener() {
                     @SuppressLint("NotifyDataSetChanged")
                     @Override
                     public void onChildAdded(@NonNull DataSnapshot dataSnapshot, String previousChildName) {
@@ -92,6 +93,7 @@ public class SubscribersChannelSettingsFragment extends Fragment {
                             keys.add(dataSnapshot.getKey());
                         } else if (eSearchUser.getText().toString().trim().equals("")) {
                             myDB.child("specter").child("channels").child(String.valueOf(channelActivity.channelId)).child("subscribers").addChildEventListener(childEventListener);
+                            myDB.child("specter").child("channels").child(String.valueOf(channelActivity.channelId)).child("subscribers").removeEventListener(childEventListenerB);
                         }
                         usersAdapter.notifyDataSetChanged();
                     }
