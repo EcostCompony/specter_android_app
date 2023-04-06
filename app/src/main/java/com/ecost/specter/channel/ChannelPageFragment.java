@@ -19,6 +19,7 @@ import android.view.ViewGroup;
 import android.widget.FrameLayout;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.ecost.specter.R;
 import com.ecost.specter.models.User;
@@ -54,12 +55,12 @@ public class ChannelPageFragment extends Fragment {
 
         tTitle.setText(channelActivity.channelTitle);
         tShortChannelLink.setText(getText(R.string.symbol_at) + channelActivity.channelShortLink);
-        if (channelActivity.channelAdmin.equals(authId)) bChannelSettings.setVisibility(View.VISIBLE);
+        if (channelActivity.channelAdmin) bChannelSettings.setVisibility(View.VISIBLE);
         if (channelActivity.categoryId != 0) {
             tChannelCategory.setText(getString(R.string.symbol_dot) + " " + getResources().getStringArray(R.array.channel_settings_array_category)[channelActivity.categoryId].toLowerCase());
             tChannelCategory.setVisibility(View.VISIBLE);
         }
-        if (!channelActivity.channelAdmin.equals(authId)) (channelActivity.userSubscribe ? bUnsubscribe : bSubscribe).setVisibility(View.VISIBLE);
+        if (!channelActivity.channelAdmin) (channelActivity.userSubscribe ? bUnsubscribe : bSubscribe).setVisibility(View.VISIBLE);
         if (channelActivity.channelDescription != null && !channelActivity.channelDescription.equals("")) {
             tChannelDescription.setText(channelActivity.channelDescription);
             lDescription.setVisibility(View.VISIBLE);

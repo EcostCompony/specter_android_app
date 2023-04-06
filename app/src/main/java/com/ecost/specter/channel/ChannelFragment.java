@@ -83,7 +83,7 @@ public class ChannelFragment extends Fragment {
         registerForContextMenu(bSendPost);
         tChannelTitle.setText(channelActivity.channelTitle);
         if (!channelActivity.userSubscribe) bSubscribe.setVisibility(View.VISIBLE);
-        if (channelActivity.channelAdmin.equals(authId)) {
+        if (channelActivity.channelAdmin) {
             DisplayMetrics displayMetrics = channelActivity.getResources().getDisplayMetrics();
             LinearLayout.LayoutParams params = (LinearLayout.LayoutParams) rPostsList.getLayoutParams();
             params.topMargin = Math.round(65 * (displayMetrics.xdpi / DisplayMetrics.DENSITY_DEFAULT));
@@ -92,7 +92,7 @@ public class ChannelFragment extends Fragment {
         }
 
         PostsAdapter.OnPostLongClickListener postLongClickListener = (post, position) -> {
-            CharSequence[] items = channelActivity.channelAdmin.equals(authId) ? new String[]{getString(R.string.channel_alert_dialog_item_comments), getString(R.string.channel_alert_dialog_item_edit), getString(R.string.channel_alert_dialog_item_copy), getString(R.string.channel_alert_dialog_item_delete)} : new String[]{getString(R.string.channel_alert_dialog_item_comments), getString(R.string.channel_alert_dialog_item_copy)};
+            CharSequence[] items = channelActivity.channelAdmin ? new String[]{getString(R.string.channel_alert_dialog_item_comments), getString(R.string.channel_alert_dialog_item_edit), getString(R.string.channel_alert_dialog_item_copy), getString(R.string.channel_alert_dialog_item_delete)} : new String[]{getString(R.string.channel_alert_dialog_item_comments), getString(R.string.channel_alert_dialog_item_copy)};
             AlertDialog.Builder builder = new AlertDialog.Builder(inflater.getContext());
 
             builder.setItems(items, (dialog, item) -> {
