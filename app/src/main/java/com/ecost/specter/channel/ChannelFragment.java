@@ -1,6 +1,8 @@
 package com.ecost.specter.channel;
 
+import static com.ecost.specter.Routing.authEcostId;
 import static com.ecost.specter.Routing.authId;
+import static com.ecost.specter.Routing.authShortUserLink;
 import static com.ecost.specter.Routing.authUserName;
 import static com.ecost.specter.Routing.myDB;
 import static com.ecost.specter.Routing.pluralForm;
@@ -33,6 +35,7 @@ import android.widget.Toast;
 import com.ecost.specter.DataTimeTask;
 import com.ecost.specter.R;
 import com.ecost.specter.models.Post;
+import com.ecost.specter.models.User;
 import com.ecost.specter.recyclers.PostsAdapter;
 import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
@@ -80,7 +83,7 @@ public class ChannelFragment extends Fragment {
         registerForContextMenu(bSendPost);
         tChannelTitle.setText(channelActivity.channelTitle);
         if (!channelActivity.userSubscribe) bSubscribe.setVisibility(View.VISIBLE);
-        if (channelActivity.channelAdmin.equals(authId)) {
+        if (channelActivity.channelAdmin) {
             DisplayMetrics displayMetrics = channelActivity.getResources().getDisplayMetrics();
             LinearLayout.LayoutParams params = (LinearLayout.LayoutParams) rPostsList.getLayoutParams();
             params.topMargin = Math.round(65 * (displayMetrics.xdpi / DisplayMetrics.DENSITY_DEFAULT));
@@ -89,7 +92,7 @@ public class ChannelFragment extends Fragment {
         }
 
         PostsAdapter.OnPostLongClickListener postLongClickListener = (post, position) -> {
-            CharSequence[] items = channelActivity.channelAdmin.equals(authId) ? new String[]{getString(R.string.channel_alert_dialog_item_comments), getString(R.string.channel_alert_dialog_item_edit), getString(R.string.channel_alert_dialog_item_copy), getString(R.string.channel_alert_dialog_item_delete)} : new String[]{getString(R.string.channel_alert_dialog_item_comments), getString(R.string.channel_alert_dialog_item_copy)};
+            CharSequence[] items = channelActivity.channelAdmin ? new String[]{getString(R.string.channel_alert_dialog_item_comments), getString(R.string.channel_alert_dialog_item_edit), getString(R.string.channel_alert_dialog_item_copy), getString(R.string.channel_alert_dialog_item_delete)} : new String[]{getString(R.string.channel_alert_dialog_item_comments), getString(R.string.channel_alert_dialog_item_copy)};
             AlertDialog.Builder builder = new AlertDialog.Builder(inflater.getContext());
 
             builder.setItems(items, (dialog, item) -> {
@@ -169,7 +172,7 @@ public class ChannelFragment extends Fragment {
         childEventListenerSub = new ChildEventListener() {
             @Override
             public void onChildAdded(@NonNull DataSnapshot dataSnapshot, String previousChildName) {
-                if (Objects.requireNonNull(dataSnapshot.getValue(Integer.class)) != 0) channelActivity.channelSubscribers++;
+                if (dataSnapshot.getValue(User.class) != null) channelActivity.channelSubscribers++;
                 tNumberSubscribers.setText(pluralForm(channelActivity.channelSubscribers, getString(R.string.number_subscribers_nominative_case), getString(R.string.number_subscribers_genitive_case), getString(R.string.number_subscribers_plural_genitive_case), Locale.getDefault().getLanguage().equals("ru")));
             }
 
@@ -185,8 +188,7 @@ public class ChannelFragment extends Fragment {
         lChannelHead.setOnClickListener(view -> channelActivity.getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container_view, new ChannelPageFragment()).addToBackStack(null).commit());
 
         bSubscribe.setOnClickListener(view -> {
-            myDB.child("specter").child("channels").child(String.valueOf(channelActivity.channelId)).child("subscribers").child(String.valueOf(channelActivity.subNumber)).setValue(authId);
-            myDB.child("specter").child("channels").child(String.valueOf(channelActivity.channelId)).child("subNumber").setValue(channelActivity.subNumber+1);
+            myDB.child("specter").child("channels").child(String.valueOf(channelActivity.channelId)).child("subscribers").push().setValue(new User(authId, authEcostId, authUserName, authShortUserLink));
             channelActivity.userSubscribe = true;
             bSubscribe.setVisibility(View.GONE);
             tNumberSubscribers.setText(pluralForm(channelActivity.channelSubscribers, getString(R.string.number_subscribers_nominative_case), getString(R.string.number_subscribers_genitive_case), getString(R.string.number_subscribers_plural_genitive_case), Locale.getDefault().getLanguage().equals("ru")));

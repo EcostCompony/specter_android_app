@@ -31,7 +31,6 @@ public class MainMenuActivity extends AppCompatActivity {
         intent.putExtra("CHANNEL_CATEGORY", channel.categoryId);
         intent.putExtra("CHANNEL_DESCRIPTION", channel.description);
         intent.putExtra("USER_SUBSCRIBE", subscribe);
-        intent.putExtra("CHANNEL_SUB_NUMBER", channel.subNumber);
         startActivity(intent);
     }
 

@@ -1,6 +1,9 @@
 package com.ecost.specter.channel;
 
+import static com.ecost.specter.Routing.authEcostId;
 import static com.ecost.specter.Routing.authId;
+import static com.ecost.specter.Routing.authShortUserLink;
+import static com.ecost.specter.Routing.authUserName;
 import static com.ecost.specter.Routing.myDB;
 
 import android.annotation.SuppressLint;
@@ -16,8 +19,10 @@ import android.view.ViewGroup;
 import android.widget.FrameLayout;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.ecost.specter.R;
+import com.ecost.specter.models.User;
 import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -50,12 +55,12 @@ public class ChannelPageFragment extends Fragment {
 
         tTitle.setText(channelActivity.channelTitle);
         tShortChannelLink.setText(getText(R.string.symbol_at) + channelActivity.channelShortLink);
-        if (channelActivity.channelAdmin.equals(authId)) bChannelSettings.setVisibility(View.VISIBLE);
+        if (channelActivity.channelAdmin) bChannelSettings.setVisibility(View.VISIBLE);
         if (channelActivity.categoryId != 0) {
             tChannelCategory.setText(getString(R.string.symbol_dot) + " " + getResources().getStringArray(R.array.channel_settings_array_category)[channelActivity.categoryId].toLowerCase());
             tChannelCategory.setVisibility(View.VISIBLE);
         }
-        if (!channelActivity.channelAdmin.equals(authId)) (channelActivity.userSubscribe ? bUnsubscribe : bSubscribe).setVisibility(View.VISIBLE);
+        if (!channelActivity.channelAdmin) (channelActivity.userSubscribe ? bUnsubscribe : bSubscribe).setVisibility(View.VISIBLE);
         if (channelActivity.channelDescription != null && !channelActivity.channelDescription.equals("")) {
             tChannelDescription.setText(channelActivity.channelDescription);
             lDescription.setVisibility(View.VISIBLE);
@@ -69,9 +74,9 @@ public class ChannelPageFragment extends Fragment {
             childEventListener = new ChildEventListener() {
                 @Override
                 public void onChildAdded(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {
-                    if (Objects.equals(snapshot.getValue(Integer.class), authId)) {
+                    if (Objects.equals(Objects.requireNonNull(snapshot.getValue(User.class)).id, authId)) {
                         assert previousChildName != null;
-                        myDB.child("specter").child("channels").child(String.valueOf(channelActivity.channelId)).child("subscribers").child(String.valueOf(snapshot.getKey())).setValue(0);
+                        myDB.child("specter").child("channels").child(String.valueOf(channelActivity.channelId)).child("subscribers").child(String.valueOf(snapshot.getKey())).setValue(null);
                         myDB.child("specter").child("channels").child(String.valueOf(channelActivity.channelId)).child("subscribers").removeEventListener(childEventListener);
                         bUnsubscribe.setVisibility(View.GONE);
                         bSubscribe.setVisibility(View.VISIBLE);
@@ -88,8 +93,7 @@ public class ChannelPageFragment extends Fragment {
         });
 
         bSubscribe.setOnClickListener(view -> {
-            myDB.child("specter").child("channels").child(String.valueOf(channelActivity.channelId)).child("subscribers").child(String.valueOf(channelActivity.subNumber)).setValue(authId);
-            myDB.child("specter").child("channels").child(String.valueOf(channelActivity.channelId)).child("subNumber").setValue(channelActivity.subNumber+1);
+            myDB.child("specter").child("channels").child(String.valueOf(channelActivity.channelId)).child("subscribers").push().setValue(new User(authId, authEcostId, authUserName, authShortUserLink));
             channelActivity.userSubscribe = true;
             bSubscribe.setVisibility(View.GONE);
             bUnsubscribe.setVisibility(View.VISIBLE);
