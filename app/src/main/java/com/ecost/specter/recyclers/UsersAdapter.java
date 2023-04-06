@@ -16,14 +16,20 @@ import java.util.List;
 
 public class UsersAdapter extends RecyclerView.Adapter<UserViewHolder> {
 
+    public interface OnAddAdminClickListener {
+        void onAddAdminClick(int position);
+    }
+
+    UsersAdapter.OnAddAdminClickListener onClickListener;
     List<User> users;
     Context context;
     LayoutInflater inflater;
 
-    public UsersAdapter(Context context, List<User> users) {
+    public UsersAdapter(Context context, List<User> users, UsersAdapter.OnAddAdminClickListener onClickListener) {
         this.inflater = LayoutInflater.from(context);
         this.context = context;
         this.users = users;
+        this.onClickListener = onClickListener;
     }
 
     @NonNull
@@ -37,6 +43,10 @@ public class UsersAdapter extends RecyclerView.Adapter<UserViewHolder> {
     public void onBindViewHolder(@NonNull UserViewHolder holder, int position) {
         holder.name.setText(users.get(position).name);
         holder.shortLink.setText(context.getString(R.string.symbol_at) + users.get(position).link);
+        holder.fAddAdmin.setOnClickListener(view -> {
+            onClickListener.onAddAdminClick(position);
+            holder.fAddAdmin.setVisibility(View.GONE);
+        });
         if (users.get(position).channel_admin) holder.fAddAdmin.setVisibility(View.GONE);
     }
 

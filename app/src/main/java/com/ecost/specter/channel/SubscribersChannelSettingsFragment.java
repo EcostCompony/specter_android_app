@@ -42,6 +42,7 @@ public class SubscribersChannelSettingsFragment extends Fragment {
     RecyclerView rUsersList;
     UsersAdapter usersAdapter;
     List<User> users = new ArrayList<>();
+    List<String> keys = new ArrayList<>();
     ChannelActivity channelActivity;
 
     @Override
@@ -52,8 +53,11 @@ public class SubscribersChannelSettingsFragment extends Fragment {
         rUsersList = inflaterView.findViewById(R.id.recycler_users_list);
         channelActivity = (ChannelActivity) requireActivity();
 
+        UsersAdapter.OnAddAdminClickListener onClickListener = position -> {
+            myDB.child("specter").child("channels").child(String.valueOf(channelActivity.channelId)).child("subscribers").child(keys.get(position)).child("channel_admin").setValue(true);
+        };
         rUsersList.setLayoutManager(new LinearLayoutManager(channelActivity));
-        usersAdapter = new UsersAdapter(channelActivity, users);
+        usersAdapter = new UsersAdapter(channelActivity, users, onClickListener);
         rUsersList.setAdapter(usersAdapter);
 
         @SuppressLint("NotifyDataSetChanged")
@@ -61,6 +65,7 @@ public class SubscribersChannelSettingsFragment extends Fragment {
             @Override
             public void onChildAdded(@NonNull DataSnapshot dataSnapshot, String previousChildName) {
                 users.add(Objects.requireNonNull(dataSnapshot.getValue(User.class)));
+                keys.add(dataSnapshot.getKey());
                 usersAdapter.notifyDataSetChanged();
             }
 
@@ -75,6 +80,7 @@ public class SubscribersChannelSettingsFragment extends Fragment {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
                 users.clear();
+                keys.clear();
                 ChildEventListener childEventListenerB = new ChildEventListener() {
                     @SuppressLint("NotifyDataSetChanged")
                     @Override
@@ -83,6 +89,7 @@ public class SubscribersChannelSettingsFragment extends Fragment {
                         if (!eSearchUser.getText().toString().trim().equals("")) myDB.child("specter").child("channels").child(String.valueOf(channelActivity.channelId)).child("subscribers").removeEventListener(childEventListener);
                         if (!eSearchUser.getText().toString().trim().equals("") && (Pattern.compile(eSearchUser.getText().toString().trim(), Pattern.CASE_INSENSITIVE).matcher(user.name.toLowerCase()).find() || Pattern.compile(eSearchUser.getText().toString().trim(), Pattern.CASE_INSENSITIVE).matcher(user.link.toLowerCase()).find())) {
                             users.add(user);
+                            keys.add(dataSnapshot.getKey());
                         } else if (eSearchUser.getText().toString().trim().equals("")) {
                             myDB.child("specter").child("channels").child(String.valueOf(channelActivity.channelId)).child("subscribers").addChildEventListener(childEventListener);
                         }
