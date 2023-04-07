@@ -12,6 +12,7 @@ import android.app.AlertDialog;
 import android.content.ClipData;
 import android.content.ClipboardManager;
 import android.content.Context;
+import android.os.Build;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -21,6 +22,8 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import android.util.DisplayMetrics;
 import android.view.ContextMenu;
+import android.view.ContextThemeWrapper;
+import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
@@ -29,6 +32,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.FrameLayout;
 import android.widget.LinearLayout;
+import android.widget.PopupMenu;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -47,6 +51,7 @@ import java.util.Date;
 import java.util.List;
 import java.util.Locale;
 import java.util.Objects;
+import java.util.TimeZone;
 import java.util.concurrent.ExecutionException;
 
 public class ChannelFragment extends Fragment {
@@ -91,27 +96,32 @@ public class ChannelFragment extends Fragment {
             fToolsMenu.setVisibility(View.VISIBLE);
         }
 
-        PostsAdapter.OnPostLongClickListener postLongClickListener = (post, position) -> {
-            CharSequence[] items = channelActivity.channelAdmin ? new String[]{getString(R.string.channel_alert_dialog_item_comments), getString(R.string.channel_alert_dialog_item_edit), getString(R.string.channel_alert_dialog_item_copy), getString(R.string.channel_alert_dialog_item_delete)} : new String[]{getString(R.string.channel_alert_dialog_item_comments), getString(R.string.channel_alert_dialog_item_copy)};
-            AlertDialog.Builder builder = new AlertDialog.Builder(inflater.getContext());
-
-            builder.setItems(items, (dialog, item) -> {
-                if (items[item].equals(getString(R.string.channel_alert_dialog_item_comments))) {
+        PostsAdapter.OnPostLongClickListener postLongClickListener = (post, position, view) -> {
+            PopupMenu popupMenu = new PopupMenu(new ContextThemeWrapper(channelActivity, R.style.specter_PopupMenu), view);
+            popupMenu.inflate(R.menu.popupmenu_post);
+            popupMenu.setOnMenuItemClickListener(item -> {
+                if (item.getItemId() == R.id.comments) {
                     channelActivity.getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container_view, new CommentsFragment()).addToBackStack(null).commit();
                     channelActivity.postId = post.id;
-                } else if (items[item].equals(getString(R.string.channel_alert_dialog_item_edit))) {
+                } else if (item.getItemId() == R.id.edit) {
                     postEdit = post;
                     tEditPost.setVisibility(View.VISIBLE);
                     ePost.setText(post.context);
-                } else if (items[item].equals(getString(R.string.channel_alert_dialog_item_copy))) ((ClipboardManager) inflater.getContext().getSystemService(Context.CLIPBOARD_SERVICE)).setPrimaryClip(ClipData.newPlainText("post", post.context));
-                else if (items[item].equals(getString(R.string.channel_alert_dialog_item_delete))) {
+                } else if (item.getItemId() == R.id.copy) ((ClipboardManager) inflater.getContext().getSystemService(Context.CLIPBOARD_SERVICE)).setPrimaryClip(ClipData.newPlainText("post", post.context));
+                else if (item.getItemId() == R.id.delete) {
                     myDB.child("specter").child("channels").child(String.valueOf(channelActivity.channelId)).child("body").setValue(posts.size() - 1 == 0 ? "%NOT_POSTS%" : (posts.get(posts.size() - 1).id == post.id ? posts.get(posts.size() - 2).context : posts.get(posts.size() - 1).context));
                     myDB.child("specter").child("channels").child(String.valueOf(channelActivity.channelId)).child("markBody").setValue(posts.size() - 1 == 0);
                     myDB.child("specter").child("channels").child(String.valueOf(channelActivity.channelId)).child("posts").child(String.valueOf(post.id)).setValue(null);
                 }
-            }).create().show();
+                return true;
+            });
+            popupMenu.setOnDismissListener(menu -> {
+                inflaterView.findViewById(R.id.dim_layout).setVisibility(View.INVISIBLE);
+            });
 
-            return true;
+            popupMenu.show();
+            inflaterView.findViewById(R.id.dim_layout).setVisibility(View.VISIBLE);
+            return false;
         };
         rPostsList.setLayoutManager(new LinearLayoutManager(channelActivity));
         postsAdapter = new PostsAdapter(channelActivity, posts, postLongClickListener);
@@ -125,14 +135,14 @@ public class ChannelFragment extends Fragment {
                 if (Objects.equals(post.author, "%CHANNEL_TITLE%")) post.author = channelActivity.channelTitle;
                 if (posts.size() == 0) post.type = 1;
                 else {
-                    Date date1 = new java.util.Date(posts.get(posts.size()-1).date * 1000L);
-                    Date date2 = new java.util.Date(post.date * 1000L);
-                    @SuppressLint("SimpleDateFormat") SimpleDateFormat sdf1 = new java.text.SimpleDateFormat("yyyy");
-                    @SuppressLint("SimpleDateFormat") SimpleDateFormat sdf2 = new java.text.SimpleDateFormat("MM");
-                    @SuppressLint("SimpleDateFormat") SimpleDateFormat sdf3 = new java.text.SimpleDateFormat("dd");
-                    sdf1.setTimeZone(java.util.TimeZone.getTimeZone("GMT+3"));
-                    sdf2.setTimeZone(java.util.TimeZone.getTimeZone("GMT+3"));
-                    sdf3.setTimeZone(java.util.TimeZone.getTimeZone("GMT+3"));
+                    Date date1 = new Date(posts.get(posts.size()-1).date * 1000L);
+                    Date date2 = new Date(post.date * 1000L);
+                    @SuppressLint("SimpleDateFormat") SimpleDateFormat sdf1 = new SimpleDateFormat("yyyy");
+                    @SuppressLint("SimpleDateFormat") SimpleDateFormat sdf2 = new SimpleDateFormat("MM");
+                    @SuppressLint("SimpleDateFormat") SimpleDateFormat sdf3 = new SimpleDateFormat("dd");
+                    sdf1.setTimeZone(TimeZone.getTimeZone("GMT+3"));
+                    sdf2.setTimeZone(TimeZone.getTimeZone("GMT+3"));
+                    sdf3.setTimeZone(TimeZone.getTimeZone("GMT+3"));
                     if (Integer.parseInt(sdf1.format(date1)) != Integer.parseInt(sdf1.format(date1)) || Integer.parseInt(sdf2.format(date1)) != Integer.parseInt(sdf2.format(date2)) || Integer.parseInt(sdf3.format(date1)) != Integer.parseInt(sdf3.format(date2))) post.type = 1;
                 }
                 posts.add(post);
@@ -217,31 +227,36 @@ public class ChannelFragment extends Fragment {
             ePost.setText("");
         });
 
+        bSendPost.setOnLongClickListener(view -> {
+            PopupMenu popupMenu = new PopupMenu(new ContextThemeWrapper(channelActivity, R.style.specter_PopupMenu), view);
+            popupMenu.inflate(R.menu.popupmenu);
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) popupMenu.setForceShowIcon(true);
+            popupMenu.setOnMenuItemClickListener(item -> {
+                String text = ePost.getText().toString().trim();
+                if (!text.equals("")) {
+                    try {
+                        long myLong = new DataTimeTask().execute("somestring").get();
+                        myDB.child("specter").child("channels").child(String.valueOf(channelActivity.channelId)).child("posts").child(String.valueOf(posts.size())).setValue(new Post(posts.size(), "%CHANNEL_TITLE%", myLong, text));
+                        myDB.child("specter").child("channels").child(String.valueOf(channelActivity.channelId)).child("body").setValue(text);
+                        myDB.child("specter").child("channels").child(String.valueOf(channelActivity.channelId)).child("markBody").setValue(false);
+                        rPostsList.smoothScrollToPosition(posts.size());
+                    } catch (ExecutionException | InterruptedException e) {
+                        throw new RuntimeException(e);
+                    }
+                }
+                ePost.setText("");
+                return true;
+            });
+            popupMenu.setOnDismissListener(menu -> {
+                inflaterView.findViewById(R.id.dim_layout).setVisibility(View.INVISIBLE);
+            });
+
+            popupMenu.show();
+            inflaterView.findViewById(R.id.dim_layout).setVisibility(View.VISIBLE);
+            return false;
+        });
+
         return inflaterView;
-    }
-
-    @Override
-    public void onCreateContextMenu(@NonNull ContextMenu menu, @NonNull View view, ContextMenu.ContextMenuInfo menuInfo) {
-        super.onCreateContextMenu(menu, view, menuInfo);
-        if (postEdit == null) menu.add(0, view.getId(), 0, R.string.channel_context_menu_item_send_without_name);
-    }
-
-    @Override
-    public boolean onContextItemSelected(@NonNull MenuItem item) {
-        String text = ePost.getText().toString().trim();
-        if (!text.equals("")) {
-            try {
-                long myLong = new DataTimeTask().execute("somestring").get();
-                myDB.child("specter").child("channels").child(String.valueOf(channelActivity.channelId)).child("posts").child(String.valueOf(posts.size())).setValue(new Post(posts.size(), "%CHANNEL_TITLE%", myLong, text));
-                myDB.child("specter").child("channels").child(String.valueOf(channelActivity.channelId)).child("body").setValue(text);
-                myDB.child("specter").child("channels").child(String.valueOf(channelActivity.channelId)).child("markBody").setValue(false);
-                rPostsList.smoothScrollToPosition(posts.size());
-            } catch (ExecutionException | InterruptedException e) {
-                throw new RuntimeException(e);
-            }
-        }
-        ePost.setText("");
-        return true;
     }
 
     @Override

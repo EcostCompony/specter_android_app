@@ -5,6 +5,7 @@
     <color name="background">#FFF</color>
     <color name="main_color">#2384DD</color>
     <color name="popup_color">#FFF</color>
+    <color name="a">#FFFFFFFF</color>
     <color name="post_background_color">#FFF</color>
     <color name="main_edit_text_background">#F8F8F8</color>
     <color name="ecost_theme">#D75026</color>

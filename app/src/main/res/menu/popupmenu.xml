@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/popup_menu_item_send_my_name"
+        android:icon="@drawable/profile_circle"
+        android:title="Отправить от имени канала" />
+</menu>

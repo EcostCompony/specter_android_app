@@ -5,6 +5,7 @@ import static com.ecost.specter.Routing.authId;
 import android.annotation.SuppressLint;
 import android.content.Context;
 import android.view.LayoutInflater;
+import android.view.View;
 import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
@@ -23,7 +24,7 @@ import java.util.List;
 public class PostsAdapter extends RecyclerView.Adapter<PostViewHolder> {
 
     public interface OnPostLongClickListener {
-        boolean onPostLongClick(Post post, int position);
+        boolean onPostLongClick(Post post, int position, View view);
     }
 
     OnPostLongClickListener onLongClickListener;
@@ -70,7 +71,7 @@ public class PostsAdapter extends RecyclerView.Adapter<PostViewHolder> {
         String formattedDate = sdf.format(date);
         System.out.println(formattedDate);
         holder.time.setText(formattedDate);
-        holder.itemView.setOnLongClickListener(v -> onLongClickListener.onPostLongClick(post, position));
+        holder.itemView.setOnLongClickListener(v -> onLongClickListener.onPostLongClick(post, position, holder.itemView));
     }
 
     @Override

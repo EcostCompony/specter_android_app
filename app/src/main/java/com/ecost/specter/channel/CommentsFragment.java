@@ -56,7 +56,7 @@ public class CommentsFragment extends Fragment {
 
         inflaterView.postDelayed(() -> rCommentsList.scrollToPosition(comments.size() - 1), 50);
 
-        PostsAdapter.OnPostLongClickListener postLongClickListener = (comment, position) -> {
+        PostsAdapter.OnPostLongClickListener postLongClickListener = (comment, position, view) -> {
             CharSequence[] items = comment.senderId == authId ? new String[]{getString(R.string.comments_alert_dialog_item_edit), getString(R.string.comments_alert_dialog_item_copy), getString(R.string.comments_alert_dialog_item_delete)} : (channelActivity.channelAdmin ? new String[]{getString(R.string.comments_alert_dialog_item_copy), getString(R.string.comments_alert_dialog_item_delete)} : new String[]{getString(R.string.comments_alert_dialog_item_copy)});
             AlertDialog.Builder builder = new AlertDialog.Builder(inflater.getContext());
 
