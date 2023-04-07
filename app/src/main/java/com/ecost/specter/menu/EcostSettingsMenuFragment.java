@@ -15,6 +15,7 @@ import android.os.Bundle;
 import androidx.fragment.app.Fragment;
 
 import android.text.InputFilter;
+import android.text.InputType;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -59,8 +60,8 @@ public class EcostSettingsMenuFragment extends Fragment {
             eNewNumberPhone.setHint(R.string.edit_number_phone_alert_dialog_hint_number_phone);
             ePass.setHint(R.string.edit_number_phone_alert_dialog_hint_password);
 
-            eNewNumberPhone.setInputType(3); // 3 - id Input type phone
-            ePass.setInputType(129); // 129 - id Input type textPassword
+            eNewNumberPhone.setInputType(3);
+            ePass.setInputType(InputType.TYPE_TEXT_VARIATION_PASSWORD);
 
             AlertDialog alertDialog = mDialogBuilder.create();
             alertDialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
@@ -101,8 +102,8 @@ public class EcostSettingsMenuFragment extends Fragment {
             EditText eNewPass = (EditText) promptsView.findViewById(R.id.input_one);
             EditText eOldPass = (EditText) promptsView.findViewById(R.id.input_two);
 
-            eNewPass.setInputType(129);
-            eOldPass.setInputType(129);
+            eNewPass.setInputType(InputType.TYPE_TEXT_VARIATION_PASSWORD);
+            eOldPass.setInputType(InputType.TYPE_TEXT_VARIATION_PASSWORD);
 
             tHeader.setText(R.string.edit_password_alert_dialog_header);
             eNewPass.setHint(R.string.edit_password_alert_dialog_hint_new_password);

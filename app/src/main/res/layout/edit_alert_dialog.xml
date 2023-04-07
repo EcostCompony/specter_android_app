@@ -26,7 +26,8 @@
         android:background="@drawable/input"
         android:paddingHorizontal="17dp"
         android:fontFamily="@font/inter_semi_bold"
-        android:textColor="#9C9C9C"
+        android:textColorHint="#9C9C9C"
+        android:textColor="#000"
         android:textSize="12sp"
         tools:hint="Номер телефона"/>
 
@@ -39,7 +40,8 @@
         android:background="@drawable/input"
         android:paddingHorizontal="17dp"
         android:fontFamily="@font/inter_semi_bold"
-        android:textColor="#9C9C9C"
+        android:textColorHint="#9C9C9C"
+        android:textColor="#000"
         android:textSize="12sp"
         tools:hint="Пароль"/>
 
