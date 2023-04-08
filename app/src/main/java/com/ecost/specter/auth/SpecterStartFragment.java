@@ -26,37 +26,36 @@ import java.util.regex.Pattern;
 
 public class SpecterStartFragment extends BottomSheetDialogFragment {
 
-    EditText eName, eShortUserLink;
+    EditText etName, etShortUserLink;
     AuthActivity authActivity;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View inflaterView = inflater.inflate(R.layout.fragment_specter_start, container, false);
 
-        eName = inflaterView.findViewById(R.id.input_user_name);
-        eShortUserLink = inflaterView.findViewById(R.id.input_short_user_link);
+        etName = inflaterView.findViewById(R.id.input_user_name);
+        etShortUserLink = inflaterView.findViewById(R.id.input_short_user_link);
         authActivity = (AuthActivity) requireActivity();
 
-        InputFilter filterShortUserLink = (source, start, end, dest, dstart, dend) -> {
+        etName.setFilters(new InputFilter[]{new InputFilter.LengthFilter(16)});
+        etShortUserLink.setFilters(new InputFilter[]{(source, start, end, dest, dstart, dend) -> {
             for (int i = start; i < end; i++) {
                 if (!Pattern.compile("^[A-Z\\d_.]+$", Pattern.CASE_INSENSITIVE).matcher(String.valueOf(source.charAt(i))).find()) return "";
                 if (Character.isUpperCase(source.charAt(i))) return String.valueOf(source.charAt(i)).toLowerCase();
             }
             return null;
-        };
-        eName.setFilters(new InputFilter[] { new InputFilter.LengthFilter(16) });
-        eShortUserLink.setFilters(new InputFilter[] { filterShortUserLink, new InputFilter.LengthFilter(16) });
+        }, new InputFilter.LengthFilter(16)});
 
         inflaterView.findViewById(R.id.button_start).setOnClickListener(view -> {
-            String name = eName.getText().toString();
-            String shortUserLink = eShortUserLink.getText().toString();
+            String name = etName.getText().toString().trim();
+            String shortUserLink = etShortUserLink.getText().toString();
 
-            if (name.equals("")) popup(authActivity, view, 1, "error");
-            else if (shortUserLink.equals("")) popup(authActivity, view, 1, "error");
-            else if (shortUserLink.length() < 3) popup(authActivity, view, 1, "ссылка маленькая");
+            if (name.equals("")) popup(authActivity, view, 1, getString(R.string.specter_start_error_not_name));
+            else if (shortUserLink.equals("")) popup(authActivity, view, 1, getString(R.string.specter_start_error_not_short_user_link));
+            else if (shortUserLink.length() < 3) popup(authActivity, view, 1, getString(R.string.specter_start_error_small_short_user_link));
             else
                 myDB.child("specter").child("uid").child(shortUserLink.replace('.', '*')).child("id").get().addOnCompleteListener(taskTestShortLink -> {
-                    if (taskTestShortLink.getResult().getValue() != null) popup(authActivity, view, 1, "ссылка занята");
+                    if (taskTestShortLink.getResult().getValue() != null) popup(authActivity, view, 1, getString(R.string.specter_start_error_busy_short_user_link));
                     else
                         myDB.child("specter").child("users_number").get().addOnCompleteListener(taskId -> {
                             Integer uid = Integer.parseInt(String.valueOf(taskId.getResult().getValue()))+1;
@@ -69,9 +68,7 @@ public class SpecterStartFragment extends BottomSheetDialogFragment {
                             pushPreferenceId(authActivity, uid);
                             pushPreferenceUserName(authActivity, name);
                             pushPreferenceShortUserLink(authActivity, shortUserLink);
-                            Intent intent = new Intent(authActivity, MainMenuActivity.class);
-                            intent.putExtra("CREATE", true);
-                            startActivity(intent);
+                            startActivity(new Intent(authActivity, MainMenuActivity.class).putExtra("CREATE", true));
                             authActivity.finish();
                         });
                 });

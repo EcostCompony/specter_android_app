@@ -188,4 +188,8 @@
     <string name="channel_settings_delete_channel_alert_dialog_text_description">Вы уверены что хотите удалить канал?\nВсе его данные будут уничтожены.</string>
     <string name="account_settings_log_out_text_header">Выход</string>
     <string name="account_settings_log_out_text_description">Вы уверены что хотите выйти?</string>
+    <string name="specter_start_error_not_name">Ой, чтобы продолжить стоит ввести имя</string>
+    <string name="specter_start_error_not_short_user_link">Ой, чтобы продолжить стоит придумать короткую ссылку</string>
+    <string name="specter_start_error_small_short_user_link">Придумайте короткую ссылку, содержащую более 3 символов</string>
+    <string name="specter_start_error_busy_short_user_link">Короткая ссылка должна быть уникальной! Кто-то уже её занял =(</string>
 </resources>

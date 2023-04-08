@@ -2,7 +2,6 @@ package com.ecost.specter.auth;
 
 import static com.ecost.specter.Routing.hash;
 import static com.ecost.specter.Routing.myDB;
-import static com.ecost.specter.Routing.pushPreferenceEcostId;
 
 import android.os.Bundle;
 
@@ -26,8 +25,8 @@ import java.util.regex.Pattern;
 
 public class PasswordSignUpFragment extends Fragment {
 
-    EditText ePassword, eConfirmPassword;
-    FrameLayout fPassword, fConfirmPassword;
+    EditText etPassword, etConfirmPassword;
+    FrameLayout flPassword, flConfirmPassword;
     LinearLayout bHidePassword, bHideConfirmPassword;
     View vHidePassword, vHideConfirmPassword;
     Boolean passwordView = false;
@@ -38,10 +37,10 @@ public class PasswordSignUpFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View inflaterView = inflater.inflate(R.layout.fragment_password_sign_up, container, false);
 
-        ePassword = inflaterView.findViewById(R.id.input_password);
-        eConfirmPassword = inflaterView.findViewById(R.id.input_confirm_password);
-        fPassword = inflaterView.findViewById(R.id.frame_input_password);
-        fConfirmPassword = inflaterView.findViewById(R.id.frame_input_confirm_password);
+        etPassword = inflaterView.findViewById(R.id.input_password);
+        etConfirmPassword = inflaterView.findViewById(R.id.input_confirm_password);
+        flPassword = inflaterView.findViewById(R.id.frame_input_password);
+        flConfirmPassword = inflaterView.findViewById(R.id.frame_input_confirm_password);
         bHidePassword = inflaterView.findViewById(R.id.button_hide_password);
         bHideConfirmPassword = inflaterView.findViewById(R.id.button_hide_confirm_password);
         vHidePassword = inflaterView.findViewById(R.id.icon_hide_password);
@@ -51,36 +50,35 @@ public class PasswordSignUpFragment extends Fragment {
         InputFilter filterPassword = (source, start, end, dest, dstart, dend) -> {
             for (int i = start; i < end; i++) {
                 if (!Pattern.compile("^[A-ZА-Я\\d_.%+@$#!-]+$", Pattern.CASE_INSENSITIVE).matcher(String.valueOf(source.charAt(i))).find()) {
-                    (ePassword.hasFocus() ? eConfirmPassword : ePassword).setBackground(ContextCompat.getDrawable(authActivity, R.drawable.input_auth));
-                    (ePassword.hasFocus() ? fPassword : fConfirmPassword).startAnimation(AnimationUtils.loadAnimation(authActivity, R.anim.input_shake));
-                    (ePassword.hasFocus() ? ePassword : eConfirmPassword).setBackground(ContextCompat.getDrawable(authActivity, R.drawable.input_auth_error));
+                    (etPassword.hasFocus() ? etConfirmPassword : etPassword).setBackground(ContextCompat.getDrawable(authActivity, R.drawable.input_auth));
+                    (etPassword.hasFocus() ? flPassword : flConfirmPassword).startAnimation(AnimationUtils.loadAnimation(authActivity, R.anim.input_shake));
+                    (etPassword.hasFocus() ? etPassword : etConfirmPassword).setBackground(ContextCompat.getDrawable(authActivity, R.drawable.input_auth_error));
                     return "";
                 }
             }
             return null;
         };
-        ePassword.setFilters(new InputFilter[] {filterPassword, new InputFilter.LengthFilter(128)});
-        eConfirmPassword.setFilters(new InputFilter[] {filterPassword, new InputFilter.LengthFilter(128)});
+        etPassword.setFilters(new InputFilter[]{filterPassword, new InputFilter.LengthFilter(128)});
+        etConfirmPassword.setFilters(new InputFilter[]{filterPassword, new InputFilter.LengthFilter(128)});
 
-        eConfirmPassword.setOnKeyListener((view, keyCode, event) -> {
-            if (keyCode == KeyEvent.KEYCODE_ENTER) signUp(view);
-            return keyCode == KeyEvent.KEYCODE_ENTER;
-        });
-
-        View.OnClickListener eyeClickListener = view -> {
-            EditText editText = view == bHidePassword ? ePassword : eConfirmPassword;
+        View.OnClickListener hideClickListener = view -> {
+            EditText editText = view == bHidePassword ? etPassword : etConfirmPassword;
             View icon = view == bHidePassword ? vHidePassword : vHideConfirmPassword;
             Boolean pView = view == bHidePassword ? passwordView : confirmPasswordView;
-            int select = editText.getSelectionStart();
 
             editText.setInputType(pView ? InputType.TYPE_CLASS_TEXT | InputType.TYPE_TEXT_VARIATION_PASSWORD : InputType.TYPE_TEXT_VARIATION_PASSWORD);
             icon.setBackground(ContextCompat.getDrawable(authActivity, pView ? R.drawable.icon_eye : R.drawable.icon_eye_slash));
-            editText.setSelection(select);
+            editText.setSelection(editText.getSelectionStart());
             if (view == bHidePassword) passwordView = !pView;
             else confirmPasswordView = !pView;
         };
-        bHidePassword.setOnClickListener(eyeClickListener);
-        bHideConfirmPassword.setOnClickListener(eyeClickListener);
+        bHidePassword.setOnClickListener(hideClickListener);
+        bHideConfirmPassword.setOnClickListener(hideClickListener);
+
+        etConfirmPassword.setOnKeyListener((view, keyCode, event) -> {
+            if (keyCode == KeyEvent.KEYCODE_ENTER) signUp(view);
+            return keyCode == KeyEvent.KEYCODE_ENTER;
+        });
 
         inflaterView.findViewById(R.id.button_sign_up).setOnClickListener(this::signUp);
 
@@ -88,22 +86,20 @@ public class PasswordSignUpFragment extends Fragment {
     }
 
     public void signUp(View view) {
-        String password = ePassword.getText().toString();
-        String confirmPassword = eConfirmPassword.getText().toString();
+        String password = etPassword.getText().toString();
+        String confirmPassword = etConfirmPassword.getText().toString();
 
         myDB.child("ecost").child("users_number").get().addOnCompleteListener(task -> {
             Integer uid = Integer.parseInt(String.valueOf(task.getResult().getValue()))+1;
 
-            if (password.equals("")) authActivity.popupTwoInput(view, ePassword, eConfirmPassword, getString(R.string.password_sign_up_error_not_password), fPassword);
-            else if (confirmPassword.equals("")) authActivity.popupTwoInput(view, eConfirmPassword, ePassword, getString(R.string.password_sign_up_error_not_confirm_password), fConfirmPassword);
-            else if (password.length() < 8) authActivity.popupTwoInput(view, ePassword, eConfirmPassword, getString(R.string.password_sign_up_error_short_password), fPassword);
-            else if (!password.equals(confirmPassword)) authActivity.popupTwoInput(view, eConfirmPassword, ePassword, getString(R.string.password_sign_up_error_wrong_confirm_password), fConfirmPassword);
+            if (password.equals("") || confirmPassword.equals("")) authActivity.popupInput(view, etPassword, etConfirmPassword, password.equals("") ? getString(R.string.password_sign_up_error_not_password) : getString(R.string.password_sign_up_error_not_confirm_password), password.equals("") ? flPassword : flConfirmPassword);
+            else if (password.length() < 8) authActivity.popupInput(view, etPassword, etConfirmPassword, getString(R.string.password_sign_up_error_short_password), flPassword);
+            else if (!password.equals(confirmPassword)) authActivity.popupInput(view, etConfirmPassword, etPassword, getString(R.string.password_sign_up_error_wrong_confirm_password), flConfirmPassword);
             else {
-                myDB.child("ecost").child("users").child(String.valueOf(uid)).child("phone").setValue(authActivity.numberPhone);
+                myDB.child("ecost").child("users").child(String.valueOf(uid)).child("phone").setValue(authActivity.phoneNumber);
                 myDB.child("ecost").child("users").child(String.valueOf(uid)).child("password").setValue(hash(password));
-                myDB.child("ecost").child("uid").child(authActivity.numberPhone).child("id").setValue(uid);
+                myDB.child("ecost").child("uid").child(authActivity.phoneNumber).child("id").setValue(uid);
                 myDB.child("ecost").child("users_number").setValue(uid);
-                pushPreferenceEcostId(authActivity, uid);
                 authActivity.getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container_view, new SignInFragment()).commit();
                 new SpecterStartFragment().show(authActivity.getSupportFragmentManager(), new SpecterStartFragment().getTag());
             }

@@ -21,7 +21,7 @@ import java.util.regex.Pattern;
 
 public class PhoneNumberSignUpFragment extends Fragment {
 
-    EditText eNumberPhone;
+    EditText etPhoneNumber;
     Button bContinue;
     AuthActivity authActivity;
 
@@ -29,22 +29,22 @@ public class PhoneNumberSignUpFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View inflaterView = inflater.inflate(R.layout.fragment_phone_number_sign_up, container, false);
 
-        eNumberPhone = inflaterView.findViewById(R.id.input_number_phone);
+        etPhoneNumber = inflaterView.findViewById(R.id.input_number_phone);
         bContinue = inflaterView.findViewById(R.id.button_continue);
         authActivity = (AuthActivity) requireActivity();
 
-        eNumberPhone.setFilters(new InputFilter[] {(source, start, end, dest, dstart, dend) -> {
+        etPhoneNumber.setFilters(new InputFilter[]{(source, start, end, dest, dstart, dend) -> {
             for (int i = start; i < end; i++) {
                 if (!Pattern.compile("\\d", Pattern.CASE_INSENSITIVE).matcher(String.valueOf(source.charAt(i))).find()) {
-                    eNumberPhone.startAnimation(AnimationUtils.loadAnimation(authActivity, R.anim.input_shake));
-                    eNumberPhone.setBackground(ContextCompat.getDrawable(authActivity, R.drawable.input_auth_error));
+                    etPhoneNumber.startAnimation(AnimationUtils.loadAnimation(authActivity, R.anim.input_shake));
+                    etPhoneNumber.setBackground(ContextCompat.getDrawable(authActivity, R.drawable.input_auth_error));
                     return "";
                 }
             }
             return null;
         }, new InputFilter.LengthFilter(13)});
 
-        eNumberPhone.setOnKeyListener((view, keyCode, event) -> {
+        etPhoneNumber.setOnKeyListener((view, keyCode, event) -> {
             if (keyCode == KeyEvent.KEYCODE_ENTER) next(view);
             return keyCode == KeyEvent.KEYCODE_ENTER;
         });
@@ -55,14 +55,14 @@ public class PhoneNumberSignUpFragment extends Fragment {
     }
 
     public void next(View view) {
-        String numberPhone = eNumberPhone.getText().toString();
+        String phoneNumber = etPhoneNumber.getText().toString();
 
-        if (numberPhone.equals("")) authActivity.popupOneInput(view, eNumberPhone, getString(R.string.phone_number_sign_up_error_not_username));
+        if (phoneNumber.equals("")) authActivity.popupInput(view, etPhoneNumber, etPhoneNumber, getString(R.string.phone_number_sign_up_error_not_username));
         else
-            myDB.child("ecost").child("uid").child(numberPhone).get().addOnCompleteListener(task -> {
-                if (task.getResult().getValue() != null) authActivity.popupOneInput(view, eNumberPhone, getString(R.string.phone_number_sign_up_error_already_phone_number));
+            myDB.child("ecost").child("uid").child(phoneNumber).get().addOnCompleteListener(task -> {
+                if (task.getResult().getValue() != null) authActivity.popupInput(view, etPhoneNumber, etPhoneNumber, getString(R.string.phone_number_sign_up_error_already_phone_number));
                 else {
-                    authActivity.numberPhone = numberPhone;
+                    authActivity.phoneNumber = phoneNumber;
                     authActivity.getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container_view, new PasswordSignUpFragment()).addToBackStack(null).commit();
                 }
             });

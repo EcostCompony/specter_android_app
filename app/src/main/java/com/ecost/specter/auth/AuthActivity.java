@@ -15,7 +15,7 @@ import com.ecost.specter.R;
 
 public class AuthActivity extends AppCompatActivity {
 
-    String numberPhone;
+    String phoneNumber;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -24,17 +24,11 @@ public class AuthActivity extends AppCompatActivity {
         getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container_view, new SignInFragment()).commit();
     }
 
-    public void popupOneInput(View view, EditText editText, String text) {
-        editText.startAnimation(AnimationUtils.loadAnimation(this, R.anim.input_shake));
-        editText.setBackground(ContextCompat.getDrawable(this, R.drawable.input_auth_error));
-        popup(this, view, 1, text);
-    }
-
-    public void popupTwoInput(View view, EditText editText, EditText editText2, String text, FrameLayout... frameLayout) {
+    public void popupInput(View view, EditText editText, EditText editText2, String context, FrameLayout... frameLayout) {
+        (frameLayout.length != 0 ? frameLayout[0] : editText).startAnimation(AnimationUtils.loadAnimation(this, R.anim.input_shake));
         editText2.setBackground(ContextCompat.getDrawable(this, R.drawable.input_auth));
         editText.setBackground(ContextCompat.getDrawable(this, R.drawable.input_auth_error));
-        (frameLayout.length != 0 ? frameLayout[0] : editText).startAnimation(AnimationUtils.loadAnimation(this, R.anim.input_shake));
-        popup(this, view, 1, text);
+        popup(this, view, 1, context);
     }
 
 }
