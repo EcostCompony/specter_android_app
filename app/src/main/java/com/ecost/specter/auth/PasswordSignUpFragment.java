@@ -27,10 +27,9 @@ public class PasswordSignUpFragment extends Fragment {
 
     EditText etPassword, etConfirmPassword;
     FrameLayout flPassword, flConfirmPassword;
-    LinearLayout bHidePassword, bHideConfirmPassword;
-    View vHidePassword, vHideConfirmPassword;
-    Boolean passwordView = false;
-    Boolean confirmPasswordView = false;
+    boolean passwordView = false;
+    boolean confirmPasswordView = false;
+    String phoneNumber;
     AuthActivity authActivity;
 
     @Override
@@ -41,10 +40,12 @@ public class PasswordSignUpFragment extends Fragment {
         etConfirmPassword = inflaterView.findViewById(R.id.input_confirm_password);
         flPassword = inflaterView.findViewById(R.id.frame_input_password);
         flConfirmPassword = inflaterView.findViewById(R.id.frame_input_confirm_password);
-        bHidePassword = inflaterView.findViewById(R.id.button_hide_password);
-        bHideConfirmPassword = inflaterView.findViewById(R.id.button_hide_confirm_password);
-        vHidePassword = inflaterView.findViewById(R.id.icon_hide_password);
-        vHideConfirmPassword = inflaterView.findViewById(R.id.icon_hide_confirm_password);
+        LinearLayout bHidePassword = inflaterView.findViewById(R.id.button_hide_password);
+        LinearLayout bHideConfirmPassword = inflaterView.findViewById(R.id.button_hide_confirm_password);
+        View vHidePassword = inflaterView.findViewById(R.id.icon_hide_password);
+        View vHideConfirmPassword = inflaterView.findViewById(R.id.icon_hide_confirm_password);
+        assert getArguments() != null;
+        phoneNumber = getArguments().getString("PHONE_NUMBER");
         authActivity = (AuthActivity) requireActivity();
 
         InputFilter filterPassword = (source, start, end, dest, dstart, dend) -> {
@@ -64,7 +65,7 @@ public class PasswordSignUpFragment extends Fragment {
         View.OnClickListener hideClickListener = view -> {
             EditText editText = view == bHidePassword ? etPassword : etConfirmPassword;
             View icon = view == bHidePassword ? vHidePassword : vHideConfirmPassword;
-            Boolean pView = view == bHidePassword ? passwordView : confirmPasswordView;
+            boolean pView = view == bHidePassword ? passwordView : confirmPasswordView;
 
             editText.setInputType(pView ? InputType.TYPE_CLASS_TEXT | InputType.TYPE_TEXT_VARIATION_PASSWORD : InputType.TYPE_TEXT_VARIATION_PASSWORD);
             icon.setBackground(ContextCompat.getDrawable(authActivity, pView ? R.drawable.icon_eye : R.drawable.icon_eye_slash));
@@ -96,9 +97,9 @@ public class PasswordSignUpFragment extends Fragment {
             else if (password.length() < 8) authActivity.popupInput(view, etPassword, etConfirmPassword, getString(R.string.password_sign_up_error_short_password), flPassword);
             else if (!password.equals(confirmPassword)) authActivity.popupInput(view, etConfirmPassword, etPassword, getString(R.string.password_sign_up_error_wrong_confirm_password), flConfirmPassword);
             else {
-                myDB.child("ecost").child("users").child(String.valueOf(uid)).child("phone").setValue(authActivity.phoneNumber);
+                myDB.child("ecost").child("users").child(String.valueOf(uid)).child("phone").setValue(phoneNumber);
                 myDB.child("ecost").child("users").child(String.valueOf(uid)).child("password").setValue(hash(password));
-                myDB.child("ecost").child("uid").child(authActivity.phoneNumber).child("id").setValue(uid);
+                myDB.child("ecost").child("uid").child(phoneNumber).child("id").setValue(uid);
                 myDB.child("ecost").child("users_number").setValue(uid);
                 authActivity.getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container_view, new SignInFragment()).commit();
                 new SpecterStartFragment().show(authActivity.getSupportFragmentManager(), new SpecterStartFragment().getTag());

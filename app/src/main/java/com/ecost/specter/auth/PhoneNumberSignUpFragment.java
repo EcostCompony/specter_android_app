@@ -22,7 +22,6 @@ import java.util.regex.Pattern;
 public class PhoneNumberSignUpFragment extends Fragment {
 
     EditText etPhoneNumber;
-    Button bContinue;
     AuthActivity authActivity;
 
     @Override
@@ -30,7 +29,6 @@ public class PhoneNumberSignUpFragment extends Fragment {
         View inflaterView = inflater.inflate(R.layout.fragment_phone_number_sign_up, container, false);
 
         etPhoneNumber = inflaterView.findViewById(R.id.input_number_phone);
-        bContinue = inflaterView.findViewById(R.id.button_continue);
         authActivity = (AuthActivity) requireActivity();
 
         etPhoneNumber.setFilters(new InputFilter[]{(source, start, end, dest, dstart, dend) -> {
@@ -49,7 +47,7 @@ public class PhoneNumberSignUpFragment extends Fragment {
             return keyCode == KeyEvent.KEYCODE_ENTER;
         });
 
-        bContinue.setOnClickListener(this::next);
+        inflaterView.findViewById(R.id.button_continue).setOnClickListener(this::next);
 
         return inflaterView;
     }
@@ -62,8 +60,11 @@ public class PhoneNumberSignUpFragment extends Fragment {
             myDB.child("ecost").child("uid").child(phoneNumber).get().addOnCompleteListener(task -> {
                 if (task.getResult().getValue() != null) authActivity.popupInput(view, etPhoneNumber, etPhoneNumber, getString(R.string.phone_number_sign_up_error_already_phone_number));
                 else {
-                    authActivity.phoneNumber = phoneNumber;
-                    authActivity.getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container_view, new PasswordSignUpFragment()).addToBackStack(null).commit();
+                    PasswordSignUpFragment passwordSignUpFragment = new PasswordSignUpFragment();
+                    Bundle bundle = new Bundle();
+                    bundle.putString("PHONE_NUMBER", phoneNumber);
+                    passwordSignUpFragment.setArguments(bundle);
+                    authActivity.getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container_view, passwordSignUpFragment).addToBackStack(null).commit();
                 }
             });
     }

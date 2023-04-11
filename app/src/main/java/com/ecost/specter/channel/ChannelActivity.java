@@ -4,13 +4,13 @@ import static com.ecost.specter.Routing.authId;
 import static com.ecost.specter.Routing.myDB;
 
 import android.os.Bundle;
-import android.widget.Toast;
+import android.os.Handler;
+import android.os.Looper;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.ecost.specter.R;
-import com.ecost.specter.models.Post;
 import com.ecost.specter.models.User;
 import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
@@ -20,11 +20,10 @@ import java.util.Objects;
 
 public class ChannelActivity extends AppCompatActivity {
 
-    Integer channelId, postId, postsNumber, categoryId;
-    Integer settingPosition = 0;
-    Integer channelSubscribers = 0;
-    String channelTitle, channelShortLink, channelDescription;
-    boolean userSubscribe, channelAdmin;
+    Integer channelId, channelPostsNumber, channelCategoryId;
+    String channelTitle, shortChannelLink, channelDescription, userSubscriberId;
+    boolean userSubscribe, userAdmin;
+    ChildEventListener childEventListener;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -32,17 +31,19 @@ public class ChannelActivity extends AppCompatActivity {
         setContentView(R.layout.activity_channel);
 
         channelId = getIntent().getIntExtra("CHANNEL_ID", 0);
-        postsNumber = getIntent().getIntExtra("CHANNEL_POSTS_NUMBER", 0);
+        channelPostsNumber = getIntent().getIntExtra("CHANNEL_POSTS_NUMBER", 0);
         channelTitle = getIntent().getStringExtra("CHANNEL_TITLE");
-        channelShortLink = getIntent().getStringExtra("CHANNEL_SHORT_LINK");
-        categoryId = getIntent().getIntExtra("CHANNEL_CATEGORY", 0);
+        shortChannelLink = getIntent().getStringExtra("CHANNEL_SHORT_LINK");
+        channelCategoryId = getIntent().getIntExtra("CHANNEL_CATEGORY", 0);
         channelDescription = getIntent().getStringExtra("CHANNEL_DESCRIPTION");
-        userSubscribe = getIntent().getBooleanExtra("USER_SUBSCRIBE", false);
 
-        ChildEventListener childEventListener = new ChildEventListener() {
+        childEventListener = new ChildEventListener() {
             @Override
             public void onChildAdded(@NonNull DataSnapshot dataSnapshot, String previousChildName) {
-                if (Objects.requireNonNull(dataSnapshot.getValue(User.class)).id.equals(authId) && Objects.requireNonNull(dataSnapshot.getValue(User.class)).channel_admin) channelAdmin = true;
+                User user = Objects.requireNonNull(dataSnapshot.getValue(User.class));
+                if (user.id.equals(authId)) userSubscriberId = dataSnapshot.getKey();
+                if (user.id.equals(authId)) userSubscribe = true;
+                if (user.id.equals(authId) && user.channel_admin) userAdmin = true;
             }
 
             @Override public void onChildChanged(@NonNull DataSnapshot dataSnapshot, String previousChildName) {}
@@ -51,12 +52,11 @@ public class ChannelActivity extends AppCompatActivity {
             @Override public void onCancelled(@NonNull DatabaseError databaseError) {}
         };
         myDB.child("specter").child("channels").child(String.valueOf(channelId)).child("subscribers").addChildEventListener(childEventListener);
-    }
 
-    @Override
-    protected void onPostResume() {
-        super.onPostResume();
-        getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container_view, new ChannelFragment()).commit();
+        new Handler(Looper.getMainLooper()).postDelayed(() -> {
+            getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container_view, new ChannelFragment()).commit();
+            myDB.child("specter").child("channels").child(String.valueOf(channelId)).child("subscribers").removeEventListener(childEventListener);
+        }, 100);
     }
 
 }

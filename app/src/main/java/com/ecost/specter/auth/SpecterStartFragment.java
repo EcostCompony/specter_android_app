@@ -26,16 +26,13 @@ import java.util.regex.Pattern;
 
 public class SpecterStartFragment extends BottomSheetDialogFragment {
 
-    EditText etName, etShortUserLink;
-    AuthActivity authActivity;
-
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View inflaterView = inflater.inflate(R.layout.fragment_specter_start, container, false);
 
-        etName = inflaterView.findViewById(R.id.input_user_name);
-        etShortUserLink = inflaterView.findViewById(R.id.input_short_user_link);
-        authActivity = (AuthActivity) requireActivity();
+        EditText etName = inflaterView.findViewById(R.id.input_user_name);
+        EditText etShortUserLink = inflaterView.findViewById(R.id.input_short_user_link);
+        AuthActivity authActivity = (AuthActivity) requireActivity();
 
         etName.setFilters(new InputFilter[]{new InputFilter.LengthFilter(16)});
         etShortUserLink.setFilters(new InputFilter[]{(source, start, end, dest, dstart, dend) -> {

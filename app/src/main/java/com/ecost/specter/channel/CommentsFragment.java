@@ -1,11 +1,10 @@
 package com.ecost.specter.channel;
 
-import static com.ecost.specter.Routing.authId;
 import static com.ecost.specter.Routing.authUserName;
 import static com.ecost.specter.Routing.myDB;
+import static com.ecost.specter.Routing.popupMenu;
+import static com.ecost.specter.Routing.translateData;
 
-import android.annotation.SuppressLint;
-import android.app.AlertDialog;
 import android.content.ClipData;
 import android.content.ClipboardManager;
 import android.content.Context;
@@ -13,7 +12,6 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
 import android.widget.TextView;
 
@@ -37,94 +35,90 @@ import java.util.concurrent.ExecutionException;
 
 public class CommentsFragment extends Fragment {
 
-    RecyclerView rCommentsList;
-    TextView tEditComment;
-    EditText eComment;
-    PostsAdapter postsAdapter;
-    List<Post> comments = new ArrayList<>();
-    Post commentEdit;
-    ChannelActivity channelActivity;
+    Post commentEditable;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View inflaterView = inflater.inflate(R.layout.fragment_comments, container, false);
 
-        rCommentsList = inflaterView.findViewById(R.id.recycler_comments_list);
-        tEditComment = inflaterView.findViewById(R.id.edit_comment);
-        eComment = inflaterView.findViewById(R.id.input_comment);
-        channelActivity = (ChannelActivity) requireActivity();
+        RecyclerView rvCommentsList = inflaterView.findViewById(R.id.recycler_comments_list);
+        TextView tvEditComment = inflaterView.findViewById(R.id.edit_comment);
+        EditText etComment = inflaterView.findViewById(R.id.input_comment);
+        List<Post> comments = new ArrayList<>();
+        assert getArguments() != null;
+        int postId = getArguments().getInt("POST_ID");
+        ChannelActivity channelActivity = (ChannelActivity) requireActivity();
 
-        inflaterView.postDelayed(() -> rCommentsList.scrollToPosition(comments.size() - 1), 50);
-
-        PostsAdapter.OnPostLongClickListener postLongClickListener = (comment, position, view) -> {
-            CharSequence[] items = comment.senderId == authId ? new String[]{getString(R.string.comments_alert_dialog_item_edit), getString(R.string.comments_alert_dialog_item_copy), getString(R.string.comments_alert_dialog_item_delete)} : (channelActivity.channelAdmin ? new String[]{getString(R.string.comments_alert_dialog_item_copy), getString(R.string.comments_alert_dialog_item_delete)} : new String[]{getString(R.string.comments_alert_dialog_item_copy)});
-            AlertDialog.Builder builder = new AlertDialog.Builder(inflater.getContext());
-
-            builder.setItems(items, (dialog, item) -> {
-                if (items[item].equals(getString(R.string.comments_alert_dialog_item_edit))) {
-                    commentEdit = comment;
-                    tEditComment.setVisibility(View.VISIBLE);
-                    eComment.setText(comment.context);
-                } else if (items[item].equals(getString(R.string.comments_alert_dialog_item_copy))) ((ClipboardManager) inflater.getContext().getSystemService(Context.CLIPBOARD_SERVICE)).setPrimaryClip(ClipData.newPlainText("comment", comment.context));
-                else if (items[item].equals(getString(R.string.comments_alert_dialog_item_delete))) {
-                    comments.remove(comment.id);
-                    myDB.child("specter").child("channels").child(String.valueOf(channelActivity.channelId)).child("posts").child(String.valueOf(channelActivity.postId)).child("comments").setValue(comments.size() == 0 ? null : comments);
-                    for (int i = 0; i < comments.size(); i++) {
-                        comments.get(i).id = i;
-                        myDB.child("specter").child("channels").child(String.valueOf(channelActivity.channelId)).child("posts").child(String.valueOf(channelActivity.postId)).child("comments").child(String.valueOf(i)).setValue(comments.get(i));
-                    }
-                }
-            }).create().show();
-
+        rvCommentsList.setLayoutManager(new LinearLayoutManager(channelActivity));
+        PostsAdapter commentsAdapter = new PostsAdapter(channelActivity, comments, (comment, position, view) -> {
+            popupMenu(channelActivity, view, R.menu.popupmenu_comment, item -> {
+                if (item.getItemId() == R.id.edit) {
+                    commentEditable = comment;
+                    tvEditComment.setVisibility(View.VISIBLE);
+                    etComment.setText(comment.context);
+                } else if (item.getItemId() == R.id.copy) ((ClipboardManager) channelActivity.getSystemService(Context.CLIPBOARD_SERVICE)).setPrimaryClip(ClipData.newPlainText("comment", comment.context));
+                else if (item.getItemId() == R.id.delete) myDB.child("specter").child("channels").child(String.valueOf(channelActivity.channelId)).child("posts").child(String.valueOf(postId)).child("comments").child(String.valueOf(comment.id)).setValue(null);
+                return true;
+            }, menu -> inflaterView.findViewById(R.id.dim_layout).setVisibility(View.INVISIBLE));
+            inflaterView.findViewById(R.id.dim_layout).setVisibility(View.VISIBLE);
             return true;
-        };
-        rCommentsList.setLayoutManager(new LinearLayoutManager(channelActivity));
-        postsAdapter = new PostsAdapter(channelActivity, comments, postLongClickListener);
-        rCommentsList.setAdapter(postsAdapter);
+        });
+        rvCommentsList.setAdapter(commentsAdapter);
 
-        @SuppressLint("NotifyDataSetChanged")
         ChildEventListener childEventListener = new ChildEventListener() {
             @Override
             public void onChildAdded(@NonNull DataSnapshot dataSnapshot, String previousChildName) {
-                comments.add(Objects.requireNonNull(dataSnapshot.getValue(Post.class)));
-                postsAdapter.notifyDataSetChanged();
+                Post comment = Objects.requireNonNull(dataSnapshot.getValue(Post.class));
+                Long unix1 = comments.size() == 0 ? comment.date : comments.get(comments.size()-1).date;
+                Long unix2 = comment.date;
+                if (comments.size() == 0 || !translateData(unix1, "yyyy").equals(translateData(unix2, "yyyy")) || !translateData(unix1, "yyyy").equals(translateData(unix2, "MM")) || !translateData(unix1, "yyyy").equals(translateData(unix2, "dd"))) comment.type = 1;
+                comments.add(comment);
+                commentsAdapter.notifyItemInserted(comments.size()-1);
+                rvCommentsList.post(() -> rvCommentsList.scrollToPosition(commentsAdapter.getItemCount()-1));
             }
 
             @Override
             public void onChildChanged(@NonNull DataSnapshot dataSnapshot, String previousChildName) {
-                comments.set(Integer.parseInt(Objects.requireNonNull(dataSnapshot.getKey())), dataSnapshot.getValue(Post.class));
-                postsAdapter.notifyDataSetChanged();
+                for (int i = 0; i < comments.size(); i++) {
+                    if (comments.get(i).id == Objects.requireNonNull(dataSnapshot.getValue(Post.class)).id) {
+                        comments.set(i, Objects.requireNonNull(dataSnapshot.getValue(Post.class)));
+                        commentsAdapter.notifyItemChanged(i);
+                        break;
+                    }
+                }
             }
 
             @Override
             public void onChildRemoved(@NonNull DataSnapshot dataSnapshot) {
-                comments.clear();
-                myDB.child("specter").child("channels").child(String.valueOf(channelActivity.channelId)).child("posts").child(String.valueOf(channelActivity.postId)).child("comments").removeEventListener(this);
-                myDB.child("specter").child("channels").child(String.valueOf(channelActivity.channelId)).child("posts").child(String.valueOf(channelActivity.postId)).child("comments").addChildEventListener(this);
+                for (int i = 0; i < comments.size(); i++) {
+                    if (comments.get(i).id == Objects.requireNonNull(dataSnapshot.getValue(Post.class)).id) {
+                        comments.remove(i);
+                        commentsAdapter.notifyItemRemoved(i);
+                        break;
+                    }
+                }
             }
 
             @Override public void onChildMoved(@NonNull DataSnapshot dataSnapshot, String previousChildName) {}
             @Override public void onCancelled(@NonNull DatabaseError databaseError) {}
         };
-        myDB.child("specter").child("channels").child(String.valueOf(channelActivity.channelId)).child("posts").child(String.valueOf(channelActivity.postId)).child("comments").addChildEventListener(childEventListener);
+        myDB.child("specter").child("channels").child(String.valueOf(channelActivity.channelId)).child("posts").child(String.valueOf(postId)).child("comments").addChildEventListener(childEventListener);
 
         inflaterView.findViewById(R.id.button_close).setOnClickListener(view -> channelActivity.getSupportFragmentManager().popBackStackImmediate());
 
         inflaterView.findViewById(R.id.button_send).setOnClickListener(view -> {
-            String text = eComment.getText().toString().trim();
-            if (!text.equals("")) {
+            String text = etComment.getText().toString().trim();
+            if (text.equals("")) return;
+            if (commentEditable != null) myDB.child("specter").child("channels").child(String.valueOf(channelActivity.channelId)).child("posts").child(String.valueOf(postId)).child("comments").child(String.valueOf(commentEditable.id)).child("context").setValue(text);
+            if (commentEditable == null)
                 try {
-                    long myLong = new DataTimeTask().execute("somestring").get();
-                    if (commentEdit != null) commentEdit.context = text;
-                    if (commentEdit == null) rCommentsList.smoothScrollToPosition(comments.size());
-                    myDB.child("specter").child("channels").child(String.valueOf(channelActivity.channelId)).child("posts").child(String.valueOf(channelActivity.postId)).child("comments").child(String.valueOf(commentEdit != null ? commentEdit.id : comments.size())).setValue(commentEdit != null ? commentEdit : new Post(comments.size(), authId, authUserName, myLong, text));
-                    tEditComment.setVisibility(View.GONE);
-                    commentEdit = null;
+                    myDB.child("specter").child("channels").child(String.valueOf(channelActivity.channelId)).child("posts").child(String.valueOf(postId)).child("comments").child(String.valueOf(comments.size() == 0 ? 0 : comments.get(comments.size()-1).id+1)).setValue(new Post(comments.size() == 0 ? 0 : comments.get(comments.size()-1).id+1, authUserName, new DataTimeTask().execute("somestring").get(), text));
                 } catch (ExecutionException | InterruptedException e) {
                     throw new RuntimeException(e);
                 }
-            }
-            eComment.setText("");
+            tvEditComment.setVisibility(View.GONE);
+            commentEditable = null;
+            etComment.setText("");
         });
 
         return inflaterView;

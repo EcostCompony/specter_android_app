@@ -65,8 +65,7 @@
                         android:layout_marginStart="3dp"
                         android:fontFamily="@font/inter_medium"
                         android:textColor="@color/channel_page_category_color"
-                        tools:text="· блог"
-                        android:visibility="gone" />
+                        tools:text="· блог" />
                 </LinearLayout>
 
                 <TextView

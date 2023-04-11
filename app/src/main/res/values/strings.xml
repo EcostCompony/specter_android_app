@@ -206,4 +206,6 @@
     <string name="specter_start_error_not_short_user_link">Ой, чтобы продолжить стоит придумать короткую ссылку</string>
     <string name="specter_start_error_small_short_user_link">Придумайте короткую ссылку, содержащую более 3 символов</string>
     <string name="specter_start_error_busy_short_user_link">Короткая ссылка должна быть уникальной! Кто-то уже её занял =(</string>
+    <string name="channel_settings_chapter_basic">Основное</string>
+    <string name="channel_settings_chapter_subscribers">Подписчики</string>
 </resources>

@@ -4,16 +4,24 @@ import static com.ecost.specter.BuildConfig.VERSION_CODE;
 
 import android.annotation.SuppressLint;
 import android.app.Activity;
+import android.app.AlertDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.content.res.Configuration;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Build;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
+import android.view.ContextThemeWrapper;
 import android.view.Gravity;
+import android.view.LayoutInflater;
+import android.view.MenuItem;
 import android.view.View;
+import android.view.ViewGroup;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.LinearLayout;
+import android.widget.PopupMenu;
 import android.widget.PopupWindow;
 import android.widget.TextView;
 
@@ -23,11 +31,17 @@ import androidx.core.splashscreen.SplashScreen;
 
 import com.ecost.specter.auth.AuthActivity;
 import com.ecost.specter.menu.MainMenuActivity;
+import com.ecost.specter.models.Post;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.Locale;
 import java.util.Objects;
+import java.util.TimeZone;
+import java.util.concurrent.ExecutionException;
+import java.util.regex.Pattern;
 
 public class Routing extends AppCompatActivity {
 
@@ -177,6 +191,36 @@ public class Routing extends AppCompatActivity {
         Configuration configuration = new Configuration();
         configuration.setLocale(locale);
         activity.getBaseContext().getResources().updateConfiguration(configuration, activity.getBaseContext().getResources().getDisplayMetrics());
+    }
+
+    public static String translateData(long unixDate, String pattern) {
+        Date date = new Date(unixDate * 1000L);
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat(pattern, Locale.getDefault());
+        simpleDateFormat.setTimeZone(TimeZone.getTimeZone("GMT+3"));
+        return simpleDateFormat.format(date);
+    }
+
+    public static void popupMenu(Activity activity, View view, int menu, PopupMenu.OnMenuItemClickListener onMenuItemClickListener, PopupMenu.OnDismissListener onDismissListener) {
+        PopupMenu popupMenu = new PopupMenu(new ContextThemeWrapper(activity, R.style.specter_PopupMenu), view);
+        popupMenu.inflate(menu);
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) popupMenu.setForceShowIcon(true);
+        popupMenu.setOnMenuItemClickListener(onMenuItemClickListener);
+        popupMenu.setOnDismissListener(onDismissListener);
+        popupMenu.show();
+    }
+
+    public static void AgreeAlertDialog(Activity activity, ViewGroup viewGroup, String title, String description, View.OnClickListener onClickListener) {
+        View alertDialogView = LayoutInflater.from(activity).inflate(R.layout.agree_alert_dialog, viewGroup, false);
+        AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(activity);
+        alertDialogBuilder.setView(alertDialogView);
+        ((TextView) alertDialogView.findViewById(R.id.header)).setText(title);
+        ((TextView) alertDialogView.findViewById(R.id.description)).setText(description);
+        AlertDialog alertDialog = alertDialogBuilder.create();
+        alertDialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+        alertDialogView.findViewById(R.id.button_yes).setOnClickListener(onClickListener);
+        alertDialogView.findViewById(R.id.button_yes).setOnClickListener(viewYes -> alertDialog.cancel());
+        alertDialogView.findViewById(R.id.button_cancel).setOnClickListener(view -> alertDialog.cancel());
+        alertDialog.show();
     }
 
 }

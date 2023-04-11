@@ -22,7 +22,6 @@ import android.view.ViewGroup;
 import android.view.animation.AnimationUtils;
 import android.widget.EditText;
 import android.widget.FrameLayout;
-import android.widget.LinearLayout;
 
 import com.ecost.specter.menu.MainMenuActivity;
 import com.ecost.specter.R;
@@ -35,9 +34,7 @@ public class SignInFragment extends Fragment {
 
     EditText etPhoneNumber, etPassword;
     FrameLayout flPassword;
-    LinearLayout bHidePassword;
-    View vHidePassword;
-    Boolean passwordView = false;
+    boolean passwordView = false;
     AuthActivity authActivity;
 
     @Override
@@ -47,8 +44,6 @@ public class SignInFragment extends Fragment {
         etPhoneNumber = inflaterView.findViewById(R.id.input_number_phone);
         etPassword = inflaterView.findViewById(R.id.input_password);
         flPassword = inflaterView.findViewById(R.id.frame_input_password);
-        bHidePassword = inflaterView.findViewById(R.id.button_hide_password);
-        vHidePassword = inflaterView.findViewById(R.id.icon_hide_password);
         authActivity = (AuthActivity) requireActivity();
 
         etPhoneNumber.setFilters(new InputFilter[]{(source, start, end, dest, dstart, dend) -> {
@@ -65,9 +60,9 @@ public class SignInFragment extends Fragment {
 
         etPhoneNumber.setOnKeyListener((view, keyCode, event) -> keyCode == KeyEvent.KEYCODE_ENTER && testPhoneNumber(view, etPhoneNumber.getText().toString()));
 
-        bHidePassword.setOnClickListener(view -> {
+        inflaterView.findViewById(R.id.button_hide_password).setOnClickListener(view -> {
             etPassword.setInputType(passwordView ? InputType.TYPE_CLASS_TEXT | InputType.TYPE_TEXT_VARIATION_PASSWORD : InputType.TYPE_TEXT_VARIATION_PASSWORD);
-            vHidePassword.setBackground(ContextCompat.getDrawable(authActivity, passwordView ? R.drawable.icon_eye : R.drawable.icon_eye_slash));
+            inflaterView.findViewById(R.id.icon_hide_password).setBackground(ContextCompat.getDrawable(authActivity, passwordView ? R.drawable.icon_eye : R.drawable.icon_eye_slash));
             etPassword.setSelection(etPassword.getSelectionStart());
             passwordView = !passwordView;
         });

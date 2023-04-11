@@ -15,8 +15,6 @@ import com.ecost.specter.R;
 
 public class AuthActivity extends AppCompatActivity {
 
-    String phoneNumber;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
