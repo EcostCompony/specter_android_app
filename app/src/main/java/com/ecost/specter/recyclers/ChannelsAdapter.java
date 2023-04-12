@@ -17,26 +17,20 @@ import java.util.List;
 public class ChannelsAdapter extends RecyclerView.Adapter<ChannelViewHolder> {
 
     public interface OnChannelClickListener {
-        void onChannelClick(Channel channel, int position);
-    }
-
-    public interface OnChannelLongClickListener {
-        boolean onChannelLongClick(Channel channel, int position);
+        void onChannelClick(Channel channel);
     }
 
     OnChannelClickListener onClickListener;
-    OnChannelLongClickListener onLongClickListener;
     List<Channel> channels;
     Integer colorMain, colorBody;
     LayoutInflater inflater;
 
-    public ChannelsAdapter(Context context, List<Channel> channels, OnChannelClickListener onClickListener, OnChannelLongClickListener onLongClickListener) {
+    public ChannelsAdapter(Context context, List<Channel> channels, OnChannelClickListener onClickListener) {
         this.inflater = LayoutInflater.from(context);
         this.channels = channels;
         this.colorMain = ContextCompat.getColor(context, R.color.main_color);
         this.colorBody = ContextCompat.getColor(context, R.color.channel_body_color);
         this.onClickListener = onClickListener;
-        this.onLongClickListener = onLongClickListener;
     }
 
     @NonNull
@@ -52,8 +46,7 @@ public class ChannelsAdapter extends RecyclerView.Adapter<ChannelViewHolder> {
         holder.tTitle.setText(channel.title);
         holder.tLastPost.setText(channel.body);
         holder.tLastPost.setTextColor(channel.markBody ? colorMain : colorBody);
-        holder.itemView.setOnClickListener(v -> onClickListener.onChannelClick(channel, position));
-        holder.itemView.setOnLongClickListener(v -> onLongClickListener.onChannelLongClick(channel, position));
+        holder.itemView.setOnClickListener(v -> onClickListener.onChannelClick(channel));
     }
 
     @Override

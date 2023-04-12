@@ -7,15 +7,11 @@ import static com.ecost.specter.Routing.authUserName;
 import static com.ecost.specter.Routing.myDB;
 import static com.ecost.specter.Routing.popup;
 
-import android.content.Context;
 import android.os.Bundle;
 import android.text.InputFilter;
-import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.inputmethod.InputMethodManager;
-import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.Spinner;
@@ -27,88 +23,61 @@ import com.ecost.specter.R;
 import com.ecost.specter.models.Channel;
 import com.ecost.specter.models.User;
 
-import java.util.ArrayList;
-import java.util.List;
 import java.util.regex.Pattern;
 
 public class CreateChannelMenuFragment extends Fragment {
 
-    EditText eTitle, eShortChannelLink, eDescription;
-    Spinner sCategory;
-    int categoryId = 0;
-    MainMenuActivity mainMenuActivity;
-
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View inflaterView = inflater.inflate(R.layout.fragment_create_channel_menu, container, false);
 
-        eTitle = inflaterView.findViewById(R.id.input_title);
-        eShortChannelLink = inflaterView.findViewById(R.id.input_short_channel_link);
-        sCategory = inflaterView.findViewById(R.id.spinner_chanel_сategory);
-        eDescription = inflaterView.findViewById(R.id.input_channel_description);
-        mainMenuActivity = (MainMenuActivity) requireActivity();
+        EditText etChannelTitle = inflaterView.findViewById(R.id.input_title);
+        EditText etShortChannelLink = inflaterView.findViewById(R.id.input_short_channel_link);
+        Spinner sChannelCategory = inflaterView.findViewById(R.id.spinner_chanel_сategory);
+        EditText etChannelDescription = inflaterView.findViewById(R.id.input_channel_description);
+        MainMenuActivity mainMenuActivity = (MainMenuActivity) requireActivity();
 
-        ArrayAdapter<CharSequence> categoryAdapter = ArrayAdapter.createFromResource(mainMenuActivity, R.array.channel_settings_array_category, R.layout.spinner_item);
-        categoryAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        sCategory.setAdapter(categoryAdapter);
-        sCategory.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-            @Override
-            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                categoryId = position;
-            }
-
-            @Override public void onNothingSelected(AdapterView<?> parent) {}
-        });
-
-        eTitle.setFilters(new InputFilter[] {new InputFilter.LengthFilter(32)});
-        eShortChannelLink.setFilters(new InputFilter[] {(source, start, end, dest, dstart, dend) -> {
+        etChannelTitle.setFilters(new InputFilter[]{new InputFilter.LengthFilter(32)});
+        etShortChannelLink.setFilters(new InputFilter[]{(source, start, end, dest, dstart, dend) -> {
             for (int i = start; i < end; i++) {
-                String j = String.valueOf(source.charAt(i));
-                if (!Pattern.compile("^[A-Z\\d_.]+$", Pattern.CASE_INSENSITIVE).matcher(j).find()) return "";
-                if (Character.isUpperCase(source.charAt(i))) return j.toLowerCase();
+                if (!Pattern.compile("^[A-Z\\d_.]+$", Pattern.CASE_INSENSITIVE).matcher(String.valueOf(source.charAt(i))).find()) return "";
+                if (Character.isUpperCase(source.charAt(i))) return String.valueOf(source.charAt(i)).toLowerCase();
             }
             return null;
         }, new InputFilter.LengthFilter(16)});
 
+        ArrayAdapter<CharSequence> categoriesAdapter = ArrayAdapter.createFromResource(mainMenuActivity, R.array.channel_settings_array_category, R.layout.spinner_item);
+        categoriesAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        sChannelCategory.setAdapter(categoriesAdapter);
+        sChannelCategory.setSelection(0,false);
+
         inflaterView.findViewById(R.id.button_close).setOnClickListener(view -> mainMenuActivity.getSupportFragmentManager().popBackStackImmediate());
 
-        eShortChannelLink.setOnKeyListener((view, keyCode, event) -> {
-            if (keyCode == KeyEvent.KEYCODE_ENTER) ((InputMethodManager) mainMenuActivity.getSystemService(Context.INPUT_METHOD_SERVICE)).hideSoftInputFromWindow(view.getWindowToken(), 0);
-            return true;
-        });
+        inflaterView.findViewById(R.id.button_create_channel).setOnClickListener(view -> {
+            String title = etChannelTitle.getText().toString().trim();
+            String shortChannelLink = etShortChannelLink.getText().toString();
 
-        eDescription.setOnKeyListener((view, keyCode, event) -> {
-            if (keyCode == KeyEvent.KEYCODE_ENTER) createChannel(view);
-            return keyCode == KeyEvent.KEYCODE_ENTER;
+            if (title.equals("")) popup(mainMenuActivity, view, 1, getString(R.string.create_channel_menu_error_not_title));
+            else if (shortChannelLink.equals("")) popup(mainMenuActivity, view, 1, getString(R.string.create_channel_menu_error_not_short_channel_link));
+            else if (shortChannelLink.length() < 3) popup(mainMenuActivity, view, 1, getString(R.string.create_channel_menu_error_small_short_channel_link));
+            else
+                myDB.child("specter").child("uid").child(shortChannelLink.replace(".", "*")).child("id").get().addOnCompleteListener(task -> {
+                    if (task.getResult().getValue() != null) popup(mainMenuActivity, view, 1, getString(R.string.create_channel_menu_error_busy_short_channel_link));
+                    else
+                        myDB.child("specter").child("channels_number").get().addOnCompleteListener(taskId -> {
+                            Integer id = Integer.parseInt(String.valueOf(taskId.getResult().getValue()));
+                            Channel channel = new Channel(id, shortChannelLink, authId, 0, title, sChannelCategory.getSelectedItemPosition() == 0 ? null : sChannelCategory.getSelectedItemPosition(), etChannelDescription.getText().toString().trim().equals("") ? null : etChannelDescription.getText().toString().trim(), "%CHANNEL_CREATED%", true);
+                            myDB.child("specter").child("channels").child(String.valueOf(id)).setValue(channel);
+                            myDB.child("specter").child("channels").child(String.valueOf(id)).child("subscribers").push().setValue(new User(authId, true, authEcostId, authUserName, authShortUserLink));
+                            myDB.child("specter").child("uid").child(shortChannelLink.replace('.', '*')).child("id").setValue(id);
+                            myDB.child("specter").child("uid").child(shortChannelLink.replace('.', '*')).child("type").setValue("channel");
+                            myDB.child("specter").child("channels_number").setValue(id+1);
+                            mainMenuActivity.startChannel(channel);
+                            mainMenuActivity.getSupportFragmentManager().popBackStack();
+                        });
+                });
         });
-
-        inflaterView.findViewById(R.id.button_create_channel).setOnClickListener(this::createChannel);
 
         return inflaterView;
-    }
-
-    public void createChannel(View view) {
-        String title = eTitle.getText().toString();
-        String shortChannelLink = eShortChannelLink.getText().toString();
-
-        if (title.equals("")) popup(mainMenuActivity, view, 1, getString(R.string.create_channel_menu_error_not_title));
-        else if (shortChannelLink.equals("")) popup(mainMenuActivity, view, 1, getString(R.string.create_channel_menu_error_not_short_channel_link));
-        else if (shortChannelLink.length() < 3) popup(mainMenuActivity, view, 1, getString(R.string.create_channel_menu_error_small_short_channel_link));
-        else
-            myDB.child("specter").child("uid").child(shortChannelLink.replace(".", "*")).child("id").get().addOnCompleteListener(taskTestShortChannelLink -> {
-                if (taskTestShortChannelLink.getResult().getValue() != null) popup(mainMenuActivity, view, 1, getString(R.string.create_channel_menu_error_busy_short_channel_link));
-                else
-                    myDB.child("specter").child("channels_number").get().addOnCompleteListener(taskId -> {
-                        Integer id = Integer.parseInt(String.valueOf(taskId.getResult().getValue()));
-                        Channel channel = new Channel(id, shortChannelLink, authId, 0, title, categoryId == 0 ? null : categoryId, eDescription.getText().toString().trim().equals("") ? null : eDescription.getText().toString(), "%CHANNEL_CREATED%", true);
-                        myDB.child("specter").child("channels").child(String.valueOf(id)).setValue(channel);
-                        myDB.child("specter").child("channels").child(String.valueOf(id)).child("subscribers").push().setValue(new User(authId, true, authEcostId, authUserName, authShortUserLink));
-                        myDB.child("specter").child("uid").child(shortChannelLink.replace('.', '*')).child("id").setValue(id);
-                        myDB.child("specter").child("uid").child(shortChannelLink.replace('.', '*')).child("type").setValue("channel");
-                        myDB.child("specter").child("channels_number").setValue(id + 1);
-                        mainMenuActivity.startChannel(channel, true);
-                        mainMenuActivity.getSupportFragmentManager().popBackStack();
-                    });
-            });
     }
 
 }

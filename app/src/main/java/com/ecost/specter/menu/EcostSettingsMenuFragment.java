@@ -28,21 +28,19 @@ import com.ecost.specter.auth.AuthActivity;
 import java.util.regex.Pattern;
 
 public class EcostSettingsMenuFragment extends Fragment {
-
-    TextView tNumberPhone;
+    // TODO: ОПТИМИЗИРОВАТЬ ВМЕСТЕ С ROUTING
     String phoneNumber;
-    MainMenuActivity mainMenuActivity;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View inflaterView = inflater.inflate(R.layout.fragment_ecost_settings_menu, container, false);
 
-        tNumberPhone = inflaterView.findViewById(R.id.phone_number);
-        mainMenuActivity = (MainMenuActivity) requireActivity();
+        TextView tvPhoneNumber = inflaterView.findViewById(R.id.phone_number);
+        MainMenuActivity mainMenuActivity = (MainMenuActivity) requireActivity();
 
         myDB.child("ecost").child("users").child(String.valueOf(authEcostId)).child("phone").get().addOnCompleteListener(task -> {
             phoneNumber = task.getResult().getValue(String.class);
-            tNumberPhone.setText(phoneNumber);
+            tvPhoneNumber.setText(phoneNumber);
         });
 
         inflaterView.findViewById(R.id.setting_phone_number).setOnClickListener(view -> {
@@ -78,7 +76,7 @@ public class EcostSettingsMenuFragment extends Fragment {
                                     myDB.child("ecost").child("uid").child(phoneNumber).setValue(null);
                                     myDB.child("ecost").child("users").child(String.valueOf(authEcostId)).child("phone").setValue(eNewNumberPhone.getText().toString());
                                     myDB.child("ecost").child("uid").child(eNewNumberPhone.getText().toString()).child("id").setValue(authEcostId);
-                                    tNumberPhone.setText(eNewNumberPhone.getText().toString());
+                                    tvPhoneNumber.setText(eNewNumberPhone.getText().toString());
                                 }
                             });
                     }

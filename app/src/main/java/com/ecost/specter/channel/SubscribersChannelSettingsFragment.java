@@ -35,7 +35,7 @@ public class SubscribersChannelSettingsFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View inflaterView = inflater.inflate(R.layout.fragment_subscribers_channel_settings, container, false);
 
-        EditText etSearch = inflaterView.findViewById(R.id.input_search_user);
+        EditText etSubscriberSearch = inflaterView.findViewById(R.id.input_search_user);
         RecyclerView rvSubscribersList = inflaterView.findViewById(R.id.recycler_users_list);
         List<User> subscribers = new ArrayList<>();
         List<String> keys = new ArrayList<>();
@@ -60,7 +60,7 @@ public class SubscribersChannelSettingsFragment extends Fragment {
         };
         myDB.child("specter").child("channels").child(String.valueOf(channelActivity.channelId)).child("subscribers").addChildEventListener(childEventListener);
 
-        etSearch.addTextChangedListener(new TextWatcher() {
+        etSubscriberSearch.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
                 subscribers.clear();
@@ -70,11 +70,11 @@ public class SubscribersChannelSettingsFragment extends Fragment {
                     @Override
                     public void onChildAdded(@NonNull DataSnapshot dataSnapshot, String previousChildName) {
                         User subscriber = Objects.requireNonNull(dataSnapshot.getValue(User.class));
-                        if (!etSearch.getText().toString().trim().equals("")) myDB.child("specter").child("channels").child(String.valueOf(channelActivity.channelId)).child("subscribers").removeEventListener(childEventListener);
-                        if (!etSearch.getText().toString().trim().equals("") && (Pattern.compile(etSearch.getText().toString().trim(), Pattern.CASE_INSENSITIVE).matcher(subscriber.name.toLowerCase()).find() || Pattern.compile(etSearch.getText().toString().trim(), Pattern.CASE_INSENSITIVE).matcher(subscriber.link.toLowerCase()).find())) {
+                        if (!etSubscriberSearch.getText().toString().trim().equals("")) myDB.child("specter").child("channels").child(String.valueOf(channelActivity.channelId)).child("subscribers").removeEventListener(childEventListener);
+                        if (!etSubscriberSearch.getText().toString().trim().equals("") && (Pattern.compile(etSubscriberSearch.getText().toString().trim(), Pattern.CASE_INSENSITIVE).matcher(subscriber.name.toLowerCase()).find() || Pattern.compile(etSubscriberSearch.getText().toString().trim(), Pattern.CASE_INSENSITIVE).matcher(subscriber.link.toLowerCase()).find())) {
                             subscribers.add(subscriber);
                             keys.add(dataSnapshot.getKey());
-                        } else if (etSearch.getText().toString().trim().equals("")) {
+                        } else if (etSubscriberSearch.getText().toString().trim().equals("")) {
                             myDB.child("specter").child("channels").child(String.valueOf(channelActivity.channelId)).child("subscribers").addChildEventListener(childEventListener);
                             myDB.child("specter").child("channels").child(String.valueOf(channelActivity.channelId)).child("subscribers").removeEventListener(this);
                         }

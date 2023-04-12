@@ -18,35 +18,26 @@ import com.google.android.material.bottomsheet.BottomSheetDialogFragment;
 
 public class NavigationFragment extends BottomSheetDialogFragment {
 
-    TextView tName, tShortUserLink;
-    MainMenuActivity mainMenuActivity;
-
     @SuppressLint("SetTextI18n")
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View inflaterView = inflater.inflate(R.layout.fragment_navigation, container, false);
 
-        tName = inflaterView.findViewById(R.id.navigate_name);
-        tShortUserLink = inflaterView.findViewById(R.id.navigate_short_user_link);
-        mainMenuActivity = (MainMenuActivity) requireActivity();
+        TextView tvUserName = inflaterView.findViewById(R.id.navigate_name);
+        TextView tvShortUserLink = inflaterView.findViewById(R.id.navigate_short_user_link);
+        MainMenuActivity mainMenuActivity = (MainMenuActivity) requireActivity();
 
-        tName.setText(authUserName);
-        tShortUserLink.setText(getString(R.string.symbol_at) + authShortUserLink);
+        tvUserName.setText(authUserName);
+        tvShortUserLink.setText(getString(R.string.symbol_at) + authShortUserLink);
 
-        inflaterView.findViewById(R.id.button_create_channel).setOnClickListener(view -> {
+        View.OnClickListener onClickListener = view -> {
             dismiss();
-            mainMenuActivity.getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container_view, new CreateChannelMenuFragment()).addToBackStack(null).commit();
-        });
-
-        inflaterView.findViewById(R.id.button_settings).setOnClickListener(view -> {
-            dismiss();
-            mainMenuActivity.getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container_view, new SettingsMenuFragment()).addToBackStack(null).commit();
-        });
-
-        inflaterView.findViewById(R.id.button_support).setOnClickListener(view -> {
-            dismiss();
-            startActivity(new Intent(mainMenuActivity, SupportActivity.class));
-        });
+            if (view != inflaterView.findViewById(R.id.button_support)) mainMenuActivity.getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container_view, (view == inflaterView.findViewById(R.id.button_create_channel) ? new CreateChannelMenuFragment() : new SettingsMenuFragment())).addToBackStack(null).commit();
+            else startActivity(new Intent(mainMenuActivity, SupportActivity.class));
+        };
+        inflaterView.findViewById(R.id.button_create_channel).setOnClickListener(onClickListener);
+        inflaterView.findViewById(R.id.button_settings).setOnClickListener(onClickListener);
+        inflaterView.findViewById(R.id.button_support).setOnClickListener(onClickListener);
 
         return inflaterView;
     }

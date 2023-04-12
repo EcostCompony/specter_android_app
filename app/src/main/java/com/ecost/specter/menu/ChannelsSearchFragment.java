@@ -1,6 +1,5 @@
 package com.ecost.specter.menu;
 
-import static com.ecost.specter.Routing.authId;
 import static com.ecost.specter.Routing.myDB;
 import static com.ecost.specter.Routing.pluralForm;
 
@@ -24,7 +23,6 @@ import android.widget.TextView;
 
 import com.ecost.specter.R;
 import com.ecost.specter.models.Channel;
-import com.ecost.specter.models.User;
 import com.ecost.specter.recyclers.ChannelsAdapter;
 import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
@@ -33,73 +31,56 @@ import com.google.firebase.database.DatabaseError;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
-import java.util.Map;
 import java.util.Objects;
 import java.util.regex.Pattern;
 
 public class ChannelsSearchFragment extends Fragment {
 
-    EditText eChannelTitle;
-    RecyclerView rChannelList;
-    TextView tChannelsNumber;
-    ChannelsAdapter channelsAdapter;
-    List<Channel> channels = new ArrayList<>();
-    MainMenuActivity mainMenuActivity;
-
-    @Override
-    public void onStart() {
-        super.onStart();
-
-        channels.clear();
-        eChannelTitle.setText("");
-    }
-
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View inflaterView = inflater.inflate(R.layout.fragment_channels_search, container, false);
 
-        eChannelTitle = inflaterView.findViewById(R.id.input_channel_title);
-        rChannelList = inflaterView.findViewById(R.id.recycler_channels_list);
-        tChannelsNumber = inflaterView.findViewById(R.id.number_channels);
-        mainMenuActivity = (MainMenuActivity) requireActivity();
+        EditText etChannelSearch = inflaterView.findViewById(R.id.input_channel_title);
+        RecyclerView rvChannelsList = inflaterView.findViewById(R.id.recycler_channels_list);
+        List<Channel> channels = new ArrayList<>();
+        MainMenuActivity mainMenuActivity = (MainMenuActivity) requireActivity();
 
-        eChannelTitle.requestFocus();
-        eChannelTitle.postDelayed(() -> {
+        etChannelSearch.requestFocus();
+        etChannelSearch.postDelayed(() -> {
             InputMethodManager inputMethodManager = (InputMethodManager) mainMenuActivity.getSystemService(Context.INPUT_METHOD_SERVICE);
-            inputMethodManager.showSoftInput(eChannelTitle, InputMethodManager.SHOW_IMPLICIT);
+            inputMethodManager.showSoftInput(etChannelSearch, InputMethodManager.SHOW_IMPLICIT);
         }, 1);
 
-        rChannelList.setLayoutManager(new LinearLayoutManager(mainMenuActivity));
-        channelsAdapter = new ChannelsAdapter(mainMenuActivity, channels, (channel, position) -> mainMenuActivity.startChannel(channel, false), (channel, position) -> true);
-        rChannelList.setAdapter(channelsAdapter);
+        rvChannelsList.setLayoutManager(new LinearLayoutManager(mainMenuActivity));
+        ChannelsAdapter channelsAdapter = new ChannelsAdapter(mainMenuActivity, channels, mainMenuActivity::startChannel);
+        rvChannelsList.setAdapter(channelsAdapter);
 
-        eChannelTitle.addTextChangedListener(new TextWatcher() {
+        ChildEventListener childEventListener = new ChildEventListener() {
+            @Override
+            public void onChildAdded(@NonNull DataSnapshot dataSnapshot, String previousChildName) {
+                Channel channel = Objects.requireNonNull(dataSnapshot.getValue(Channel.class));
+                String text = etChannelSearch.getText().toString().trim();
+                if (!text.equals("") && (Pattern.compile(text, Pattern.CASE_INSENSITIVE).matcher(channel.title.toLowerCase()).find() || Pattern.compile(text, Pattern.CASE_INSENSITIVE).matcher(channel.shortLink.toLowerCase()).find())) {
+                    channel.body = getString(R.string.symbol_at) + channel.shortLink;
+                    channel.markBody = true;
+                    channels.add(channel);
+                    channelsAdapter.notifyItemInserted(channels.size()-1);
+                }
+                ((TextView) inflaterView.findViewById(R.id.number_channels)).setText(pluralForm(channelsAdapter.getItemCount(), getString(R.string.number_channels_nominative_case), getString(R.string.number_channels_genitive_case), getString(R.string.number_channels_plural_genitive_case), Locale.getDefault().getLanguage().equals("ru")));
+            }
+
+            @Override public void onChildChanged(@NonNull DataSnapshot dataSnapshot, String previousChildName) {}
+            @Override public void onChildRemoved(@NonNull DataSnapshot dataSnapshot) {}
+            @Override public void onChildMoved(@NonNull DataSnapshot dataSnapshot, String previousChildName) { }
+            @Override public void onCancelled(@NonNull DatabaseError databaseError) { }
+        };
+        etChannelSearch.addTextChangedListener(new TextWatcher() {
+            @SuppressLint("NotifyDataSetChanged")
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+                myDB.child("specter").child("channels").removeEventListener(childEventListener);
                 channels.clear();
-                ChildEventListener childEventListener = new ChildEventListener() {
-                    @SuppressLint("NotifyDataSetChanged")
-                    @Override
-                    public void onChildAdded(@NonNull DataSnapshot dataSnapshot, String previousChildName) {
-                        Channel channel = Objects.requireNonNull(dataSnapshot.getValue(Channel.class));
-                        boolean subscribe = false;
-                        if (!eChannelTitle.getText().toString().trim().equals("") && Pattern.compile(eChannelTitle.getText().toString().trim(), Pattern.CASE_INSENSITIVE).matcher(channel.title.toLowerCase()).find()) {
-                            for (Map.Entry<String, User> entry : channel.subscribers.entrySet()) if (entry.getValue().id.equals(authId)) subscribe = true;
-                            if (!subscribe) {
-                                channel.body = getString(R.string.symbol_at) + channel.shortLink;
-                                channel.markBody = true;
-                                channels.add(channel);
-                            }
-                        }
-                        tChannelsNumber.setText(pluralForm(channelsAdapter.getItemCount(), getString(R.string.number_channels_nominative_case), getString(R.string.number_channels_genitive_case), getString(R.string.number_channels_plural_genitive_case), Locale.getDefault().getLanguage().equals("ru")));
-                        channelsAdapter.notifyDataSetChanged();
-                    }
-
-                    @Override public void onChildChanged(@NonNull DataSnapshot dataSnapshot, String previousChildName) {}
-                    @Override public void onChildRemoved(@NonNull DataSnapshot dataSnapshot) {}
-                    @Override public void onChildMoved(@NonNull DataSnapshot dataSnapshot, String previousChildName) { }
-                    @Override public void onCancelled(@NonNull DatabaseError databaseError) { }
-                };
+                channelsAdapter.notifyDataSetChanged();
                 myDB.child("specter").child("channels").addChildEventListener(childEventListener);
             }
 
@@ -107,10 +88,7 @@ public class ChannelsSearchFragment extends Fragment {
             @Override public void afterTextChanged(Editable s) {}
         });
 
-        inflaterView.findViewById(R.id.button_close).setOnClickListener(view -> {
-            ((InputMethodManager) mainMenuActivity.getSystemService(Context.INPUT_METHOD_SERVICE)).hideSoftInputFromWindow(view.getWindowToken(), 0);
-            mainMenuActivity.getSupportFragmentManager().popBackStackImmediate();
-        });
+        inflaterView.findViewById(R.id.button_close).setOnClickListener(view -> mainMenuActivity.getSupportFragmentManager().popBackStackImmediate());
 
         return inflaterView;
     }

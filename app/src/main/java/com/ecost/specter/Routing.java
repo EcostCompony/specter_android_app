@@ -13,6 +13,7 @@ import android.graphics.drawable.ColorDrawable;
 import android.os.Build;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
+import android.text.InputType;
 import android.view.ContextThemeWrapper;
 import android.view.Gravity;
 import android.view.LayoutInflater;
@@ -20,6 +21,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.inputmethod.InputMethodManager;
+import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.PopupMenu;
 import android.widget.PopupWindow;
@@ -47,15 +49,14 @@ public class Routing extends AppCompatActivity {
 
     public static final DatabaseReference myDB = FirebaseDatabase.getInstance().getReference();
     public static boolean auth, authAdmin;
-    public static Integer authId, authEcostId, settingsSection;
-    public static String authUserName, authShortUserLink, appLanguage, appTheme;
+    public static Integer authId, authEcostId, settingsSection, appLanguage, appTheme;
+    public static String authUserName, authShortUserLink;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        appTheme = PreferenceManager.getDefaultSharedPreferences(this).getString("APP_THEME", null);
-        if (appTheme == null) pushPreferenceTheme(this, getResources().getStringArray(R.array.setting_array_theme)[0]);
-        if (Objects.equals(appTheme, getResources().getStringArray(R.array.setting_array_theme)[1])) AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
-        else if (Objects.equals(appTheme, getResources().getStringArray(R.array.setting_array_theme)[2])) AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES);
+        appTheme = PreferenceManager.getDefaultSharedPreferences(this).getInt("APP_THEME", 0);
+        if (appTheme == 1) AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
+        else if (appTheme == 2) AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES);
 
         super.onCreate(savedInstanceState);
         if (Build.VERSION.SDK_INT < 31) {
@@ -69,14 +70,14 @@ public class Routing extends AppCompatActivity {
         authEcostId = PreferenceManager.getDefaultSharedPreferences(this).getInt("ECOST_ID", 0);
         authUserName = PreferenceManager.getDefaultSharedPreferences(this).getString("USER_NAME", null);
         authShortUserLink = PreferenceManager.getDefaultSharedPreferences(this).getString("SHORT_USER_LINK", null);
-        appLanguage = PreferenceManager.getDefaultSharedPreferences(this).getString("APP_LANGUAGE", null);
+        appLanguage = PreferenceManager.getDefaultSharedPreferences(this).getInt("APP_LANGUAGE", 0);
         settingsSection = PreferenceManager.getDefaultSharedPreferences(this).getInt("SETTINGS_SECTION", 0);
 
         myDB.child("specter").child("support_version").get().addOnCompleteListener(taskSupportVersion ->
             myDB.child("specter").child("users").child(String.valueOf(authId)).get().addOnCompleteListener(taskTestUser ->
                 myDB.child("specter").child("users").child(String.valueOf(authId)).child("app_version").get().addOnCompleteListener(taskUserVersion -> {
-                    if (appLanguage == null) pushPreferenceLanguage(this, getResources().getStringArray(R.array.setting_array_language)[Locale.getDefault().getLanguage().equals("ru") ? 0 : 1]);
-                    if (Objects.equals(appLanguage, getResources().getStringArray(R.array.setting_array_language)[0])) changeLocale(this, new Locale("ru"));
+                    if (!auth) pushPreferenceLanguage(this, Locale.getDefault().getLanguage().equals("ru") ? 0 : 1);
+                    if (appLanguage == 0) changeLocale(this, new Locale("ru"));
                     else changeLocale(this, new Locale("en"));
                     if (Integer.parseInt(String.valueOf(taskSupportVersion.getResult().getValue())) > VERSION_CODE) startActivity(new Intent(this, HardUpdateActivity.class));
                     else if (auth && taskTestUser.getResult().getValue() != null) {
@@ -122,13 +123,13 @@ public class Routing extends AppCompatActivity {
         authShortUserLink = value;
     }
 
-    public static void pushPreferenceLanguage(Context context, String value) {
-        PreferenceManager.getDefaultSharedPreferences(context).edit().putString("APP_LANGUAGE", value).apply();
+    public static void pushPreferenceLanguage(Context context, int value) {
+        PreferenceManager.getDefaultSharedPreferences(context).edit().putInt("APP_LANGUAGE", value).apply();
         appLanguage = value;
     }
 
-    public static void pushPreferenceTheme(Context context, String value) {
-        PreferenceManager.getDefaultSharedPreferences(context).edit().putString("APP_THEME", value).apply();
+    public static void pushPreferenceTheme(Context context, int value) {
+        PreferenceManager.getDefaultSharedPreferences(context).edit().putInt("APP_THEME", value).apply();
         appTheme = value;
     }
 

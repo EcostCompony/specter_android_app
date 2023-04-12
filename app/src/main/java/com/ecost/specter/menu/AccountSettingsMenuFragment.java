@@ -7,13 +7,7 @@ import static com.ecost.specter.Routing.myDB;
 import static com.ecost.specter.Routing.popup;
 import static com.ecost.specter.Routing.pushPreferenceShortUserLink;
 import static com.ecost.specter.Routing.pushPreferenceUserName;
-import static com.ecost.specter.Routing.signOut;
 
-import android.annotation.SuppressLint;
-import android.app.AlertDialog;
-import android.content.Intent;
-import android.graphics.Color;
-import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
@@ -27,16 +21,14 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
 import android.widget.ImageButton;
-import android.widget.TextView;
 
 import com.ecost.specter.R;
-import com.ecost.specter.auth.AuthActivity;
 
 import java.util.regex.Pattern;
 
 public class AccountSettingsMenuFragment extends Fragment {
 
-    EditText eUserName, eShortUserLink;
+    EditText etUserName, etShortUserLink;
     ImageButton bSaveUserName, bSaveShortUserLink;
     MainMenuActivity mainMenuActivity;
 
@@ -44,65 +36,54 @@ public class AccountSettingsMenuFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View inflaterView = inflater.inflate(R.layout.fragment_account_settings_menu, container, false);
 
-        eUserName = inflaterView.findViewById(R.id.input_user_name);
-        eShortUserLink = inflaterView.findViewById(R.id.input_short_user_link);
+        etUserName = inflaterView.findViewById(R.id.input_user_name);
+        etShortUserLink = inflaterView.findViewById(R.id.input_short_user_link);
         bSaveUserName = inflaterView.findViewById(R.id.button_save_user_name);
         bSaveShortUserLink = inflaterView.findViewById(R.id.button_save_short_user_link);
         mainMenuActivity = (MainMenuActivity) requireActivity();
 
-        eUserName.setText(authUserName);
-        eShortUserLink.setText(authShortUserLink);
+        etUserName.setText(authUserName);
+        etShortUserLink.setText(authShortUserLink);
 
-        eUserName.setFilters(new InputFilter[] {new InputFilter.LengthFilter(16)});
-        eShortUserLink.setFilters(new InputFilter[] {(source, start, end, dest, dstart, dend) -> {
+        etUserName.setFilters(new InputFilter[]{new InputFilter.LengthFilter(16)});
+        etShortUserLink.setFilters(new InputFilter[]{(source, start, end, dest, dstart, dend) -> {
             for (int i = start; i < end; i++) {
-                String j = String.valueOf(source.charAt(i));
-                if (!Pattern.compile("^[A-Z\\d_.]+$", Pattern.CASE_INSENSITIVE).matcher(j).find()) return "";
-                if (Character.isUpperCase(source.charAt(i))) return j.toLowerCase();
+                if (!Pattern.compile("^[A-Z\\d_.]+$", Pattern.CASE_INSENSITIVE).matcher(String.valueOf(source.charAt(i))).find()) return "";
+                if (Character.isUpperCase(source.charAt(i))) return String.valueOf(source.charAt(i)).toLowerCase();
             }
             return null;
         }, new InputFilter.LengthFilter(16)});
 
-        eUserName.addTextChangedListener(new TextWatcher() {
+        TextWatcher textWatcher = new TextWatcher() {
             @Override
             public void afterTextChanged(Editable s) {
-                bSaveUserName.setVisibility(eUserName.getText().toString().equals(authUserName) ? View.GONE : View.VISIBLE);
+                bSaveUserName.setVisibility(etUserName.getText().toString().trim().equals(authUserName) ? View.GONE : View.VISIBLE);
+                bSaveShortUserLink.setVisibility(etShortUserLink.getText().toString().equals(authShortUserLink) ? View.GONE : View.VISIBLE);
             }
 
             @Override public void beforeTextChanged(CharSequence s, int start, int count, int after) { }
             @Override public void onTextChanged(CharSequence s, int start, int before, int count) { }
-        });
+        };
+        etUserName.addTextChangedListener(textWatcher);
+        etShortUserLink.addTextChangedListener(textWatcher);
 
-        eShortUserLink.addTextChangedListener(new TextWatcher() {
-            @Override
-            public void afterTextChanged(Editable s) {
-                bSaveShortUserLink.setVisibility(eShortUserLink.getText().toString().equals(authShortUserLink) ? View.GONE : View.VISIBLE);
-            }
-
-            @Override public void beforeTextChanged(CharSequence s, int start, int count, int after) { }
-            @Override public void onTextChanged(CharSequence s, int start, int before, int count) { }
-        });
-
-        eUserName.setOnKeyListener((view, keyCode, event) -> {
-            if (keyCode == KeyEvent.KEYCODE_ENTER && !eUserName.getText().toString().equals(authUserName)) saveUserName(view);
+        etUserName.setOnKeyListener((view, keyCode, event) -> {
+            if (keyCode == KeyEvent.KEYCODE_ENTER && !etUserName.getText().toString().trim().equals(authUserName)) saveUserName(view);
             return keyCode == KeyEvent.KEYCODE_ENTER;
         });
-
-        eShortUserLink.setOnKeyListener((view, keyCode, event) -> {
-            if (keyCode == KeyEvent.KEYCODE_ENTER && !eShortUserLink.getText().toString().equals(authShortUserLink)) saveShortUserLink(view);
+        etShortUserLink.setOnKeyListener((view, keyCode, event) -> {
+            if (keyCode == KeyEvent.KEYCODE_ENTER && !etShortUserLink.getText().toString().equals(authShortUserLink)) saveShortUserLink(view);
             return keyCode == KeyEvent.KEYCODE_ENTER;
         });
 
         bSaveUserName.setOnClickListener(this::saveUserName);
-
         bSaveShortUserLink.setOnClickListener(this::saveShortUserLink);
 
         return inflaterView;
     }
 
     public void saveUserName(View view) {
-        String userName = eUserName.getText().toString();
-
+        String userName = etUserName.getText().toString().trim();
         if (userName.equals("")) popup(mainMenuActivity, view, 1, getString(R.string.account_settings_error_not_name));
         else {
             myDB.child("specter").child("users").child(String.valueOf(authId)).child("name").setValue(userName);
@@ -111,15 +92,13 @@ public class AccountSettingsMenuFragment extends Fragment {
         }
     }
 
-    @SuppressLint("SetTextI18n")
     public void saveShortUserLink(View view) {
-        String shortUserLink = eShortUserLink.getText().toString();
-
+        String shortUserLink = etShortUserLink.getText().toString();
         if (shortUserLink.equals("")) popup(mainMenuActivity, view, 1, getString(R.string.account_settings_error_not_short_user_link));
         else if (shortUserLink.length() < 3) popup(mainMenuActivity, view, 1, getString(R.string.account_settings_error_small_short_user_link));
         else
-            myDB.child("specter").child("uid").child(shortUserLink.replace('.', '*')).child("id").get().addOnCompleteListener(taskTestShortUserLink -> {
-                if (taskTestShortUserLink.getResult().getValue() != null) popup(mainMenuActivity, view, 1, getString(R.string.account_settings_error_busy_short_user_link));
+            myDB.child("specter").child("uid").child(shortUserLink.replace('.', '*')).child("id").get().addOnCompleteListener(task -> {
+                if (task.getResult().getValue() != null) popup(mainMenuActivity, view, 1, getString(R.string.account_settings_error_busy_short_user_link));
                 else {
                     myDB.child("specter").child("uid").child(authShortUserLink.replace(".", "*")).setValue(null);
                     myDB.child("specter").child("users").child(String.valueOf(authId)).child("link").setValue(shortUserLink);

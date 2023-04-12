@@ -20,7 +20,7 @@ import java.util.Objects;
 
 public class ChannelActivity extends AppCompatActivity {
 
-    Integer channelId, channelPostsNumber, channelCategoryId;
+    Integer channelId, channelCategoryId;
     String channelTitle, shortChannelLink, channelDescription, userSubscriberId;
     boolean userSubscribe, userAdmin;
     ChildEventListener childEventListener;
@@ -31,7 +31,6 @@ public class ChannelActivity extends AppCompatActivity {
         setContentView(R.layout.activity_channel);
 
         channelId = getIntent().getIntExtra("CHANNEL_ID", 0);
-        channelPostsNumber = getIntent().getIntExtra("CHANNEL_POSTS_NUMBER", 0);
         channelTitle = getIntent().getStringExtra("CHANNEL_TITLE");
         shortChannelLink = getIntent().getStringExtra("CHANNEL_SHORT_LINK");
         channelCategoryId = getIntent().getIntExtra("CHANNEL_CATEGORY", 0);
