@@ -16,6 +16,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import com.ecost.specter.R;
 import com.ecost.specter.menu.MainMenuActivity;
@@ -33,6 +34,8 @@ public class SpecterStartFragment extends BottomSheetDialogFragment {
         EditText etName = inflaterView.findViewById(R.id.input_user_name);
         EditText etShortUserLink = inflaterView.findViewById(R.id.input_short_user_link);
         AuthActivity authActivity = (AuthActivity) requireActivity();
+
+        Toast.makeText(authActivity.getApplicationContext(), String.valueOf(authEcostId), Toast.LENGTH_LONG).show();
 
         etName.setFilters(new InputFilter[]{new InputFilter.LengthFilter(16)});
         etShortUserLink.setFilters(new InputFilter[]{(source, start, end, dest, dstart, dend) -> {

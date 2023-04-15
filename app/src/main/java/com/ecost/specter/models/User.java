@@ -2,9 +2,9 @@ package com.ecost.specter.models;
 
 public class User {
 
-    public Integer id, ecost_id;
-    public String name, link;
-    public boolean channel_admin;
+    Integer id, ecost_id;
+    String name, short_link;
+    boolean channel_admin;
 
     public User() {}
 
@@ -12,7 +12,7 @@ public class User {
         this.id = id;
         this.ecost_id = ecost_id;
         this.name = name;
-        this.link = link;
+        this.short_link = link;
     }
 
     public User(Integer id, boolean channel_admin, Integer ecost_id, String name, String link) {
@@ -20,7 +20,23 @@ public class User {
         this.channel_admin = channel_admin;
         this.ecost_id = ecost_id;
         this.name = name;
-        this.link = link;
+        this.short_link = link;
+    }
+
+    public Integer getId() {
+        return id;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public String getShortLink() {
+        return short_link;
+    }
+
+    public boolean getChannelAdmin() {
+        return channel_admin;
     }
 
 }

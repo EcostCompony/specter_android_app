@@ -39,8 +39,8 @@ public class PostsAdapter extends RecyclerView.Adapter<PostViewHolder> {
 
     @Override
     public int getItemViewType(int position) {
-        if (posts.get(position).senderId == authId) return R.layout.my_comment_item;
-        else if (posts.get(position).type == 1) return R.layout.date_post_item;
+        if (posts.get(position).getSenderId() == authId) return R.layout.my_comment_item;
+        else if (posts.get(position).getType() == 1) return R.layout.date_post_item;
         return R.layout.post_item;
     }
 
@@ -54,18 +54,18 @@ public class PostsAdapter extends RecyclerView.Adapter<PostViewHolder> {
     @Override
     public void onBindViewHolder(@NonNull PostViewHolder holder, @SuppressLint("RecyclerView") int position) {
         Post post = posts.get(position);
-        holder.text.setText(post.context);
-        if (post.type == 1) {
+        holder.text.setText(post.getContext());
+        if (post.getType() == 1) {
             List<String> months = Arrays.asList(" января", " февраля", " марта", " апреля", " мая", " июня", " июля", " августа", " сентября", " октября", " ноября", " декабря");
-            Date date = new java.util.Date(post.date * 1000L);
+            Date date = new java.util.Date(post.getDate() * 1000L);
             @SuppressLint("SimpleDateFormat") SimpleDateFormat sdf1 = new java.text.SimpleDateFormat("dd");
             @SuppressLint("SimpleDateFormat") SimpleDateFormat sdf2 = new java.text.SimpleDateFormat("MM");
             sdf1.setTimeZone(java.util.TimeZone.getTimeZone("GMT+3"));
             sdf2.setTimeZone(java.util.TimeZone.getTimeZone("GMT+3"));
             holder.date.setText(sdf1.format(date) + months.get(Integer.parseInt(sdf2.format(date))-1));
         }
-        if (holder.author != null) holder.author.setText(post.author);
-        Date date = new java.util.Date(post.date * 1000L);
+        if (holder.author != null) holder.author.setText(post.getAuthor());
+        Date date = new java.util.Date(post.getDate() * 1000L);
         @SuppressLint("SimpleDateFormat") SimpleDateFormat sdf = new java.text.SimpleDateFormat("HH:mm");
         sdf.setTimeZone(java.util.TimeZone.getTimeZone("GMT+3"));
         String formattedDate = sdf.format(date);

@@ -2,6 +2,7 @@ package com.ecost.specter.auth;
 
 import static com.ecost.specter.Routing.hash;
 import static com.ecost.specter.Routing.myDB;
+import static com.ecost.specter.Routing.pushPreferenceEcostId;
 
 import android.os.Bundle;
 
@@ -101,6 +102,7 @@ public class PasswordSignUpFragment extends Fragment {
                 myDB.child("ecost").child("users").child(String.valueOf(uid)).child("password").setValue(hash(password));
                 myDB.child("ecost").child("uid").child(phoneNumber).child("id").setValue(uid);
                 myDB.child("ecost").child("users_number").setValue(uid);
+                pushPreferenceEcostId(authActivity, uid);
                 authActivity.getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container_view, new SignInFragment()).commit();
                 new SpecterStartFragment().show(authActivity.getSupportFragmentManager(), new SpecterStartFragment().getTag());
             }

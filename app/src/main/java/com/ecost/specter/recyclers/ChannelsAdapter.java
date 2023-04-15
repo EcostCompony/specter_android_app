@@ -43,9 +43,9 @@ public class ChannelsAdapter extends RecyclerView.Adapter<ChannelViewHolder> {
     @Override
     public void onBindViewHolder(@NonNull ChannelViewHolder holder, int position) {
         Channel channel = channels.get(position);
-        holder.tTitle.setText(channel.title);
-        holder.tLastPost.setText(channel.body);
-        holder.tLastPost.setTextColor(channel.markBody ? colorMain : colorBody);
+        holder.tTitle.setText(channel.getTitle());
+        holder.tLastPost.setText(channel.getBody());
+        holder.tLastPost.setTextColor(channel.getMarkBody() ? colorMain : colorBody);
         holder.itemView.setOnClickListener(v -> onClickListener.onChannelClick(channel));
     }
 

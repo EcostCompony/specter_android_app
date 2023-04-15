@@ -30,7 +30,7 @@ public class FAQPostsAdapter extends RecyclerView.Adapter<FAQPostViewHolder> {
 
     @Override
     public int getItemViewType(int position) {
-        if (faqPosts.get(position).type == 1) return R.layout.faq_question_item;
+        if (faqPosts.get(position).getType() == 1) return R.layout.faq_question_item;
         return R.layout.faq_answer_item;
     }
 
@@ -43,8 +43,8 @@ public class FAQPostsAdapter extends RecyclerView.Adapter<FAQPostViewHolder> {
     @Override
     public void onBindViewHolder(@NonNull FAQPostViewHolder holder, int position) {
         FAQPost faqPost = faqPosts.get(position);
-        holder.text.setText(faqPost.context);
-        holder.itemView.setOnLongClickListener(v -> onLongClickListener.onFAQPostLongClick(faqPost.context));
+        holder.text.setText(faqPost.getContext());
+        holder.itemView.setOnLongClickListener(v -> onLongClickListener.onFAQPostLongClick(faqPost.getContext()));
     }
 
     @Override

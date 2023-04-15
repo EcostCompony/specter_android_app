@@ -41,8 +41,8 @@ public class AppealsAdapter extends RecyclerView.Adapter<AppealViewHolder> {
     @Override
     public void onBindViewHolder(@NonNull AppealViewHolder holder, int position) {
         Appeal appeal = appeals.get(position);
-        holder.tTopic.setText(appeal.topic);
-        holder.tLastPost.setText(appeal.body);
+        holder.tTopic.setText(appeal.getTopic());
+        holder.tLastPost.setText(appeal.getBody());
         holder.itemView.setOnClickListener(v -> onClickListener.onAppealClick(appeal, position));
     }
 

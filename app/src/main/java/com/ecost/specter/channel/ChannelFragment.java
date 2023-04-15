@@ -77,18 +77,18 @@ public class ChannelFragment extends Fragment {
                 if (item.getItemId() == R.id.comments) {
                     CommentsFragment commentsFragment = new CommentsFragment();
                     Bundle bundle = new Bundle();
-                    bundle.putInt("POST_ID", post.id);
+                    bundle.putInt("POST_ID", post.getId());
                     commentsFragment.setArguments(bundle);
                     channelActivity.getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container_view, commentsFragment).addToBackStack(null).commit();
                 } else if (item.getItemId() == R.id.edit) {
                     postEditable = post;
                     tvEditingPost.setVisibility(View.VISIBLE);
-                    etPost.setText(post.context);
-                } else if (item.getItemId() == R.id.copy) ((ClipboardManager) channelActivity.getSystemService(Context.CLIPBOARD_SERVICE)).setPrimaryClip(ClipData.newPlainText("post", post.context));
+                    etPost.setText(post.getContext());
+                } else if (item.getItemId() == R.id.copy) ((ClipboardManager) channelActivity.getSystemService(Context.CLIPBOARD_SERVICE)).setPrimaryClip(ClipData.newPlainText("post", post.getContext()));
                 else if (item.getItemId() == R.id.delete) {
-                    myDB.child("specter").child("channels").child(String.valueOf(channelActivity.channelId)).child("body").setValue(posts.size() - 1 == 0 ? "%NOT_POSTS%" : (posts.get(posts.size() - 1).id == post.id ? posts.get(posts.size() - 2).context : posts.get(posts.size() - 1).context));
+                    myDB.child("specter").child("channels").child(String.valueOf(channelActivity.channelId)).child("body").setValue(posts.size() - 1 == 0 ? "%NOT_POSTS%" : (posts.get(posts.size() - 1).getId() == post.getId() ? posts.get(posts.size() - 2).getContext() : posts.get(posts.size() - 1).getContext()));
                     myDB.child("specter").child("channels").child(String.valueOf(channelActivity.channelId)).child("markBody").setValue(posts.size() - 1 == 0);
-                    myDB.child("specter").child("channels").child(String.valueOf(channelActivity.channelId)).child("posts").child(String.valueOf(post.id)).setValue(null);
+                    myDB.child("specter").child("channels").child(String.valueOf(channelActivity.channelId)).child("posts").child(String.valueOf(post.getId())).setValue(null);
                 }
                 return true;
             }, menu -> inflaterView.findViewById(R.id.dim_layout).setVisibility(View.INVISIBLE));
@@ -115,10 +115,10 @@ public class ChannelFragment extends Fragment {
             @Override
             public void onChildAdded(@NonNull DataSnapshot dataSnapshot, String previousChildName) {
                 Post post = Objects.requireNonNull(dataSnapshot.getValue(Post.class));
-                if (post.author.equals("%CHANNEL_TITLE%")) post.author = channelActivity.channelTitle;
-                Long unix1 = posts.size() == 0 ? post.date : posts.get(posts.size()-1).date;
-                Long unix2 = post.date;
-                if (posts.size() == 0 || !translateData(unix1, "yyyy").equals(translateData(unix2, "yyyy")) || !translateData(unix1, "MM").equals(translateData(unix2, "MM")) || !translateData(unix1, "dd").equals(translateData(unix2, "dd"))) post.type = 1;
+                if (post.getAuthor().equals("%CHANNEL_TITLE%")) post.setAuthor(channelActivity.channelTitle);
+                Long unix1 = posts.size() == 0 ? post.getDate() : posts.get(posts.size()-1).getDate();
+                Long unix2 = post.getDate();
+                if (posts.size() == 0 || !translateData(unix1, "yyyy").equals(translateData(unix2, "yyyy")) || !translateData(unix1, "MM").equals(translateData(unix2, "MM")) || !translateData(unix1, "dd").equals(translateData(unix2, "dd"))) post.setType(1);
                 posts.add(post);
                 postsAdapter.notifyItemInserted(posts.size()-1);
                 rvPostsList.post(() -> rvPostsList.scrollToPosition(postsAdapter.getItemCount()-1));
@@ -127,7 +127,7 @@ public class ChannelFragment extends Fragment {
             @Override
             public void onChildChanged(@NonNull DataSnapshot dataSnapshot, String previousChildName) {
                 for (int i = 0; i < posts.size(); i++) {
-                    if (posts.get(i).id == Objects.requireNonNull(dataSnapshot.getValue(Post.class)).id) {
+                    if (posts.get(i).getId() == Objects.requireNonNull(dataSnapshot.getValue(Post.class)).getId()) {
                         posts.set(i, Objects.requireNonNull(dataSnapshot.getValue(Post.class)));
                         postsAdapter.notifyItemChanged(i);
                         break;
@@ -138,7 +138,7 @@ public class ChannelFragment extends Fragment {
             @Override
             public void onChildRemoved(@NonNull DataSnapshot dataSnapshot) {
                 for (int i = 0; i < posts.size(); i++) {
-                    if (posts.get(i).id == Objects.requireNonNull(dataSnapshot.getValue(Post.class)).id) {
+                    if (posts.get(i).getId() == Objects.requireNonNull(dataSnapshot.getValue(Post.class)).getId()) {
                         posts.remove(i);
                         postsAdapter.notifyItemRemoved(i);
                         break;
@@ -164,11 +164,11 @@ public class ChannelFragment extends Fragment {
         bSendPost.setOnClickListener(view -> {
             String text = etPost.getText().toString().trim();
             if (text.equals("")) return;
-            if (postEditable != null) myDB.child("specter").child("channels").child(String.valueOf(channelActivity.channelId)).child("posts").child(String.valueOf(postEditable.id)).child("context").setValue(text);
-            if (postEditable == null || posts.size() == postEditable.id) myDB.child("specter").child("channels").child(String.valueOf(channelActivity.channelId)).child("body").setValue(text);
+            if (postEditable != null) myDB.child("specter").child("channels").child(String.valueOf(channelActivity.channelId)).child("posts").child(String.valueOf(postEditable.getId())).child("context").setValue(text);
+            if (postEditable == null || posts.size() == postEditable.getId()) myDB.child("specter").child("channels").child(String.valueOf(channelActivity.channelId)).child("body").setValue(text);
             if (postEditable == null) {
                 try {
-                    myDB.child("specter").child("channels").child(String.valueOf(channelActivity.channelId)).child("posts").child(String.valueOf(posts.size() == 0 ? 0 : posts.get(posts.size()-1).id+1)).setValue(new Post(posts.size() == 0 ? 0 : posts.get(posts.size()-1).id+1, authUserName, new DataTimeTask().execute("somestring").get(), text));
+                    myDB.child("specter").child("channels").child(String.valueOf(channelActivity.channelId)).child("posts").child(String.valueOf(posts.size() == 0 ? 0 : posts.get(posts.size()-1).getId()+1)).setValue(new Post(posts.size() == 0 ? 0 : posts.get(posts.size()-1).getId()+1, authUserName, new DataTimeTask().execute("somestring").get(), text));
                 } catch (ExecutionException | InterruptedException e) {
                     throw new RuntimeException(e);
                 }
@@ -184,7 +184,7 @@ public class ChannelFragment extends Fragment {
                 String text = etPost.getText().toString().trim();
                 if (text.equals("") || postEditable != null) return false;
                 try {
-                    myDB.child("specter").child("channels").child(String.valueOf(channelActivity.channelId)).child("posts").child(String.valueOf(posts.size() == 0 ? 0 : posts.get(posts.size()-1).id+1)).setValue(new Post(posts.size() == 0 ? 0 : posts.get(posts.size()-1).id+1, "%CHANNEL_TITLE%", new DataTimeTask().execute("somestring").get(), text));
+                    myDB.child("specter").child("channels").child(String.valueOf(channelActivity.channelId)).child("posts").child(String.valueOf(posts.size() == 0 ? 0 : posts.get(posts.size()-1).getId()+1)).setValue(new Post(posts.size() == 0 ? 0 : posts.get(posts.size()-1).getId()+1, "%CHANNEL_TITLE%", new DataTimeTask().execute("somestring").get(), text));
                 } catch (ExecutionException | InterruptedException e) {
                     throw new RuntimeException(e);
                 }

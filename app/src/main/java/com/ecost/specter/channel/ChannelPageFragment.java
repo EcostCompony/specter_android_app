@@ -65,7 +65,7 @@ public class ChannelPageFragment extends Fragment {
             ChildEventListener childEventListener = new ChildEventListener() {
                 @Override
                 public void onChildAdded(@NonNull DataSnapshot dataSnapshot, String previousChildName) {
-                    if (Objects.requireNonNull(dataSnapshot.getValue(User.class)).id.equals(authId)) {
+                    if (Objects.requireNonNull(dataSnapshot.getValue(User.class)).getId().equals(authId)) {
                         channelActivity.userSubscriberId = dataSnapshot.getKey();
                         myDB.child("specter").child("channels").child(String.valueOf(channelActivity.channelId)).child("subscribers").removeEventListener(this);
                     }

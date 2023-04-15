@@ -71,7 +71,7 @@ public class SubscribersChannelSettingsFragment extends Fragment {
                     public void onChildAdded(@NonNull DataSnapshot dataSnapshot, String previousChildName) {
                         User subscriber = Objects.requireNonNull(dataSnapshot.getValue(User.class));
                         if (!etSubscriberSearch.getText().toString().trim().equals("")) myDB.child("specter").child("channels").child(String.valueOf(channelActivity.channelId)).child("subscribers").removeEventListener(childEventListener);
-                        if (!etSubscriberSearch.getText().toString().trim().equals("") && (Pattern.compile(etSubscriberSearch.getText().toString().trim(), Pattern.CASE_INSENSITIVE).matcher(subscriber.name.toLowerCase()).find() || Pattern.compile(etSubscriberSearch.getText().toString().trim(), Pattern.CASE_INSENSITIVE).matcher(subscriber.link.toLowerCase()).find())) {
+                        if (!etSubscriberSearch.getText().toString().trim().equals("") && (Pattern.compile(etSubscriberSearch.getText().toString().trim(), Pattern.CASE_INSENSITIVE).matcher(subscriber.getName().toLowerCase()).find() || Pattern.compile(etSubscriberSearch.getText().toString().trim(), Pattern.CASE_INSENSITIVE).matcher(subscriber.getShortLink().toLowerCase()).find())) {
                             subscribers.add(subscriber);
                             keys.add(dataSnapshot.getKey());
                         } else if (etSubscriberSearch.getText().toString().trim().equals("")) {

@@ -3,6 +3,7 @@ package com.ecost.specter.auth;
 import static com.ecost.specter.Routing.hash;
 import static com.ecost.specter.Routing.myDB;
 import static com.ecost.specter.Routing.pushPreferenceAuth;
+import static com.ecost.specter.Routing.pushPreferenceEcostId;
 import static com.ecost.specter.Routing.pushPreferenceId;
 import static com.ecost.specter.Routing.pushPreferenceShortUserLink;
 import static com.ecost.specter.Routing.pushPreferenceUserName;
@@ -96,14 +97,15 @@ public class SignInFragment extends Fragment {
                         else
                             myDB.child("ecost").child("users").child(uid).child("services").child("specter").get().addOnCompleteListener(taskSpecterId -> {
                                 String id = String.valueOf(taskSpecterId.getResult().getValue());
+                                pushPreferenceEcostId(authActivity, Integer.parseInt(uid));
                                 if (id.equals("null")) new SpecterStartFragment().show(authActivity.getSupportFragmentManager(), new SpecterStartFragment().getTag());
                                 else
                                     myDB.child("specter").child("users").child(id).get().addOnCompleteListener(taskUser -> {
                                         User user = Objects.requireNonNull(taskUser.getResult().getValue(User.class));
                                         pushPreferenceAuth(authActivity, true);
-                                        pushPreferenceId(authActivity, user.id);
-                                        pushPreferenceUserName(authActivity, user.name);
-                                        pushPreferenceShortUserLink(authActivity, user.link);
+                                        pushPreferenceId(authActivity, user.getId());
+                                        pushPreferenceUserName(authActivity, user.getName());
+                                        pushPreferenceShortUserLink(authActivity, user.getShortLink());
                                         startActivity(new Intent(authActivity, MainMenuActivity.class).putExtra("CREATE", true));
                                         authActivity.finish();
                                     });

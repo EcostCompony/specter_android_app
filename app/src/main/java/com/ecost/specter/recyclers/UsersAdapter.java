@@ -41,13 +41,13 @@ public class UsersAdapter extends RecyclerView.Adapter<UserViewHolder> {
     @SuppressLint("SetTextI18n")
     @Override
     public void onBindViewHolder(@NonNull UserViewHolder holder, int position) {
-        holder.name.setText(users.get(position).name);
-        holder.shortLink.setText(context.getString(R.string.symbol_at) + users.get(position).link);
+        holder.name.setText(users.get(position).getName());
+        holder.shortLink.setText(context.getString(R.string.symbol_at) + users.get(position).getShortLink());
         holder.fAddAdmin.setOnClickListener(view -> {
             onClickListener.onAddAdminClick(position);
             holder.fAddAdmin.setVisibility(View.GONE);
         });
-        if (users.get(position).channel_admin) holder.fAddAdmin.setVisibility(View.GONE);
+        if (users.get(position).getChannelAdmin()) holder.fAddAdmin.setVisibility(View.GONE);
     }
 
     @Override

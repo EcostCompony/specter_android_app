@@ -1,5 +1,6 @@
 package com.ecost.specter.channel;
 
+import static com.ecost.specter.Routing.authId;
 import static com.ecost.specter.Routing.authUserName;
 import static com.ecost.specter.Routing.myDB;
 import static com.ecost.specter.Routing.popupMenu;
@@ -55,9 +56,9 @@ public class CommentsFragment extends Fragment {
                 if (item.getItemId() == R.id.edit) {
                     commentEditable = comment;
                     tvEditComment.setVisibility(View.VISIBLE);
-                    etComment.setText(comment.context);
-                } else if (item.getItemId() == R.id.copy) ((ClipboardManager) channelActivity.getSystemService(Context.CLIPBOARD_SERVICE)).setPrimaryClip(ClipData.newPlainText("comment", comment.context));
-                else if (item.getItemId() == R.id.delete) myDB.child("specter").child("channels").child(String.valueOf(channelActivity.channelId)).child("posts").child(String.valueOf(postId)).child("comments").child(String.valueOf(comment.id)).setValue(null);
+                    etComment.setText(comment.getContext());
+                } else if (item.getItemId() == R.id.copy) ((ClipboardManager) channelActivity.getSystemService(Context.CLIPBOARD_SERVICE)).setPrimaryClip(ClipData.newPlainText("comment", comment.getContext()));
+                else if (item.getItemId() == R.id.delete) myDB.child("specter").child("channels").child(String.valueOf(channelActivity.channelId)).child("posts").child(String.valueOf(postId)).child("comments").child(String.valueOf(comment.getId())).setValue(null);
                 return true;
             }, menu -> inflaterView.findViewById(R.id.dim_layout).setVisibility(View.INVISIBLE));
             inflaterView.findViewById(R.id.dim_layout).setVisibility(View.VISIBLE);
@@ -69,9 +70,9 @@ public class CommentsFragment extends Fragment {
             @Override
             public void onChildAdded(@NonNull DataSnapshot dataSnapshot, String previousChildName) {
                 Post comment = Objects.requireNonNull(dataSnapshot.getValue(Post.class));
-                Long unix1 = comments.size() == 0 ? comment.date : comments.get(comments.size()-1).date;
-                Long unix2 = comment.date;
-                if (comments.size() == 0 || !translateData(unix1, "yyyy").equals(translateData(unix2, "yyyy")) || !translateData(unix1, "yyyy").equals(translateData(unix2, "MM")) || !translateData(unix1, "yyyy").equals(translateData(unix2, "dd"))) comment.type = 1;
+                Long unix1 = comments.size() == 0 ? comment.getDate() : comments.get(comments.size()-1).getDate();
+                Long unix2 = comment.getDate();
+                if (comments.size() == 0 || !translateData(unix1, "yyyy").equals(translateData(unix2, "yyyy")) || !translateData(unix1, "yyyy").equals(translateData(unix2, "MM")) || !translateData(unix1, "yyyy").equals(translateData(unix2, "dd"))) comment.setType(1);
                 comments.add(comment);
                 commentsAdapter.notifyItemInserted(comments.size()-1);
                 rvCommentsList.post(() -> rvCommentsList.scrollToPosition(commentsAdapter.getItemCount()-1));
@@ -80,7 +81,7 @@ public class CommentsFragment extends Fragment {
             @Override
             public void onChildChanged(@NonNull DataSnapshot dataSnapshot, String previousChildName) {
                 for (int i = 0; i < comments.size(); i++) {
-                    if (comments.get(i).id == Objects.requireNonNull(dataSnapshot.getValue(Post.class)).id) {
+                    if (comments.get(i).getId() == Objects.requireNonNull(dataSnapshot.getValue(Post.class)).getId()) {
                         comments.set(i, Objects.requireNonNull(dataSnapshot.getValue(Post.class)));
                         commentsAdapter.notifyItemChanged(i);
                         break;
@@ -91,7 +92,7 @@ public class CommentsFragment extends Fragment {
             @Override
             public void onChildRemoved(@NonNull DataSnapshot dataSnapshot) {
                 for (int i = 0; i < comments.size(); i++) {
-                    if (comments.get(i).id == Objects.requireNonNull(dataSnapshot.getValue(Post.class)).id) {
+                    if (comments.get(i).getId() == Objects.requireNonNull(dataSnapshot.getValue(Post.class)).getId()) {
                         comments.remove(i);
                         commentsAdapter.notifyItemRemoved(i);
                         break;
@@ -109,10 +110,10 @@ public class CommentsFragment extends Fragment {
         inflaterView.findViewById(R.id.button_send).setOnClickListener(view -> {
             String text = etComment.getText().toString().trim();
             if (text.equals("")) return;
-            if (commentEditable != null) myDB.child("specter").child("channels").child(String.valueOf(channelActivity.channelId)).child("posts").child(String.valueOf(postId)).child("comments").child(String.valueOf(commentEditable.id)).child("context").setValue(text);
+            if (commentEditable != null) myDB.child("specter").child("channels").child(String.valueOf(channelActivity.channelId)).child("posts").child(String.valueOf(postId)).child("comments").child(String.valueOf(commentEditable.getId())).child("context").setValue(text);
             if (commentEditable == null)
                 try {
-                    myDB.child("specter").child("channels").child(String.valueOf(channelActivity.channelId)).child("posts").child(String.valueOf(postId)).child("comments").child(String.valueOf(comments.size() == 0 ? 0 : comments.get(comments.size()-1).id+1)).setValue(new Post(comments.size() == 0 ? 0 : comments.get(comments.size()-1).id+1, authUserName, new DataTimeTask().execute("somestring").get(), text));
+                    myDB.child("specter").child("channels").child(String.valueOf(channelActivity.channelId)).child("posts").child(String.valueOf(postId)).child("comments").child(String.valueOf(comments.size() == 0 ? 0 : comments.get(comments.size()-1).getId()+1)).setValue(new Post(comments.size() == 0 ? 0 : comments.get(comments.size()-1).getId()+1, authId, authUserName, new DataTimeTask().execute("somestring").get(), text));
                 } catch (ExecutionException | InterruptedException e) {
                     throw new RuntimeException(e);
                 }

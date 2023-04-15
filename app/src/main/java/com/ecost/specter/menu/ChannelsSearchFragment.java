@@ -60,9 +60,9 @@ public class ChannelsSearchFragment extends Fragment {
             public void onChildAdded(@NonNull DataSnapshot dataSnapshot, String previousChildName) {
                 Channel channel = Objects.requireNonNull(dataSnapshot.getValue(Channel.class));
                 String text = etChannelSearch.getText().toString().trim();
-                if (!text.equals("") && (Pattern.compile(text, Pattern.CASE_INSENSITIVE).matcher(channel.title.toLowerCase()).find() || Pattern.compile(text, Pattern.CASE_INSENSITIVE).matcher(channel.shortLink.toLowerCase()).find())) {
-                    channel.body = getString(R.string.symbol_at) + channel.shortLink;
-                    channel.markBody = true;
+                if (!text.equals("") && (Pattern.compile(text, Pattern.CASE_INSENSITIVE).matcher(channel.getTitle().toLowerCase()).find() || Pattern.compile(text, Pattern.CASE_INSENSITIVE).matcher(channel.getShortLink().toLowerCase()).find())) {
+                    channel.setBody(getString(R.string.symbol_at) + channel.getShortLink());
+                    channel.setMarkBody(true);
                     channels.add(channel);
                     channelsAdapter.notifyItemInserted(channels.size()-1);
                 }

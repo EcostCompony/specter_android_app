@@ -40,9 +40,9 @@ public class ChannelActivity extends AppCompatActivity {
             @Override
             public void onChildAdded(@NonNull DataSnapshot dataSnapshot, String previousChildName) {
                 User user = Objects.requireNonNull(dataSnapshot.getValue(User.class));
-                if (user.id.equals(authId)) userSubscriberId = dataSnapshot.getKey();
-                if (user.id.equals(authId)) userSubscribe = true;
-                if (user.id.equals(authId) && user.channel_admin) userAdmin = true;
+                if (user.getId().equals(authId)) userSubscriberId = dataSnapshot.getKey();
+                if (user.getId().equals(authId)) userSubscribe = true;
+                if (user.getId().equals(authId) && user.getChannelAdmin()) userAdmin = true;
             }
 
             @Override public void onChildChanged(@NonNull DataSnapshot dataSnapshot, String previousChildName) {}

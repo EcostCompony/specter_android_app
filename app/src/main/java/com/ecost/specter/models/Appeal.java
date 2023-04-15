@@ -2,17 +2,27 @@ package com.ecost.specter.models;
 
 public class Appeal {
 
-    public Integer id, author, posts_number;
-    public String topic, body;
+    Integer id, author;
+    String topic, body;
 
-    public Appeal() { }
+    public Integer getId() {
+        return id;
+    }
 
-    public Appeal(Integer id, String topic, Integer author, Integer posts_number, String body) {
+    public Integer getAuthor() {
+        return author;
+    }
+
+    public String getTopic() {
+        return topic;
+    }
+
+    public String getBody() {
+        return body;
+    }
+
+    public void setId(Integer id) {
         this.id = id;
-        this.topic = topic;
-        this.author = author;
-        this.posts_number = posts_number;
-        this.body = body;
     }
 
 }

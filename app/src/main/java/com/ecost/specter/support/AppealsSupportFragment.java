@@ -46,7 +46,7 @@ public class AppealsSupportFragment extends Fragment {
             @Override
             public void onChildAdded(@NonNull DataSnapshot dataSnapshot, String previousChildName) {
                 Appeal appeal = Objects.requireNonNull(dataSnapshot.getValue(Appeal.class));
-                if (appeal.author.equals(Integer.parseInt(String.valueOf(authId))) || authAdmin) {
+                if (appeal.getAuthor().equals(Integer.parseInt(String.valueOf(authId))) || authAdmin) {
                     appeals.add(appeal);
                     appealsAdapter.notifyDataSetChanged();
                 }
@@ -57,7 +57,7 @@ public class AppealsSupportFragment extends Fragment {
             public void onChildChanged(@NonNull DataSnapshot dataSnapshot, String previousChildName) {
                 Appeal appeal = Objects.requireNonNull(dataSnapshot.getValue(Appeal.class));
                 for (int i = 0; i < appealsAdapter.getItemCount(); i++) {
-                    if (appeals.get(i).id.equals(appeal.id)) {
+                    if (appeals.get(i).getId().equals(appeal.getId())) {
                         appeals.set(i, appeal);
                         appealsAdapter.notifyDataSetChanged();
                         break;
@@ -81,9 +81,9 @@ public class AppealsSupportFragment extends Fragment {
 
         rAppealsList.setLayoutManager(new LinearLayoutManager(supportActivity));
         appealsAdapter = new AppealsAdapter(supportActivity, appeals, (appeal, position) -> {
-            supportActivity.appealTopic = appeal.topic;
-            supportActivity.appealId = appeal.id;
-            supportActivity.appealAuthor = appeal.author;
+            supportActivity.appealTopic = appeal.getTopic();
+            supportActivity.appealId = appeal.getId();
+            supportActivity.appealAuthor = appeal.getAuthor();
             supportActivity.getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container_view, new AppealSupportFragment()).addToBackStack(null).commit();
         });
         rAppealsList.setAdapter(appealsAdapter);

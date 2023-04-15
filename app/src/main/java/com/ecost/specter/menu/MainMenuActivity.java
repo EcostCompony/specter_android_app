@@ -23,11 +23,11 @@ public class MainMenuActivity extends AppCompatActivity {
 
     public void startChannel(Channel channel) {
         Intent intent = new Intent(this, ChannelActivity.class);
-        intent.putExtra("CHANNEL_ID", channel.id);
-        intent.putExtra("CHANNEL_TITLE", channel.title);
-        intent.putExtra("CHANNEL_SHORT_LINK", String.valueOf(channel.shortLink));
-        intent.putExtra("CHANNEL_CATEGORY", channel.categoryId);
-        intent.putExtra("CHANNEL_DESCRIPTION", channel.description);
+        intent.putExtra("CHANNEL_ID", channel.getId());
+        intent.putExtra("CHANNEL_TITLE", channel.getTitle());
+        intent.putExtra("CHANNEL_SHORT_LINK", String.valueOf(channel.getShortLink()));
+        intent.putExtra("CHANNEL_CATEGORY", channel.getCategoryId());
+        intent.putExtra("CHANNEL_DESCRIPTION", channel.getDescription());
         startActivity(intent);
     }
 

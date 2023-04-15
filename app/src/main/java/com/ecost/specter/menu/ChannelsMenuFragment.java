@@ -48,10 +48,10 @@ public class ChannelsMenuFragment extends Fragment {
             @Override
             public void onChildAdded(@NonNull DataSnapshot dataSnapshot, String previousChildName) {
                 Channel channel = Objects.requireNonNull(dataSnapshot.getValue(Channel.class));
-                for (Map.Entry<String, User> subscriber : channel.subscribers.entrySet()) {
-                    if (subscriber.getValue().id.equals(authId)) {
-                        if (channel.body.equals("%CHANNEL_CREATED%")) channel.body = mainMenuActivity.getString(R.string.channels_menu_attribute_channel_created);
-                        else if (channel.body.equals("%NOT_POSTS%")) channel.body = mainMenuActivity.getString(R.string.channels_menu_attribute_not_posts);
+                for (Map.Entry<String, User> subscriber : channel.getSubscribers().entrySet()) {
+                    if (subscriber.getValue().getId().equals(authId)) {
+                        if (channel.getBody().equals("%CHANNEL_CREATED%")) channel.setBody(mainMenuActivity.getString(R.string.channels_menu_attribute_channel_created));
+                        else if (channel.getBody().equals("%NOT_POSTS%")) channel.setBody(mainMenuActivity.getString(R.string.channels_menu_attribute_not_posts));
                         channels.add(channel);
                         ((TextView) inflaterView.findViewById(R.id.number_channels)).setText(pluralForm(channelsAdapter.getItemCount(), mainMenuActivity.getString(R.string.number_channels_nominative_case), mainMenuActivity.getString(R.string.number_channels_genitive_case), mainMenuActivity.getString(R.string.number_channels_plural_genitive_case), Locale.getDefault().getLanguage().equals("ru")));
                         channelsAdapter.notifyItemInserted(channels.size()-1);
@@ -64,8 +64,8 @@ public class ChannelsMenuFragment extends Fragment {
             public void onChildChanged(@NonNull DataSnapshot dataSnapshot, String previousChildName) {
                 Channel channel = Objects.requireNonNull(dataSnapshot.getValue(Channel.class));
                 for (int i = 0; i < channelsAdapter.getItemCount(); i++) {
-                    if (channels.get(i).id.equals(channel.id)) {
-                        if (channel.body.equals("%NOT_POSTS%")) channel.body = mainMenuActivity.getString(R.string.channels_menu_attribute_not_posts);
+                    if (channels.get(i).getId().equals(channel.getId())) {
+                        if (channel.getBody().equals("%NOT_POSTS%")) channel.setBody(mainMenuActivity.getString(R.string.channels_menu_attribute_not_posts));
                         channels.set(i, channel);
                         channelsAdapter.notifyItemChanged(i);
                         break;
