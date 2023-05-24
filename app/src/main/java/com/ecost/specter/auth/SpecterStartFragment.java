@@ -1,7 +1,9 @@
 package com.ecost.specter.auth;
 
+import static com.ecost.specter.Routing.putAccessToken;
 import static com.ecost.specter.Routing.showToastMessage;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Looper;
@@ -15,6 +17,7 @@ import android.widget.EditText;
 import com.ecost.specter.R;
 import com.ecost.specter.api.API;
 import com.ecost.specter.api.Response;
+import com.ecost.specter.menu.MainMenuActivity;
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment;
 
 import java.io.IOException;
@@ -77,9 +80,9 @@ public class SpecterStartFragment extends BottomSheetDialogFragment {
                         else if (response.getError().getErrorCode() == 51) showToastMessage(authActivity, view, 2, getString(R.string.specter_start_error_already_in_use));
                         else showToastMessage(authActivity, view, 2, getString(R.string.unknown_error));
                     } else {
-                        /*pushPreferenceAccessToken(authActivity, response.getRes().getAccessToken());
-                        startActivity(new Intent(authActivity, MainMenuActivity.class).putExtra("CREATE", true));
-                        authActivity.finish();*/
+                        putAccessToken(authActivity, response.getRes().getAccessToken());
+                        startActivity(new Intent(authActivity, MainMenuActivity.class));
+                        authActivity.finish();
                     }
                 });
             }

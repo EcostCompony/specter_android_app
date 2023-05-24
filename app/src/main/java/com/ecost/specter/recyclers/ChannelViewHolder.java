@@ -1,4 +1,4 @@
-/* package com.ecost.specter.recyclers;
+package com.ecost.specter.recyclers;
 
 import android.view.View;
 import android.widget.TextView;
@@ -9,12 +9,13 @@ import com.ecost.specter.R;
 
 public class ChannelViewHolder extends RecyclerView.ViewHolder {
 
-    TextView tTitle, tLastPost;
+    TextView tvTitle, tvBody;
 
     public ChannelViewHolder(View itemView) {
         super(itemView);
-        tTitle = itemView.findViewById(R.id.channel_title);
-        tLastPost = itemView.findViewById(R.id.channel_last_post);
+
+        tvTitle = itemView.findViewById(R.id.title);
+        tvBody = itemView.findViewById(R.id.body);
     }
 
-} */
+}

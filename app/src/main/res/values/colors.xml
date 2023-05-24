@@ -1,23 +1,32 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <!-- general -->
     <color name="background">#FFFFFF</color>
     <color name="text_color">#000000</color>
-
-    <color name="button_neutral_tint">#EEF5FC</color>
     <color name="main_color">#2384DD</color>
-    <color name="parameter_header">#C0C0C0</color>
-    <color name="input_tint">#F8F8F8</color>
+
+    <!-- auth -->
+    <color name="description_auth_text">#606060</color>
 
     <color name="input_auth_stroke">#DEDEDE</color>
     <color name="input_auth_hint">#C6C6C6</color>
+
     <color name="button_auth_tint">#F8F8F8</color>
     <color name="button_auth_text">#BBBBBB</color>
     <color name="button_sign_in_text">#D75026</color>
 
-    <color name="description_auth_text">#606060</color>
+    <!-- button tints -->
+    <color name="button_neutral_tint">#EEF5FC</color>
 
+    <!-- input -->
+    <color name="input_tint">#F8F8F8</color>
+    <color name="parameter_header">#C0C0C0</color>
+
+    <!-- toast message -->
     <color name="toast_message_background">#FFFFFF</color>
     <color name="toast_message_text">#716E6E</color>
 
+    <!-- other -->
     <color name="divider_bottom_sheet_tint">#EFEFEF</color>
+    <color name="channel_item_body">#9C9C9C</color>
 </resources>

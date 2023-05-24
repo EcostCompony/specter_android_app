@@ -6,6 +6,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
+import androidx.preference.PreferenceManager;
 import android.view.Gravity;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
@@ -17,13 +18,14 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.splashscreen.SplashScreen;
 
 import com.ecost.specter.auth.AuthActivity;
+import com.ecost.specter.menu.MainMenuActivity;
 
 public class Routing extends AppCompatActivity {
 
-    /*public static final DatabaseReference myDB = FirebaseDatabase.getInstance().getReference();
-    public static boolean auth, authAdmin;
+    public static String accessToken;
+    /*public static boolean auth, authAdmin;
     public static Integer authId, authEcostId, settingsSection, appLanguage, appTheme;
-    public static String authUserName, authShortUserLink, accessToken;*/
+    public static String authUserName, authShortUserLink;*/
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -34,8 +36,8 @@ public class Routing extends AppCompatActivity {
         if (Build.VERSION.SDK_INT < 31) setContentView(R.layout.splash_screen);
         else SplashScreen.installSplashScreen(this).setKeepOnScreenCondition(() -> true);
 
-        /*accessToken = PreferenceManager.getDefaultSharedPreferences(this).getString("ACCESS_TOKEN", null);
-        auth = PreferenceManager.getDefaultSharedPreferences(this).getBoolean("AUTH", false);
+        accessToken = PreferenceManager.getDefaultSharedPreferences(this).getString("ACCESS_TOKEN", null);
+        /*auth = PreferenceManager.getDefaultSharedPreferences(this).getBoolean("AUTH", false);
         authId = PreferenceManager.getDefaultSharedPreferences(this).getInt("SPECTER_ID", 0);
         authEcostId = PreferenceManager.getDefaultSharedPreferences(this).getInt("ECOST_ID", 0);
         authUserName = PreferenceManager.getDefaultSharedPreferences(this).getString("USER_NAME", null);
@@ -43,37 +45,21 @@ public class Routing extends AppCompatActivity {
         appLanguage = PreferenceManager.getDefaultSharedPreferences(this).getInt("APP_LANGUAGE", 0);
         settingsSection = PreferenceManager.getDefaultSharedPreferences(this).getInt("SETTINGS_SECTION", 0);
 
-        myDB.child("specter").child("support_version").get().addOnCompleteListener(taskSupportVersion ->
-            myDB.child("specter").child("users").child(String.valueOf(authId)).get().addOnCompleteListener(taskTestUser ->
-                myDB.child("specter").child("users").child(String.valueOf(authId)).child("app_version").get().addOnCompleteListener(taskUserVersion -> {
-                    if (!auth) pushPreferenceLanguage(this, Locale.getDefault().getLanguage().equals("ru") ? 0 : 1);
-                    if (appLanguage == 0) changeLocale(this, new Locale("ru"));
-                    else changeLocale(this, new Locale("en"));
-                    if (Integer.parseInt(String.valueOf(taskSupportVersion.getResult().getValue())) > VERSION_CODE) startActivity(new Intent(this, HardUpdateActivity.class));
-                    else if (auth && taskTestUser.getResult().getValue() != null) {
-                        myDB.child("specter").child("users").child(authId.toString()).child("admin").get().addOnCompleteListener(task -> {
-                            authAdmin = Boolean.TRUE.equals(task.getResult().getValue(Boolean.class));
-                            if (!String.valueOf(taskUserVersion.getResult().getValue()).equals(String.valueOf(VERSION_CODE))) myDB.child("specter").child("users").child(String.valueOf(authId)).child("app_version").setValue(VERSION_CODE);
-                            Intent intent = new Intent(this, MainMenuActivity.class);
-                            intent.putExtra("CREATE", true);
-                            startActivity(intent);
-                        });
-                    } else {
-                        signOut(this);*/
-        startActivity(new Intent(this, AuthActivity.class));
-                    //}
+        if (!auth) pushPreferenceLanguage(this, Locale.getDefault().getLanguage().equals("ru") ? 0 : 1);
+        if (appLanguage == 0) changeLocale(this, new Locale("ru"));
+        else changeLocale(this, new Locale("en"));
+        if (Integer.parseInt(String.valueOf(taskSupportVersion.getResult().getValue())) > VERSION_CODE) startActivity(new Intent(this, HardUpdateActivity.class));*/
+        if (accessToken == null) startActivity(new Intent(this, AuthActivity.class));
+        else startActivity(new Intent(this, MainMenuActivity.class));
         finish();
-                /*})
-            )
-        );*/
     }
 
-    /*public static void pushPreferenceAccessToken(Context context, String value) {
+    public static void putAccessToken(Context context, String value) {
         PreferenceManager.getDefaultSharedPreferences(context).edit().putString("ACCESS_TOKEN", value).apply();
         accessToken = value;
     }
 
-    public static void pushPreferenceAuth(Context context, Boolean value) {
+    /*public static void pushPreferenceAuth(Context context, Boolean value) {
         PreferenceManager.getDefaultSharedPreferences(context).edit().putBoolean("AUTH", value).apply();
         auth = value;
     }

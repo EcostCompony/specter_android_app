@@ -1,7 +1,9 @@
 package com.ecost.specter.auth;
 
+import static com.ecost.specter.Routing.putAccessToken;
 import static com.ecost.specter.Routing.showToastMessage;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Looper;
@@ -17,6 +19,7 @@ import androidx.fragment.app.Fragment;
 import com.ecost.specter.R;
 import com.ecost.specter.api.API;
 import com.ecost.specter.api.Response;
+import com.ecost.specter.menu.MainMenuActivity;
 
 import java.io.IOException;
 import java.util.concurrent.Executors;
@@ -72,9 +75,9 @@ public class ConfirmCodeSignInFragment extends Fragment {
                         specterStartFragment.setArguments(bundle);
                         specterStartFragment.show(authActivity.getSupportFragmentManager(), specterStartFragment.getTag());
                     } else {
-                        /*pushPreferenceAccessToken(authActivity, response.getRes().getAccessToken());
-                        startActivity(new Intent(authActivity, MainMenuActivity.class).putExtra("CREATE", true));
-                        authActivity.finish();*/
+                        putAccessToken(authActivity, response.getRes().getAccessToken());
+                        startActivity(new Intent(authActivity, MainMenuActivity.class));
+                        authActivity.finish();
                     }
                 });
             }

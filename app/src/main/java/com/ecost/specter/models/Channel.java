@@ -1,64 +1,48 @@
-/*package com.ecost.specter.models;
-
-import java.util.HashMap;
+package com.ecost.specter.models;
 
 public class Channel {
 
-    Integer id, category;
-    String title, short_link, body, description;
-    Boolean mark_body;
-    HashMap<String, User> subscribers = new HashMap<>();
-
-    public Channel() {}
-
-    public Channel(Integer id, String shortLink, String title, Integer category, String description, String body, Boolean markBody) {
-        this.id = id;
-        this.short_link = shortLink;
-        this.title = title;
-        this.category = category;
-        this.description = description;
-        this.body = body;
-        this.mark_body = markBody;
-    }
+    private Integer id, category;
+    private String title, short_link, description;
 
     public Integer getId() {
         return id;
     }
 
-    public Integer getCategoryId() {
+    public void setId(Integer id) {
+        this.id = id;
+    }
+
+    public Integer getCategory() {
         return category;
+    }
+
+    public void setCategory(Integer category) {
+        this.category = category;
     }
 
     public String getTitle() {
         return title;
     }
 
-    public String getShortLink() {
+    public void setTitle(String title) {
+        this.title = title;
+    }
+
+    public String getShort_link() {
         return short_link;
     }
 
-    public String getBody() {
-        return body;
+    public void setShort_link(String short_link) {
+        this.short_link = short_link;
     }
 
     public String getDescription() {
         return description;
     }
 
-    public Boolean getMarkBody() {
-        return mark_body;
+    public void setDescription(String description) {
+        this.description = description;
     }
 
-    public HashMap<String, User> getSubscribers() {
-        return subscribers;
-    }
-
-    public void setBody(String body) {
-        this.body = body;
-    }
-
-    public void setMarkBody(Boolean markBody) {
-        this.mark_body = markBody;
-    }
-
-}*/
+}

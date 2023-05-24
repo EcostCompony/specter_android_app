@@ -1,8 +1,11 @@
 package com.ecost.specter.api;
 
+import com.ecost.specter.models.Channel;
+
 public class ResponseRes {
 
     private String confirmToken, signupToken, serviceAuthToken, accessToken, authToken;
+    private Channel[] channels;
 
     public String getConfirmToken() {
         return confirmToken;
@@ -24,6 +27,10 @@ public class ResponseRes {
         return authToken;
     }
 
+    public Channel[] getChannels() {
+        return channels;
+    }
+
     public void setConfirm_token(String confirmToken) {
         this.confirmToken = confirmToken;
     }
@@ -42,6 +49,10 @@ public class ResponseRes {
 
     public void setAccess_token(String accessToken) {
         this.accessToken = accessToken;
+    }
+
+    public void setChannels(Channel[] channels) {
+        this.channels = channels;
     }
 
 }

@@ -26,5 +26,8 @@
         <activity
             android:name=".auth.AuthActivity"
             android:screenOrientation="nosensor" />
+        <activity
+            android:name=".menu.MainMenuActivity"
+            android:screenOrientation="nosensor" />
     </application>
 </manifest>

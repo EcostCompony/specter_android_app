@@ -1,4 +1,4 @@
-/* package com.ecost.specter.recyclers;
+package com.ecost.specter.recyclers;
 
 import android.content.Context;
 import android.view.LayoutInflater;
@@ -6,7 +6,6 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
-import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.ecost.specter.R;
@@ -22,14 +21,11 @@ public class ChannelsAdapter extends RecyclerView.Adapter<ChannelViewHolder> {
 
     OnChannelClickListener onClickListener;
     List<Channel> channels;
-    Integer colorMain, colorBody;
     LayoutInflater inflater;
 
     public ChannelsAdapter(Context context, List<Channel> channels, OnChannelClickListener onClickListener) {
         this.inflater = LayoutInflater.from(context);
         this.channels = channels;
-        this.colorMain = ContextCompat.getColor(context, R.color.main_color);
-        this.colorBody = ContextCompat.getColor(context, R.color.channel_body_color);
         this.onClickListener = onClickListener;
     }
 
@@ -43,9 +39,7 @@ public class ChannelsAdapter extends RecyclerView.Adapter<ChannelViewHolder> {
     @Override
     public void onBindViewHolder(@NonNull ChannelViewHolder holder, int position) {
         Channel channel = channels.get(position);
-        holder.tTitle.setText(channel.getTitle());
-        holder.tLastPost.setText(channel.getBody());
-        holder.tLastPost.setTextColor(channel.getMarkBody() ? colorMain : colorBody);
+        holder.tvTitle.setText(channel.getTitle());
         holder.itemView.setOnClickListener(v -> onClickListener.onChannelClick(channel));
     }
 
@@ -55,4 +49,4 @@ public class ChannelsAdapter extends RecyclerView.Adapter<ChannelViewHolder> {
         else return 0;
     }
 
-} */
+}

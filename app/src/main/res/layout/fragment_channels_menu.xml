@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="@color/background">
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="55dp"
+        android:layout_marginTop="12dp">
+
+        <androidx.cardview.widget.CardView
+            android:layout_width="29dp"
+            android:layout_height="29dp"
+            android:layout_marginStart="25dp"
+            android:layout_gravity="center_vertical"
+            app:cardCornerRadius="29dp">
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@drawable/user_photo" />
+        </androidx.cardview.widget.CardView>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="66dp"
+            android:layout_gravity="center_vertical"
+            android:fontFamily="@font/inter_semi_bold"
+            android:textSize="22sp"
+            android:text="@string/channels_menu_header" />
+
+        <FrameLayout
+            android:id="@+id/hitbox_button_search"
+            android:layout_width="36dp"
+            android:layout_height="match_parent"
+            android:layout_marginEnd="49dp"
+            android:layout_gravity="end">
+
+            <View
+                android:layout_width="14dp"
+                android:layout_height="14dp"
+                android:layout_gravity="center"
+                android:background="@drawable/icon_magnifier" />
+        </FrameLayout>
+
+        <FrameLayout
+            android:id="@+id/hitbox_button_navigate"
+            android:layout_width="49dp"
+            android:layout_height="match_parent"
+            android:layout_gravity="end">
+
+            <View
+                android:layout_width="14dp"
+                android:layout_height="12dp"
+                android:layout_gravity="center"
+                android:background="@drawable/icon_burger" />
+        </FrameLayout>
+    </FrameLayout>
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recycler_channels_list"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="5dp"
+        android:overScrollMode="never" />
+</LinearLayout>

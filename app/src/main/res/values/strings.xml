@@ -3,10 +3,12 @@
 
     <!-- symbols -->
     <string name="symbol_at">\@</string>
+
     <!-- headers -->
     <string name="sign_in_header">Log in with <font color="#D75026">eco</font>st</string>
     <string name="sign_up_header">Registration in <font color="#D75026">eco</font>st</string>
     <string name="specter_start_header">Let\'s start</string>
+    <string name="channels_menu_header">Channels</string>
 
     <!-- errors -->
     <string name="unknown_error">Unknown error</string>
