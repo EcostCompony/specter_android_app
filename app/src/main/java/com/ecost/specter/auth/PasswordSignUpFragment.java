@@ -1,37 +1,38 @@
 package com.ecost.specter.auth;
 
-import static com.ecost.specter.Routing.hash;
-import static com.ecost.specter.Routing.myDB;
-import static com.ecost.specter.Routing.pushPreferenceEcostId;
+import static com.ecost.specter.Routing.showToastMessage;
 
 import android.os.Bundle;
-
-import androidx.core.content.ContextCompat;
-import androidx.fragment.app.Fragment;
-
+import android.os.Handler;
+import android.os.Looper;
 import android.text.InputFilter;
 import android.text.InputType;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.animation.AnimationUtils;
 import android.widget.EditText;
-import android.widget.FrameLayout;
 import android.widget.LinearLayout;
 
-import com.ecost.specter.R;
+import androidx.core.content.ContextCompat;
+import androidx.fragment.app.Fragment;
 
+import com.ecost.specter.R;
+import com.ecost.specter.api.API;
+import com.ecost.specter.api.Response;
+
+import java.io.IOException;
+import java.util.concurrent.Executors;
 import java.util.regex.Pattern;
 
 public class PasswordSignUpFragment extends Fragment {
 
-    EditText etPassword, etConfirmPassword;
-    FrameLayout flPassword, flConfirmPassword;
-    boolean passwordView = false;
-    boolean confirmPasswordView = false;
-    String phoneNumber;
-    AuthActivity authActivity;
+    private EditText etPassword, etConfirmPassword;
+    private AuthActivity authActivity;
+    private Response response;
+    private boolean passwordDisplay = false;
+    private boolean confirmPasswordDisplay = false;
+    private String token;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -39,43 +40,33 @@ public class PasswordSignUpFragment extends Fragment {
 
         etPassword = inflaterView.findViewById(R.id.input_password);
         etConfirmPassword = inflaterView.findViewById(R.id.input_confirm_password);
-        flPassword = inflaterView.findViewById(R.id.frame_input_password);
-        flConfirmPassword = inflaterView.findViewById(R.id.frame_input_confirm_password);
-        LinearLayout bHidePassword = inflaterView.findViewById(R.id.button_hide_password);
-        LinearLayout bHideConfirmPassword = inflaterView.findViewById(R.id.button_hide_confirm_password);
-        View vHidePassword = inflaterView.findViewById(R.id.icon_hide_password);
-        View vHideConfirmPassword = inflaterView.findViewById(R.id.icon_hide_confirm_password);
-        assert getArguments() != null;
-        phoneNumber = getArguments().getString("PHONE_NUMBER");
+        LinearLayout llToggleShowPassword = inflaterView.findViewById(R.id.hitbox_toggle_show);
+        LinearLayout llToggleShowConfirmPassword = inflaterView.findViewById(R.id.hitbox_toggle_show2);
         authActivity = (AuthActivity) requireActivity();
 
-        InputFilter filterPassword = (source, start, end, dest, dstart, dend) -> {
-            for (int i = start; i < end; i++) {
-                if (!Pattern.compile("^[A-ZА-Я\\d_.%+@$#!-]+$", Pattern.CASE_INSENSITIVE).matcher(String.valueOf(source.charAt(i))).find()) {
-                    (etPassword.hasFocus() ? etConfirmPassword : etPassword).setBackground(ContextCompat.getDrawable(authActivity, R.drawable.input_auth));
-                    (etPassword.hasFocus() ? flPassword : flConfirmPassword).startAnimation(AnimationUtils.loadAnimation(authActivity, R.anim.input_shake));
-                    (etPassword.hasFocus() ? etPassword : etConfirmPassword).setBackground(ContextCompat.getDrawable(authActivity, R.drawable.input_auth_error));
-                    return "";
-                }
-            }
+        assert getArguments() != null;
+        token = getArguments().getString("TOKEN");
+
+        InputFilter[] inputFilters = new InputFilter[]{ (source, start, end, dest, dstart, dend) -> {
+            for (int i = start; i < end; i++) if (!Pattern.compile("^[A-ZА-Я\\d_.%+@$#!-]+$", Pattern.CASE_INSENSITIVE).matcher(String.valueOf(source.charAt(i))).find()) return "";
             return null;
-        };
-        etPassword.setFilters(new InputFilter[]{filterPassword, new InputFilter.LengthFilter(128)});
-        etConfirmPassword.setFilters(new InputFilter[]{filterPassword, new InputFilter.LengthFilter(128)});
+        }, new InputFilter.LengthFilter(128) };
+        etPassword.setFilters(inputFilters);
+        etConfirmPassword.setFilters(inputFilters);
 
-        View.OnClickListener hideClickListener = view -> {
-            EditText editText = view == bHidePassword ? etPassword : etConfirmPassword;
-            View icon = view == bHidePassword ? vHidePassword : vHideConfirmPassword;
-            boolean pView = view == bHidePassword ? passwordView : confirmPasswordView;
+        View.OnClickListener onClickListener = view -> {
+            EditText editText = view == llToggleShowPassword ? etPassword : etConfirmPassword;
+            View icon = view == llToggleShowPassword ? inflaterView.findViewById(R.id.icon_toggle_show) : inflaterView.findViewById(R.id.icon_toggle_show2);
+            boolean display = view == llToggleShowPassword ? passwordDisplay : confirmPasswordDisplay;
 
-            editText.setInputType(pView ? InputType.TYPE_CLASS_TEXT | InputType.TYPE_TEXT_VARIATION_PASSWORD : InputType.TYPE_TEXT_VARIATION_PASSWORD);
-            icon.setBackground(ContextCompat.getDrawable(authActivity, pView ? R.drawable.icon_eye : R.drawable.icon_eye_slash));
+            editText.setInputType(display ? InputType.TYPE_CLASS_TEXT | InputType.TYPE_TEXT_VARIATION_PASSWORD : InputType.TYPE_TEXT_VARIATION_PASSWORD);
+            icon.setBackground(ContextCompat.getDrawable(authActivity, display ? R.drawable.icon_eye : R.drawable.icon_eye_slash));
             editText.setSelection(editText.getSelectionStart());
-            if (view == bHidePassword) passwordView = !pView;
-            else confirmPasswordView = !pView;
+            if (view == llToggleShowPassword) passwordDisplay = !display;
+            else confirmPasswordDisplay = !display;
         };
-        bHidePassword.setOnClickListener(hideClickListener);
-        bHideConfirmPassword.setOnClickListener(hideClickListener);
+        llToggleShowPassword.setOnClickListener(onClickListener);
+        llToggleShowConfirmPassword.setOnClickListener(onClickListener);
 
         etConfirmPassword.setOnKeyListener((view, keyCode, event) -> {
             if (keyCode == KeyEvent.KEYCODE_ENTER) signUp(view);
@@ -87,24 +78,31 @@ public class PasswordSignUpFragment extends Fragment {
         return inflaterView;
     }
 
-    public void signUp(View view) {
+    private void signUp(View view) {
         String password = etPassword.getText().toString();
         String confirmPassword = etConfirmPassword.getText().toString();
 
-        myDB.child("ecost").child("users_number").get().addOnCompleteListener(task -> {
-            Integer uid = Integer.parseInt(String.valueOf(task.getResult().getValue()))+1;
-
-            if (password.equals("") || confirmPassword.equals("")) authActivity.popupInput(view, etPassword, etConfirmPassword, password.equals("") ? getString(R.string.password_sign_up_error_not_password) : getString(R.string.password_sign_up_error_not_confirm_password), password.equals("") ? flPassword : flConfirmPassword);
-            else if (password.length() < 8) authActivity.popupInput(view, etPassword, etConfirmPassword, getString(R.string.password_sign_up_error_short_password), flPassword);
-            else if (!password.equals(confirmPassword)) authActivity.popupInput(view, etConfirmPassword, etPassword, getString(R.string.password_sign_up_error_wrong_confirm_password), flConfirmPassword);
-            else {
-                myDB.child("ecost").child("users").child(String.valueOf(uid)).child("phone").setValue(phoneNumber);
-                myDB.child("ecost").child("users").child(String.valueOf(uid)).child("password").setValue(hash(password));
-                myDB.child("ecost").child("uid").child(phoneNumber).child("id").setValue(uid);
-                myDB.child("ecost").child("users_number").setValue(uid);
-                pushPreferenceEcostId(authActivity, uid);
-                authActivity.getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container_view, new SignInFragment()).commit();
-                new SpecterStartFragment().show(authActivity.getSupportFragmentManager(), new SpecterStartFragment().getTag());
+        if (password.equals("")) showToastMessage(authActivity, view, 2, getString(R.string.password_sign_up_error_not_password));
+        else if (confirmPassword.equals("")) showToastMessage(authActivity, view, 2, getString(R.string.password_sign_up_error_not_confirm_password));
+        else if (password.length() < 8) showToastMessage(authActivity, view, 2, getString(R.string.password_sign_up_error_small_password));
+        else if (!password.equals(confirmPassword)) showToastMessage(authActivity, view, 2, getString(R.string.password_sign_up_error_different_passwords));
+        else Executors.newSingleThreadExecutor().execute(() -> {
+            try {
+                response = new API("http://213.219.214.94:3500/api/auth/method/signup?v=1.0&password=" + password, token).call();
+            } catch (IOException e) {
+                throw new RuntimeException(e);
+            } finally {
+                new Handler(Looper.getMainLooper()).post(() -> {
+                    if (response.getError() != null) showToastMessage(authActivity, view, 2, getString(R.string.unknown_error));
+                    else {
+                        authActivity.getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container_view, new SignInFragment()).commit();
+                        SpecterStartFragment specterStartFragment = new SpecterStartFragment();
+                        Bundle bundle = new Bundle();
+                        bundle.putString("TOKEN", response.getRes().getServiceAuthToken());
+                        specterStartFragment.setArguments(bundle);
+                        specterStartFragment.show(authActivity.getSupportFragmentManager(), specterStartFragment.getTag());
+                    }
+                });
             }
         });
     }

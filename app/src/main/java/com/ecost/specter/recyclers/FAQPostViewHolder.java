@@ -1,4 +1,4 @@
-package com.ecost.specter.recyclers;
+/* package com.ecost.specter.recyclers;
 
 import android.view.View;
 import android.widget.TextView;
@@ -17,4 +17,4 @@ public class FAQPostViewHolder extends RecyclerView.ViewHolder {
         text = itemView.findViewById(R.id.post_text);
     }
 
-}
+} */

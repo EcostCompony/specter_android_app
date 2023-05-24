@@ -1,39 +1,23 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="black">#000</color>
-    <color name="white">#FFF</color>
-    <color name="background">#FFF</color>
+    <color name="background">#FFFFFF</color>
+    <color name="text_color">#000000</color>
+
+    <color name="button_neutral_tint">#EEF5FC</color>
     <color name="main_color">#2384DD</color>
-    <color name="popup_color">#FFF</color>
-    <color name="a">#FFFFFFFF</color>
-    <color name="post_background_color">#FFF</color>
-    <color name="main_edit_text_background">#F8F8F8</color>
-    <color name="ecost_theme">#D75026</color>
-    <color name="button_auth">#F8F8F8</color>
-    <color name="channel_body_color">#9C9C9C</color>
-    <color name="button_neutral_color">#EEF5FC</color>
-    <color name="button_negative_color">#FFE8E8</color>
-    <color name="button_permissive_color">#EDFFEC</color>
-    <color name="popup_text_color">#716E6E</color>
-    <color name="input_color_auth_error">#851A1A</color>
-    <color name="input_color_auth">#DEDEDE</color>
-    <color name="auth_color_hint">#C6C6C6</color>
-    <color name="auth_button_color_text">#BBB</color>
-    <color name="auth_description_text">#606060</color>
-    <color name="channels_menu_number_channels">#D1D1D1</color>
-    <color name="parameters_header">#C0C0C0</color>
-    <color name="button_negative_text_color">#E55454</color>
-    <color name="channel_number_subscribers_color">#9C9C9C</color>
-    <color name="divider_color">#EAEAEA</color>
-    <color name="channel_input_post_color_hint">#9C9C9C</color>
-    <color name="post_item_time_color">#9C9C9C</color>
-    <color name="channel_page_header_background_color">#F8F8F8</color>
-    <color name="bottom_sheet_divider_color">#EFEFEF</color>
-    <color name="my_comment_background_color">#BC2384DD</color>
-    <color name="my_comment_time_color">#EAEAEA</color>
-    <color name="channel_page_category_color">#9C9C9C</color>
-    <color name="section_background_color">#F8F8F8</color>
-    <color name="section_text_color">#9C9C9C</color>
-    <color name="channel_page_button_text_unsubscribe">#E55454</color>
-    <color name="alert_dialog_color_cancel">#E55353</color>
+    <color name="parameter_header">#C0C0C0</color>
+    <color name="input_tint">#F8F8F8</color>
+
+    <color name="input_auth_stroke">#DEDEDE</color>
+    <color name="input_auth_hint">#C6C6C6</color>
+    <color name="button_auth_tint">#F8F8F8</color>
+    <color name="button_auth_text">#BBBBBB</color>
+    <color name="button_sign_in_text">#D75026</color>
+
+    <color name="description_auth_text">#606060</color>
+
+    <color name="toast_message_background">#FFFFFF</color>
+    <color name="toast_message_text">#716E6E</color>
+
+    <color name="divider_bottom_sheet_tint">#EFEFEF</color>
 </resources>

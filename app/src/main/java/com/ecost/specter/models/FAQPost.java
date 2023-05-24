@@ -1,4 +1,4 @@
-package com.ecost.specter.models;
+/* package com.ecost.specter.models;
 
 public class FAQPost {
 
@@ -20,4 +20,4 @@ public class FAQPost {
         return context;
     }
 
-}
+} */

@@ -1,4 +1,4 @@
-package com.ecost.specter.menu;
+/* package com.ecost.specter.menu;
 
 import static com.ecost.specter.Routing.authShortUserLink;
 import static com.ecost.specter.Routing.authUserName;
@@ -42,4 +42,4 @@ public class NavigationFragment extends BottomSheetDialogFragment {
         return inflaterView;
     }
 
-}
+} */

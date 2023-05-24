@@ -1,4 +1,4 @@
-package com.ecost.specter.models;
+/*package com.ecost.specter.models;
 
 import java.util.HashMap;
 
@@ -61,4 +61,4 @@ public class Channel {
         this.mark_body = markBody;
     }
 
-}
+}*/

@@ -1,4 +1,4 @@
-package com.ecost.specter.menu;
+/*package com.ecost.specter.menu;
 
 import static com.ecost.specter.Routing.authId;
 import static com.ecost.specter.Routing.myDB;
@@ -84,4 +84,4 @@ public class ChannelsMenuFragment extends Fragment {
         return inflaterView;
     }
 
-}
+}*/

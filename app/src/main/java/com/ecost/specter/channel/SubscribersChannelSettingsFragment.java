@@ -1,4 +1,4 @@
-package com.ecost.specter.channel;
+/*package com.ecost.specter.channel;
 
 import static com.ecost.specter.Routing.myDB;
 
@@ -96,4 +96,4 @@ public class SubscribersChannelSettingsFragment extends Fragment {
         return inflaterView;
     }
 
-}
+}*/

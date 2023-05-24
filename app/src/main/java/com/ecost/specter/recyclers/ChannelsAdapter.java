@@ -1,4 +1,4 @@
-package com.ecost.specter.recyclers;
+/* package com.ecost.specter.recyclers;
 
 import android.content.Context;
 import android.view.LayoutInflater;
@@ -55,4 +55,4 @@ public class ChannelsAdapter extends RecyclerView.Adapter<ChannelViewHolder> {
         else return 0;
     }
 
-}
+} */

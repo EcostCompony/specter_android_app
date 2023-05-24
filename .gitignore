@@ -1,5 +1,5 @@
-/.gradle/
-/.idea/
-/app/build/
-/app/src/debug/
-/.properties/
+gradle/
+idea/
+app/build/
+app/src/debug/
+local.properties

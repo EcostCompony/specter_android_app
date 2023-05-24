@@ -1,4 +1,4 @@
-package com.ecost.specter.recyclers;
+/* package com.ecost.specter.recyclers;
 
 import android.content.Context;
 import android.view.LayoutInflater;
@@ -52,4 +52,4 @@ public class AppealsAdapter extends RecyclerView.Adapter<AppealViewHolder> {
         else return 0;
     }
 
-}
+} */

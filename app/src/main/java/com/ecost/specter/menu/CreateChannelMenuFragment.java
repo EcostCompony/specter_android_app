@@ -1,4 +1,4 @@
-package com.ecost.specter.menu;
+/*package com.ecost.specter.menu;
 
 import static com.ecost.specter.Routing.authEcostId;
 import static com.ecost.specter.Routing.authId;
@@ -80,4 +80,4 @@ public class CreateChannelMenuFragment extends Fragment {
         return inflaterView;
     }
 
-}
+}*/

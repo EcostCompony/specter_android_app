@@ -1,4 +1,4 @@
-package com.ecost.specter.models;
+/* package com.ecost.specter.models;
 
 public class Appeal {
 
@@ -25,4 +25,4 @@ public class Appeal {
         this.id = id;
     }
 
-}
+} */

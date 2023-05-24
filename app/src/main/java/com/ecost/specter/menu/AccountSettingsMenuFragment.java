@@ -1,4 +1,4 @@
-package com.ecost.specter.menu;
+/*package com.ecost.specter.menu;
 
 import static com.ecost.specter.Routing.authId;
 import static com.ecost.specter.Routing.authShortUserLink;
@@ -110,4 +110,4 @@ public class AccountSettingsMenuFragment extends Fragment {
             });
     }
 
-}
+}*/

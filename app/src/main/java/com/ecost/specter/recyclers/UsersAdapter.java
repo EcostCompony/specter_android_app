@@ -1,4 +1,4 @@
-package com.ecost.specter.recyclers;
+/* package com.ecost.specter.recyclers;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
@@ -56,4 +56,4 @@ public class UsersAdapter extends RecyclerView.Adapter<UserViewHolder> {
         else return 0;
     }
 
-}
+} */

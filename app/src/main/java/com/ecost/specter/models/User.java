@@ -1,4 +1,4 @@
-package com.ecost.specter.models;
+/* package com.ecost.specter.models;
 
 public class User {
 
@@ -39,4 +39,4 @@ public class User {
         return channel_admin;
     }
 
-}
+} */

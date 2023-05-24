@@ -8,15 +8,12 @@
         android:xlargeScreens="false" />
 
     <uses-permission android:name="android.permission.INTERNET" />
-    <uses-permission android:name="android.permission.VIBRATE" />
 
     <application
         android:icon="@mipmap/logo"
         android:label="@string/app_name"
+        android:usesCleartextTraffic="true"
         android:theme="@style/Theme.specter">
-        <activity
-            android:name=".support.SupportActivity"
-            android:exported="false" />
         <activity
             android:name=".Routing"
             android:exported="true"
@@ -28,15 +25,6 @@
         </activity>
         <activity
             android:name=".auth.AuthActivity"
-            android:screenOrientation="nosensor" />
-        <activity
-            android:name=".menu.MainMenuActivity"
-            android:screenOrientation="nosensor" />
-        <activity
-            android:name=".channel.ChannelActivity"
-            android:screenOrientation="nosensor" />
-        <activity
-            android:name=".HardUpdateActivity"
             android:screenOrientation="nosensor" />
     </application>
 </manifest>

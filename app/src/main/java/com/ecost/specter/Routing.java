@@ -1,70 +1,40 @@
 package com.ecost.specter;
 
-import static com.ecost.specter.BuildConfig.VERSION_CODE;
-
 import android.annotation.SuppressLint;
 import android.app.Activity;
-import android.app.AlertDialog;
 import android.content.Context;
 import android.content.Intent;
-import android.content.res.Configuration;
-import android.graphics.Color;
-import android.graphics.drawable.ColorDrawable;
 import android.os.Build;
 import android.os.Bundle;
-import android.preference.PreferenceManager;
-import android.text.InputType;
-import android.view.ContextThemeWrapper;
 import android.view.Gravity;
-import android.view.LayoutInflater;
-import android.view.MenuItem;
 import android.view.View;
-import android.view.ViewGroup;
 import android.view.inputmethod.InputMethodManager;
-import android.widget.EditText;
 import android.widget.LinearLayout;
-import android.widget.PopupMenu;
 import android.widget.PopupWindow;
 import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.app.AppCompatDelegate;
 import androidx.core.splashscreen.SplashScreen;
 
 import com.ecost.specter.auth.AuthActivity;
-import com.ecost.specter.menu.MainMenuActivity;
-import com.ecost.specter.models.Post;
-import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.FirebaseDatabase;
-
-import java.text.SimpleDateFormat;
-import java.util.Date;
-import java.util.Locale;
-import java.util.Objects;
-import java.util.TimeZone;
-import java.util.concurrent.ExecutionException;
-import java.util.regex.Pattern;
 
 public class Routing extends AppCompatActivity {
 
-    public static final DatabaseReference myDB = FirebaseDatabase.getInstance().getReference();
+    /*public static final DatabaseReference myDB = FirebaseDatabase.getInstance().getReference();
     public static boolean auth, authAdmin;
     public static Integer authId, authEcostId, settingsSection, appLanguage, appTheme;
-    public static String authUserName, authShortUserLink;
+    public static String authUserName, authShortUserLink, accessToken;*/
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        appTheme = PreferenceManager.getDefaultSharedPreferences(this).getInt("APP_THEME", 0);
+        /*appTheme = PreferenceManager.getDefaultSharedPreferences(this).getInt("APP_THEME", 0);
         if (appTheme == 1) AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
-        else if (appTheme == 2) AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES);
-
+        else if (appTheme == 2) AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES);*/
         super.onCreate(savedInstanceState);
-        if (Build.VERSION.SDK_INT < 31) {
-            setContentView(R.layout.splash_screen);
-        } else {
-            SplashScreen.installSplashScreen(this).setKeepOnScreenCondition(() -> true);
-        }
+        if (Build.VERSION.SDK_INT < 31) setContentView(R.layout.splash_screen);
+        else SplashScreen.installSplashScreen(this).setKeepOnScreenCondition(() -> true);
 
+        /*accessToken = PreferenceManager.getDefaultSharedPreferences(this).getString("ACCESS_TOKEN", null);
         auth = PreferenceManager.getDefaultSharedPreferences(this).getBoolean("AUTH", false);
         authId = PreferenceManager.getDefaultSharedPreferences(this).getInt("SPECTER_ID", 0);
         authEcostId = PreferenceManager.getDefaultSharedPreferences(this).getInt("ECOST_ID", 0);
@@ -89,13 +59,18 @@ public class Routing extends AppCompatActivity {
                             startActivity(intent);
                         });
                     } else {
-                        signOut(this);
-                        startActivity(new Intent(this, AuthActivity.class));
-                    }
-                    finish();
-                })
+                        signOut(this);*/
+        startActivity(new Intent(this, AuthActivity.class));
+                    //}
+        finish();
+                /*})
             )
-        );
+        );*/
+    }
+
+    /*public static void pushPreferenceAccessToken(Context context, String value) {
+        PreferenceManager.getDefaultSharedPreferences(context).edit().putString("ACCESS_TOKEN", value).apply();
+        accessToken = value;
     }
 
     public static void pushPreferenceAuth(Context context, Boolean value) {
@@ -166,29 +141,31 @@ public class Routing extends AppCompatActivity {
         if (i == 1) return i + " " + form1;
         else if (i == 0 || (i > 4 && i < 20)) return i + " " + form3;
         else return i + " " + form2;
-    }
+    }*/
 
-    public static void popup(Activity activity, View view, int type, String text) {
-        @SuppressLint("InflateParams") View popupView =  activity.getLayoutInflater().inflate(type == 2 ? R.layout.popup_window : R.layout.error_popup_window, null);
-        PopupWindow popupWindow = new PopupWindow(popupView, LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT, false);
+    public static void showToastMessage(Activity activity, View view, int type, String text) {
+        @SuppressLint("InflateParams") View vToastMessage =  activity.getLayoutInflater().inflate(R.layout.window_toast_message, null);
+        PopupWindow pwToastMessage = new PopupWindow(vToastMessage, LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT, false);
 
-        ((TextView) popupView.findViewById(R.id.text_error)).setText(text);
+        ((TextView) vToastMessage.findViewById(R.id.message)).setText(text);
+        if (type == 2) vToastMessage.findViewById(R.id.icon_error).setVisibility(View.VISIBLE);
+
         ((InputMethodManager) activity.getSystemService(Context.INPUT_METHOD_SERVICE)).hideSoftInputFromWindow(view.getWindowToken(), 0);
 
-        popupWindow.setOutsideTouchable(true);
-        popupWindow.showAtLocation(view, Gravity.BOTTOM, 0, 0);
+        pwToastMessage.setOutsideTouchable(true);
+        pwToastMessage.showAtLocation(view, Gravity.BOTTOM, 0, 0);
 
         new Thread(() -> {
             try {
                 Thread.sleep(3000);
-                activity.runOnUiThread(popupWindow::dismiss);
+                activity.runOnUiThread(pwToastMessage::dismiss);
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
         }).start();
     }
 
-    public static void changeLocale(Activity activity, Locale locale) {
+    /*public static void changeLocale(Activity activity, Locale locale) {
         Configuration configuration = new Configuration();
         configuration.setLocale(locale);
         activity.getBaseContext().getResources().updateConfiguration(configuration, activity.getBaseContext().getResources().getDisplayMetrics());
@@ -222,6 +199,6 @@ public class Routing extends AppCompatActivity {
         alertDialogView.findViewById(R.id.button_yes).setOnClickListener(viewYes -> alertDialog.cancel());
         alertDialogView.findViewById(R.id.button_cancel).setOnClickListener(view -> alertDialog.cancel());
         alertDialog.show();
-    }
+    }*/
 
 }

@@ -1,4 +1,4 @@
-package com.ecost.specter.menu;
+/*package com.ecost.specter.menu;
 
 import static com.ecost.specter.Routing.authEcostId;
 import static com.ecost.specter.Routing.hash;
@@ -165,4 +165,4 @@ public class EcostSettingsMenuFragment extends Fragment {
         return inflaterView;
     }
 
-}
+}*/

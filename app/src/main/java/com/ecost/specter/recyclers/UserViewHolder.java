@@ -1,4 +1,4 @@
-package com.ecost.specter.recyclers;
+/*package com.ecost.specter.recyclers;
 
 import android.view.View;
 import android.widget.FrameLayout;
@@ -21,4 +21,4 @@ public class UserViewHolder extends RecyclerView.ViewHolder {
         fAddAdmin = itemView.findViewById(R.id.button_add_admin);
     }
 
-}
+}*/

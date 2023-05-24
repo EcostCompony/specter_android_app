@@ -1,4 +1,4 @@
-package com.ecost.specter.channel;
+/*package com.ecost.specter.channel;
 
 import static com.ecost.specter.Routing.authId;
 import static com.ecost.specter.Routing.authUserName;
@@ -125,4 +125,4 @@ public class CommentsFragment extends Fragment {
         return inflaterView;
     }
 
-}
+}*/

@@ -1,4 +1,4 @@
-package com.ecost.specter.recyclers;
+/* package com.ecost.specter.recyclers;
 
 import static com.ecost.specter.Routing.authId;
 
@@ -80,4 +80,4 @@ public class PostsAdapter extends RecyclerView.Adapter<PostViewHolder> {
         else return 0;
     }
 
-}
+} */

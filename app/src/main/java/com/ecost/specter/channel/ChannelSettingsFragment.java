@@ -1,4 +1,4 @@
-package com.ecost.specter.channel;
+/*package com.ecost.specter.channel;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -39,4 +39,4 @@ public class ChannelSettingsFragment extends Fragment {
         return inflaterView;
     }
 
-}
+}*/

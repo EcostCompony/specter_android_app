@@ -1,4 +1,4 @@
-package com.ecost.specter.menu;
+/* package com.ecost.specter.menu;
 
 import static com.ecost.specter.Routing.myDB;
 import static com.ecost.specter.Routing.pluralForm;
@@ -93,4 +93,4 @@ public class ChannelsSearchFragment extends Fragment {
         return inflaterView;
     }
 
-}
+}*/

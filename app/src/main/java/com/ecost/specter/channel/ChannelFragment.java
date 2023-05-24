@@ -1,4 +1,4 @@
-package com.ecost.specter.channel;
+/*package com.ecost.specter.channel;
 
 import static com.ecost.specter.Routing.authEcostId;
 import static com.ecost.specter.Routing.authId;
@@ -209,4 +209,4 @@ public class ChannelFragment extends Fragment {
         myDB.child("specter").child("channels").child(String.valueOf(channelActivity.channelId)).child("subscribers").removeEventListener(childEventListenerSubscribers);
     }
 
-}
+}*/

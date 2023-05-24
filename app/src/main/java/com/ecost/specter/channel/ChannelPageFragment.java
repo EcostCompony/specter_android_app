@@ -1,4 +1,4 @@
-package com.ecost.specter.channel;
+/*package com.ecost.specter.channel;
 
 import static com.ecost.specter.Routing.authEcostId;
 import static com.ecost.specter.Routing.authId;
@@ -85,4 +85,4 @@ public class ChannelPageFragment extends Fragment {
         return inflaterView;
     }
 
-}
+}*/

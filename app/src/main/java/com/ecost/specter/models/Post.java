@@ -1,4 +1,4 @@
-package com.ecost.specter.models;
+/* package com.ecost.specter.models;
 
 public class Post {
 
@@ -55,4 +55,4 @@ public class Post {
         this.author = author;
     }
 
-}
+} */

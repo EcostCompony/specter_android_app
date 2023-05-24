@@ -1,4 +1,4 @@
-package com.ecost.specter.recyclers;
+/* package com.ecost.specter.recyclers;
 
 import android.view.View;
 import android.widget.TextView;
@@ -17,4 +17,4 @@ public class SectionViewHolder  extends RecyclerView.ViewHolder {
         name = itemView.findViewById(R.id.section_name);
     }
 
-}
+} */

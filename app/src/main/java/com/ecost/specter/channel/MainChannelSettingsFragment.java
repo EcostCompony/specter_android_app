@@ -1,4 +1,4 @@
-package com.ecost.specter.channel;
+/*package com.ecost.specter.channel;
 
 import static com.ecost.specter.Routing.AgreeAlertDialog;
 import static com.ecost.specter.Routing.myDB;
@@ -151,4 +151,4 @@ public class MainChannelSettingsFragment extends Fragment {
         bSaveChannelDescription.setVisibility(View.GONE);
     }
 
-}
+}*/

@@ -1,4 +1,4 @@
-package com.ecost.specter.recyclers;
+/*package com.ecost.specter.recyclers;
 
 import android.view.View;
 import android.widget.TextView;
@@ -19,4 +19,4 @@ public class PostViewHolder extends RecyclerView.ViewHolder {
         time = itemView.findViewById(R.id.post_time);
     }
 
-}
+}*/

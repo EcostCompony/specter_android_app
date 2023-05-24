@@ -1,4 +1,4 @@
-package com.ecost.specter.menu;
+/* package com.ecost.specter.menu;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -31,4 +31,4 @@ public class MainMenuActivity extends AppCompatActivity {
         startActivity(intent);
     }
 
-}
+} */

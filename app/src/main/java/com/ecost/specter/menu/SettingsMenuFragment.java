@@ -1,4 +1,4 @@
-package com.ecost.specter.menu;
+/* package com.ecost.specter.menu;
 
 import static com.ecost.specter.Routing.pushPreferenceSettingsSection;
 import static com.ecost.specter.Routing.settingsSection;
@@ -40,4 +40,4 @@ public class SettingsMenuFragment extends Fragment {
         return inflaterView;
     }
 
-}
+} */

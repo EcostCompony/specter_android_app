@@ -1,4 +1,4 @@
-package com.ecost.specter;
+/*package com.ecost.specter;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -20,4 +20,4 @@ public class HardUpdateActivity extends AppCompatActivity {
         });
     }
 
-}
+}*/

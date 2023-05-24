@@ -1,4 +1,4 @@
-package com.ecost.specter.recyclers;
+/* package com.ecost.specter.recyclers;
 
 import android.content.Context;
 import android.view.LayoutInflater;
@@ -53,4 +53,4 @@ public class FAQPostsAdapter extends RecyclerView.Adapter<FAQPostViewHolder> {
         else return 0;
     }
 
-}
+} */

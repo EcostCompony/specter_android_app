@@ -1,4 +1,4 @@
-package com.ecost.specter.menu;
+/*package com.ecost.specter.menu;
 
 import static com.ecost.specter.Routing.appLanguage;
 import static com.ecost.specter.Routing.appTheme;
@@ -65,4 +65,4 @@ public class AppSettingsMenuFragment extends Fragment {
         return inflaterView;
     }
 
-}
+}*/
