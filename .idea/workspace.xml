@@ -9,27 +9,28 @@
     <option name="autoReloadType" value="NONE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="9b5b6967-9ca6-411a-be37-b65b22f6951c" name="Changes" comment="the api is embedded in authorization">
-      <change afterPath="$PROJECT_DIR$/app/src/main/res/drawable/channel_photo.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/src/main/res/drawable/icon_burger.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/src/main/res/drawable/icon_magnifier.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/src/main/res/drawable/user_photo.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/src/main/res/layout/activity_main_menu.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/src/main/res/layout/channel_item.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/src/main/res/layout/fragment_channels_menu.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/build.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/app/build.gradle" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/AndroidManifest.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/AndroidManifest.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/ecost/specter/Routing.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/ecost/specter/Routing.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/ecost/specter/api/ResponseRes.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/ecost/specter/api/ResponseRes.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/ecost/specter/auth/ConfirmCodeSignInFragment.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/ecost/specter/auth/ConfirmCodeSignInFragment.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/ecost/specter/auth/SpecterStartFragment.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/ecost/specter/auth/SpecterStartFragment.java" afterDir="false" />
+    <list default="true" id="9b5b6967-9ca6-411a-be37-b65b22f6951c" name="Changes" comment="the api is implemented in the channels menu">
+      <change afterPath="$PROJECT_DIR$/app/src/main/res/drawable/icon_cross.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/src/main/res/layout/fragment_channels_search.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/8.0/checksums/checksums.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/8.0/checksums/checksums.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/8.0/checksums/md5-checksums.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/8.0/checksums/md5-checksums.bin" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/8.0/checksums/sha1-checksums.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/8.0/checksums/sha1-checksums.bin" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/8.0/fileHashes/fileHashes.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/8.0/fileHashes/fileHashes.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/buildOutputCleanup/outputFiles.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/buildOutputCleanup/outputFiles.bin" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/modules/app/specter.app.androidTest.iml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/modules/app/specter.app.unitTest.iml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/src/main/java/com/ecost/specter/menu/ChannelsMenuFragment.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/ecost/specter/menu/ChannelsMenuFragment.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/ecost/specter/menu/MainMenuActivity.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/ecost/specter/menu/MainMenuActivity.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/ecost/specter/menu/ChannelsSearchFragment.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/ecost/specter/menu/ChannelsSearchFragment.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/src/main/java/com/ecost/specter/models/Channel.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/ecost/specter/models/Channel.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/ecost/specter/recyclers/ChannelViewHolder.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/ecost/specter/recyclers/ChannelViewHolder.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/src/main/java/com/ecost/specter/recyclers/ChannelsAdapter.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/ecost/specter/recyclers/ChannelsAdapter.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/channel_item.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/channel_item.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/fragment_password_sign_up.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/fragment_password_sign_up.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/src/main/res/values/colors.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/values/colors.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/src/main/res/values/strings.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/values/strings.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/build.gradle" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -246,13 +247,6 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1674677968572</updated>
-    </task>
-    <task id="LOCAL-00057" summary="changed the background color of section item with a dark theme">
-      <created>1677522612308</created>
-      <option name="number" value="00057" />
-      <option name="presentableId" value="LOCAL-00057" />
-      <option name="project" value="LOCAL" />
-      <updated>1677522612309</updated>
     </task>
     <task id="LOCAL-00058" summary="strings translation from pre-alpha 87">
       <created>1677529167546</created>
@@ -590,7 +584,14 @@
       <option name="project" value="LOCAL" />
       <updated>1684923372965</updated>
     </task>
-    <option name="localTasksCounter" value="106" />
+    <task id="LOCAL-00106" summary="the api is implemented in the channels menu">
+      <created>1684959945185</created>
+      <option name="number" value="00106" />
+      <option name="presentableId" value="LOCAL-00106" />
+      <option name="project" value="LOCAL" />
+      <updated>1684959945185</updated>
+    </task>
+    <option name="localTasksCounter" value="107" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -623,7 +624,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="changed the way the date is written to the database" />
     <MESSAGE value="dates between posts have been developed" />
     <MESSAGE value="now the date before the posts is written only if it differs from the date of the previous post" />
     <MESSAGE value="the display of the date before publications in the form of text has been developed" />
@@ -648,6 +648,7 @@
     <MESSAGE value="optimization of models" />
     <MESSAGE value="release pre-alpha 93" />
     <MESSAGE value="the api is embedded in authorization" />
-    <option name="LAST_COMMIT_MESSAGE" value="the api is embedded in authorization" />
+    <MESSAGE value="the api is implemented in the channels menu" />
+    <option name="LAST_COMMIT_MESSAGE" value="the api is implemented in the channels menu" />
   </component>
 </project>

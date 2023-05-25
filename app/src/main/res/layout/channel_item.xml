@@ -41,9 +41,9 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:fontFamily="@font/inter_semi_bold"
-            android:textColor="@color/channel_item_body"
+            android:textColor="@color/main_color"
             android:textSize="11sp"
             android:maxLines="1"
-            android:singleLine="true" />
+            android:singleLine="true" />  <!-- TODO: ПОСЛЕ ТОГО, КАК BODY вернется изменить -->
     </LinearLayout>
 </LinearLayout>

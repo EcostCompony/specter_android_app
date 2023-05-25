@@ -40,6 +40,7 @@ public class ChannelsAdapter extends RecyclerView.Adapter<ChannelViewHolder> {
     public void onBindViewHolder(@NonNull ChannelViewHolder holder, int position) {
         Channel channel = channels.get(position);
         holder.tvTitle.setText(channel.getTitle());
+        if (channel.getBody() != null) holder.tvBody.setText(channel.getBody()); // TODO: ПОСЛЕ ТОГО, КАК BODY ВЕРНЁТСЯ - ОПТИМИЗИРОВАТЬ
         holder.itemView.setOnClickListener(v -> onClickListener.onChannelClick(channel));
     }
 

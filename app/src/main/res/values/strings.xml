@@ -72,4 +72,7 @@
     <string name="specter_start_input_name_header">Name</string>
     <string name="specter_start_input_short_link_header">Short link</string>
     <string name="specter_start_button_start">Start</string>
+
+    <!-- channels search -->
+    <string name="channels_search_input_search_string_hint">Search</string>
 </resources>

@@ -3,7 +3,7 @@ package com.ecost.specter.models;
 public class Channel {
 
     private Integer id, category;
-    private String title, short_link, description;
+    private String title, short_link, description, body;
 
     public Integer getId() {
         return id;
@@ -29,7 +29,7 @@ public class Channel {
         this.title = title;
     }
 
-    public String getShort_link() {
+    public String getShortLink() {
         return short_link;
     }
 
@@ -43,6 +43,14 @@ public class Channel {
 
     public void setDescription(String description) {
         this.description = description;
+    }
+
+    public String getBody() {
+        return body;
+    }
+
+    public void setBody(String body) {
+        this.body = body;
     }
 
 }

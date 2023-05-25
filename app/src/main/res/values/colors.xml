@@ -21,6 +21,7 @@
     <!-- input -->
     <color name="input_tint">#F8F8F8</color>
     <color name="parameter_header">#C0C0C0</color>
+    <color name="input_hint">#9C9C9C</color>
 
     <!-- toast message -->
     <color name="toast_message_background">#FFFFFF</color>

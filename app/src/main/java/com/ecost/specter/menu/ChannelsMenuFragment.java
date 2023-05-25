@@ -3,6 +3,7 @@ package com.ecost.specter.menu;
 import static com.ecost.specter.Routing.accessToken;
 import static com.ecost.specter.Routing.showToastMessage;
 
+import android.annotation.SuppressLint;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Looper;
@@ -31,12 +32,15 @@ public class ChannelsMenuFragment extends Fragment {
     Response response;
     List<Channel> channels = new ArrayList<>();
 
+    @SuppressLint("NotifyDataSetChanged")
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View inflaterView = inflater.inflate(R.layout.fragment_channels_menu, container, false);
 
         RecyclerView rvChannelsList = inflaterView.findViewById(R.id.recycler_channels_list);
         MainMenuActivity mainMenuActivity = (MainMenuActivity) requireActivity();
+
+        channels.clear();
 
         rvChannelsList.setLayoutManager(new LinearLayoutManager(mainMenuActivity));
         ChannelsAdapter channelsAdapter = new ChannelsAdapter(mainMenuActivity, channels, mainMenuActivity::openChannel);
@@ -52,14 +56,14 @@ public class ChannelsMenuFragment extends Fragment {
                     if (response.getError() != null) showToastMessage(mainMenuActivity, inflaterView, 2, getString(R.string.unknown_error));
                     else {
                         channels.addAll(Arrays.asList(response.getRes().getChannels()));
-                        channelsAdapter.notifyItemMoved(0, channels.size());
+                        channelsAdapter.notifyDataSetChanged();
                     }
                 });
             }
         });
 
         // inflaterView.findViewById(R.id.button_navigate).setOnClickListener(view -> new NavigationFragment().show(mainMenuActivity.getSupportFragmentManager(), new NavigationFragment().getTag()));
-        // inflaterView.findViewById(R.id.button_search).setOnClickListener(view -> mainMenuActivity.getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container_view, new ChannelsSearchFragment()).addToBackStack(null).commit());
+        inflaterView.findViewById(R.id.hitbox_button_search).setOnClickListener(view -> mainMenuActivity.getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container_view, new ChannelsSearchFragment()).addToBackStack(null).commit());
 
         return inflaterView;
     }
