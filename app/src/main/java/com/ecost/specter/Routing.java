@@ -7,6 +7,9 @@ import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
 import androidx.preference.PreferenceManager;
+
+import android.os.Handler;
+import android.os.Looper;
 import android.view.Gravity;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
@@ -17,15 +20,22 @@ import android.widget.TextView;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.splashscreen.SplashScreen;
 
+import com.ecost.specter.api.API;
+import com.ecost.specter.api.Response;
 import com.ecost.specter.auth.AuthActivity;
 import com.ecost.specter.menu.MainMenuActivity;
 
+import java.io.IOException;
+import java.util.concurrent.Executors;
+
 public class Routing extends AppCompatActivity {
 
-    public static String accessToken;
-    /*public static boolean auth, authAdmin;
-    public static Integer authId, authEcostId, settingsSection, appLanguage, appTheme;
-    public static String authUserName, authShortUserLink;*/
+    public static String accessToken, userName, userShortLink;
+    // public static boolean auth, authAdmin;
+    // public static Integer authId, authEcostId, settingsSection, appLanguage, appTheme;
+    // public static String authUserName, authShortUserLink;
+
+    Response response;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -50,8 +60,27 @@ public class Routing extends AppCompatActivity {
         else changeLocale(this, new Locale("en"));
         if (Integer.parseInt(String.valueOf(taskSupportVersion.getResult().getValue())) > VERSION_CODE) startActivity(new Intent(this, HardUpdateActivity.class));*/
         if (accessToken == null) startActivity(new Intent(this, AuthActivity.class));
-        else startActivity(new Intent(this, MainMenuActivity.class));
-        finish();
+        else {
+            Executors.newSingleThreadExecutor().execute(() -> {
+                try {
+                    response = new API("http://213.219.214.94:3501/api/method/account.get?v=1.0", accessToken).call();
+                } catch (IOException e) {
+                    throw new RuntimeException(e);
+                } finally {
+                    new Handler(Looper.getMainLooper()).post(() -> {
+                        if (response.getError() != null || response.getRes() == null) {
+                            putAccessToken(this, null);
+                            startActivity(new Intent(this, AuthActivity.class));
+                        } else {
+                            putUserName(this, response.getRes().getName());
+                            putUserShortLink(this, response.getRes().getShortLink());
+                            startActivity(new Intent(this, MainMenuActivity.class));
+                            finish();
+                        }
+                    });
+                }
+            });
+        }
     }
 
     public static void putAccessToken(Context context, String value) {
@@ -72,19 +101,19 @@ public class Routing extends AppCompatActivity {
     public static void pushPreferenceEcostId(Context context, int value) {
         PreferenceManager.getDefaultSharedPreferences(context).edit().putInt("ECOST_ID", value).apply();
         authEcostId = value;
-    }
+    }*/
 
-    public static void pushPreferenceUserName(Context context, String value) {
+    public static void putUserName(Context context, String value) {
         PreferenceManager.getDefaultSharedPreferences(context).edit().putString("USER_NAME", value).apply();
-        authUserName = value;
+        userName = value;
     }
 
-    public static void pushPreferenceShortUserLink(Context context, String value) {
-        PreferenceManager.getDefaultSharedPreferences(context).edit().putString("SHORT_USER_LINK", value).apply();
-        authShortUserLink = value;
+    public static void putUserShortLink(Context context, String value) {
+        PreferenceManager.getDefaultSharedPreferences(context).edit().putString("USER_SHORT_LINK", value).apply();
+        userShortLink = value;
     }
 
-    public static void pushPreferenceLanguage(Context context, int value) {
+    /*public static void pushPreferenceLanguage(Context context, int value) {
         PreferenceManager.getDefaultSharedPreferences(context).edit().putInt("APP_LANGUAGE", value).apply();
         appLanguage = value;
     }
@@ -97,18 +126,9 @@ public class Routing extends AppCompatActivity {
     public static void pushPreferenceSettingsSection(Context context, Integer value) {
         PreferenceManager.getDefaultSharedPreferences(context).edit().putInt("SETTINGS_SECTION", value).apply();
         settingsSection = value;
-    }
+    }*/
 
-    public static void signOut(Context context) {
-        PreferenceManager.getDefaultSharedPreferences(context).edit().clear().apply();
-        auth = false;
-        authId = 0;
-        authEcostId = 0;
-        authUserName = null;
-        authShortUserLink = null;
-    }
-
-    public static String hash(String password) {
+/*    public static String hash(String password) {
         String[] symbols = {".","M","%","$","Ш","V","p","T","#","М","и","i","N","U","д","ч","a","э","B","В","r","м","л","Г","7","L","Ц","4","z","я","c","v","б","ъ","Ю","Б","1","Ы","н","l","F","ц","Y","d","t","+","-","с","3","ё","Л","п","C","р","К","ю","w","О","Н","И","q","!","x","Е","y","С","@","Э","а","Ь","Я","I","й","f","n","m","G","Ж","ы","s","Ч","Щ","П","к","в","е","ь","K","2","P","S","0","D","Ъ","A","Q","e","J","h","ш","_","Ё","H","b","А","Z","Р","X","з","ф","о","R","6","g","г","9","Т","O","Д","у","u","ж","o","Й","щ","Ф","j","5","Х","8","W","З","У","х","т","k"};
         String[] arrayPassword = password.split("");
 

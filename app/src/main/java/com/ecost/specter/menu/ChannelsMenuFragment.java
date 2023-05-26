@@ -62,8 +62,8 @@ public class ChannelsMenuFragment extends Fragment {
             }
         });
 
-        // inflaterView.findViewById(R.id.button_navigate).setOnClickListener(view -> new NavigationFragment().show(mainMenuActivity.getSupportFragmentManager(), new NavigationFragment().getTag()));
         inflaterView.findViewById(R.id.hitbox_button_search).setOnClickListener(view -> mainMenuActivity.getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container_view, new ChannelsSearchFragment()).addToBackStack(null).commit());
+        inflaterView.findViewById(R.id.hitbox_button_navigate).setOnClickListener(view -> new NavigationFragment().show(mainMenuActivity.getSupportFragmentManager(), new NavigationFragment().getTag()));
 
         return inflaterView;
     }
