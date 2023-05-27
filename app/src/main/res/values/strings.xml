@@ -2,13 +2,27 @@
     <string name="app_name" translatable="false">specter</string>
 
     <!-- symbols -->
-    <string name="symbol_at">\@</string>
+    <string name="symbol_at" translatable="false">\@</string>
 
     <!-- headers -->
     <string name="sign_in_header">Log in with <font color="#D75026">eco</font>st</string>
     <string name="sign_up_header">Registration in <font color="#D75026">eco</font>st</string>
     <string name="specter_start_header">Let\'s start</string>
     <string name="channels_menu_header">Channels</string>
+    <string name="settings_menu_header">Settings</string>
+
+    <!-- Themes -->
+    <array name="themes_array">
+        <item>System</item>
+        <item>Light</item>
+        <item>Dark</item>
+    </array>
+
+    <!-- Languages -->
+    <array name="languages_array" translatable="false">
+        <item>English</item>
+        <item>Русский</item>
+    </array>
 
     <!-- errors -->
     <string name="unknown_error">Unknown error</string>
@@ -34,11 +48,17 @@
     <string name="password_sign_up_error_not_password">Password not entered</string>
     <string name="password_sign_up_error_small_password">The password must contain more than 8 characters</string>
     <string name="password_sign_up_error_different_passwords">Passwords don\'t match</string>
+    <string name="password_sign_up_error_not_confirm_password">Password confirmation not entered</string>
 
     <string name="specter_start_error_not_name">Name not entered</string>
     <string name="specter_start_error_not_short_link">Short link not entered</string>
     <string name="specter_start_error_small_short_link">A short link must contain 3 or more characters</string>
     <string name="specter_start_error_already_in_use">The short link is already in use</string>
+
+    <string name="account_settings_menu_error_not_name">Name not entered</string>
+    <string name="account_settings_menu_error_not_short_link">Short link not entered</string>
+    <string name="account_settings_menu_error_small_short_link">A short link must contain 3 or more characters</string>
+    <string name="account_settings_menu_error_already_in_use">The short link is already in use</string>
 
     <!-- sign in -->
     <string name="sign_in_input_phone_number_hint">Phone number</string>
@@ -66,7 +86,6 @@
     <string name="password_sign_up_input_password_hint">Password</string>
     <string name="password_sign_up_input_confirm_password_hint">Confirm password</string>
     <string name="password_sign_up_button_sign_up">Sign up</string>
-    <string name="password_sign_up_error_not_confirm_password">Password confirmation not entered</string>
 
     <!-- specter start -->
     <string name="specter_start_input_name_header">Name</string>
@@ -79,4 +98,16 @@
     <!-- navigation -->
     <string name="navigation_button_opening_menu_create_channel">Creating a channel</string>
     <string name="navigation_button_opening_menu_settings">Settings</string>
+
+    <!-- settings menu -->
+    <string name="settings_menu_section_account">Account</string>
+    <string name="settings_menu_section_app">App</string>
+
+    <string name="account_settings_menu_input_name_header">Name</string>
+    <string name="account_settings_menu_input_short_link_header">Short link</string>
+    <string name="account_settings_menu_button_sign_out">Sign out</string>
+
+    <string name="app_settings_menu_spinner_theme_header">Theme</string>
+    <string name="app_settings_menu_spinner_languages_header">Language</string>
+    <string name="app_settings_menu_message_change_language">To change the language correctly, restart the application</string>
 </resources>

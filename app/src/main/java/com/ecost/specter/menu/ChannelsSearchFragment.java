@@ -34,7 +34,7 @@ import java.util.concurrent.Executors;
 
 public class ChannelsSearchFragment extends Fragment {
 
-    Response response;
+    private Response response;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {

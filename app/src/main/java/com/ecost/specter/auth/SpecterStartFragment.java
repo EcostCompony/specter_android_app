@@ -15,9 +15,9 @@ import android.view.ViewGroup;
 import android.widget.EditText;
 
 import com.ecost.specter.R;
+import com.ecost.specter.Routing;
 import com.ecost.specter.api.API;
 import com.ecost.specter.api.Response;
-import com.ecost.specter.menu.MainMenuActivity;
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment;
 
 import java.io.IOException;
@@ -81,7 +81,7 @@ public class SpecterStartFragment extends BottomSheetDialogFragment {
                         else showToastMessage(authActivity, view, 2, getString(R.string.unknown_error));
                     } else {
                         putAccessToken(authActivity, response.getRes().getAccessToken());
-                        startActivity(new Intent(authActivity, MainMenuActivity.class));
+                        startActivity(new Intent(authActivity, Routing.class));
                         authActivity.finish();
                     }
                 });

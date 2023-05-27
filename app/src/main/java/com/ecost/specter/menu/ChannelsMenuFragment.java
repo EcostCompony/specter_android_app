@@ -29,8 +29,8 @@ import java.util.concurrent.Executors;
 
 public class ChannelsMenuFragment extends Fragment {
 
-    Response response;
-    List<Channel> channels = new ArrayList<>();
+    private Response response;
+    private final List<Channel> channels = new ArrayList<>();
 
     @SuppressLint("NotifyDataSetChanged")
     @Override

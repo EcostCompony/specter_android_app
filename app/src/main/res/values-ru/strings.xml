@@ -1,0 +1,102 @@
+<resources>
+    <!-- headers -->
+    <string name="sign_in_header">Вход с <font color="#D75026">eco</font>st</string>
+    <string name="sign_up_header">Регистрация в <font color="#D75026">eco</font>st</string>
+    <string name="specter_start_header">Давайте начнём</string>
+    <string name="channels_menu_header">Каналы</string>
+    <string name="settings_menu_header">Настройки</string>
+
+    <!-- Themes -->
+    <array name="themes_array">
+        <item>Системная</item>
+        <item>Светлая</item>
+        <item>Тёмная</item>
+    </array>
+
+    <!-- errors -->
+    <string name="unknown_error">Неизвестная ошибка</string>
+    <string name="sign_in_error_not_phone_number">Номер телефона не введён</string>
+    <string name="sign_in_error_not_password">Пароль не введён</string>
+    <string name="sign_in_error_incorrect_phone_number">Некорректный номер телефона</string>
+    <string name="sign_in_error_small_password">Пароль должен содержать 8 и более символов</string>
+    <string name="sign_in_error_account_not_found">Аккаунт с таким номером телефона не найден</string>
+    <string name="sign_in_error_wrong_password">Неверный пароль</string>
+    <string name="sign_in_error_too_often">Слишком часто</string>
+
+    <string name="confirm_code_sign_in_error_incorrect_code">Код должен состоять из 4 символов</string>
+    <string name="confirm_code_sign_in_error_wrong_code">Неверный код</string>
+
+    <string name="phone_number_sign_up_error_not_phone_number">Номер телефона не введён</string>
+    <string name="phone_number_sign_up_error_incorrect_phone_number">Некорректный номер телефона</string>
+    <string name="phone_number_sign_up_error_already_in_use">Номер телефона уже используется</string>
+    <string name="phone_number_sign_up_error_too_often">Слишком часто</string>
+
+    <string name="confirm_code_sign_up_error_incorrect_code">Код должен состоять из 4 символов</string>
+    <string name="confirm_code_sign_up_error_wrong_code">Неверный код</string>
+
+    <string name="password_sign_up_error_not_password">Пароль не введён</string>
+    <string name="password_sign_up_error_small_password">Пароль должен содержать 8 и более символов</string>
+    <string name="password_sign_up_error_different_passwords">Пароли не совпадают</string>
+    <string name="password_sign_up_error_not_confirm_password">Подтверждение пароля не введено</string>
+
+    <string name="specter_start_error_not_name">Имя не введено</string>
+    <string name="specter_start_error_not_short_link">Короткая ссылка не введена</string>
+    <string name="specter_start_error_small_short_link">Короткая ссылка должна содержать 3 и более символов</string>
+    <string name="specter_start_error_already_in_use">Короткая ссылка уже используется</string>
+
+    <string name="account_settings_menu_error_not_name">Имя не введено</string>
+    <string name="account_settings_menu_error_not_short_link">Короткая ссылка не введена</string>
+    <string name="account_settings_menu_error_small_short_link">Короткая ссылка должна содержать 3 и более символов</string>
+    <string name="account_settings_menu_error_already_in_use">Короткая ссылка уже используется</string>
+
+    <!-- sign in -->
+    <string name="sign_in_input_phone_number_hint">Номер телефона</string>
+    <string name="sign_in_input_password_hint">Пароль</string>
+    <string name="sign_in_button_sign_in">Войти</string>
+
+    <!-- confirm code sign in -->
+    <string name="sign_in_button_sign_up">Регистрация</string>
+    <string name="confirm_code_sign_in_description">Введите одноразовый код, который пришёл на ваш номер телефона</string>
+    <string name="confirm_code_sign_in_input_code_hint">Код</string>
+    <string name="confirm_code_sign_in_button_confirm">Подтвердить</string>
+
+    <!-- phone number sign up-->
+    <string name="phone_number_sign_up_description">Введите номер телефона, который будет использоваться для входа в сервисы</string>
+    <string name="phone_number_sign_up_input_phone_number_hint">Номер телефона</string>
+    <string name="phone_number_sign_up_button_continue">Продолжить</string>
+
+    <!-- confirm code sign up -->
+    <string name="confirm_code_sign_up_description">Введите одноразовый код, который пришёл на ваш номер телефона</string>
+    <string name="confirm_code_sign_up_input_code_hint">Код</string>
+    <string name="confirm_code_sign_up_button_confirm">Подтвердить</string>
+
+    <!-- password sign up -->
+    <string name="password_sign_up_description">Придумайте пароль, который будет использоваться для входа в сервисы</string>
+    <string name="password_sign_up_input_password_hint">Пароль</string>
+    <string name="password_sign_up_input_confirm_password_hint">Повторите пароль</string>
+    <string name="password_sign_up_button_sign_up">Зарегистрироваться</string>
+
+    <!-- specter start -->
+    <string name="specter_start_input_name_header">Имя</string>
+    <string name="specter_start_input_short_link_header">Короткая ссылка</string>
+    <string name="specter_start_button_start">Поехали</string>
+
+    <!-- channels search -->
+    <string name="channels_search_input_search_string_hint">Поиск</string>
+
+    <!-- navigation -->
+    <string name="navigation_button_opening_menu_create_channel">Создать канал</string>
+    <string name="navigation_button_opening_menu_settings">Настройки</string>
+
+    <!-- settings menu -->
+    <string name="settings_menu_section_account">Аккаунт</string>
+    <string name="settings_menu_section_app">Приложение</string>
+
+    <string name="account_settings_menu_input_name_header">Имя</string>
+    <string name="account_settings_menu_input_short_link_header">Короткая ссылка</string>
+    <string name="account_settings_menu_button_sign_out">Выйти из аккаунта</string>
+
+    <string name="app_settings_menu_spinner_theme_header">Тема</string>
+    <string name="app_settings_menu_spinner_languages_header">Язык</string>
+    <string name="app_settings_menu_message_change_language">Для корректной смены языка перезапустите приложение</string>
+</resources>

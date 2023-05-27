@@ -1,19 +1,21 @@
 package com.ecost.specter.api;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
+
 public class Response {
 
-    private ResponseRes res;
+    private Object res;
     private ResponseError error;
 
     public ResponseRes getRes() {
-        return res;
+        return new ObjectMapper().convertValue(res, ResponseRes.class);
     }
 
     public ResponseError getError() {
         return error;
     }
 
-    public void setRes(ResponseRes res) {
+    public void setRes(Object res) {
         this.res = res;
     }
 

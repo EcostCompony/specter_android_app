@@ -2,7 +2,6 @@ package com.ecost.specter.recyclers;
 
 import android.content.Context;
 import android.view.LayoutInflater;
-import android.view.View;
 import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
@@ -32,8 +31,7 @@ public class ChannelsAdapter extends RecyclerView.Adapter<ChannelViewHolder> {
     @NonNull
     @Override
     public ChannelViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view = inflater.inflate(R.layout.channel_item, parent, false);
-        return new ChannelViewHolder(view);
+        return new ChannelViewHolder(inflater.inflate(R.layout.channel_item, parent, false));
     }
 
     @Override

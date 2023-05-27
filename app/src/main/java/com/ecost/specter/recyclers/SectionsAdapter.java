@@ -1,4 +1,6 @@
-/* package com.ecost.specter.recyclers;
+package com.ecost.specter.recyclers;
+
+import static com.ecost.specter.Routing.sectionPosition;
 
 import android.content.Context;
 import android.view.LayoutInflater;
@@ -18,32 +20,27 @@ public class SectionsAdapter extends RecyclerView.Adapter<SectionViewHolder> {
     }
 
     SectionsAdapter.OnSectionClickListener onClickListener;
-    List<String> names;
-    Integer sectionPosition;
     LayoutInflater inflater;
 
-    public SectionsAdapter(Context context, List<String> names, Integer sectionPosition, SectionsAdapter.OnSectionClickListener onClickListener) {
+    List<String> names;
+
+    public SectionsAdapter(Context context, List<String> names, SectionsAdapter.OnSectionClickListener onClickListener) {
         this.inflater = LayoutInflater.from(context);
         this.names = names;
-        this.sectionPosition = sectionPosition;
         this.onClickListener = onClickListener;
-    }
-
-    @Override
-    public int getItemViewType(int position) {
-        if (sectionPosition == position) return R.layout.section_mark_item;
-        return R.layout.section_item;
     }
 
     @NonNull
     @Override
     public SectionViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        return new SectionViewHolder(inflater.inflate(viewType, parent, false));
+        return new SectionViewHolder(inflater.inflate(R.layout.section_item, parent, false));
     }
 
     @Override
-    public void onBindViewHolder(@NonNull SectionViewHolder holder, int position) {
-        holder.name.setText(names.get(position));
+    public void onBindViewHolder(SectionViewHolder holder, int position) {
+        holder.tvName.setText(names.get(position));
+        if (sectionPosition == position) holder.flItem.setAlpha(1);
+        else holder.flItem.setAlpha(0.5F);
         holder.itemView.setOnClickListener(v -> onClickListener.onSectionClick(position));
     }
 
@@ -53,4 +50,4 @@ public class SectionsAdapter extends RecyclerView.Adapter<SectionViewHolder> {
         else return 0;
     }
 
-} */
+}

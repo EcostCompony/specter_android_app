@@ -1,14 +1,13 @@
-/* package com.ecost.specter.menu;
+package com.ecost.specter.menu;
 
-import static com.ecost.specter.Routing.pushPreferenceSettingsSection;
-import static com.ecost.specter.Routing.settingsSection;
+import static com.ecost.specter.Routing.sectionPosition;
 
+import android.annotation.SuppressLint;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -20,24 +19,30 @@ import java.util.Arrays;
 
 public class SettingsMenuFragment extends Fragment {
 
-    public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+    private SectionsAdapter sectionsAdapter;
+
+    @SuppressLint("NotifyDataSetChanged")
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View inflaterView = inflater.inflate(R.layout.fragment_settings_menu, container, false);
 
         RecyclerView rvSectionsList = inflaterView.findViewById(R.id.recycler_sections_list);
         MainMenuActivity mainMenuActivity = (MainMenuActivity) requireActivity();
 
-        getChildFragmentManager().beginTransaction().replace(R.id.child_fragment_container_view, (settingsSection == 0 ? new AccountSettingsMenuFragment() : (settingsSection == 1 ? new AppSettingsMenuFragment() : new EcostSettingsMenuFragment()))).commit();
+        sectionPosition = 0;
+        getChildFragmentManager().beginTransaction().replace(R.id.child_fragment_container_view, new AccountSettingsMenuFragment()).commit();
 
         rvSectionsList.setLayoutManager(new LinearLayoutManager(mainMenuActivity, LinearLayoutManager.HORIZONTAL, false));
-        rvSectionsList.setAdapter(new SectionsAdapter(mainMenuActivity, Arrays.asList(getString(R.string.settings_menu_section_account), getString(R.string.settings_menu_section_app), getString(R.string.settings_menu_section_ecost_account)), settingsSection, position -> {
-            if (settingsSection == position) return;
-            getChildFragmentManager().beginTransaction().replace(R.id.child_fragment_container_view, (position == 0 ? new AccountSettingsMenuFragment() : (position == 1 ? new AppSettingsMenuFragment() : new EcostSettingsMenuFragment()))).commit();
-            pushPreferenceSettingsSection(mainMenuActivity, position);
-        }));
+        sectionsAdapter = new SectionsAdapter(mainMenuActivity, Arrays.asList(getString(R.string.settings_menu_section_account), getString(R.string.settings_menu_section_app)), position -> {
+            if (sectionPosition == position) return;
+            getChildFragmentManager().beginTransaction().replace(R.id.child_fragment_container_view, (position == 0 ? new AccountSettingsMenuFragment() : new AppSettingsMenuFragment())).commit();
+            sectionPosition = position;
+            sectionsAdapter.notifyDataSetChanged();
+        });
+        rvSectionsList.setAdapter(sectionsAdapter);
 
         inflaterView.findViewById(R.id.button_close).setOnClickListener(view -> mainMenuActivity.getSupportFragmentManager().popBackStackImmediate());
 
         return inflaterView;
     }
 
-} */
+}

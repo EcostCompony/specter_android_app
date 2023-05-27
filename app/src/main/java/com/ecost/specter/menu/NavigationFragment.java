@@ -29,7 +29,7 @@ public class NavigationFragment extends BottomSheetDialogFragment {
 
         View.OnClickListener onClickListener = view -> {
             dismiss();
-            //mainMenuActivity.getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container_view, (view == inflaterView.findViewById(R.id.button_opening_menu_create_channel) ? new CreateChannelMenuFragment() : new SettingsMenuFragment())).addToBackStack(null).commit();
+            mainMenuActivity.getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container_view, (view == inflaterView.findViewById(R.id.button_opening_menu_create_channel) ? new SettingsMenuFragment() : new SettingsMenuFragment())).addToBackStack(null).commit();
         };
         inflaterView.findViewById(R.id.button_opening_menu_create_channel).setOnClickListener(onClickListener);
         inflaterView.findViewById(R.id.button_opening_menu_settings).setOnClickListener(onClickListener);

@@ -4,8 +4,11 @@ import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
+import android.content.res.Configuration;
 import android.os.Build;
 import android.os.Bundle;
+
+import androidx.appcompat.app.AppCompatDelegate;
 import androidx.preference.PreferenceManager;
 
 import android.os.Handler;
@@ -26,39 +29,25 @@ import com.ecost.specter.auth.AuthActivity;
 import com.ecost.specter.menu.MainMenuActivity;
 
 import java.io.IOException;
+import java.util.Locale;
 import java.util.concurrent.Executors;
 
 public class Routing extends AppCompatActivity {
 
     public static String accessToken, userName, userShortLink;
-    // public static boolean auth, authAdmin;
-    // public static Integer authId, authEcostId, settingsSection, appLanguage, appTheme;
-    // public static String authUserName, authShortUserLink;
-
-    Response response;
+    public static int sectionPosition, appTheme, appLanguage;
+    private Response response;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        /*appTheme = PreferenceManager.getDefaultSharedPreferences(this).getInt("APP_THEME", 0);
-        if (appTheme == 1) AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
-        else if (appTheme == 2) AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES);*/
         super.onCreate(savedInstanceState);
         if (Build.VERSION.SDK_INT < 31) setContentView(R.layout.splash_screen);
         else SplashScreen.installSplashScreen(this).setKeepOnScreenCondition(() -> true);
 
         accessToken = PreferenceManager.getDefaultSharedPreferences(this).getString("ACCESS_TOKEN", null);
-        /*auth = PreferenceManager.getDefaultSharedPreferences(this).getBoolean("AUTH", false);
-        authId = PreferenceManager.getDefaultSharedPreferences(this).getInt("SPECTER_ID", 0);
-        authEcostId = PreferenceManager.getDefaultSharedPreferences(this).getInt("ECOST_ID", 0);
-        authUserName = PreferenceManager.getDefaultSharedPreferences(this).getString("USER_NAME", null);
-        authShortUserLink = PreferenceManager.getDefaultSharedPreferences(this).getString("SHORT_USER_LINK", null);
-        appLanguage = PreferenceManager.getDefaultSharedPreferences(this).getInt("APP_LANGUAGE", 0);
-        settingsSection = PreferenceManager.getDefaultSharedPreferences(this).getInt("SETTINGS_SECTION", 0);
+        putAppTheme(this, PreferenceManager.getDefaultSharedPreferences(this).getInt("APP_THEME", 0));
+        putAppLanguage(this, accessToken == null ? (Locale.getDefault().getLanguage().equals("ru") ? 1 : 0) : PreferenceManager.getDefaultSharedPreferences(this).getInt("APP_LANGUAGE", 0));
 
-        if (!auth) pushPreferenceLanguage(this, Locale.getDefault().getLanguage().equals("ru") ? 0 : 1);
-        if (appLanguage == 0) changeLocale(this, new Locale("ru"));
-        else changeLocale(this, new Locale("en"));
-        if (Integer.parseInt(String.valueOf(taskSupportVersion.getResult().getValue())) > VERSION_CODE) startActivity(new Intent(this, HardUpdateActivity.class));*/
         if (accessToken == null) startActivity(new Intent(this, AuthActivity.class));
         else {
             Executors.newSingleThreadExecutor().execute(() -> {
@@ -88,21 +77,6 @@ public class Routing extends AppCompatActivity {
         accessToken = value;
     }
 
-    /*public static void pushPreferenceAuth(Context context, Boolean value) {
-        PreferenceManager.getDefaultSharedPreferences(context).edit().putBoolean("AUTH", value).apply();
-        auth = value;
-    }
-
-    public static void pushPreferenceId(Context context, int value) {
-        PreferenceManager.getDefaultSharedPreferences(context).edit().putInt("SPECTER_ID", value).apply();
-        authId = value;
-    }
-
-    public static void pushPreferenceEcostId(Context context, int value) {
-        PreferenceManager.getDefaultSharedPreferences(context).edit().putInt("ECOST_ID", value).apply();
-        authEcostId = value;
-    }*/
-
     public static void putUserName(Context context, String value) {
         PreferenceManager.getDefaultSharedPreferences(context).edit().putString("USER_NAME", value).apply();
         userName = value;
@@ -113,33 +87,26 @@ public class Routing extends AppCompatActivity {
         userShortLink = value;
     }
 
-    /*public static void pushPreferenceLanguage(Context context, int value) {
+    public static void putAppLanguage(Context context, int value) {
         PreferenceManager.getDefaultSharedPreferences(context).edit().putInt("APP_LANGUAGE", value).apply();
         appLanguage = value;
+
+        Locale[] locales = { new Locale("en"), new Locale("ru") };
+        Configuration configuration = new Configuration();
+        configuration.setLocale(locales[value]);
+        context.getResources().updateConfiguration(configuration, context.getResources().getDisplayMetrics());
     }
 
-    public static void pushPreferenceTheme(Context context, int value) {
+    public static void putAppTheme(Context context, int value) {
         PreferenceManager.getDefaultSharedPreferences(context).edit().putInt("APP_THEME", value).apply();
         appTheme = value;
+
+        if (appTheme == 0) AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_FOLLOW_SYSTEM);
+        else if (appTheme == 1) AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
+        else if (appTheme == 2) AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES);
     }
 
-    public static void pushPreferenceSettingsSection(Context context, Integer value) {
-        PreferenceManager.getDefaultSharedPreferences(context).edit().putInt("SETTINGS_SECTION", value).apply();
-        settingsSection = value;
-    }*/
-
-/*    public static String hash(String password) {
-        String[] symbols = {".","M","%","$","Ш","V","p","T","#","М","и","i","N","U","д","ч","a","э","B","В","r","м","л","Г","7","L","Ц","4","z","я","c","v","б","ъ","Ю","Б","1","Ы","н","l","F","ц","Y","d","t","+","-","с","3","ё","Л","п","C","р","К","ю","w","О","Н","И","q","!","x","Е","y","С","@","Э","а","Ь","Я","I","й","f","n","m","G","Ж","ы","s","Ч","Щ","П","к","в","е","ь","K","2","P","S","0","D","Ъ","A","Q","e","J","h","ш","_","Ё","H","b","А","Z","Р","X","з","ф","о","R","6","g","г","9","Т","O","Д","у","u","ж","o","Й","щ","Ф","j","5","Х","8","W","З","У","х","т","k"};
-        String[] arrayPassword = password.split("");
-
-        if (password.equals("")) return "";
-
-        for (int i = 0; i < arrayPassword.length; i++) arrayPassword[i] = Integer.toHexString(String.join("", symbols).indexOf(arrayPassword[i]));
-
-        return String.join("", arrayPassword);
-    }
-
-    public static String pluralForm(Integer i, String form1, String form2, String form3, Boolean declination) {
+    /*public static String pluralForm(Integer i, String form1, String form2, String form3, Boolean declination) {
         if (i == 1) return i + " " + form1;
         else if (!declination) return i + " " + form2;
         i = i%100;
@@ -171,13 +138,7 @@ public class Routing extends AppCompatActivity {
         }).start();
     }
 
-    /*public static void changeLocale(Activity activity, Locale locale) {
-        Configuration configuration = new Configuration();
-        configuration.setLocale(locale);
-        activity.getBaseContext().getResources().updateConfiguration(configuration, activity.getBaseContext().getResources().getDisplayMetrics());
-    }
-
-    public static String translateData(long unixDate, String pattern) {
+    /*public static String translateData(long unixDate, String pattern) {
         Date date = new Date(unixDate * 1000L);
         SimpleDateFormat simpleDateFormat = new SimpleDateFormat(pattern, Locale.getDefault());
         simpleDateFormat.setTimeZone(TimeZone.getTimeZone("GMT+3"));

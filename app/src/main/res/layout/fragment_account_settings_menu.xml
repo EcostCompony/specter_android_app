@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:gravity="center_horizontal"
+    android:background="@color/background">
+
+    <TextView
+        android:layout_width="340dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="15dp"
+        android:paddingHorizontal="13dp"
+        android:textColor="@color/parameter_header"
+        android:fontFamily="@font/inter_semi_bold"
+        android:textSize="12sp"
+        android:text="@string/account_settings_menu_input_name_header"
+        android:labelFor="@+id/input_name" />
+
+    <LinearLayout
+        android:layout_width="340dp"
+        android:layout_height="38dp"
+        android:layout_marginTop="4dp"
+        android:orientation="horizontal">
+
+        <EditText
+            android:id="@+id/input_name"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:imeOptions="actionGo"
+            android:inputType="text"
+            android:importantForAutofill="no"
+            android:background="@drawable/input"
+            android:paddingHorizontal="13dp"
+            android:fontFamily="@font/inter_semi_bold"
+            android:textSize="12sp" />
+
+        <ImageButton
+            android:id="@+id/button_save_name"
+            android:layout_width="38dp"
+            android:layout_height="38dp"
+            android:layout_marginStart="12dp"
+            android:background="@drawable/button_permissive"
+            android:src="@drawable/icon_checkmark"
+            android:visibility="gone" />
+    </LinearLayout>
+
+    <TextView
+        android:layout_width="340dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:paddingHorizontal="13dp"
+        android:textColor="@color/parameter_header"
+        android:fontFamily="@font/inter_semi_bold"
+        android:textSize="12sp"
+        android:text="@string/account_settings_menu_input_short_link_header"
+        android:labelFor="@+id/input_short_link" />
+
+    <LinearLayout
+        android:layout_width="340dp"
+        android:layout_height="38dp"
+        android:layout_marginTop="4dp"
+        android:orientation="horizontal">
+
+        <RelativeLayout
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1">
+
+            <EditText
+                android:id="@+id/input_short_link"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:imeOptions="actionGo"
+                android:inputType="text"
+                android:importantForAutofill="no"
+                android:background="@drawable/input"
+                android:paddingHorizontal="25dp"
+                android:fontFamily="@font/inter_semi_bold"
+                android:textColor="@color/main_color"
+                android:textSize="12sp" />
+
+            <TextView
+                android:layout_width="25dp"
+                android:layout_height="match_parent"
+                android:gravity="center_vertical|end"
+                android:fontFamily="@font/inter_semi_bold"
+                android:textColor="@color/main_color"
+                android:textSize="12sp"
+                android:text="@string/symbol_at" />
+        </RelativeLayout>
+
+        <ImageButton
+            android:id="@+id/button_save_short_link"
+            android:layout_width="38dp"
+            android:layout_height="38dp"
+            android:layout_marginStart="12dp"
+            android:background="@drawable/button_permissive"
+            android:src="@drawable/icon_checkmark"
+            android:visibility="gone" />
+    </LinearLayout>
+
+    <Button
+        android:id="@+id/button_sign_out"
+        android:layout_width="wrap_content"
+        android:layout_height="37dp"
+        android:layout_marginTop="22dp"
+        android:background="@drawable/button_negative"
+        android:paddingHorizontal="19dp"
+        android:fontFamily="@font/inter_bold"
+        android:textColor="@color/button_negative_text"
+        android:textSize="12sp"
+        android:text="@string/account_settings_menu_button_sign_out" />
+</LinearLayout>

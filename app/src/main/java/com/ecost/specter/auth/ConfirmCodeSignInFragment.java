@@ -17,9 +17,9 @@ import android.widget.EditText;
 import androidx.fragment.app.Fragment;
 
 import com.ecost.specter.R;
+import com.ecost.specter.Routing;
 import com.ecost.specter.api.API;
 import com.ecost.specter.api.Response;
-import com.ecost.specter.menu.MainMenuActivity;
 
 import java.io.IOException;
 import java.util.concurrent.Executors;
@@ -76,7 +76,7 @@ public class ConfirmCodeSignInFragment extends Fragment {
                         specterStartFragment.show(authActivity.getSupportFragmentManager(), specterStartFragment.getTag());
                     } else {
                         putAccessToken(authActivity, response.getRes().getAccessToken());
-                        startActivity(new Intent(authActivity, MainMenuActivity.class));
+                        startActivity(new Intent(authActivity, Routing.class));
                         authActivity.finish();
                     }
                 });

@@ -1,17 +1,17 @@
-/*package com.ecost.specter.menu;
+package com.ecost.specter.menu;
 
-import static com.ecost.specter.Routing.authId;
-import static com.ecost.specter.Routing.authShortUserLink;
-import static com.ecost.specter.Routing.authUserName;
-import static com.ecost.specter.Routing.myDB;
-import static com.ecost.specter.Routing.popup;
-import static com.ecost.specter.Routing.pushPreferenceShortUserLink;
-import static com.ecost.specter.Routing.pushPreferenceUserName;
+import static com.ecost.specter.Routing.accessToken;
+import static com.ecost.specter.Routing.putAccessToken;
+import static com.ecost.specter.Routing.putUserName;
+import static com.ecost.specter.Routing.putUserShortLink;
+import static com.ecost.specter.Routing.showToastMessage;
+import static com.ecost.specter.Routing.userName;
+import static com.ecost.specter.Routing.userShortLink;
 
+import android.content.Intent;
 import android.os.Bundle;
-
-import androidx.fragment.app.Fragment;
-
+import android.os.Handler;
+import android.os.Looper;
 import android.text.Editable;
 import android.text.InputFilter;
 import android.text.TextWatcher;
@@ -22,92 +22,124 @@ import android.view.ViewGroup;
 import android.widget.EditText;
 import android.widget.ImageButton;
 
-import com.ecost.specter.R;
+import androidx.fragment.app.Fragment;
 
+import com.ecost.specter.R;
+import com.ecost.specter.api.API;
+import com.ecost.specter.api.Response;
+import com.ecost.specter.auth.AuthActivity;
+
+import java.io.IOException;
+import java.util.concurrent.Executors;
 import java.util.regex.Pattern;
 
 public class AccountSettingsMenuFragment extends Fragment {
 
-    EditText etUserName, etShortUserLink;
-    ImageButton bSaveUserName, bSaveShortUserLink;
-    MainMenuActivity mainMenuActivity;
+    private EditText etName, etShortLink;
+    private ImageButton ibSaveName, ibSaveShortLink;
+    private MainMenuActivity mainMenuActivity;
+    private Response response;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View inflaterView = inflater.inflate(R.layout.fragment_account_settings_menu, container, false);
 
-        etUserName = inflaterView.findViewById(R.id.input_user_name);
-        etShortUserLink = inflaterView.findViewById(R.id.input_short_user_link);
-        bSaveUserName = inflaterView.findViewById(R.id.button_save_user_name);
-        bSaveShortUserLink = inflaterView.findViewById(R.id.button_save_short_user_link);
+        etName = inflaterView.findViewById(R.id.input_name);
+        etShortLink = inflaterView.findViewById(R.id.input_short_link);
+        ibSaveName = inflaterView.findViewById(R.id.button_save_name);
+        ibSaveShortLink = inflaterView.findViewById(R.id.button_save_short_link);
         mainMenuActivity = (MainMenuActivity) requireActivity();
 
-        etUserName.setText(authUserName);
-        etShortUserLink.setText(authShortUserLink);
+        etName.setText(userName);
+        etShortLink.setText(userShortLink);
 
-        etUserName.setFilters(new InputFilter[]{new InputFilter.LengthFilter(16)});
-        etShortUserLink.setFilters(new InputFilter[]{(source, start, end, dest, dstart, dend) -> {
+        etName.setFilters(new InputFilter[]{ new InputFilter.LengthFilter(16) });
+        etShortLink.setFilters(new InputFilter[]{ (source, start, end, dest, dstart, dend) -> {
             for (int i = start; i < end; i++) {
                 if (!Pattern.compile("^[A-Z\\d_.]+$", Pattern.CASE_INSENSITIVE).matcher(String.valueOf(source.charAt(i))).find()) return "";
                 if (Character.isUpperCase(source.charAt(i))) return String.valueOf(source.charAt(i)).toLowerCase();
             }
             return null;
-        }, new InputFilter.LengthFilter(16)});
+        }, new InputFilter.LengthFilter(32) });
 
         TextWatcher textWatcher = new TextWatcher() {
             @Override
             public void afterTextChanged(Editable s) {
-                bSaveUserName.setVisibility(etUserName.getText().toString().trim().equals(authUserName) ? View.GONE : View.VISIBLE);
-                bSaveShortUserLink.setVisibility(etShortUserLink.getText().toString().equals(authShortUserLink) ? View.GONE : View.VISIBLE);
+                ibSaveName.setVisibility(etName.getText().toString().trim().equals(userName) ? View.GONE : View.VISIBLE);
+                ibSaveShortLink.setVisibility(etShortLink.getText().toString().equals(userShortLink) ? View.GONE : View.VISIBLE);
             }
 
             @Override public void beforeTextChanged(CharSequence s, int start, int count, int after) { }
             @Override public void onTextChanged(CharSequence s, int start, int before, int count) { }
         };
-        etUserName.addTextChangedListener(textWatcher);
-        etShortUserLink.addTextChangedListener(textWatcher);
+        etName.addTextChangedListener(textWatcher);
+        etShortLink.addTextChangedListener(textWatcher);
 
-        etUserName.setOnKeyListener((view, keyCode, event) -> {
-            if (keyCode == KeyEvent.KEYCODE_ENTER && !etUserName.getText().toString().trim().equals(authUserName)) saveUserName(view);
-            return keyCode == KeyEvent.KEYCODE_ENTER;
-        });
-        etShortUserLink.setOnKeyListener((view, keyCode, event) -> {
-            if (keyCode == KeyEvent.KEYCODE_ENTER && !etShortUserLink.getText().toString().equals(authShortUserLink)) saveShortUserLink(view);
+        etName.setOnKeyListener((view, keyCode, event) -> {
+            if (keyCode == KeyEvent.KEYCODE_ENTER && !etName.getText().toString().trim().equals(userName)) saveName(view);
             return keyCode == KeyEvent.KEYCODE_ENTER;
         });
 
-        bSaveUserName.setOnClickListener(this::saveUserName);
-        bSaveShortUserLink.setOnClickListener(this::saveShortUserLink);
+        etShortLink.setOnKeyListener((view, keyCode, event) -> {
+            if (keyCode == KeyEvent.KEYCODE_ENTER && !etShortLink.getText().toString().equals(userShortLink)) saveShortLink(view);
+            return keyCode == KeyEvent.KEYCODE_ENTER;
+        });
+
+        ibSaveName.setOnClickListener(this::saveName);
+        ibSaveShortLink.setOnClickListener(this::saveShortLink);
+
+        inflaterView.findViewById(R.id.button_sign_out).setOnClickListener(view -> {
+            putAccessToken(mainMenuActivity, null);
+            startActivity(new Intent(mainMenuActivity, AuthActivity.class));
+            mainMenuActivity.finish();
+        });
 
         return inflaterView;
     }
 
-    public void saveUserName(View view) {
-        String userName = etUserName.getText().toString().trim();
-        if (userName.equals("")) popup(mainMenuActivity, view, 1, getString(R.string.account_settings_error_not_name));
-        else {
-            myDB.child("specter").child("users").child(String.valueOf(authId)).child("name").setValue(userName);
-            pushPreferenceUserName(mainMenuActivity, userName);
-            bSaveUserName.setVisibility(View.GONE);
-        }
+    private void saveName(View view) {
+        String name = etName.getText().toString().trim();
+
+        if (name.equals("")) showToastMessage(mainMenuActivity, view, 2, getString(R.string.account_settings_menu_error_not_name));
+        else Executors.newSingleThreadExecutor().execute(() -> {
+            try {
+                response = new API("http://213.219.214.94:3501/api/method/account.edit?v=1.0&name=" + name, accessToken).call();
+            } catch (IOException e) {
+                throw new RuntimeException(e);
+            } finally {
+                new Handler(Looper.getMainLooper()).post(() -> {
+                    if (response.getError() != null) showToastMessage(mainMenuActivity, view, 2, getString(R.string.unknown_error));
+                    else {
+                        putUserName(mainMenuActivity, name);
+                        ibSaveName.setVisibility(View.GONE);
+                    }
+                });
+            }
+        });
     }
 
-    public void saveShortUserLink(View view) {
-        String shortUserLink = etShortUserLink.getText().toString();
-        if (shortUserLink.equals("")) popup(mainMenuActivity, view, 1, getString(R.string.account_settings_error_not_short_user_link));
-        else if (shortUserLink.length() < 3) popup(mainMenuActivity, view, 1, getString(R.string.account_settings_error_small_short_user_link));
-        else
-            myDB.child("specter").child("uid").child(shortUserLink.replace('.', '*')).child("id").get().addOnCompleteListener(task -> {
-                if (task.getResult().getValue() != null) popup(mainMenuActivity, view, 1, getString(R.string.account_settings_error_busy_short_user_link));
-                else {
-                    myDB.child("specter").child("uid").child(authShortUserLink.replace(".", "*")).setValue(null);
-                    myDB.child("specter").child("users").child(String.valueOf(authId)).child("link").setValue(shortUserLink);
-                    myDB.child("specter").child("uid").child(shortUserLink.replace('.', '*')).child("id").setValue(authId);
-                    myDB.child("specter").child("uid").child(shortUserLink.replace('.', '*')).child("type").setValue("user");
-                    pushPreferenceShortUserLink(mainMenuActivity, shortUserLink);
-                    bSaveShortUserLink.setVisibility(View.GONE);
-                }
-            });
+    private void saveShortLink(View view) {
+        String shortLink = etShortLink.getText().toString();
+
+        if (shortLink.equals("")) showToastMessage(mainMenuActivity, view, 2, getString(R.string.account_settings_menu_error_not_short_link));
+        else if (shortLink.length() < 3) showToastMessage(mainMenuActivity, view, 2, getString(R.string.account_settings_menu_error_small_short_link));
+        else Executors.newSingleThreadExecutor().execute(() -> {
+            try {
+                response = new API("http://213.219.214.94:3501/api/method/account.edit?v=1.0&short_link=" + shortLink, accessToken).call();
+            } catch (IOException e) {
+                throw new RuntimeException(e);
+            } finally {
+                new Handler(Looper.getMainLooper()).post(() -> {
+                    if (response.getError() != null) {
+                        if (response.getError().getErrorCode() == 51) showToastMessage(mainMenuActivity, view, 2, getString(R.string.account_settings_menu_error_already_in_use));
+                        else showToastMessage(mainMenuActivity, view, 2, getString(R.string.unknown_error));
+                    } else {
+                        putUserShortLink(mainMenuActivity, shortLink);
+                        ibSaveShortLink.setVisibility(View.GONE);
+                    }
+                });
+            }
+        });
     }
 
-}*/
+}

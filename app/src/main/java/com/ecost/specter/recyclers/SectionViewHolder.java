@@ -1,20 +1,23 @@
-/* package com.ecost.specter.recyclers;
+package com.ecost.specter.recyclers;
 
 import android.view.View;
+import android.widget.FrameLayout;
 import android.widget.TextView;
 
-import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.ecost.specter.R;
 
 public class SectionViewHolder  extends RecyclerView.ViewHolder {
 
-    TextView name;
+    FrameLayout flItem;
+    TextView tvName;
 
-    public SectionViewHolder(@NonNull View itemView) {
+    public SectionViewHolder(View itemView) {
         super(itemView);
-        name = itemView.findViewById(R.id.section_name);
+
+        flItem = itemView.findViewById(R.id.item);
+        tvName = itemView.findViewById(R.id.name);
     }
 
-} */
+}
