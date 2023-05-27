@@ -10,6 +10,7 @@
     <string name="specter_start_header">Let\'s start</string>
     <string name="channels_menu_header">Channels</string>
     <string name="settings_menu_header">Settings</string>
+    <string name="create_channel_menu_header">Creating a channel</string>
 
     <!-- Themes -->
     <array name="themes_array">
@@ -22,6 +23,13 @@
     <array name="languages_array" translatable="false">
         <item>English</item>
         <item>Русский</item>
+    </array>
+
+    <!-- Categories -->
+    <array name="categories_array">
+        <item>Not selected</item>
+        <item>Blog</item>
+        <item>News</item>
     </array>
 
     <!-- errors -->
@@ -59,6 +67,11 @@
     <string name="account_settings_menu_error_not_short_link">Short link not entered</string>
     <string name="account_settings_menu_error_small_short_link">A short link must contain 3 or more characters</string>
     <string name="account_settings_menu_error_already_in_use">The short link is already in use</string>
+
+    <string name="create_channel_menu_error_not_title">Title not entered</string>
+    <string name="create_channel_menu_error_not_short_link">Short link not entered</string>
+    <string name="create_channel_menu_error_small_short_link">A short link must contain 3 or more characters</string>
+    <string name="create_channel_menu_error_already_in_use">The short link is already in use</string>
 
     <!-- sign in -->
     <string name="sign_in_input_phone_number_hint">Phone number</string>
@@ -110,4 +123,11 @@
     <string name="app_settings_menu_spinner_theme_header">Theme</string>
     <string name="app_settings_menu_spinner_languages_header">Language</string>
     <string name="app_settings_menu_message_change_language">To change the language correctly, restart the application</string>
+
+    <!-- create channel -->
+    <string name="create_channel_menu_input_title_header">Title</string>
+    <string name="create_channel_menu_input_short_link_header">Short link</string>
+    <string name="create_channel_menu_spinner_category_header">Category</string>
+    <string name="create_channel_menu_input_description_header">Description</string>
+    <string name="create_channel_menu_button_create_channel">Create a channel</string>
 </resources>

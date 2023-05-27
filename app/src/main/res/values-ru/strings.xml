@@ -5,12 +5,20 @@
     <string name="specter_start_header">Давайте начнём</string>
     <string name="channels_menu_header">Каналы</string>
     <string name="settings_menu_header">Настройки</string>
+    <string name="create_channel_menu_header">Создание канала</string>
 
     <!-- Themes -->
     <array name="themes_array">
         <item>Системная</item>
         <item>Светлая</item>
         <item>Тёмная</item>
+    </array>
+
+    <!-- Categories -->
+    <array name="categories_array">
+        <item>Не выбрано</item>
+        <item>Блог</item>
+        <item>Новости</item>
     </array>
 
     <!-- errors -->
@@ -48,6 +56,11 @@
     <string name="account_settings_menu_error_not_short_link">Короткая ссылка не введена</string>
     <string name="account_settings_menu_error_small_short_link">Короткая ссылка должна содержать 3 и более символов</string>
     <string name="account_settings_menu_error_already_in_use">Короткая ссылка уже используется</string>
+
+    <string name="create_channel_menu_error_not_title">Название не введено</string>
+    <string name="create_channel_menu_error_not_short_link">Короткая ссылка не введена</string>
+    <string name="create_channel_menu_error_small_short_link">Короткая ссылка должна содержать 3 и более символов</string>
+    <string name="create_channel_menu_error_already_in_use">Короткая ссылка уже используется</string>
 
     <!-- sign in -->
     <string name="sign_in_input_phone_number_hint">Номер телефона</string>
@@ -99,4 +112,11 @@
     <string name="app_settings_menu_spinner_theme_header">Тема</string>
     <string name="app_settings_menu_spinner_languages_header">Язык</string>
     <string name="app_settings_menu_message_change_language">Для корректной смены языка перезапустите приложение</string>
+
+    <!-- create channel -->
+    <string name="create_channel_menu_input_title_header">Название</string>
+    <string name="create_channel_menu_input_short_link_header">Короткая ссылка</string>
+    <string name="create_channel_menu_spinner_category_header">Категория</string>
+    <string name="create_channel_menu_input_description_header">Описание</string>
+    <string name="create_channel_menu_button_create_channel">Создать канал</string>
 </resources>
