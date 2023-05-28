@@ -2,7 +2,7 @@ package com.ecost.specter.models;
 
 public class Channel {
 
-    private Integer id, category;
+    private Integer id, category, is_subscriber, is_admin;
     private String title, short_link, description, body;
 
     public Integer getId() {
@@ -51,6 +51,22 @@ public class Channel {
 
     public void setBody(String body) {
         this.body = body;
+    }
+
+    public Integer getIsSubscriber() {
+        return is_subscriber;
+    }
+
+    public void setIs_subscriber(Integer is_subscriber) {
+        this.is_subscriber = is_subscriber;
+    }
+
+    public Integer getIsAdmin() {
+        return is_admin;
+    }
+
+    public void setIs_admin(Integer is_admin) {
+        this.is_admin = is_admin;
     }
 
 }

@@ -15,4 +15,11 @@
     <style name="CustomBottomSheetStyle" parent="Widget.Design.BottomSheet.Modal">
         <item name="android:background">#0000</item>
     </style>
+
+    <style name="specter.PopupMenu" parent="Widget.AppCompat.PopupMenu">
+        <item name="android:colorBackground">@android:color/transparent</item>
+        <item name="android:fontFamily">@font/inter_medium</item>
+        <item name="android:textSize">13sp</item>
+        <item name="android:background">@drawable/popup_menu_background</item>
+    </style>
 </resources>

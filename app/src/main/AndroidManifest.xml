@@ -29,5 +29,8 @@
         <activity
             android:name=".menu.MainMenuActivity"
             android:screenOrientation="nosensor" />
+        <activity
+            android:name=".channel.ChannelActivity"
+            android:screenOrientation="nosensor" />
     </application>
 </manifest>

@@ -1,58 +1,41 @@
-/* package com.ecost.specter.models;
+package com.ecost.specter.models;
 
 public class Post {
 
-    int id, sender_id, type;
-    String author, context;
-    Long date;
-
-    public Post() {}
-
-    public Post(int id, String author, Long date, String context) {
-        this.id = id;
-        this.author = author;
-        this.date = date;
-        this.context = context;
-    }
-
-    public Post(int id, int senderId, String author, Long date, String context) {
-        this.id = id;
-        this.sender_id = senderId;
-        this.author = author;
-        this.date = date;
-        this.context = context;
-    }
+    private int id;
+    private String author, text;
+    private Long datetime;
 
     public int getId() {
         return id;
     }
 
-    public int getSenderId() {
-        return sender_id;
-    }
-
-    public int getType() {
-        return type;
+    public void setId(int id) {
+        this.id = id;
     }
 
     public String getAuthor() {
         return author;
     }
 
-    public String getContext() {
-        return context;
-    }
-
-    public Long getDate() {
-        return date;
-    }
-
-    public void setType(int type) {
-        this.type = type;
-    }
-
     public void setAuthor(String author) {
         this.author = author;
     }
 
-} */
+    public String getText() {
+        return text;
+    }
+
+    public void setText(String text) {
+        this.text = text;
+    }
+
+    public Long getDatetime() {
+        return datetime;
+    }
+
+    public void setDatetime(Long datetime) {
+        this.datetime = datetime;
+    }
+
+}

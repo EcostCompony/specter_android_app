@@ -6,7 +6,6 @@ public class ResponseRes {
 
     private String confirmToken, signupToken, serviceAuthToken, accessToken, authToken, name, short_link;
     private Integer id, ecost_id;
-    private Channel[] channels;
 
     public String getConfirmToken() {
         return confirmToken;
@@ -26,10 +25,6 @@ public class ResponseRes {
 
     public String getAuthToken() {
         return authToken;
-    }
-
-    public Channel[] getChannels() {
-        return channels;
     }
 
     public Integer getId() {
@@ -66,10 +61,6 @@ public class ResponseRes {
 
     public void setAccess_token(String accessToken) {
         this.accessToken = accessToken;
-    }
-
-    public void setChannels(Channel[] channels) {
-        this.channels = channels;
     }
 
     public void setId(Integer id) {

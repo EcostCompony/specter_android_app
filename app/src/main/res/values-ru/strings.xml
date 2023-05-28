@@ -21,6 +21,14 @@
         <item>Новости</item>
     </array>
 
+    <!-- popup menu -->
+    <string name="popup_menu_post_comments_title">Комментарии</string>
+    <string name="popup_menu_post_edit_title">Редактировать</string>
+    <string name="popup_menu_post_copy_title">Копировать</string>
+    <string name="popup_menu_post_delete_title">Удалить</string>
+
+    <string name="popup_menu_send_post_on_my_behalf_title">От своего имени</string>
+
     <!-- errors -->
     <string name="unknown_error">Неизвестная ошибка</string>
     <string name="sign_in_error_not_phone_number">Номер телефона не введён</string>
@@ -119,4 +127,9 @@
     <string name="create_channel_menu_spinner_category_header">Категория</string>
     <string name="create_channel_menu_input_description_header">Описание</string>
     <string name="create_channel_menu_button_create_channel">Создать канал</string>
+
+    <!-- channel -->
+    <string name="channel_button_subscribe">Подписаться</string>
+    <string name="channel_editing_mode">Редактирование</string>
+    <string name="channel_input_post_hint">Публикация</string>
 </resources>

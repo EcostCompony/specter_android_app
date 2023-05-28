@@ -1,8 +1,5 @@
-/* package com.ecost.specter.recyclers;
+package com.ecost.specter.recyclers;
 
-import static com.ecost.specter.Routing.authId;
-
-import android.annotation.SuppressLint;
 import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -14,12 +11,9 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.ecost.specter.R;
 import com.ecost.specter.models.Post;
 
-import java.lang.reflect.Array;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Date;
 import java.util.List;
+import java.util.Locale;
 
 public class PostsAdapter extends RecyclerView.Adapter<PostViewHolder> {
 
@@ -37,40 +31,18 @@ public class PostsAdapter extends RecyclerView.Adapter<PostViewHolder> {
         this.onLongClickListener = onLongClickListener;
     }
 
-    @Override
-    public int getItemViewType(int position) {
-        if (posts.get(position).getSenderId() == authId) return R.layout.my_comment_item;
-        else if (posts.get(position).getType() == 1) return R.layout.date_post_item;
-        return R.layout.post_item;
-    }
-
     @NonNull
     @Override
     public PostViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        return new PostViewHolder(inflater.inflate(viewType, parent, false));
+        return new PostViewHolder(inflater.inflate(R.layout.post_item, parent, false));
     }
 
-    @SuppressLint("SetTextI18n")
     @Override
-    public void onBindViewHolder(@NonNull PostViewHolder holder, @SuppressLint("RecyclerView") int position) {
+    public void onBindViewHolder(PostViewHolder holder, int position) {
         Post post = posts.get(position);
-        holder.text.setText(post.getContext());
-        if (post.getType() == 1) {
-            List<String> months = Arrays.asList(" января", " февраля", " марта", " апреля", " мая", " июня", " июля", " августа", " сентября", " октября", " ноября", " декабря");
-            Date date = new java.util.Date(post.getDate() * 1000L);
-            @SuppressLint("SimpleDateFormat") SimpleDateFormat sdf1 = new java.text.SimpleDateFormat("dd");
-            @SuppressLint("SimpleDateFormat") SimpleDateFormat sdf2 = new java.text.SimpleDateFormat("MM");
-            sdf1.setTimeZone(java.util.TimeZone.getTimeZone("GMT+3"));
-            sdf2.setTimeZone(java.util.TimeZone.getTimeZone("GMT+3"));
-            holder.date.setText(sdf1.format(date) + months.get(Integer.parseInt(sdf2.format(date))-1));
-        }
-        if (holder.author != null) holder.author.setText(post.getAuthor());
-        Date date = new java.util.Date(post.getDate() * 1000L);
-        @SuppressLint("SimpleDateFormat") SimpleDateFormat sdf = new java.text.SimpleDateFormat("HH:mm");
-        sdf.setTimeZone(java.util.TimeZone.getTimeZone("GMT+3"));
-        String formattedDate = sdf.format(date);
-        System.out.println(formattedDate);
-        holder.time.setText(formattedDate);
+        holder.tvText.setText(post.getText());
+        holder.tvAuthor.setText(post.getAuthor());
+        holder.tvTime.setText(new SimpleDateFormat("HH:mm", Locale.getDefault()).format(new java.util.Date(post.getDatetime())));
         holder.itemView.setOnLongClickListener(v -> onLongClickListener.onPostLongClick(post, position, holder.itemView));
     }
 
@@ -80,4 +52,4 @@ public class PostsAdapter extends RecyclerView.Adapter<PostViewHolder> {
         else return 0;
     }
 
-} */
+}

@@ -1,6 +1,7 @@
 package com.ecost.specter.api;
 
 import com.ecost.specter.models.Channel;
+import com.ecost.specter.models.Post;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 public class Response {
@@ -14,6 +15,18 @@ public class Response {
 
     public Channel getChannelRes() {
         return new ObjectMapper().convertValue(res, Channel.class);
+    }
+
+    public Channel[] getChannelsRes() {
+        return new ObjectMapper().convertValue(res, Channel[].class);
+    }
+
+    public Post[] getPostsRes() {
+        return new ObjectMapper().convertValue(res, Post[].class);
+    }
+
+    public Post getPostRes() {
+        return new ObjectMapper().convertValue(res, Post.class);
     }
 
     public ResponseError getError() {

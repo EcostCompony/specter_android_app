@@ -32,6 +32,14 @@
         <item>News</item>
     </array>
 
+    <!-- popup menu -->
+    <string name="popup_menu_post_comments_title">Comments</string>
+    <string name="popup_menu_post_edit_title">Edit</string>
+    <string name="popup_menu_post_copy_title">Copy</string>
+    <string name="popup_menu_post_delete_title">Delete</string>
+
+    <string name="popup_menu_send_post_on_my_behalf_title">On my behalf</string>
+
     <!-- errors -->
     <string name="unknown_error">Unknown error</string>
     <string name="sign_in_error_not_phone_number">Phone number not entered</string>
@@ -130,4 +138,9 @@
     <string name="create_channel_menu_spinner_category_header">Category</string>
     <string name="create_channel_menu_input_description_header">Description</string>
     <string name="create_channel_menu_button_create_channel">Create a channel</string>
+
+    <!-- channel -->
+    <string name="channel_button_subscribe">Subscribe</string>
+    <string name="channel_editing_mode">Editing</string>
+    <string name="channel_input_post_hint">Broadcast</string>
 </resources>

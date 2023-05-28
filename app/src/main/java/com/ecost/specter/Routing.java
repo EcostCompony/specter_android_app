@@ -13,10 +13,12 @@ import androidx.preference.PreferenceManager;
 
 import android.os.Handler;
 import android.os.Looper;
+import android.view.ContextThemeWrapper;
 import android.view.Gravity;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.LinearLayout;
+import android.widget.PopupMenu;
 import android.widget.PopupWindow;
 import android.widget.TextView;
 
@@ -138,20 +140,20 @@ public class Routing extends AppCompatActivity {
         }).start();
     }
 
-    /*public static String translateData(long unixDate, String pattern) {
-        Date date = new Date(unixDate * 1000L);
-        SimpleDateFormat simpleDateFormat = new SimpleDateFormat(pattern, Locale.getDefault());
-        simpleDateFormat.setTimeZone(TimeZone.getTimeZone("GMT+3"));
-        return simpleDateFormat.format(date);
-    }
-
-    public static void popupMenu(Activity activity, View view, int menu, PopupMenu.OnMenuItemClickListener onMenuItemClickListener, PopupMenu.OnDismissListener onDismissListener) {
+    public static void showPopupMenu(Activity activity, View view, int menu, PopupMenu.OnMenuItemClickListener onMenuItemClickListener, PopupMenu.OnDismissListener onDismissListener) {
         PopupMenu popupMenu = new PopupMenu(new ContextThemeWrapper(activity, R.style.specter_PopupMenu), view);
         popupMenu.inflate(menu);
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) popupMenu.setForceShowIcon(true);
         popupMenu.setOnMenuItemClickListener(onMenuItemClickListener);
         popupMenu.setOnDismissListener(onDismissListener);
         popupMenu.show();
+    }
+
+    /*public static String translateData(long unixDate, String pattern) {
+        Date date = new Date(unixDate * 1000L);
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat(pattern, Locale.getDefault());
+        simpleDateFormat.setTimeZone(TimeZone.getTimeZone("GMT+3"));
+        return simpleDateFormat.format(date);
     }
 
     public static void AgreeAlertDialog(Activity activity, ViewGroup viewGroup, String title, String description, View.OnClickListener onClickListener) {

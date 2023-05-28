@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:paddingVertical="3.5dp"
+    android:paddingStart="16dp"
+    android:paddingEnd="80dp"
+    android:clipToPadding="false">
+
+    <FrameLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@drawable/post_background"
+        android:elevation="5dp"
+        tools:ignore="UselessParent">
+
+        <TextView
+            android:id="@+id/author"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="7dp"
+            android:layout_marginStart="14dp"
+            android:layout_marginEnd="52dp"
+            android:fontFamily="@font/inter_bold"
+            android:textColor="@color/main_color"
+            android:textSize="13sp" />
+
+        <TextView
+            android:id="@+id/time"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:layout_marginEnd="16dp"
+            android:layout_gravity="end"
+            android:fontFamily="@font/inter_regular"
+            android:textColor="@color/post_item_time_text"
+            android:textSize="10sp"
+            tools:ignore="SmallSp" />
+
+        <TextView
+            android:id="@+id/text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="24dp"
+            android:layout_marginHorizontal="14dp"
+            android:layout_marginBottom="7dp"
+            android:layout_gravity="bottom"
+            android:fontFamily="@font/manrope_medium"
+            android:textSize="13sp" />
+    </FrameLayout>
+</FrameLayout>
