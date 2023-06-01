@@ -6,6 +6,7 @@
     <string name="channels_menu_header">Каналы</string>
     <string name="settings_menu_header">Настройки</string>
     <string name="create_channel_menu_header">Создание канала</string>
+    <string name="channel_settings_header">Настройки канала</string>
 
     <!-- Themes -->
     <array name="themes_array">
@@ -19,6 +20,12 @@
         <item>Не выбрано</item>
         <item>Блог</item>
         <item>Новости</item>
+    </array>
+
+    <!-- channel settings sections -->
+    <array name="channel_settings_section">
+        <item>Основное</item>
+        <item>Подписчики</item>
     </array>
 
     <!-- popup menu -->
@@ -69,6 +76,11 @@
     <string name="create_channel_menu_error_not_short_link">Короткая ссылка не введена</string>
     <string name="create_channel_menu_error_small_short_link">Короткая ссылка должна содержать 3 и более символов</string>
     <string name="create_channel_menu_error_already_in_use">Короткая ссылка уже используется</string>
+
+    <string name="main_channel_settings_error_not_title">Название не введено</string>
+    <string name="main_channel_settings_error_not_short_link">Короткая ссылка не введена</string>
+    <string name="main_channel_settings_error_small_short_link">Короткая ссылка должна содержать 3 и более символов</string>
+    <string name="main_channel_settings_error_already_in_use">Короткая ссылка уже используется</string>
 
     <!-- sign in -->
     <string name="sign_in_input_phone_number_hint">Номер телефона</string>
@@ -136,4 +148,12 @@
     <!-- channel page -->
     <string name="channel_page_description_header">Описание</string>
     <string name="channel_page_category_header">Категория</string>
+
+    <!-- channel settings -->
+    <string name="main_channel_settings_input_title_header">Название</string>
+    <string name="main_channel_settings_input_short_link_header">Короткая ссылка</string>
+    <string name="main_channel_settings_spinner_category_header">Категория</string>
+    <string name="main_channel_settings_input_description_header">Описание</string>
+    <string name="main_channel_settings_button_delete_channel">Удалить канал</string>
+    <string name="subscribers_channel_settings_input_search_string_hint">Имя или короткая ссылка</string>
 </resources>

@@ -11,6 +11,7 @@
     <string name="channels_menu_header">Channels</string>
     <string name="settings_menu_header">Settings</string>
     <string name="create_channel_menu_header">Creating a channel</string>
+    <string name="channel_settings_header">Channel settings</string>
 
     <!-- Themes -->
     <array name="themes_array">
@@ -30,6 +31,12 @@
         <item>Not selected</item>
         <item>Blog</item>
         <item>News</item>
+    </array>
+
+    <!-- channel settings sections -->
+    <array name="channel_settings_section">
+        <item>Basic</item>
+        <item>Subscribers</item>
     </array>
 
     <!-- popup menu -->
@@ -80,6 +87,11 @@
     <string name="create_channel_menu_error_not_short_link">Short link not entered</string>
     <string name="create_channel_menu_error_small_short_link">A short link must contain 3 or more characters</string>
     <string name="create_channel_menu_error_already_in_use">The short link is already in use</string>
+
+    <string name="main_channel_settings_error_not_title">Title not entered</string>
+    <string name="main_channel_settings_error_not_short_link">Short link not entered</string>
+    <string name="main_channel_settings_error_small_short_link">A short link must contain 3 or more characters</string>
+    <string name="main_channel_settings_error_already_in_use">The short link is already in use</string>
 
     <!-- sign in -->
     <string name="sign_in_input_phone_number_hint">Phone number</string>
@@ -147,4 +159,12 @@
     <!-- channel page -->
     <string name="channel_page_description_header">Description</string>
     <string name="channel_page_category_header">Category</string>
+
+    <!-- channel settings -->
+    <string name="main_channel_settings_input_title_header">Title</string>
+    <string name="main_channel_settings_input_short_link_header">Short link</string>
+    <string name="main_channel_settings_spinner_category_header">Category</string>
+    <string name="main_channel_settings_input_description_header">Description</string>
+    <string name="main_channel_settings_button_delete_channel">Delete channel</string>
+    <string name="subscribers_channel_settings_input_search_string_hint">Name or short link</string>
 </resources>

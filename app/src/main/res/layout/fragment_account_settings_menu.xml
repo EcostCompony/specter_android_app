@@ -3,16 +3,16 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:gravity="center_horizontal"
-    android:background="@color/background">
+    android:background="@color/background"
+    android:gravity="center_horizontal">
 
     <TextView
         android:layout_width="340dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="15dp"
         android:paddingHorizontal="13dp"
-        android:textColor="@color/parameter_header"
         android:fontFamily="@font/inter_semi_bold"
+        android:textColor="@color/parameter_header"
         android:textSize="12sp"
         android:text="@string/account_settings_menu_input_name_header"
         android:labelFor="@+id/input_name" />
@@ -43,7 +43,8 @@
             android:layout_marginStart="12dp"
             android:background="@drawable/button_permissive"
             android:src="@drawable/icon_checkmark"
-            android:visibility="gone" />
+            android:visibility="gone"
+            android:importantForAccessibility="no" />
     </LinearLayout>
 
     <TextView
@@ -98,7 +99,8 @@
             android:layout_marginStart="12dp"
             android:background="@drawable/button_permissive"
             android:src="@drawable/icon_checkmark"
-            android:visibility="gone" />
+            android:visibility="gone"
+            android:importantForAccessibility="no" />
     </LinearLayout>
 
     <Button

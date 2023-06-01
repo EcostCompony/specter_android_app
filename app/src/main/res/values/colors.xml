@@ -42,6 +42,7 @@
     <color name="channel_page_number_subscribers_text">#727272</color>
     <color name="channel_page_info_header_text">#9C9C9C</color>
     <color name="channel_page_divider_background">#EAEAEA</color>
+    <color name="small_button_tint">#F8F8F8</color>
 
     <!-- section -->
     <color name="section_background">#F8F8F8</color>

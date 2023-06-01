@@ -65,6 +65,8 @@ public class ChannelPageFragment extends Fragment {
             });
         });
 
+        ibChannelSettings.setOnClickListener(view -> channelActivity.getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container_view, new ChannelSettingsFragment()).addToBackStack(null).commit());
+
         return inflaterView;
     }
 

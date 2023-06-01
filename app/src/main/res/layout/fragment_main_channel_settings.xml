@@ -1,0 +1,207 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="@color/background"
+    android:gravity="center_horizontal">
+
+    <TextView
+        android:layout_width="340dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="15dp"
+        android:paddingHorizontal="13dp"
+        android:fontFamily="@font/inter_semi_bold"
+        android:textColor="@color/parameter_header"
+        android:textSize="12sp"
+        android:text="@string/main_channel_settings_input_title_header"
+        android:labelFor="@+id/input_title" />
+
+    <LinearLayout
+        android:layout_width="340dp"
+        android:layout_height="38dp"
+        android:layout_marginTop="4dp"
+        android:orientation="horizontal">
+
+        <EditText
+            android:id="@+id/input_title"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:imeOptions="actionGo"
+            android:inputType="text"
+            android:importantForAutofill="no"
+            android:background="@drawable/input"
+            android:paddingHorizontal="13dp"
+            android:fontFamily="@font/inter_semi_bold"
+            android:textSize="12sp" />
+
+        <ImageButton
+            android:id="@+id/button_save_title"
+            android:layout_width="38dp"
+            android:layout_height="38dp"
+            android:layout_marginStart="12dp"
+            android:background="@drawable/button_permissive"
+            android:src="@drawable/icon_checkmark"
+            android:visibility="gone"
+            android:importantForAccessibility="no" />
+    </LinearLayout>
+
+    <TextView
+        android:layout_width="340dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:paddingHorizontal="13dp"
+        android:textColor="@color/parameter_header"
+        android:fontFamily="@font/inter_semi_bold"
+        android:textSize="12sp"
+        android:text="@string/main_channel_settings_input_short_link_header"
+        android:labelFor="@+id/input_short_link" />
+
+    <LinearLayout
+        android:layout_width="340dp"
+        android:layout_height="38dp"
+        android:layout_marginTop="4dp"
+        android:orientation="horizontal">
+
+        <RelativeLayout
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1">
+
+            <EditText
+                android:id="@+id/input_short_link"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:imeOptions="actionGo"
+                android:inputType="text"
+                android:importantForAutofill="no"
+                android:background="@drawable/input"
+                android:paddingHorizontal="25dp"
+                android:fontFamily="@font/inter_semi_bold"
+                android:textColor="@color/main_color"
+                android:textSize="12sp" />
+
+            <TextView
+                android:layout_width="25dp"
+                android:layout_height="match_parent"
+                android:gravity="center_vertical|end"
+                android:fontFamily="@font/inter_semi_bold"
+                android:textColor="@color/main_color"
+                android:textSize="12sp"
+                android:text="@string/symbol_at" />
+        </RelativeLayout>
+
+        <ImageButton
+            android:id="@+id/button_save_short_link"
+            android:layout_width="38dp"
+            android:layout_height="38dp"
+            android:layout_marginStart="12dp"
+            android:background="@drawable/button_permissive"
+            android:src="@drawable/icon_checkmark"
+            android:visibility="gone"
+            android:importantForAccessibility="no" />
+    </LinearLayout>
+
+    <TextView
+        android:layout_width="340dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="14dp"
+        android:paddingHorizontal="13dp"
+        android:fontFamily="@font/inter_semi_bold"
+        android:textColor="@color/parameter_header"
+        android:textSize="12sp"
+        android:text="@string/main_channel_settings_spinner_category_header"
+        android:labelFor="@+id/spinner_category" />
+
+    <LinearLayout
+        android:layout_width="340dp"
+        android:layout_height="38dp"
+        android:layout_marginTop="4dp"
+        android:orientation="horizontal">
+
+        <FrameLayout
+            android:layout_width="0dp"
+            android:layout_height="38dp"
+            android:layout_weight="1">
+
+            <Spinner
+                android:id="@+id/spinner_category"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@drawable/input"
+                android:paddingHorizontal="13dp" />
+
+            <View
+                android:layout_width="11dp"
+                android:layout_height="7dp"
+                android:layout_marginEnd="18dp"
+                android:layout_gravity="center_vertical|end"
+                android:background="@drawable/icon_arrow_down" />
+        </FrameLayout>
+
+        <ImageButton
+            android:id="@+id/button_save_category"
+            android:layout_width="38dp"
+            android:layout_height="38dp"
+            android:layout_marginStart="12dp"
+            android:background="@drawable/button_permissive"
+            android:src="@drawable/icon_checkmark"
+            android:visibility="gone"
+            android:importantForAccessibility="no" />
+    </LinearLayout>
+
+    <TextView
+        android:layout_width="340dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="14dp"
+        android:paddingHorizontal="13dp"
+        android:fontFamily="@font/inter_semi_bold"
+        android:textColor="@color/parameter_header"
+        android:textSize="12sp"
+        android:text="@string/main_channel_settings_input_description_header"
+        android:labelFor="@+id/input_description" />
+
+    <LinearLayout
+        android:layout_width="340dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="4dp"
+        android:orientation="horizontal">
+
+        <EditText
+            android:id="@+id/input_description"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:inputType="textCapSentences|textMultiLine"
+            android:importantForAutofill="no"
+            android:background="@drawable/input"
+            android:paddingVertical="10dp"
+            android:paddingHorizontal="13dp"
+            android:fontFamily="@font/inter_semi_bold"
+            android:textSize="12sp" />
+
+        <ImageButton
+            android:id="@+id/button_save_description"
+            android:layout_width="38dp"
+            android:layout_height="38dp"
+            android:layout_marginStart="12dp"
+            android:layout_gravity="bottom"
+            android:background="@drawable/button_permissive"
+            android:src="@drawable/icon_checkmark"
+            android:visibility="gone"
+            android:importantForAccessibility="no" />
+    </LinearLayout>
+
+    <Button
+        android:id="@+id/button_delete_channel"
+        android:layout_width="wrap_content"
+        android:layout_height="37dp"
+        android:layout_marginTop="22dp"
+        android:background="@drawable/button_negative"
+        android:paddingHorizontal="19dp"
+        android:fontFamily="@font/inter_bold"
+        android:textColor="@color/button_negative_text"
+        android:textSize="12sp"
+        android:text="@string/main_channel_settings_button_delete_channel" />
+</LinearLayout>
