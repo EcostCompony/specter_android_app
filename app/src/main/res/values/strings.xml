@@ -143,4 +143,8 @@
     <string name="channel_button_subscribe">Subscribe</string>
     <string name="channel_editing_mode">Editing</string>
     <string name="channel_input_post_hint">Broadcast</string>
+
+    <!-- channel page -->
+    <string name="channel_page_description_header">Description</string>
+    <string name="channel_page_category_header">Category</string>
 </resources>

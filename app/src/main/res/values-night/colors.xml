@@ -38,6 +38,10 @@
     <color name="channel_number_subscribers_text">#9C9C9C</color>
     <color name="post_background_solid">#272727</color>
     <color name="post_item_time_text">#9C9C9C</color>
+    <color name="header_background_tint">#F9F9F9</color>
+    <color name="channel_page_number_subscribers_text">#727272</color>
+    <color name="channel_page_info_header_text">#9C9C9C</color>
+    <color name="channel_page_divider_background">#EAEAEA</color>
 
     <!-- section -->
     <color name="section_background">#272727</color>

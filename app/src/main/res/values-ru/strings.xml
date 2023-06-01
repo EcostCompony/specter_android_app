@@ -132,4 +132,8 @@
     <string name="channel_button_subscribe">Подписаться</string>
     <string name="channel_editing_mode">Редактирование</string>
     <string name="channel_input_post_hint">Публикация</string>
+
+    <!-- channel page -->
+    <string name="channel_page_description_header">Описание</string>
+    <string name="channel_page_category_header">Категория</string>
 </resources>

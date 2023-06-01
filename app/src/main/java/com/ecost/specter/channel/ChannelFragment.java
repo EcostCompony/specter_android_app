@@ -94,7 +94,7 @@ public class ChannelFragment extends Fragment {
         rvPostsList.setAdapter(postsAdapter);
         showPosts(inflaterView);
 
-        // inflaterView.findViewById(R.id.channel_header).setOnClickListener(view -> channelActivity.getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container_view, new ChannelPageFragment()).addToBackStack(null).commit());
+        inflaterView.findViewById(R.id.channel_header).setOnClickListener(view -> channelActivity.getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container_view, new ChannelPageFragment()).addToBackStack(null).commit());
 
         bSubscribe.setOnClickListener(view -> {
             Executors.newSingleThreadExecutor().execute(() -> {
