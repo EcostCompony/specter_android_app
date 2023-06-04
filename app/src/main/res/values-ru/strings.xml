@@ -7,6 +7,7 @@
     <string name="settings_menu_header">Настройки</string>
     <string name="create_channel_menu_header">Создание канала</string>
     <string name="channel_settings_header">Настройки канала</string>
+    <string name="comments_header">Комментарии</string>
 
     <!-- Themes -->
     <array name="themes_array">
@@ -35,6 +36,10 @@
     <string name="popup_menu_post_delete_title">Удалить</string>
 
     <string name="popup_menu_send_post_on_my_behalf_title">От своего имени</string>
+
+    <string name="popup_menu_comment_edit_title">Редактировать</string>
+    <string name="popup_menu_comment_copy_title">Копировать</string>
+    <string name="popup_menu_comment_delete_title">Удалить</string>
 
     <!-- errors -->
     <string name="unknown_error">Неизвестная ошибка</string>
@@ -156,4 +161,8 @@
     <string name="main_channel_settings_input_description_header">Описание</string>
     <string name="main_channel_settings_button_delete_channel">Удалить канал</string>
     <string name="subscribers_channel_settings_input_search_string_hint">Имя или короткая ссылка</string>
+
+    <!-- comments -->
+    <string name="comments_editing_mode">Редактирование</string>
+    <string name="comments_input_comment_hint">Комментарий</string>
 </resources>

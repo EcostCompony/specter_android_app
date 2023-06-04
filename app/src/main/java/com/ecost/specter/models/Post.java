@@ -2,7 +2,7 @@ package com.ecost.specter.models;
 
 public class Post {
 
-    private int id;
+    private int id, author_id;
     private String author, text;
     private Long datetime;
 
@@ -12,6 +12,14 @@ public class Post {
 
     public void setId(int id) {
         this.id = id;
+    }
+
+    public int getAuthorId() {
+        return author_id;
+    }
+
+    public void setAuthor_id(int author_id) {
+        this.author_id = author_id;
     }
 
     public String getAuthor() {

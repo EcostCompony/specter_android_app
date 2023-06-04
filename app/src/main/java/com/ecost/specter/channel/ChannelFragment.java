@@ -62,11 +62,11 @@ public class ChannelFragment extends Fragment {
         postsAdapter = new PostsAdapter(channelActivity, posts, (post, position, view) -> {
             showPopupMenu(channelActivity, view, R.menu.popup_menu_post, item -> {
                 if (item.getItemId() == R.id.comments) {
-                    //CommentsFragment commentsFragment = new CommentsFragment();
-                    //Bundle bundle = new Bundle();
-                    //bundle.putInt("POST_ID", post.getId());
-                    //commentsFragment.setArguments(bundle);
-                    //channelActivity.getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container_view, commentsFragment).addToBackStack(null).commit();
+                    CommentsFragment commentsFragment = new CommentsFragment();
+                    Bundle bundle = new Bundle();
+                    bundle.putInt("POST_ID", post.getId());
+                    commentsFragment.setArguments(bundle);
+                    channelActivity.getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container_view, commentsFragment).addToBackStack(null).commit();
                 } else if (item.getItemId() == R.id.edit) {
                     postEditable = post;
                     tvEditingPost.setVisibility(View.VISIBLE);

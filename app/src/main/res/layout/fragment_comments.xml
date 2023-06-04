@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/background">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="69dp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="25dp"
+                android:layout_gravity="center_vertical"
+                android:fontFamily="@font/inter_semi_bold"
+                android:textSize="22sp"
+                android:text="@string/comments_header" />
+
+            <LinearLayout
+                android:id="@+id/hitbox_button_close"
+                android:layout_width="73dp"
+                android:layout_height="match_parent"
+                android:layout_gravity="end"
+                android:gravity="center">
+
+                <View
+                    android:layout_width="13dp"
+                    android:layout_height="13dp"
+                    android:background="@drawable/icon_cross" />
+            </LinearLayout>
+        </FrameLayout>
+
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/recycler_comments_list"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="65dp"
+                android:layout_gravity="bottom"
+                android:overScrollMode="never" />
+
+            <FrameLayout
+                android:layout_width="match_parent"
+                android:layout_height="70dp"
+                android:layout_gravity="bottom">
+
+                <TextView
+                    android:id="@+id/editing_mode"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="25dp"
+                    android:fontFamily="@font/manrope_extra_bold"
+                    android:textColor="@color/main_color"
+                    android:textSize="13sp"
+                    android:text="@string/comments_editing_mode"
+                    android:visibility="gone" />
+
+                <EditText
+                    android:id="@+id/input_comment"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginTop="18dp"
+                    android:layout_marginBottom="10dp"
+                    android:layout_marginStart="13dp"
+                    android:layout_marginEnd="50dp"
+                    android:inputType="text"
+                    android:importantForAutofill="no"
+                    android:background="@drawable/input"
+                    android:paddingHorizontal="14dp"
+                    android:paddingVertical="7dp"
+                    android:fontFamily="@font/inter_medium"
+                    android:textColorHint="@color/input_hint"
+                    android:textSize="12sp"
+                    android:hint="@string/comments_input_comment_hint" />
+
+                <FrameLayout
+                    android:id="@+id/hitbox_button_send"
+                    android:layout_width="50dp"
+                    android:layout_height="match_parent"
+                    android:layout_gravity="end">
+
+                    <View
+                        android:layout_width="20dp"
+                        android:layout_height="20dp"
+                        android:layout_marginTop="4dp"
+                        android:layout_gravity="center"
+                        android:background="@drawable/icon_arrow_right" />
+                </FrameLayout>
+            </FrameLayout>
+        </FrameLayout>
+    </LinearLayout>
+
+    <FrameLayout
+        android:id="@+id/dim_layout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="#40000000"
+        android:visibility="invisible" />
+</FrameLayout>

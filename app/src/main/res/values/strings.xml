@@ -12,6 +12,7 @@
     <string name="settings_menu_header">Settings</string>
     <string name="create_channel_menu_header">Creating a channel</string>
     <string name="channel_settings_header">Channel settings</string>
+    <string name="comments_header">Comments</string>
 
     <!-- Themes -->
     <array name="themes_array">
@@ -46,6 +47,10 @@
     <string name="popup_menu_post_delete_title">Delete</string>
 
     <string name="popup_menu_send_post_on_my_behalf_title">On my behalf</string>
+
+    <string name="popup_menu_comment_edit_title">Edit</string>
+    <string name="popup_menu_comment_copy_title">Copy</string>
+    <string name="popup_menu_comment_delete_title">Delete</string>
 
     <!-- errors -->
     <string name="unknown_error">Unknown error</string>
@@ -167,4 +172,8 @@
     <string name="main_channel_settings_input_description_header">Description</string>
     <string name="main_channel_settings_button_delete_channel">Delete channel</string>
     <string name="subscribers_channel_settings_input_search_string_hint">Name or short link</string>
+
+    <!-- comments -->
+    <string name="comments_editing_mode">Editing</string>
+    <string name="comments_input_comment_hint">Comment</string>
 </resources>
