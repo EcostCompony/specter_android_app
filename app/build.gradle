@@ -9,8 +9,8 @@ android {
         applicationId "com.ecost.specter"
         minSdkVersion 23
         targetSdkVersion 33
-        versionCode 93
-        versionName "Pre-Alpha 93"
+        versionCode 94
+        versionName "1.0a1"
     }
 
     namespace 'com.ecost.specter'
