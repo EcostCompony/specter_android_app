@@ -1,5 +1,8 @@
 package com.ecost.specter.models;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
+@JsonIgnoreProperties(ignoreUnknown = true)
 public class Subscriber {
 
     private Integer user_id;

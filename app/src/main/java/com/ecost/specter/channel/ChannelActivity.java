@@ -17,7 +17,7 @@ import java.util.concurrent.Executors;
 
 public class ChannelActivity extends AppCompatActivity {
 
-    public Integer channelId, channelCategory;
+    public Integer channelId, channelCategory, channelSubscriberNumbers;
     public String channelTitle, channelShortLink, channelDescription;
     public boolean userSubscribe;
     public boolean userAdmin = false;
@@ -33,6 +33,7 @@ public class ChannelActivity extends AppCompatActivity {
         channelShortLink = getIntent().getStringExtra("CHANNEL_SHORT_LINK");
         channelCategory = getIntent().getIntExtra("CHANNEL_CATEGORY", 0);
         channelDescription = getIntent().getStringExtra("CHANNEL_DESCRIPTION");
+        channelSubscriberNumbers = getIntent().getIntExtra("CHANNEL_SUBSCRIBER_NUMBERS", 0);
 
         Executors.newSingleThreadExecutor().execute(() -> {
             try {

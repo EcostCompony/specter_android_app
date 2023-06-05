@@ -1,6 +1,7 @@
 package com.ecost.specter.channel;
 
 import static com.ecost.specter.Routing.accessToken;
+import static com.ecost.specter.Routing.pluralForm;
 import static com.ecost.specter.Routing.showPopupMenu;
 import static com.ecost.specter.Routing.showToastMessage;
 
@@ -55,6 +56,7 @@ public class ChannelFragment extends Fragment {
         channelActivity = (ChannelActivity) requireActivity();
 
         ((TextView) inflaterView.findViewById(R.id.title)).setText(channelActivity.channelTitle);
+        ((TextView) inflaterView.findViewById(R.id.number_subscribers)).setText(pluralForm(channelActivity.channelSubscriberNumbers, getResources().getStringArray(R.array.subscribers)));
         if (!channelActivity.userSubscribe) bSubscribe.setVisibility(View.VISIBLE);
         if (channelActivity.userAdmin) inflaterView.findViewById(R.id.admin_panel).setVisibility(View.VISIBLE);
 
@@ -96,23 +98,21 @@ public class ChannelFragment extends Fragment {
 
         inflaterView.findViewById(R.id.channel_header).setOnClickListener(view -> channelActivity.getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container_view, new ChannelPageFragment()).addToBackStack(null).commit());
 
-        bSubscribe.setOnClickListener(view -> {
-            Executors.newSingleThreadExecutor().execute(() -> {
-                try {
-                    response = new API("http://213.219.214.94:3501/api/method/channels.subscribe?v=1.0&channel_id=" + channelActivity.channelId, accessToken).call();
-                } catch (IOException e) {
-                    throw new RuntimeException(e);
-                } finally {
-                    new Handler(Looper.getMainLooper()).post(() -> {
-                        if (response.getError() != null) showToastMessage(channelActivity, inflaterView, 2, getString(R.string.unknown_error));
-                        else {
-                            channelActivity.userSubscribe = true;
-                            bSubscribe.setVisibility(View.GONE);
-                        }
-                    });
-                }
-            });
-        });
+        bSubscribe.setOnClickListener(view -> Executors.newSingleThreadExecutor().execute(() -> {
+            try {
+                response = new API("http://213.219.214.94:3501/api/method/channels.subscribe?v=1.0&channel_id=" + channelActivity.channelId, accessToken).call();
+            } catch (IOException e) {
+                throw new RuntimeException(e);
+            } finally {
+                new Handler(Looper.getMainLooper()).post(() -> {
+                    if (response.getError() != null) showToastMessage(channelActivity, inflaterView, 2, getString(R.string.unknown_error));
+                    else {
+                        channelActivity.userSubscribe = true;
+                        bSubscribe.setVisibility(View.GONE);
+                    }
+                });
+            }
+        }));
 
         inflaterView.findViewById(R.id.hitbox_button_close).setOnClickListener(view -> channelActivity.finish());
 

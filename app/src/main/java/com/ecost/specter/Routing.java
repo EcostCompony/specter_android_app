@@ -21,6 +21,7 @@ import android.widget.LinearLayout;
 import android.widget.PopupMenu;
 import android.widget.PopupWindow;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.splashscreen.SplashScreen;
@@ -38,7 +39,7 @@ public class Routing extends AppCompatActivity {
 
     public static String accessToken, userName, userShortLink;
     public static int sectionPosition, appTheme, appLanguage;
-    private Response response;
+    private Response response, response1;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -50,28 +51,27 @@ public class Routing extends AppCompatActivity {
         putAppTheme(this, PreferenceManager.getDefaultSharedPreferences(this).getInt("APP_THEME", 0));
         putAppLanguage(this, accessToken == null ? (Locale.getDefault().getLanguage().equals("ru") ? 1 : 0) : PreferenceManager.getDefaultSharedPreferences(this).getInt("APP_LANGUAGE", 0));
 
-        if (accessToken == null) startActivity(new Intent(this, AuthActivity.class));
-        else {
-            Executors.newSingleThreadExecutor().execute(() -> {
-                try {
-                    response = new API("http://213.219.214.94:3501/api/method/account.get?v=1.0", accessToken).call();
-                } catch (IOException e) {
-                    throw new RuntimeException(e);
-                } finally {
-                    new Handler(Looper.getMainLooper()).post(() -> {
-                        if (response.getError() != null || response.getRes() == null) {
-                            putAccessToken(this, null);
-                            startActivity(new Intent(this, AuthActivity.class));
-                        } else {
-                            putUserName(this, response.getRes().getName());
-                            putUserShortLink(this, response.getRes().getShortLink());
-                            startActivity(new Intent(this, MainMenuActivity.class));
-                            finish();
-                        }
-                    });
-                }
-            });
-        }
+        Executors.newSingleThreadExecutor().execute(() -> {
+            try {
+                response = new API("http://213.219.214.94:3501/api/method/utils.getAndroidAppMinimumSupportedVersionCode?v=1.0").call();
+                response1 = new API("http://213.219.214.94:3501/api/method/account.get?v=1.0", accessToken).call();
+            } catch (IOException e) {
+                throw new RuntimeException(e);
+            } finally {
+                new Handler(Looper.getMainLooper()).post(() -> {
+                    if (Integer.parseInt(response.getRes().getValue()) > BuildConfig.VERSION_CODE) startActivity(new Intent(this, HardUpdateActivity.class));
+                    else if (accessToken == null) startActivity(new Intent(this, AuthActivity.class));
+                    else if (response1.getError() != null || response1.getRes() == null) {
+                        putAccessToken(this, null);
+                        startActivity(new Intent(this, AuthActivity.class));
+                    } else {
+                        putUserName(this, response1.getRes().getName());
+                        putUserShortLink(this, response1.getRes().getShortLink());
+                        startActivity(new Intent(this, MainMenuActivity.class));
+                    }
+                });
+            }
+        });
     }
 
     public static void putAccessToken(Context context, String value) {
@@ -108,15 +108,10 @@ public class Routing extends AppCompatActivity {
         else if (appTheme == 2) AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES);
     }
 
-    /*public static String pluralForm(Integer i, String form1, String form2, String form3, Boolean declination) {
-        if (i == 1) return i + " " + form1;
-        else if (!declination) return i + " " + form2;
-        i = i%100;
-
-        if (i == 1) return i + " " + form1;
-        else if (i == 0 || (i > 4 && i < 20)) return i + " " + form3;
-        else return i + " " + form2;
-    }*/
+    public static String pluralForm(Integer i, String[] words) {
+        if (!Locale.getDefault().getLanguage().equals("ru")) return i + " " + words[i == 1 ? 0 : 1];
+        return i + " " + words[(i % 100 > 4 && i % 100 < 20) ? 2 : new int[]{ 2, 0, 1, 1, 1, 2 }[(i % 10 < 5) ? Math.abs(i) % 10 : 5]];
+    }
 
     public static void showToastMessage(Activity activity, View view, int type, String text) {
         @SuppressLint("InflateParams") View vToastMessage =  activity.getLayoutInflater().inflate(R.layout.window_toast_message, null);

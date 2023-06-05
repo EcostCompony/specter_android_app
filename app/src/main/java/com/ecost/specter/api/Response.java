@@ -3,8 +3,10 @@ package com.ecost.specter.api;
 import com.ecost.specter.models.Channel;
 import com.ecost.specter.models.Post;
 import com.ecost.specter.models.Subscriber;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
+@JsonIgnoreProperties(ignoreUnknown = true)
 public class Response {
 
     private Object res;

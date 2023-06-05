@@ -1,10 +1,11 @@
-<resources>
+<resources xmlns:tools="http://schemas.android.com/tools">
     <string name="app_name" translatable="false">specter</string>
 
     <!-- symbols -->
     <string name="symbol_at" translatable="false">\@</string>
 
     <!-- headers -->
+    <string name="hard_update_header">Your version is outdated!</string>
     <string name="sign_in_header">Log in with <font color="#D75026">eco</font>st</string>
     <string name="sign_up_header">Registration in <font color="#D75026">eco</font>st</string>
     <string name="specter_start_header">Let\'s start</string>
@@ -38,6 +39,12 @@
     <array name="channel_settings_section">
         <item>Basic</item>
         <item>Subscribers</item>
+    </array>
+
+    <!-- plural form -->
+    <array name="subscribers" tools:ignore="InconsistentArrays">
+        <item>subscriber</item>
+        <item>subscribers</item>
     </array>
 
     <!-- popup menu -->
@@ -98,6 +105,9 @@
     <string name="main_channel_settings_error_small_short_link">A short link must contain 3 or more characters</string>
     <string name="main_channel_settings_error_already_in_use">The short link is already in use</string>
 
+    <!-- hard update -->
+    <string name="hard_update_description">Unfortunately, we stopped supporting this version because a critical error was found, or this version does not support the new service system.</string>
+
     <!-- sign in -->
     <string name="sign_in_input_phone_number_hint">Phone number</string>
     <string name="sign_in_input_password_hint">Password</string>
@@ -129,6 +139,9 @@
     <string name="specter_start_input_name_header">Name</string>
     <string name="specter_start_input_short_link_header">Short link</string>
     <string name="specter_start_button_start">Start</string>
+
+    <!-- channels menu -->
+    <string name="channels_menu_channel_body_channel_created">Channel created</string>
 
     <!-- channels search -->
     <string name="channels_search_input_search_string_hint">Search</string>

@@ -1,6 +1,7 @@
 package com.ecost.specter.channel;
 
 import static com.ecost.specter.Routing.accessToken;
+import static com.ecost.specter.Routing.pluralForm;
 
 import android.annotation.SuppressLint;
 import android.os.Bundle;
@@ -33,6 +34,7 @@ public class ChannelPageFragment extends Fragment {
 
         ((TextView) inflaterView.findViewById(R.id.title)).setText(channelActivity.channelTitle);
         ((TextView) inflaterView.findViewById(R.id.short_link)).setText(getText(R.string.symbol_at) + channelActivity.channelShortLink);
+        ((TextView) inflaterView.findViewById(R.id.number_subscribers)).setText(pluralForm(channelActivity.channelSubscriberNumbers, getResources().getStringArray(R.array.subscribers)));
         if (channelActivity.userSubscribe) ibSubscribe.setImageResource(R.drawable.icon_profile_delete);
         if (channelActivity.userAdmin) {
             ibChannelSettings.setVisibility(View.VISIBLE);
@@ -50,20 +52,18 @@ public class ChannelPageFragment extends Fragment {
 
         inflaterView.findViewById(R.id.header).setOnClickListener(view -> channelActivity.getSupportFragmentManager().popBackStackImmediate());
 
-        ibSubscribe.setOnClickListener(view -> {
-            Executors.newSingleThreadExecutor().execute(() -> {
-                try {
-                    new API((channelActivity.userSubscribe ? "http://213.219.214.94:3501/api/method/channels.unsubscribe?v=1.0&channel_id=" : "http://213.219.214.94:3501/api/method/channels.subscribe?v=1.0&channel_id=") + channelActivity.channelId, accessToken).call();
-                } catch (IOException e) {
-                    throw new RuntimeException(e);
-                } finally {
-                    new Handler(Looper.getMainLooper()).post(() -> {
-                        channelActivity.userSubscribe = !channelActivity.userSubscribe;
-                        ibSubscribe.setImageResource(channelActivity.userSubscribe ? R.drawable.icon_profile_delete : R.drawable.icon_profile_add);
-                    });
-                }
-            });
-        });
+        ibSubscribe.setOnClickListener(view -> Executors.newSingleThreadExecutor().execute(() -> {
+            try {
+                new API((channelActivity.userSubscribe ? "http://213.219.214.94:3501/api/method/channels.unsubscribe?v=1.0&channel_id=" : "http://213.219.214.94:3501/api/method/channels.subscribe?v=1.0&channel_id=") + channelActivity.channelId, accessToken).call();
+            } catch (IOException e) {
+                throw new RuntimeException(e);
+            } finally {
+                new Handler(Looper.getMainLooper()).post(() -> {
+                    channelActivity.userSubscribe = !channelActivity.userSubscribe;
+                    ibSubscribe.setImageResource(channelActivity.userSubscribe ? R.drawable.icon_profile_delete : R.drawable.icon_profile_add);
+                });
+            }
+        }));
 
         ibChannelSettings.setOnClickListener(view -> channelActivity.getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container_view, new ChannelSettingsFragment()).addToBackStack(null).commit());
 

@@ -1,8 +1,11 @@
 package com.ecost.specter.models;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
+@JsonIgnoreProperties(ignoreUnknown = true)
 public class Channel {
 
-    private Integer id, category, is_subscriber, is_admin;
+    private Integer id, category, is_subscriber, is_admin, subscriber_numbers;
     private String title, short_link, description, body;
 
     public Integer getId() {
@@ -43,6 +46,14 @@ public class Channel {
 
     public void setDescription(String description) {
         this.description = description;
+    }
+
+    public Integer getSubscriberNumbers() {
+        return subscriber_numbers;
+    }
+
+    public void setSubscriber_numbers(Integer subscriber_numbers) {
+        this.subscriber_numbers = subscriber_numbers;
     }
 
     public String getBody() {

@@ -1,10 +1,11 @@
 package com.ecost.specter.api;
 
-import com.ecost.specter.models.Channel;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
+@JsonIgnoreProperties(ignoreUnknown = true)
 public class ResponseRes {
 
-    private String confirmToken, signupToken, serviceAuthToken, accessToken, authToken, name, short_link;
+    private String confirmToken, signupToken, serviceAuthToken, accessToken, authToken, name, short_link, value;
     private Integer id, ecost_id;
 
     public String getConfirmToken() {
@@ -77,6 +78,14 @@ public class ResponseRes {
 
     public void setEcost_id(Integer ecost_id) {
         this.ecost_id = ecost_id;
+    }
+
+    public String getValue() {
+        return value;
+    }
+
+    public void setValue(String value) {
+        this.value = value;
     }
 
 }

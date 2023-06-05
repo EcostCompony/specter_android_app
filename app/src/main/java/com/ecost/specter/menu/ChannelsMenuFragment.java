@@ -50,7 +50,9 @@ public class ChannelsMenuFragment extends Fragment {
                 new Handler(Looper.getMainLooper()).post(() -> {
                     if (response.getError() != null) showToastMessage(mainMenuActivity, super.getView(), 2, getString(R.string.unknown_error));
                     else {
-                        channels.addAll(Arrays.asList(response.getChannelsRes()));
+                        Channel[] channels1 = response.getChannelsRes();
+                        for (Channel channel : channels1) if (channel.getBody().equals("%CHANNEL_CREATED%")) channel.setBody(getString(R.string.channels_menu_channel_body_channel_created));
+                        channels.addAll(Arrays.asList(channels1));
                         channelsAdapter.notifyDataSetChanged();
                     }
                 });

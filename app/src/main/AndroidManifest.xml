@@ -24,6 +24,9 @@
             </intent-filter>
         </activity>
         <activity
+            android:name=".HardUpdateActivity"
+            android:screenOrientation="nosensor" />
+        <activity
             android:name=".auth.AuthActivity"
             android:screenOrientation="nosensor" />
         <activity

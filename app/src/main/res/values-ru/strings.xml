@@ -1,5 +1,6 @@
-<resources>
+<resources xmlns:tools="http://schemas.android.com/tools">
     <!-- headers -->
+    <string name="hard_update_header">Твоя версия устарела!</string>
     <string name="sign_in_header">Вход с <font color="#D75026">eco</font>st</string>
     <string name="sign_up_header">Регистрация в <font color="#D75026">eco</font>st</string>
     <string name="specter_start_header">Давайте начнём</string>
@@ -27,6 +28,13 @@
     <array name="channel_settings_section">
         <item>Основное</item>
         <item>Подписчики</item>
+    </array>
+
+    <!-- plural form -->
+    <array name="subscribers" tools:ignore="InconsistentArrays">
+        <item>подписчик</item>
+        <item>подписчика</item>
+        <item>подписчиков</item>
     </array>
 
     <!-- popup menu -->
@@ -87,6 +95,9 @@
     <string name="main_channel_settings_error_small_short_link">Короткая ссылка должна содержать 3 и более символов</string>
     <string name="main_channel_settings_error_already_in_use">Короткая ссылка уже используется</string>
 
+    <!-- hard update -->
+    <string name="hard_update_description">К сожалению, мы перестали поддерживать данную версию, так как была обнаружена критическая ошибка, либо эта версия не поддерживает новую систему сервиса.</string>
+
     <!-- sign in -->
     <string name="sign_in_input_phone_number_hint">Номер телефона</string>
     <string name="sign_in_input_password_hint">Пароль</string>
@@ -118,6 +129,9 @@
     <string name="specter_start_input_name_header">Имя</string>
     <string name="specter_start_input_short_link_header">Короткая ссылка</string>
     <string name="specter_start_button_start">Поехали</string>
+
+    <!-- channels menu -->
+    <string name="channels_menu_channel_body_channel_created">Канал создан</string>
 
     <!-- channels search -->
     <string name="channels_search_input_search_string_hint">Поиск</string>
