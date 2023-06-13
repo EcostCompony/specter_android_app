@@ -53,10 +53,10 @@ public class AccountSettingsMenuFragment extends Fragment {
         etName.setText(userName);
         etShortLink.setText(userShortLink);
 
-        etName.setFilters(new InputFilter[]{ new InputFilter.LengthFilter(16) });
+        etName.setFilters(new InputFilter[]{ new InputFilter.LengthFilter(64) });
         etShortLink.setFilters(new InputFilter[]{ (source, start, end, dest, dstart, dend) -> {
             for (int i = start; i < end; i++) {
-                if (!Pattern.compile("^[A-Z\\d_.]+$", Pattern.CASE_INSENSITIVE).matcher(String.valueOf(source.charAt(i))).find()) return "";
+                if (!Pattern.compile("^[a-z][a-z\\d_.]{2,30}[a-z\\d]$", Pattern.CASE_INSENSITIVE).matcher(String.valueOf(source.charAt(i))).find()) return "";
                 if (Character.isUpperCase(source.charAt(i))) return String.valueOf(source.charAt(i)).toLowerCase();
             }
             return null;
@@ -65,8 +65,11 @@ public class AccountSettingsMenuFragment extends Fragment {
         TextWatcher textWatcher = new TextWatcher() {
             @Override
             public void afterTextChanged(Editable s) {
-                ibSaveName.setVisibility(etName.getText().toString().trim().equals(userName) ? View.GONE : View.VISIBLE);
-                ibSaveShortLink.setVisibility(etShortLink.getText().toString().equals(userShortLink) ? View.GONE : View.VISIBLE);
+                String name = etName.getText().toString().trim();
+                String shortLink = etShortLink.getText().toString();
+
+                ibSaveName.setVisibility(name.equals(userName) || name.equals("") ? View.GONE : View.VISIBLE);
+                ibSaveShortLink.setVisibility(shortLink.equals(userShortLink) || shortLink.length() < 4 || !Pattern.compile("^[a-z][a-z\\d_.]{2,30}[a-z\\d]$", Pattern.CASE_INSENSITIVE).matcher(shortLink).find() || (float) Pattern.compile("[a-z]", Pattern.CASE_INSENSITIVE).matcher(shortLink).replaceAll("").length() / (float) shortLink.length() * 100 > 40 ? View.GONE : View.VISIBLE);
             }
 
             @Override public void beforeTextChanged(CharSequence s, int start, int count, int after) { }
@@ -103,7 +106,7 @@ public class AccountSettingsMenuFragment extends Fragment {
         if (name.equals("")) showToastMessage(mainMenuActivity, view, 2, getString(R.string.account_settings_menu_error_not_name));
         else Executors.newSingleThreadExecutor().execute(() -> {
             try {
-                response = new API("http://213.219.214.94:3501/api/method/account.edit?v=1.0&name=" + name, accessToken).call();
+                response = new API("http://thespecterlife.com:3501/api/method/account.edit?v=1.0&name=" + name, accessToken).call();
             } catch (IOException e) {
                 throw new RuntimeException(e);
             } finally {
@@ -122,10 +125,10 @@ public class AccountSettingsMenuFragment extends Fragment {
         String shortLink = etShortLink.getText().toString();
 
         if (shortLink.equals("")) showToastMessage(mainMenuActivity, view, 2, getString(R.string.account_settings_menu_error_not_short_link));
-        else if (shortLink.length() < 3) showToastMessage(mainMenuActivity, view, 2, getString(R.string.account_settings_menu_error_small_short_link));
+        else if (shortLink.length() < 4) showToastMessage(mainMenuActivity, view, 2, getString(R.string.account_settings_menu_error_small_short_link));
         else Executors.newSingleThreadExecutor().execute(() -> {
             try {
-                response = new API("http://213.219.214.94:3501/api/method/account.edit?v=1.0&short_link=" + shortLink, accessToken).call();
+                response = new API("http://thespecterlife.com:3501/api/method/account.edit?v=1.0&short_link=" + shortLink, accessToken).call();
             } catch (IOException e) {
                 throw new RuntimeException(e);
             } finally {

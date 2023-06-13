@@ -59,7 +59,7 @@ public class ConfirmCodeSignInFragment extends Fragment {
         if (code.length() != 4) showToastMessage(authActivity, view, 2, getString(R.string.confirm_code_sign_in_error_incorrect_code));
         else Executors.newSingleThreadExecutor().execute(() -> {
             try {
-                response = new API("http://213.219.214.94:3500/api/auth/method/signin.checkConfirmCode?v=1.0&code=" + code, token).call();
+                response = new API("http://thespecterlife.com:3500/api/auth/method/signin.checkConfirmCode?v=1.0&code=" + code, token).call();
             } catch (IOException e) {
                 throw new RuntimeException(e);
             } finally {

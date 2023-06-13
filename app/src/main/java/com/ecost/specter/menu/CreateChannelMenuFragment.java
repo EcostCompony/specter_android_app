@@ -37,10 +37,10 @@ public class CreateChannelMenuFragment extends Fragment {
         EditText etDescription = inflaterView.findViewById(R.id.input_description);
         MainMenuActivity mainMenuActivity = (MainMenuActivity) requireActivity();
 
-        etTitle.setFilters(new InputFilter[]{ new InputFilter.LengthFilter(32) });
+        etTitle.setFilters(new InputFilter[]{ new InputFilter.LengthFilter(64) });
         etShortLink.setFilters(new InputFilter[]{ (source, start, end, dest, dstart, dend) -> {
             for (int i = start; i < end; i++) {
-                if (!Pattern.compile("^[A-Z\\d_.]+$", Pattern.CASE_INSENSITIVE).matcher(String.valueOf(source.charAt(i))).find()) return "";
+                if (!Pattern.compile("^[a-z][a-z\\d_.]{2,30}[a-z\\d]$", Pattern.CASE_INSENSITIVE).matcher(String.valueOf(source.charAt(i))).find()) return "";
                 if (Character.isUpperCase(source.charAt(i))) return String.valueOf(source.charAt(i)).toLowerCase();
             }
             return null;
@@ -62,10 +62,10 @@ public class CreateChannelMenuFragment extends Fragment {
 
             if (title.equals("")) showToastMessage(mainMenuActivity, view, 2, getString(R.string.create_channel_menu_error_not_title));
             else if (shortLink.equals("")) showToastMessage(mainMenuActivity, view, 2, getString(R.string.create_channel_menu_error_not_short_link));
-            else if (shortLink.length() < 3) showToastMessage(mainMenuActivity, view, 2, getString(R.string.create_channel_menu_error_small_short_link));
+            else if (shortLink.length() < 4) showToastMessage(mainMenuActivity, view, 2, getString(R.string.create_channel_menu_error_small_short_link));
             else Executors.newSingleThreadExecutor().execute(() -> {
                 try {
-                    response = new API("http://213.219.214.94:3501/api/method/channels.create?v=1.0&title=" + title + "&short_link=" + shortLink + (category != 0 ? "&category=" + category : "") + (description.length() != 0 ? "&description=" + description : ""), accessToken).call();
+                    response = new API("http://thespecterlife.com:3501/api/method/channels.create?v=1.0&title=" + title + "&short_link=" + shortLink + (category != 0 ? "&category=" + category : "") + (description.length() != 0 ? "&description=" + description : ""), accessToken).call();
                 } catch (IOException e) {
                     throw new RuntimeException(e);
                 } finally {

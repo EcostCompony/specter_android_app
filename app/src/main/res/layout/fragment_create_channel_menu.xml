@@ -147,6 +147,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="4dp"
         android:inputType="textCapSentences|textMultiLine"
+        android:maxLines="8"
         android:importantForAutofill="no"
         android:background="@drawable/input"
         android:paddingVertical="10dp"

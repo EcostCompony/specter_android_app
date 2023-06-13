@@ -77,22 +77,22 @@
 
     <string name="specter_start_error_not_name">Имя не введено</string>
     <string name="specter_start_error_not_short_link">Короткая ссылка не введена</string>
-    <string name="specter_start_error_small_short_link">Короткая ссылка должна содержать 3 и более символов</string>
+    <string name="specter_start_error_small_short_link">Короткая ссылка должна содержать 4 и более символов</string>
     <string name="specter_start_error_already_in_use">Короткая ссылка уже используется</string>
 
     <string name="account_settings_menu_error_not_name">Имя не введено</string>
     <string name="account_settings_menu_error_not_short_link">Короткая ссылка не введена</string>
-    <string name="account_settings_menu_error_small_short_link">Короткая ссылка должна содержать 3 и более символов</string>
+    <string name="account_settings_menu_error_small_short_link">Короткая ссылка должна содержать 4 и более символов</string>
     <string name="account_settings_menu_error_already_in_use">Короткая ссылка уже используется</string>
 
     <string name="create_channel_menu_error_not_title">Название не введено</string>
     <string name="create_channel_menu_error_not_short_link">Короткая ссылка не введена</string>
-    <string name="create_channel_menu_error_small_short_link">Короткая ссылка должна содержать 3 и более символов</string>
+    <string name="create_channel_menu_error_small_short_link">Короткая ссылка должна содержать 4 и более символов</string>
     <string name="create_channel_menu_error_already_in_use">Короткая ссылка уже используется</string>
 
     <string name="main_channel_settings_error_not_title">Название не введено</string>
     <string name="main_channel_settings_error_not_short_link">Короткая ссылка не введена</string>
-    <string name="main_channel_settings_error_small_short_link">Короткая ссылка должна содержать 3 и более символов</string>
+    <string name="main_channel_settings_error_small_short_link">Короткая ссылка должна содержать 4 и более символов</string>
     <string name="main_channel_settings_error_already_in_use">Короткая ссылка уже используется</string>
 
     <!-- hard update -->

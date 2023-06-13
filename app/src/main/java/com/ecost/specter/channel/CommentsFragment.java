@@ -14,6 +14,7 @@ import android.os.Looper;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
 import android.widget.TextView;
 
@@ -61,11 +62,14 @@ public class CommentsFragment extends Fragment {
                     commentEditable = comment;
                     tvEditingComment.setVisibility(View.VISIBLE);
                     etComment.setText(comment.getText());
+                    etComment.setSelection(comment.getText().length());
+                    etComment.requestFocus();
+                    etComment.postDelayed(() -> ((InputMethodManager) channelActivity.getSystemService(Context.INPUT_METHOD_SERVICE)).showSoftInput(etComment, InputMethodManager.SHOW_IMPLICIT), 100);
                 } else if (item.getItemId() == R.id.copy) ((ClipboardManager) channelActivity.getSystemService(Context.CLIPBOARD_SERVICE)).setPrimaryClip(ClipData.newPlainText("comment", comment.getText()));
                 else if (item.getItemId() == R.id.delete) {
                     Executors.newSingleThreadExecutor().execute(() -> {
                         try {
-                            response = new API("http://213.219.214.94:3501/api/method/comments.delete?v=1.0&channel_id=" + channelActivity.channelId + "&post_id=" + postId + "&comment_id=" + comment.getId(), accessToken).call();
+                            response = new API("http://thespecterlife.com:3501/api/method/comments.delete?v=1.0&channel_id=" + channelActivity.channelId + "&post_id=" + postId + "&comment_id=" + comment.getId(), accessToken).call();
                         } catch (IOException e) {
                             throw new RuntimeException(e);
                         } finally {
@@ -92,7 +96,7 @@ public class CommentsFragment extends Fragment {
             if (text.equals("")) return;
             Executors.newSingleThreadExecutor().execute(() -> {
                 try {
-                    response = new API(commentEditable == null ? ("http://213.219.214.94:3501/api/method/comments.create?v=1.0&channel_id=" + channelActivity.channelId + "&post_id=" + postId + "&text=" + text) : ("http://213.219.214.94:3501/api/method/comments.edit?v=1.0&channel_id=" + channelActivity.channelId + "&post_id=" + postId + "&comment_id=" + commentEditable.getId() + "&text=" + text), accessToken).call();
+                    response = new API(commentEditable == null ? ("http://thespecterlife.com:3501/api/method/comments.create?v=1.0&channel_id=" + channelActivity.channelId + "&post_id=" + postId + "&text=" + text) : ("http://213.219.214.94:3501/api/method/comments.edit?v=1.0&channel_id=" + channelActivity.channelId + "&post_id=" + postId + "&comment_id=" + commentEditable.getId() + "&text=" + text), accessToken).call();
                 } catch (IOException e) {
                     throw new RuntimeException(e);
                 } finally {
@@ -120,7 +124,7 @@ public class CommentsFragment extends Fragment {
     private void showComments(View view) {
         Executors.newSingleThreadExecutor().execute(() -> {
             try {
-                response = new API("http://213.219.214.94:3501/api/method/comments.get?v=1.0&channel_id=" + channelActivity.channelId + "&post_id=" + postId, accessToken).call();
+                response = new API("http://thespecterlife.com:3501/api/method/comments.get?v=1.0&channel_id=" + channelActivity.channelId + "&post_id=" + postId, accessToken).call();
             } catch (IOException e) {
                 throw new RuntimeException(e);
             } finally {

@@ -43,7 +43,7 @@ public class ChannelsMenuFragment extends Fragment {
 
         Executors.newSingleThreadExecutor().execute(() -> {
             try {
-                response = new API("http://213.219.214.94:3501/api/method/channels.get?v=1.0", accessToken).call();
+                response = new API("http://thespecterlife.com:3501/api/method/channels.get?v=1.0", accessToken).call();
             } catch (IOException e) {
                 throw new RuntimeException(e);
             } finally {

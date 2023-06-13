@@ -37,7 +37,7 @@ public class ChannelActivity extends AppCompatActivity {
 
         Executors.newSingleThreadExecutor().execute(() -> {
             try {
-                response = new API("http://213.219.214.94:3501/api/method/channels.getById?v=1.0&channel_id=" + channelId, accessToken).call();
+                response = new API("http://thespecterlife.com:3501/api/method/channels.getById?v=1.0&channel_id=" + channelId, accessToken).call();
             } catch (IOException e) {
                 throw new RuntimeException(e);
             } finally {

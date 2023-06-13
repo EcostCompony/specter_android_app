@@ -87,22 +87,22 @@
 
     <string name="specter_start_error_not_name">Name not entered</string>
     <string name="specter_start_error_not_short_link">Short link not entered</string>
-    <string name="specter_start_error_small_short_link">A short link must contain 3 or more characters</string>
+    <string name="specter_start_error_small_short_link">A short link must contain 4 or more characters</string>
     <string name="specter_start_error_already_in_use">The short link is already in use</string>
 
     <string name="account_settings_menu_error_not_name">Name not entered</string>
     <string name="account_settings_menu_error_not_short_link">Short link not entered</string>
-    <string name="account_settings_menu_error_small_short_link">A short link must contain 3 or more characters</string>
+    <string name="account_settings_menu_error_small_short_link">A short link must contain 4 or more characters</string>
     <string name="account_settings_menu_error_already_in_use">The short link is already in use</string>
 
     <string name="create_channel_menu_error_not_title">Title not entered</string>
     <string name="create_channel_menu_error_not_short_link">Short link not entered</string>
-    <string name="create_channel_menu_error_small_short_link">A short link must contain 3 or more characters</string>
+    <string name="create_channel_menu_error_small_short_link">A short link must contain 4 or more characters</string>
     <string name="create_channel_menu_error_already_in_use">The short link is already in use</string>
 
     <string name="main_channel_settings_error_not_title">Title not entered</string>
     <string name="main_channel_settings_error_not_short_link">Short link not entered</string>
-    <string name="main_channel_settings_error_small_short_link">A short link must contain 3 or more characters</string>
+    <string name="main_channel_settings_error_small_short_link">A short link must contain 4 or more characters</string>
     <string name="main_channel_settings_error_already_in_use">The short link is already in use</string>
 
     <!-- hard update -->

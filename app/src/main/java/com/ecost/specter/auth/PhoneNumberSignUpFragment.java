@@ -57,7 +57,7 @@ public class PhoneNumberSignUpFragment extends Fragment {
         else if (phoneNumber.length() < 3) showToastMessage(authActivity, view, 2, getString(R.string.phone_number_sign_up_error_incorrect_phone_number));
         else Executors.newSingleThreadExecutor().execute(() -> {
             try {
-                response = new API("http://213.219.214.94:3500/api/auth/method/signup.confirmPhoneNumber?v=1.0&service=specter&phone_number=" + phoneNumber).call();
+                response = new API("http://thespecterlife.com:3500/api/auth/method/signup.confirmPhoneNumber?v=1.0&service=specter&phone_number=" + phoneNumber).call();
             } catch (IOException e) {
                 throw new RuntimeException(e);
             } finally {

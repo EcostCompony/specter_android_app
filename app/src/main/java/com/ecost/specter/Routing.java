@@ -21,7 +21,6 @@ import android.widget.LinearLayout;
 import android.widget.PopupMenu;
 import android.widget.PopupWindow;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.splashscreen.SplashScreen;
@@ -53,8 +52,8 @@ public class Routing extends AppCompatActivity {
 
         Executors.newSingleThreadExecutor().execute(() -> {
             try {
-                response = new API("http://213.219.214.94:3501/api/method/utils.getAndroidAppMinimumSupportedVersionCode?v=1.0").call();
-                response1 = new API("http://213.219.214.94:3501/api/method/account.get?v=1.0", accessToken).call();
+                response = new API("http://thespecterlife.com:3501/api/method/utils.getAndroidAppMinimumSupportedVersionCode?v=1.0").call();
+                response1 = new API("http://thespecterlife.com:3501/api/method/account.get?v=1.0", accessToken).call();
             } catch (IOException e) {
                 throw new RuntimeException(e);
             } finally {
@@ -143,26 +142,5 @@ public class Routing extends AppCompatActivity {
         popupMenu.setOnDismissListener(onDismissListener);
         popupMenu.show();
     }
-
-    /*public static String translateData(long unixDate, String pattern) {
-        Date date = new Date(unixDate * 1000L);
-        SimpleDateFormat simpleDateFormat = new SimpleDateFormat(pattern, Locale.getDefault());
-        simpleDateFormat.setTimeZone(TimeZone.getTimeZone("GMT+3"));
-        return simpleDateFormat.format(date);
-    }
-
-    public static void AgreeAlertDialog(Activity activity, ViewGroup viewGroup, String title, String description, View.OnClickListener onClickListener) {
-        View alertDialogView = LayoutInflater.from(activity).inflate(R.layout.agree_alert_dialog, viewGroup, false);
-        AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(activity);
-        alertDialogBuilder.setView(alertDialogView);
-        ((TextView) alertDialogView.findViewById(R.id.header)).setText(title);
-        ((TextView) alertDialogView.findViewById(R.id.description)).setText(description);
-        AlertDialog alertDialog = alertDialogBuilder.create();
-        alertDialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
-        alertDialogView.findViewById(R.id.button_yes).setOnClickListener(onClickListener);
-        alertDialogView.findViewById(R.id.button_yes).setOnClickListener(viewYes -> alertDialog.cancel());
-        alertDialogView.findViewById(R.id.button_cancel).setOnClickListener(view -> alertDialog.cancel());
-        alertDialog.show();
-    }*/
 
 }

@@ -62,7 +62,7 @@ public class ChannelsSearchFragment extends Fragment {
                 if (!searchString.equals("")) {
                     Executors.newSingleThreadExecutor().execute(() -> {
                         try {
-                            response = new API("http://213.219.214.94:3501/api/method/channels.search?v=1.0&q=" + searchString, accessToken).call();
+                            response = new API("http://thespecterlife.com:3501/api/method/channels.search?v=1.0&q=" + searchString, accessToken).call();
                         } catch (IOException e) {
                             throw new RuntimeException(e);
                         } finally {

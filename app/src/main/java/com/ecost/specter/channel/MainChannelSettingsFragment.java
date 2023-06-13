@@ -55,10 +55,10 @@ public class MainChannelSettingsFragment extends Fragment {
         etShortLink.setText(channelActivity.channelShortLink);
         etDescription.setText(channelActivity.channelDescription);
 
-        etTitle.setFilters(new InputFilter[]{ new InputFilter.LengthFilter(32) });
+        etTitle.setFilters(new InputFilter[]{ new InputFilter.LengthFilter(64) });
         etShortLink.setFilters(new InputFilter[]{ (source, start, end, dest, dstart, dend) -> {
             for (int i = start; i < end; i++) {
-                if (!Pattern.compile("^[A-Z\\d_.]+$", Pattern.CASE_INSENSITIVE).matcher(String.valueOf(source.charAt(i))).find()) return "";
+                if (!Pattern.compile("^[a-z][a-z\\d_.]{2,30}[a-z\\d]$", Pattern.CASE_INSENSITIVE).matcher(String.valueOf(source.charAt(i))).find()) return "";
                 if (Character.isUpperCase(source.charAt(i))) return String.valueOf(source.charAt(i)).toLowerCase();
             }
             return null;
@@ -81,9 +81,12 @@ public class MainChannelSettingsFragment extends Fragment {
         TextWatcher textWatcher = new TextWatcher() {
             @Override
             public void afterTextChanged(Editable s) {
-                ibSaveTitle.setVisibility(etTitle.getText().toString().trim().equals(channelActivity.channelTitle) ? View.GONE : View.VISIBLE);
-                ibSaveShortLink.setVisibility(etShortLink.getText().toString().equals(channelActivity.channelShortLink) ? View.GONE : View.VISIBLE);
-                ibSaveDescription.setVisibility(etDescription.getText().toString().trim().equals(channelActivity.channelDescription) || etDescription.getText().toString().trim().equals("") ? View.GONE : View.VISIBLE);
+                String title = etTitle.getText().toString().trim();
+                String shortLink = etShortLink.getText().toString();
+
+                ibSaveTitle.setVisibility(title.equals(channelActivity.channelTitle) || title.equals("") ? View.GONE : View.VISIBLE);
+                ibSaveShortLink.setVisibility(shortLink.equals(channelActivity.channelShortLink) || shortLink.length() < 4 || !Pattern.compile("^[a-z][a-z\\d_.]{2,30}[a-z\\d]$", Pattern.CASE_INSENSITIVE).matcher(shortLink).find() || (float) Pattern.compile("[a-z]", Pattern.CASE_INSENSITIVE).matcher(shortLink).replaceAll("").length() / (float) shortLink.length() * 100 > 40 ? View.GONE : View.VISIBLE);
+                ibSaveDescription.setVisibility(etDescription.getText().toString().trim().equals(channelActivity.channelDescription) ? View.GONE : View.VISIBLE);
             }
 
             @Override public void beforeTextChanged(CharSequence s, int start, int count, int after) { }
@@ -113,7 +116,7 @@ public class MainChannelSettingsFragment extends Fragment {
         ibSaveDescription.setOnClickListener(this::saveDescription);
         ibSaveCategory.setOnClickListener(view -> Executors.newSingleThreadExecutor().execute(() -> {
             try {
-                response = new API("http://213.219.214.94:3501/api/method/channels.edit?v=1.0&channel_id=" + channelActivity.channelId + "&category=" + sCategory.getSelectedItemPosition(), accessToken).call();
+                response = new API("http://thespecterlife.com:3501/api/method/channels.edit?v=1.0&channel_id=" + channelActivity.channelId + "&category=" + sCategory.getSelectedItemPosition(), accessToken).call();
             } catch (IOException e) {
                 throw new RuntimeException(e);
             } finally {
@@ -129,7 +132,7 @@ public class MainChannelSettingsFragment extends Fragment {
 
         inflaterView.findViewById(R.id.button_delete_channel).setOnClickListener(view -> Executors.newSingleThreadExecutor().execute(() -> {
             try {
-                response = new API("http://213.219.214.94:3501/api/method/channels.delete?v=1.0&channel_id=" + channelActivity.channelId, accessToken).call();
+                response = new API("http://thespecterlife.com:3501/api/method/channels.delete?v=1.0&channel_id=" + channelActivity.channelId, accessToken).call();
             } catch (IOException e) {
                 throw new RuntimeException(e);
             } finally {
@@ -146,7 +149,7 @@ public class MainChannelSettingsFragment extends Fragment {
         if (title.equals("")) showToastMessage(channelActivity, view, 2, getString(R.string.main_channel_settings_error_not_title));
         else Executors.newSingleThreadExecutor().execute(() -> {
             try {
-                response = new API("http://213.219.214.94:3501/api/method/channels.edit?v=1.0&channel_id=" + channelActivity.channelId + "&title=" + title, accessToken).call();
+                response = new API("http://thespecterlife.com:3501/api/method/channels.edit?v=1.0&channel_id=" + channelActivity.channelId + "&title=" + title, accessToken).call();
             } catch (IOException e) {
                 throw new RuntimeException(e);
             } finally {
@@ -165,10 +168,10 @@ public class MainChannelSettingsFragment extends Fragment {
         String shortLink = etShortLink.getText().toString();
 
         if (shortLink.equals("")) showToastMessage(channelActivity, view, 2, getString(R.string.main_channel_settings_error_not_short_link));
-        else if (shortLink.length() < 3) showToastMessage(channelActivity, view, 2, getString(R.string.main_channel_settings_error_small_short_link));
+        else if (shortLink.length() < 4) showToastMessage(channelActivity, view, 2, getString(R.string.main_channel_settings_error_small_short_link));
         else Executors.newSingleThreadExecutor().execute(() -> {
             try {
-                response = new API("http://213.219.214.94:3501/api/method/channels.edit?v=1.0&channel_id=" + channelActivity.channelId + "&short_link=" + shortLink, accessToken).call();
+                response = new API("http://thespecterlife.com:3501/api/method/channels.edit?v=1.0&channel_id=" + channelActivity.channelId + "&short_link=" + shortLink, accessToken).call();
             } catch (IOException e) {
                 throw new RuntimeException(e);
             } finally {
@@ -190,7 +193,7 @@ public class MainChannelSettingsFragment extends Fragment {
 
         Executors.newSingleThreadExecutor().execute(() -> {
             try {
-                response = new API("http://213.219.214.94:3501/api/method/channels.edit?v=1.0&channel_id=" + channelActivity.channelId + "&description=" + description, accessToken).call();
+                response = new API("http://thespecterlife.com:3501/api/method/channels.edit?v=1.0&channel_id=" + channelActivity.channelId + "&description=" + description, accessToken).call();
             } catch (IOException e) {
                 throw new RuntimeException(e);
             } finally {

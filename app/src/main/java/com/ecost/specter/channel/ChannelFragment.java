@@ -15,6 +15,7 @@ import android.os.Looper;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.FrameLayout;
@@ -73,11 +74,14 @@ public class ChannelFragment extends Fragment {
                     postEditable = post;
                     tvEditingPost.setVisibility(View.VISIBLE);
                     etBroadcast.setText(post.getText());
+                    etBroadcast.setSelection(post.getText().length());
+                    etBroadcast.requestFocus();
+                    etBroadcast.postDelayed(() -> ((InputMethodManager) channelActivity.getSystemService(Context.INPUT_METHOD_SERVICE)).showSoftInput(etBroadcast, InputMethodManager.SHOW_IMPLICIT), 100);
                 } else if (item.getItemId() == R.id.copy) ((ClipboardManager) channelActivity.getSystemService(Context.CLIPBOARD_SERVICE)).setPrimaryClip(ClipData.newPlainText("post", post.getText()));
                 else if (item.getItemId() == R.id.delete) {
                     Executors.newSingleThreadExecutor().execute(() -> {
                         try {
-                            response = new API("http://213.219.214.94:3501/api/method/posts.delete?v=1.0&channel_id=" + channelActivity.channelId + "&post_id=" + post.getId(), accessToken).call();
+                            response = new API("http://thespecterlife.com:3501/api/method/posts.delete?v=1.0&channel_id=" + channelActivity.channelId + "&post_id=" + post.getId(), accessToken).call();
                         } catch (IOException e) {
                             throw new RuntimeException(e);
                         } finally {
@@ -100,7 +104,7 @@ public class ChannelFragment extends Fragment {
 
         bSubscribe.setOnClickListener(view -> Executors.newSingleThreadExecutor().execute(() -> {
             try {
-                response = new API("http://213.219.214.94:3501/api/method/channels.subscribe?v=1.0&channel_id=" + channelActivity.channelId, accessToken).call();
+                response = new API("http://thespecterlife.com:3501/api/method/channels.subscribe?v=1.0&channel_id=" + channelActivity.channelId, accessToken).call();
             } catch (IOException e) {
                 throw new RuntimeException(e);
             } finally {
@@ -122,7 +126,7 @@ public class ChannelFragment extends Fragment {
             if (text.equals("")) return;
             Executors.newSingleThreadExecutor().execute(() -> {
                 try {
-                    response = new API(postEditable == null ? ("http://213.219.214.94:3501/api/method/posts.create?v=1.0&channel_id=" + channelActivity.channelId + "&text=" + text + "&author=1") : ("http://213.219.214.94:3501/api/method/posts.edit?v=1.0&channel_id=" + channelActivity.channelId + "&post_id=" + postEditable.getId() + "&text=" + text), accessToken).call();
+                    response = new API(postEditable == null ? ("http://thespecterlife.com:3501/api/method/posts.create?v=1.0&channel_id=" + channelActivity.channelId + "&text=" + text + "&author=1") : ("http://213.219.214.94:3501/api/method/posts.edit?v=1.0&channel_id=" + channelActivity.channelId + "&post_id=" + postEditable.getId() + "&text=" + text), accessToken).call();
                 } catch (IOException e) {
                     throw new RuntimeException(e);
                 } finally {
@@ -150,7 +154,7 @@ public class ChannelFragment extends Fragment {
                 if (text.equals("") || postEditable != null) return false;
                 Executors.newSingleThreadExecutor().execute(() -> {
                     try {
-                        response = new API("http://213.219.214.94:3501/api/method/posts.create?v=1.0&channel_id=" + channelActivity.channelId + "&text=" + text + "&author=2", accessToken).call();
+                        response = new API("http://thespecterlife.com:3501/api/method/posts.create?v=1.0&channel_id=" + channelActivity.channelId + "&text=" + text + "&author=2", accessToken).call();
                     } catch (IOException e) {
                         throw new RuntimeException(e);
                     } finally {
@@ -177,7 +181,7 @@ public class ChannelFragment extends Fragment {
     private void showPosts(View view) {
         Executors.newSingleThreadExecutor().execute(() -> {
             try {
-                response = new API("http://213.219.214.94:3501/api/method/posts.get?v=1.0&channel_id=" + channelActivity.channelId, accessToken).call();
+                response = new API("http://thespecterlife.com:3501/api/method/posts.get?v=1.0&channel_id=" + channelActivity.channelId, accessToken).call();
             } catch (IOException e) {
                 throw new RuntimeException(e);
             } finally {

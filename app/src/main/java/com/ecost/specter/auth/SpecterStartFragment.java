@@ -42,10 +42,10 @@ public class SpecterStartFragment extends BottomSheetDialogFragment {
         assert getArguments() != null;
         token = getArguments().getString("TOKEN", null);
 
-        etName.setFilters(new InputFilter[]{ new InputFilter.LengthFilter(16) });
+        etName.setFilters(new InputFilter[]{ new InputFilter.LengthFilter(64) });
         etShortLink.setFilters(new InputFilter[]{ (source, start, end, dest, dstart, dend) -> {
             for (int i = start; i < end; i++) {
-                if (!Pattern.compile("^[A-Z\\d_.]+$", Pattern.CASE_INSENSITIVE).matcher(String.valueOf(source.charAt(i))).find()) return "";
+                if (!Pattern.compile("^[a-z][a-z\\d_.]{2,30}[a-z\\d]$", Pattern.CASE_INSENSITIVE).matcher(String.valueOf(source.charAt(i))).find()) return "";
                 if (Character.isUpperCase(source.charAt(i))) return String.valueOf(source.charAt(i)).toLowerCase();
             }
             return null;
@@ -67,10 +67,10 @@ public class SpecterStartFragment extends BottomSheetDialogFragment {
 
         if (name.equals("")) showToastMessage(authActivity, view, 2, getString(R.string.specter_start_error_not_name));
         else if (shortLink.equals("")) showToastMessage(authActivity, view, 2, getString(R.string.specter_start_error_not_short_link));
-        else if (shortLink.length() < 3) showToastMessage(authActivity, view, 2, getString(R.string.specter_start_error_small_short_link));
+        else if (shortLink.length() < 4) showToastMessage(authActivity, view, 2, getString(R.string.specter_start_error_small_short_link));
         else Executors.newSingleThreadExecutor().execute(() -> {
             try {
-                response = new API("http://213.219.214.94:3501/api/method/auth?v=1.0&name=" + name + "&short_link=" + shortLink, token).call();
+                response = new API("http://thespecterlife.com:3501/api/method/auth?v=1.0&name=" + name + "&short_link=" + shortLink, token).call();
             } catch (IOException e) {
                 throw new RuntimeException(e);
             } finally {
