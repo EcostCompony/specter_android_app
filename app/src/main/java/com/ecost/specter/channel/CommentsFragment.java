@@ -36,6 +36,7 @@ import java.util.concurrent.Executors;
 
 public class CommentsFragment extends Fragment {
 
+    private RecyclerView rvCommentsList;
     private ChannelActivity channelActivity;
     private PostsAdapter postsAdapter;
     private final List<Post> comments = new ArrayList<>();
@@ -47,7 +48,7 @@ public class CommentsFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View inflaterView = inflater.inflate(R.layout.fragment_comments, container, false);
 
-        RecyclerView rvCommentsList = inflaterView.findViewById(R.id.recycler_comments_list);
+        rvCommentsList = inflaterView.findViewById(R.id.recycler_comments_list);
         TextView tvEditingComment = inflaterView.findViewById(R.id.editing_mode);
         EditText etComment = inflaterView.findViewById(R.id.input_comment);
         channelActivity = (ChannelActivity) requireActivity();
@@ -55,7 +56,9 @@ public class CommentsFragment extends Fragment {
         assert getArguments() != null;
         postId = getArguments().getInt("POST_ID");
 
-        rvCommentsList.setLayoutManager(new LinearLayoutManager(channelActivity));
+        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(channelActivity);
+        linearLayoutManager.setStackFromEnd(true);
+        rvCommentsList.setLayoutManager(linearLayoutManager);
         postsAdapter = new PostsAdapter(channelActivity, comments, (comment, position, view) -> {
             showPopupMenu(channelActivity, view, R.menu.popup_menu_comment, item -> {
                 if (item.getItemId() == R.id.edit) {
@@ -96,7 +99,7 @@ public class CommentsFragment extends Fragment {
             if (text.equals("")) return;
             Executors.newSingleThreadExecutor().execute(() -> {
                 try {
-                    response = new API(commentEditable == null ? ("http://thespecterlife.com:3501/api/method/comments.create?v=1.0&channel_id=" + channelActivity.channelId + "&post_id=" + postId + "&text=" + text) : ("http://213.219.214.94:3501/api/method/comments.edit?v=1.0&channel_id=" + channelActivity.channelId + "&post_id=" + postId + "&comment_id=" + commentEditable.getId() + "&text=" + text), accessToken).call();
+                    response = new API(commentEditable == null ? ("http://thespecterlife.com:3501/api/method/comments.create?v=1.0&channel_id=" + channelActivity.channelId + "&post_id=" + postId + "&text=" + text) : ("http://thespecterlife.com:3501/api/method/comments.edit?v=1.0&channel_id=" + channelActivity.channelId + "&post_id=" + postId + "&comment_id=" + commentEditable.getId() + "&text=" + text), accessToken).call();
                 } catch (IOException e) {
                     throw new RuntimeException(e);
                 } finally {
@@ -105,6 +108,7 @@ public class CommentsFragment extends Fragment {
                         else if (commentEditable == null) {
                             comments.add(response.getPostRes());
                             postsAdapter.notifyItemInserted(comments.size() - 1);
+                            rvCommentsList.scrollToPosition(comments.size() - 1);
                             etComment.setText("");
                         } else {
                             showComments(view);
@@ -134,6 +138,7 @@ public class CommentsFragment extends Fragment {
                         comments.clear();
                         comments.addAll(Arrays.asList(response.getPostsRes()));
                         postsAdapter.notifyDataSetChanged();
+                        rvCommentsList.scrollToPosition(comments.size() - 1);
                     }
                 });
             }

@@ -68,6 +68,7 @@ public class Routing extends AppCompatActivity {
                         putUserShortLink(this, response1.getRes().getShortLink());
                         startActivity(new Intent(this, MainMenuActivity.class));
                     }
+                    finish();
                 });
             }
         });

@@ -69,8 +69,8 @@ public class ChannelsSearchFragment extends Fragment {
                             new Handler(Looper.getMainLooper()).post(() -> {
                                 if (response.getError() != null) showToastMessage(mainMenuActivity, inflaterView, 2, getString(R.string.unknown_error));
                                 else {
-                                    for (Channel channel : response.getChannelsRes()) channel.setBody(getString(R.string.symbol_at) + channel.getShortLink());
                                     channels.addAll(Arrays.asList(response.getChannelsRes()));
+                                    for (Channel channel : channels) channel.setBody(getString(R.string.symbol_at) + channel.getShortLink());
                                     channelsAdapter.notifyDataSetChanged();
                                 }
                             });

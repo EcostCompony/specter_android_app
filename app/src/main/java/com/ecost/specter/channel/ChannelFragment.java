@@ -39,6 +39,7 @@ import java.util.concurrent.Executors;
 
 public class ChannelFragment extends Fragment {
 
+    private RecyclerView rvPostsList;
     private ChannelActivity channelActivity;
     private PostsAdapter postsAdapter;
     private final List<Post> posts = new ArrayList<>();
@@ -50,7 +51,7 @@ public class ChannelFragment extends Fragment {
         View inflaterView = inflater.inflate(R.layout.fragment_channel, container, false);
 
         Button bSubscribe = inflaterView.findViewById(R.id.button_subscribe);
-        RecyclerView rvPostsList = inflaterView.findViewById(R.id.recycler_posts_list);
+        rvPostsList = inflaterView.findViewById(R.id.recycler_posts_list);
         TextView tvEditingPost = inflaterView.findViewById(R.id.editing_mode);
         EditText etBroadcast = inflaterView.findViewById(R.id.input_post);
         FrameLayout flSend = inflaterView.findViewById(R.id.hitbox_button_send);
@@ -61,7 +62,9 @@ public class ChannelFragment extends Fragment {
         if (!channelActivity.userSubscribe) bSubscribe.setVisibility(View.VISIBLE);
         if (channelActivity.userAdmin) inflaterView.findViewById(R.id.admin_panel).setVisibility(View.VISIBLE);
 
-        rvPostsList.setLayoutManager(new LinearLayoutManager(channelActivity));
+        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(channelActivity);
+        linearLayoutManager.setStackFromEnd(true);
+        rvPostsList.setLayoutManager(linearLayoutManager);
         postsAdapter = new PostsAdapter(channelActivity, posts, (post, position, view) -> {
             showPopupMenu(channelActivity, view, R.menu.popup_menu_post, item -> {
                 if (item.getItemId() == R.id.comments) {
@@ -126,7 +129,7 @@ public class ChannelFragment extends Fragment {
             if (text.equals("")) return;
             Executors.newSingleThreadExecutor().execute(() -> {
                 try {
-                    response = new API(postEditable == null ? ("http://thespecterlife.com:3501/api/method/posts.create?v=1.0&channel_id=" + channelActivity.channelId + "&text=" + text + "&author=1") : ("http://213.219.214.94:3501/api/method/posts.edit?v=1.0&channel_id=" + channelActivity.channelId + "&post_id=" + postEditable.getId() + "&text=" + text), accessToken).call();
+                    response = new API(postEditable == null ? ("http://thespecterlife.com:3501/api/method/posts.create?v=1.0&channel_id=" + channelActivity.channelId + "&text=" + text + "&author=1") : ("http://thespecterlife.com:3501/api/method/posts.edit?v=1.0&channel_id=" + channelActivity.channelId + "&post_id=" + postEditable.getId() + "&text=" + text), accessToken).call();
                 } catch (IOException e) {
                     throw new RuntimeException(e);
                 } finally {
@@ -135,6 +138,7 @@ public class ChannelFragment extends Fragment {
                         else if (postEditable == null) {
                             posts.add(response.getPostRes());
                             postsAdapter.notifyItemInserted(posts.size() - 1);
+                            rvPostsList.scrollToPosition(posts.size() - 1);
                             etBroadcast.setText("");
                         } else {
                             showPosts(view);
@@ -163,6 +167,7 @@ public class ChannelFragment extends Fragment {
                             else {
                                 posts.add(response.getPostRes());
                                 postsAdapter.notifyItemInserted(posts.size() - 1);
+                                rvPostsList.scrollToPosition(posts.size() - 1);
                                 etBroadcast.setText("");
                             }
                         });
@@ -191,6 +196,7 @@ public class ChannelFragment extends Fragment {
                         posts.clear();
                         posts.addAll(Arrays.asList(response.getPostsRes()));
                         postsAdapter.notifyDataSetChanged();
+                        rvPostsList.scrollToPosition(posts.size() - 1);
                     }
                 });
             }
