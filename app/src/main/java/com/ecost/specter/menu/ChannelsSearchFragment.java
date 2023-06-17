@@ -57,7 +57,6 @@ public class ChannelsSearchFragment extends Fragment {
             @SuppressLint("NotifyDataSetChanged")
             @Override public void onTextChanged(CharSequence s, int start, int before, int count) {
                 String searchString = etSearchString.getText().toString().trim();
-                channels.clear();
 
                 if (!searchString.equals("")) {
                     Executors.newSingleThreadExecutor().execute(() -> {
@@ -69,6 +68,7 @@ public class ChannelsSearchFragment extends Fragment {
                             new Handler(Looper.getMainLooper()).post(() -> {
                                 if (response.getError() != null) showToastMessage(mainMenuActivity, inflaterView, 2, getString(R.string.unknown_error));
                                 else {
+                                    channels.clear();
                                     channels.addAll(Arrays.asList(response.getChannelsRes()));
                                     for (Channel channel : channels) channel.setBody(getString(R.string.symbol_at) + channel.getShortLink());
                                     channelsAdapter.notifyDataSetChanged();
@@ -76,7 +76,10 @@ public class ChannelsSearchFragment extends Fragment {
                             });
                         }
                     });
-                } else channelsAdapter.notifyDataSetChanged();
+                } else {
+                    channels.clear();
+                    channelsAdapter.notifyDataSetChanged();
+                }
             }
 
             @Override public void beforeTextChanged(CharSequence s, int start, int count, int after) { }

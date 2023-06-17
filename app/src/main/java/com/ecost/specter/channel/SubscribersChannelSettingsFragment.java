@@ -62,7 +62,6 @@ public class SubscribersChannelSettingsFragment extends Fragment {
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
                 String searchString = etSearchString.getText().toString().trim();
-                subscribers.clear();
 
                 if (!searchString.equals("")) {
                     Executors.newSingleThreadExecutor().execute(() -> {
@@ -74,6 +73,7 @@ public class SubscribersChannelSettingsFragment extends Fragment {
                             new Handler(Looper.getMainLooper()).post(() -> {
                                 if (response.getError() != null) showToastMessage(channelActivity, inflaterView, 2, getString(R.string.unknown_error));
                                 else {
+                                    subscribers.clear();
                                     subscribers.addAll(Arrays.asList(response.getSubscribersRes()));
                                     subscribersAdapter.notifyDataSetChanged();
                                 }
@@ -101,6 +101,7 @@ public class SubscribersChannelSettingsFragment extends Fragment {
                 new Handler(Looper.getMainLooper()).post(() -> {
                     if (response.getError() != null) showToastMessage(channelActivity, view, 2, getString(R.string.unknown_error));
                     else {
+                        subscribers.clear();
                         subscribers.addAll(Arrays.asList(response.getSubscribersRes()));
                         subscribersAdapter.notifyDataSetChanged();
                     }

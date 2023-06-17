@@ -46,9 +46,10 @@ public class SignInFragment extends Fragment {
         etPassword.setFilters(new InputFilter[] { new InputFilter.LengthFilter(128) });
 
         inflaterView.findViewById(R.id.hitbox_toggle_show).setOnClickListener(view -> {
+            int selection = etPassword.getSelectionStart();
             etPassword.setInputType(passwordDisplay ? InputType.TYPE_CLASS_TEXT | InputType.TYPE_TEXT_VARIATION_PASSWORD : InputType.TYPE_TEXT_VARIATION_PASSWORD);
             inflaterView.findViewById(R.id.icon_toggle_show).setBackground(ContextCompat.getDrawable(authActivity, passwordDisplay ? R.drawable.icon_eye : R.drawable.icon_eye_slash));
-            etPassword.setSelection(etPassword.getSelectionStart());
+            etPassword.setSelection(selection);
             passwordDisplay = !passwordDisplay;
         });
 

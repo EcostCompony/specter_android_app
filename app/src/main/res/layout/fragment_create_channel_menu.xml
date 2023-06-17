@@ -83,6 +83,7 @@
             android:layout_height="match_parent"
             android:inputType="text"
             android:importantForAutofill="no"
+            android:digits="abcdefghijklmnopqrstuvwxyz0123456789_."
             android:background="@drawable/input"
             android:paddingHorizontal="25dp"
             android:fontFamily="@font/inter_semi_bold"

@@ -19,6 +19,7 @@ import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.FrameLayout;
+import android.widget.PopupMenu;
 import android.widget.TextView;
 
 import androidx.fragment.app.Fragment;
@@ -66,7 +67,7 @@ public class ChannelFragment extends Fragment {
         linearLayoutManager.setStackFromEnd(true);
         rvPostsList.setLayoutManager(linearLayoutManager);
         postsAdapter = new PostsAdapter(channelActivity, posts, (post, position, view) -> {
-            showPopupMenu(channelActivity, view, R.menu.popup_menu_post, item -> {
+            PopupMenu popupMenu = showPopupMenu(channelActivity, view, R.menu.popup_menu_post, item -> {
                 if (item.getItemId() == R.id.comments) {
                     CommentsFragment commentsFragment = new CommentsFragment();
                     Bundle bundle = new Bundle();
@@ -97,6 +98,11 @@ public class ChannelFragment extends Fragment {
                 }
                 return true;
             }, menu -> inflaterView.findViewById(R.id.dim_layout).setVisibility(View.INVISIBLE));
+            if (!channelActivity.userAdmin) {
+                popupMenu.getMenu().findItem(R.id.edit).setVisible(false);
+                popupMenu.getMenu().findItem(R.id.delete).setVisible(false);
+            }
+            popupMenu.show();
             inflaterView.findViewById(R.id.dim_layout).setVisibility(View.VISIBLE);
             return false;
         });

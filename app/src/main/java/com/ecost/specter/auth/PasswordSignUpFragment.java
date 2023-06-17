@@ -59,9 +59,10 @@ public class PasswordSignUpFragment extends Fragment {
             View icon = view == llToggleShowPassword ? inflaterView.findViewById(R.id.icon_toggle_show) : inflaterView.findViewById(R.id.icon_toggle_show2);
             boolean display = view == llToggleShowPassword ? passwordDisplay : confirmPasswordDisplay;
 
+            int selection = editText.getSelectionStart();
             editText.setInputType(display ? InputType.TYPE_CLASS_TEXT | InputType.TYPE_TEXT_VARIATION_PASSWORD : InputType.TYPE_TEXT_VARIATION_PASSWORD);
             icon.setBackground(ContextCompat.getDrawable(authActivity, display ? R.drawable.icon_eye : R.drawable.icon_eye_slash));
-            editText.setSelection(editText.getSelectionStart());
+            editText.setSelection(selection);
             if (view == llToggleShowPassword) passwordDisplay = !display;
             else confirmPasswordDisplay = !display;
         };

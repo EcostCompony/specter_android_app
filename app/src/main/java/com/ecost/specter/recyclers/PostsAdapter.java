@@ -41,7 +41,7 @@ public class PostsAdapter extends RecyclerView.Adapter<PostViewHolder> {
     public void onBindViewHolder(PostViewHolder holder, int position) {
         Post post = posts.get(position);
         holder.tvText.setText(post.getText());
-        holder.tvAuthor.setText(post.getAuthor());
+        holder.tvAuthor.setText(post.getAuthor() == null ? post.getAuthorName() : post.getAuthor());
         holder.tvTime.setText(new SimpleDateFormat("HH:mm", Locale.getDefault()).format(new java.util.Date(post.getDatetime())));
         holder.itemView.setOnLongClickListener(v -> onLongClickListener.onPostLongClick(post, position, holder.itemView));
     }

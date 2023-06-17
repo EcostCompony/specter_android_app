@@ -1,6 +1,7 @@
 <resources xmlns:tools="http://schemas.android.com/tools">
     <!-- headers -->
     <string name="hard_update_header">Твоя версия устарела!</string>
+    <string name="no_internet_header">Отсутствует подключение к сети!</string>
     <string name="sign_in_header">Вход с <font color="#D75026">eco</font>st</string>
     <string name="sign_up_header">Регистрация в <font color="#D75026">eco</font>st</string>
     <string name="specter_start_header">Давайте начнём</string>
@@ -97,6 +98,9 @@
 
     <!-- hard update -->
     <string name="hard_update_description">К сожалению, мы перестали поддерживать данную версию, так как была обнаружена критическая ошибка, либо эта версия не поддерживает новую систему сервиса.</string>
+
+    <!-- no internet -->
+    <string name="no_internet_description">Пожалуйста, подключитесь к сети интернет, чтобы использовать приложение.</string>
 
     <!-- sign in -->
     <string name="sign_in_input_phone_number_hint">Номер телефона</string>

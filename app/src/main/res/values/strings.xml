@@ -6,6 +6,7 @@
 
     <!-- headers -->
     <string name="hard_update_header">Your version is outdated!</string>
+    <string name="no_internet_header">There is no network connection!</string>
     <string name="sign_in_header">Log in with <font color="#D75026">eco</font>st</string>
     <string name="sign_up_header">Registration in <font color="#D75026">eco</font>st</string>
     <string name="specter_start_header">Let\'s start</string>
@@ -107,6 +108,9 @@
 
     <!-- hard update -->
     <string name="hard_update_description">Unfortunately, we stopped supporting this version because a critical error was found, or this version does not support the new service system.</string>
+
+    <!-- no internet -->
+    <string name="no_internet_description">Please connect to the internet to use the app.</string>
 
     <!-- sign in -->
     <string name="sign_in_input_phone_number_hint">Phone number</string>

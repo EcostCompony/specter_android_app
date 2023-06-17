@@ -22,7 +22,6 @@ import com.ecost.specter.api.Response;
 
 import java.io.IOException;
 import java.util.concurrent.Executors;
-import java.util.regex.Pattern;
 
 public class CreateChannelMenuFragment extends Fragment {
 
@@ -38,13 +37,7 @@ public class CreateChannelMenuFragment extends Fragment {
         MainMenuActivity mainMenuActivity = (MainMenuActivity) requireActivity();
 
         etTitle.setFilters(new InputFilter[]{ new InputFilter.LengthFilter(64) });
-        etShortLink.setFilters(new InputFilter[]{ (source, start, end, dest, dstart, dend) -> {
-            for (int i = start; i < end; i++) {
-                if (!Pattern.compile("^[a-z][a-z\\d_.]{2,30}[a-z\\d]$", Pattern.CASE_INSENSITIVE).matcher(String.valueOf(source.charAt(i))).find()) return "";
-                if (Character.isUpperCase(source.charAt(i))) return String.valueOf(source.charAt(i)).toLowerCase();
-            }
-            return null;
-        }, new InputFilter.LengthFilter(32) });
+        etShortLink.setFilters(new InputFilter[]{ new InputFilter.LengthFilter(32) });
         etDescription.setFilters(new InputFilter[]{ new InputFilter.LengthFilter(256) });
 
         ArrayAdapter<CharSequence> categoriesAdapter = ArrayAdapter.createFromResource(mainMenuActivity, R.array.categories_array, R.layout.spinner_item);

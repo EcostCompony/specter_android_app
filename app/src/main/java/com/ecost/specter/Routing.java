@@ -37,7 +37,7 @@ import java.util.concurrent.Executors;
 public class Routing extends AppCompatActivity {
 
     public static String accessToken, userName, userShortLink;
-    public static int sectionPosition, appTheme, appLanguage;
+    public static int userId, sectionPosition, appTheme, appLanguage;
     private Response response, response1;
 
     @Override
@@ -55,15 +55,18 @@ public class Routing extends AppCompatActivity {
                 response = new API("http://thespecterlife.com:3501/api/method/utils.getAndroidAppMinimumSupportedVersionCode?v=1.0").call();
                 response1 = new API("http://thespecterlife.com:3501/api/method/account.get?v=1.0", accessToken).call();
             } catch (IOException e) {
-                throw new RuntimeException(e);
+                startActivity(new Intent(this, NoInternetActivity.class));
+                finish();
             } finally {
                 new Handler(Looper.getMainLooper()).post(() -> {
+                    if (response == null || response1 == null) return;
                     if (Integer.parseInt(response.getRes().getValue()) > BuildConfig.VERSION_CODE) startActivity(new Intent(this, HardUpdateActivity.class));
                     else if (accessToken == null) startActivity(new Intent(this, AuthActivity.class));
                     else if (response1.getError() != null || response1.getRes() == null) {
                         putAccessToken(this, null);
                         startActivity(new Intent(this, AuthActivity.class));
                     } else {
+                        putUserId(this, response1.getRes().getId());
                         putUserName(this, response1.getRes().getName());
                         putUserShortLink(this, response1.getRes().getShortLink());
                         startActivity(new Intent(this, MainMenuActivity.class));
@@ -77,6 +80,11 @@ public class Routing extends AppCompatActivity {
     public static void putAccessToken(Context context, String value) {
         PreferenceManager.getDefaultSharedPreferences(context).edit().putString("ACCESS_TOKEN", value).apply();
         accessToken = value;
+    }
+
+    public static void putUserId(Context context, int value) {
+        PreferenceManager.getDefaultSharedPreferences(context).edit().putInt("USER_ID", value).apply();
+        userId = value;
     }
 
     public static void putUserName(Context context, String value) {
@@ -135,13 +143,13 @@ public class Routing extends AppCompatActivity {
         }).start();
     }
 
-    public static void showPopupMenu(Activity activity, View view, int menu, PopupMenu.OnMenuItemClickListener onMenuItemClickListener, PopupMenu.OnDismissListener onDismissListener) {
+    public static PopupMenu showPopupMenu(Activity activity, View view, int menu, PopupMenu.OnMenuItemClickListener onMenuItemClickListener, PopupMenu.OnDismissListener onDismissListener) {
         PopupMenu popupMenu = new PopupMenu(new ContextThemeWrapper(activity, R.style.specter_PopupMenu), view);
         popupMenu.inflate(menu);
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) popupMenu.setForceShowIcon(true);
         popupMenu.setOnMenuItemClickListener(onMenuItemClickListener);
         popupMenu.setOnDismissListener(onDismissListener);
-        popupMenu.show();
+        return popupMenu;
     }
 
 }

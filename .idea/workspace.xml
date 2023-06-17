@@ -11,8 +11,12 @@
     <option name="autoReloadType" value="NONE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="9b5b6967-9ca6-411a-be37-b65b22f6951c" name="Changes" comment="release 1.0-alpha.2, minor improvements and creating parity with the API">
-      <change afterPath="$PROJECT_DIR$/app/src/main/res/values-night/themes.xml" afterDir="false" />
+    <list default="true" id="9b5b6967-9ca6-411a-be37-b65b22f6951c" name="Changes" comment="bug fixes">
+      <change afterPath="$PROJECT_DIR$/app/src/main/java/com/ecost/specter/NoInternetActivity.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/src/main/res/layout/activity_no_internet.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/8.0/checksums/checksums.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/8.0/checksums/checksums.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/8.0/checksums/md5-checksums.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/8.0/checksums/md5-checksums.bin" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/8.0/checksums/sha1-checksums.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/8.0/checksums/sha1-checksums.bin" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/8.0/executionHistory/executionHistory.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/8.0/executionHistory/executionHistory.bin" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/8.0/executionHistory/executionHistory.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/8.0/executionHistory/executionHistory.lock" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/8.0/fileHashes/fileHashes.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/8.0/fileHashes/fileHashes.bin" afterDir="false" />
@@ -23,12 +27,27 @@
       <change beforePath="$PROJECT_DIR$/.gradle/file-system.probe" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/file-system.probe" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/build.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/app/build.gradle" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/AndroidManifest.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/AndroidManifest.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/src/main/java/com/ecost/specter/Routing.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/ecost/specter/Routing.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/ecost/specter/api/API.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/ecost/specter/api/API.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/ecost/specter/auth/PasswordSignUpFragment.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/ecost/specter/auth/PasswordSignUpFragment.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/ecost/specter/auth/SignInFragment.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/ecost/specter/auth/SignInFragment.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/ecost/specter/auth/SpecterStartFragment.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/ecost/specter/auth/SpecterStartFragment.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/src/main/java/com/ecost/specter/channel/ChannelFragment.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/ecost/specter/channel/ChannelFragment.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/ecost/specter/channel/ChannelPageFragment.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/ecost/specter/channel/ChannelPageFragment.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/src/main/java/com/ecost/specter/channel/CommentsFragment.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/ecost/specter/channel/CommentsFragment.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/ecost/specter/channel/MainChannelSettingsFragment.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/ecost/specter/channel/MainChannelSettingsFragment.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/ecost/specter/channel/SubscribersChannelSettingsFragment.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/ecost/specter/channel/SubscribersChannelSettingsFragment.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/ecost/specter/menu/AccountSettingsMenuFragment.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/ecost/specter/menu/AccountSettingsMenuFragment.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/src/main/java/com/ecost/specter/menu/ChannelsSearchFragment.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/ecost/specter/menu/ChannelsSearchFragment.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/fragment_channel.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/fragment_channel.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/ecost/specter/menu/CreateChannelMenuFragment.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/ecost/specter/menu/CreateChannelMenuFragment.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/ecost/specter/models/Post.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/ecost/specter/models/Post.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/ecost/specter/recyclers/PostsAdapter.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/ecost/specter/recyclers/PostsAdapter.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/fragment_account_settings_menu.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/fragment_account_settings_menu.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/fragment_create_channel_menu.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/fragment_create_channel_menu.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/fragment_main_channel_settings.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/fragment_main_channel_settings.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/fragment_specter_start.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/fragment_specter_start.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/res/values-ru/strings.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/values-ru/strings.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/res/values/strings.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/values/strings.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -147,6 +166,9 @@
       <recent name="D:\ecost\services\@specter\@specter-Android\specter\app\src\main\res\font" />
       <recent name="D:\ecost\services\@specter\@specter-Android\specter\app\src\main\java\com\ecost\specter\api" />
     </key>
+    <key name="android.template.-1628116465">
+      <recent name="com.ecost.specter" />
+    </key>
   </component>
   <component name="RunManager" selected="Android App.app">
     <configuration name="app" type="AndroidRunConfigurationType" factoryName="Android App">
@@ -246,13 +268,6 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1674677968572</updated>
-    </task>
-    <task id="LOCAL-00067" summary="the function of unsubscribing from channels has been developed">
-      <created>1678320658271</created>
-      <option name="number" value="00067" />
-      <option name="presentableId" value="LOCAL-00067" />
-      <option name="project" value="LOCAL" />
-      <updated>1678320658271</updated>
     </task>
     <task id="LOCAL-00068" summary="release pre-alpha 89">
       <created>1678356278688</created>
@@ -590,7 +605,14 @@
       <option name="project" value="LOCAL" />
       <updated>1686689021905</updated>
     </task>
-    <option name="localTasksCounter" value="116" />
+    <task id="LOCAL-00116" summary="bug fixes">
+      <created>1686914653718</created>
+      <option name="number" value="00116" />
+      <option name="presentableId" value="LOCAL-00116" />
+      <option name="project" value="LOCAL" />
+      <updated>1686914653718</updated>
+    </task>
+    <option name="localTasksCounter" value="117" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -623,7 +645,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="a list of subscribers has been added to the channel settings" />
     <MESSAGE value="developed a search for subscribers by name or short link" />
     <MESSAGE value="developed buttons for setting the status of an administrator to a subscriber" />
     <MESSAGE value="developed by pressing the button to set the status of the administrator to the subscriber" />
@@ -648,6 +669,7 @@
     <MESSAGE value="the api is implemented in the channel settings window" />
     <MESSAGE value="the api is implemented in the comments window" />
     <MESSAGE value="release 1.0-alpha.2, minor improvements and creating parity with the API" />
-    <option name="LAST_COMMIT_MESSAGE" value="release 1.0-alpha.2, minor improvements and creating parity with the API" />
+    <MESSAGE value="bug fixes" />
+    <option name="LAST_COMMIT_MESSAGE" value="bug fixes" />
   </component>
 </project>

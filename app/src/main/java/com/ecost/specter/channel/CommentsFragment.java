@@ -3,6 +3,7 @@ package com.ecost.specter.channel;
 import static com.ecost.specter.Routing.accessToken;
 import static com.ecost.specter.Routing.showPopupMenu;
 import static com.ecost.specter.Routing.showToastMessage;
+import static com.ecost.specter.Routing.userId;
 
 import android.annotation.SuppressLint;
 import android.content.ClipData;
@@ -16,6 +17,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
+import android.widget.PopupMenu;
 import android.widget.TextView;
 
 import androidx.fragment.app.Fragment;
@@ -60,7 +62,7 @@ public class CommentsFragment extends Fragment {
         linearLayoutManager.setStackFromEnd(true);
         rvCommentsList.setLayoutManager(linearLayoutManager);
         postsAdapter = new PostsAdapter(channelActivity, comments, (comment, position, view) -> {
-            showPopupMenu(channelActivity, view, R.menu.popup_menu_comment, item -> {
+            PopupMenu popupMenu = showPopupMenu(channelActivity, view, R.menu.popup_menu_comment, item -> {
                 if (item.getItemId() == R.id.edit) {
                     commentEditable = comment;
                     tvEditingComment.setVisibility(View.VISIBLE);
@@ -85,6 +87,11 @@ public class CommentsFragment extends Fragment {
                 }
                 return true;
             }, menu -> inflaterView.findViewById(R.id.dim_layout).setVisibility(View.INVISIBLE));
+            if (!channelActivity.userAdmin && comment.getAuthorId() != userId) {
+                popupMenu.getMenu().findItem(R.id.edit).setVisible(false);
+                popupMenu.getMenu().findItem(R.id.delete).setVisible(false);
+            }
+            popupMenu.show();
             inflaterView.findViewById(R.id.dim_layout).setVisibility(View.VISIBLE);
             return false;
         });

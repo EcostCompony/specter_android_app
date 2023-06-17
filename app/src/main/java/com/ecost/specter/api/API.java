@@ -16,6 +16,7 @@ public class API implements Callable<Response> {
 
     public API(String... strings) {
         this.strings = strings;
+        this.strings[0] = this.strings[0].replaceAll("\n", "%0A");
     }
 
     @Override
