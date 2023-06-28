@@ -5,7 +5,7 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class Channel {
 
-    private Integer id, category, is_subscriber, is_admin, subscriber_numbers;
+    private Integer id, category, is_subscriber, is_admin, subscribers_count;
     private String title, short_link, description, body;
 
     public Integer getId() {
@@ -48,12 +48,12 @@ public class Channel {
         this.description = description;
     }
 
-    public Integer getSubscriberNumbers() {
-        return subscriber_numbers;
+    public Integer getSubscribersCount() {
+        return subscribers_count;
     }
 
-    public void setSubscriber_numbers(Integer subscriber_numbers) {
-        this.subscriber_numbers = subscriber_numbers;
+    public void setSubscribers_count(Integer subscribers_count) {
+        this.subscribers_count = subscribers_count;
     }
 
     public String getBody() {

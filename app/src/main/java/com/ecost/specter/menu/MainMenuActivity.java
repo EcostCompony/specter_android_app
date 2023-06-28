@@ -26,7 +26,7 @@ public class MainMenuActivity extends AppCompatActivity {
         intent.putExtra("CHANNEL_SHORT_LINK", channel.getShortLink());
         intent.putExtra("CHANNEL_CATEGORY", channel.getCategory());
         intent.putExtra("CHANNEL_DESCRIPTION", channel.getDescription());
-        intent.putExtra("CHANNEL_SUBSCRIBER_NUMBERS", channel.getSubscriberNumbers());
+        intent.putExtra("CHANNEL_SUBSCRIBER_NUMBERS", channel.getSubscribersCount());
         startActivity(intent);
     }
 

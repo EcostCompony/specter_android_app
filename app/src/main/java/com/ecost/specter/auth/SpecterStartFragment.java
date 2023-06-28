@@ -63,7 +63,7 @@ public class SpecterStartFragment extends BottomSheetDialogFragment {
         else if (shortLink.length() < 4) showToastMessage(authActivity, view, 2, getString(R.string.specter_start_error_small_short_link));
         else Executors.newSingleThreadExecutor().execute(() -> {
             try {
-                response = new API("http://thespecterlife.com:3501/api/method/auth?v=1.0&name=" + name + "&short_link=" + shortLink, token).call();
+                response = new API("http://95.163.236.254:3501/api/method/auth?v=0.7&name=" + name + "&short_link=" + shortLink, token).call();
             } catch (IOException e) {
                 throw new RuntimeException(e);
             } finally {

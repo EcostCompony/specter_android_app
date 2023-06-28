@@ -18,6 +18,7 @@ import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.Spinner;
+import android.widget.Toast;
 
 import androidx.fragment.app.Fragment;
 
@@ -110,11 +111,12 @@ public class MainChannelSettingsFragment extends Fragment {
         ibSaveDescription.setOnClickListener(this::saveDescription);
         ibSaveCategory.setOnClickListener(view -> Executors.newSingleThreadExecutor().execute(() -> {
             try {
-                response = new API("http://thespecterlife.com:3501/api/method/channels.edit?v=1.0&channel_id=" + channelActivity.channelId + "&category=" + sCategory.getSelectedItemPosition(), accessToken).call();
+                response = new API("http://95.163.236.254:3501/api/method/channels.edit?v=0.7&channel_id=" + channelActivity.channelId + "&category=" + sCategory.getSelectedItemPosition(), accessToken).call();
             } catch (IOException e) {
                 throw new RuntimeException(e);
             } finally {
                 new Handler(Looper.getMainLooper()).post(() -> {
+                    Toast.makeText(channelActivity.getApplicationContext(), String.valueOf(response.getError().getCode()), Toast.LENGTH_LONG).show();
                     if (response.getError() != null) showToastMessage(channelActivity, view, 2, getString(R.string.unknown_error));
                     else {
                         channelActivity.channelCategory = sCategory.getSelectedItemPosition();
@@ -126,7 +128,7 @@ public class MainChannelSettingsFragment extends Fragment {
 
         inflaterView.findViewById(R.id.button_delete_channel).setOnClickListener(view -> Executors.newSingleThreadExecutor().execute(() -> {
             try {
-                response = new API("http://thespecterlife.com:3501/api/method/channels.delete?v=1.0&channel_id=" + channelActivity.channelId, accessToken).call();
+                response = new API("http://95.163.236.254:3501/api/method/channels.delete?v=0.7&channel_id=" + channelActivity.channelId, accessToken).call();
             } catch (IOException e) {
                 throw new RuntimeException(e);
             } finally {
@@ -143,7 +145,7 @@ public class MainChannelSettingsFragment extends Fragment {
         if (title.equals("")) showToastMessage(channelActivity, view, 2, getString(R.string.main_channel_settings_error_not_title));
         else Executors.newSingleThreadExecutor().execute(() -> {
             try {
-                response = new API("http://thespecterlife.com:3501/api/method/channels.edit?v=1.0&channel_id=" + channelActivity.channelId + "&title=" + title, accessToken).call();
+                response = new API("http://95.163.236.254:3501/api/method/channels.edit?v=0.7&channel_id=" + channelActivity.channelId + "&title=" + title, accessToken).call();
             } catch (IOException e) {
                 throw new RuntimeException(e);
             } finally {
@@ -165,13 +167,13 @@ public class MainChannelSettingsFragment extends Fragment {
         else if (shortLink.length() < 4) showToastMessage(channelActivity, view, 2, getString(R.string.main_channel_settings_error_small_short_link));
         else Executors.newSingleThreadExecutor().execute(() -> {
             try {
-                response = new API("http://thespecterlife.com:3501/api/method/channels.edit?v=1.0&channel_id=" + channelActivity.channelId + "&short_link=" + shortLink, accessToken).call();
+                response = new API("http://95.163.236.254:3501/api/method/channels.edit?v=0.7&channel_id=" + channelActivity.channelId + "&short_link=" + shortLink, accessToken).call();
             } catch (IOException e) {
                 throw new RuntimeException(e);
             } finally {
                 new Handler(Looper.getMainLooper()).post(() -> {
                     if (response.getError() != null) {
-                        if (response.getError().getErrorCode() == 51) showToastMessage(channelActivity, view, 2, getString(R.string.main_channel_settings_error_already_in_use));
+                        if (response.getError().getCode() == 51) showToastMessage(channelActivity, view, 2, getString(R.string.main_channel_settings_error_already_in_use));
                         else showToastMessage(channelActivity, view, 2, getString(R.string.unknown_error));
                     } else {
                         channelActivity.channelShortLink = shortLink;
@@ -187,7 +189,7 @@ public class MainChannelSettingsFragment extends Fragment {
 
         Executors.newSingleThreadExecutor().execute(() -> {
             try {
-                response = new API("http://thespecterlife.com:3501/api/method/channels.edit?v=1.0&channel_id=" + channelActivity.channelId + "&description=" + description, accessToken).call();
+                response = new API("http://95.163.236.254:3501/api/method/channels.edit?v=0.7&channel_id=" + channelActivity.channelId + "&description=" + description, accessToken).call();
             } catch (IOException e) {
                 throw new RuntimeException(e);
             } finally {

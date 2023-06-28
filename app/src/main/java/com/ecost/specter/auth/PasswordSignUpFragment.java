@@ -89,7 +89,7 @@ public class PasswordSignUpFragment extends Fragment {
         else if (!password.equals(confirmPassword)) showToastMessage(authActivity, view, 2, getString(R.string.password_sign_up_error_different_passwords));
         else Executors.newSingleThreadExecutor().execute(() -> {
             try {
-                response = new API("http://thespecterlife.com:3500/api/auth/method/signup?v=1.0&password=" + password, token).call();
+                response = new API("http://95.163.236.254:3500/api/auth/method/signup?v=1.0&password=" + password, token).call();
             } catch (IOException e) {
                 throw new RuntimeException(e);
             } finally {

@@ -49,7 +49,7 @@ public class SubscribersChannelSettingsFragment extends Fragment {
         rvSubscribersList.setLayoutManager(new LinearLayoutManager(channelActivity));
         subscribersAdapter = new SubscribersAdapter(channelActivity, subscribers, position -> Executors.newSingleThreadExecutor().execute(() -> {
             try {
-                response = new API("http://thespecterlife.com:3501/api/method/subscribers.setAdmin?v=1.0&channel_id=" + channelActivity.channelId + "&user_id=" + subscribers.get(position).getUserId(), accessToken).call();
+                response = new API("http://95.163.236.254:3501/api/method/subscribers.setAdmin?v=0.7&channel_id=" + channelActivity.channelId + "&user_id=" + subscribers.get(position).getUser().getId(), accessToken).call();
             } catch (IOException e) {
                 throw new RuntimeException(e);
             }
@@ -66,7 +66,7 @@ public class SubscribersChannelSettingsFragment extends Fragment {
                 if (!searchString.equals("")) {
                     Executors.newSingleThreadExecutor().execute(() -> {
                         try {
-                            response = new API("http://thespecterlife.com:3501/api/method/subscribers.search?v=1.0&channel_id=" + channelActivity.channelId + "&q=" + searchString, accessToken).call();
+                            response = new API("http://95.163.236.254:3501/api/method/subscribers.search?v=0.7&channel_id=" + channelActivity.channelId + "&q=" + searchString, accessToken).call();
                         } catch (IOException e) {
                             throw new RuntimeException(e);
                         } finally {
@@ -74,7 +74,7 @@ public class SubscribersChannelSettingsFragment extends Fragment {
                                 if (response.getError() != null) showToastMessage(channelActivity, inflaterView, 2, getString(R.string.unknown_error));
                                 else {
                                     subscribers.clear();
-                                    subscribers.addAll(Arrays.asList(response.getSubscribersRes()));
+                                    subscribers.addAll(Arrays.asList(response.getSubscribers()));
                                     subscribersAdapter.notifyDataSetChanged();
                                 }
                             });
@@ -94,7 +94,7 @@ public class SubscribersChannelSettingsFragment extends Fragment {
     private void showSubscribers(View view) {
         Executors.newSingleThreadExecutor().execute(() -> {
             try {
-                response = new API("http://thespecterlife.com:3501/api/method/subscribers.get?v=1.0&channel_id=" + channelActivity.channelId, accessToken).call();
+                response = new API("http://95.163.236.254:3501/api/method/subscribers.get?v=0.7&channel_id=" + channelActivity.channelId, accessToken).call();
             } catch (IOException e) {
                 throw new RuntimeException(e);
             } finally {
@@ -102,7 +102,7 @@ public class SubscribersChannelSettingsFragment extends Fragment {
                     if (response.getError() != null) showToastMessage(channelActivity, view, 2, getString(R.string.unknown_error));
                     else {
                         subscribers.clear();
-                        subscribers.addAll(Arrays.asList(response.getSubscribersRes()));
+                        subscribers.addAll(Arrays.asList(response.getSubscribers()));
                         subscribersAdapter.notifyDataSetChanged();
                     }
                 });

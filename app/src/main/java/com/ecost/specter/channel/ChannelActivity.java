@@ -20,7 +20,7 @@ public class ChannelActivity extends AppCompatActivity {
     public Integer channelId, channelCategory, channelSubscriberNumbers;
     public String channelTitle, channelShortLink, channelDescription;
     public boolean userSubscribe;
-    public boolean userAdmin = false;
+    public boolean userAdmin;
     private Response response;
 
     @Override
@@ -37,15 +37,15 @@ public class ChannelActivity extends AppCompatActivity {
 
         Executors.newSingleThreadExecutor().execute(() -> {
             try {
-                response = new API("http://thespecterlife.com:3501/api/method/channels.getById?v=1.0&channel_id=" + channelId, accessToken).call();
+                response = new API("http://95.163.236.254:3501/api/method/channels.getById?v=0.7&channel_id=" + channelId, accessToken).call();
             } catch (IOException e) {
                 throw new RuntimeException(e);
             } finally {
                 new Handler(Looper.getMainLooper()).post(() -> {
                     if (response.getError() != null) finish();
                     else {
-                        userSubscribe = response.getChannelRes().getIsSubscriber() == 1;
-                        if (response.getChannelRes().getIsAdmin() != null) userAdmin = response.getChannelRes().getIsAdmin() == 1;
+                        userSubscribe = response.getChannel().getIsSubscriber() == 1;
+                        userAdmin = response.getChannel().getIsAdmin() == 1;
                         getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container_view, new ChannelFragment()).commit();
                     }
                 });

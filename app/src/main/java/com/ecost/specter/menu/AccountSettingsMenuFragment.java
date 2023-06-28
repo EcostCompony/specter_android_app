@@ -100,7 +100,7 @@ public class AccountSettingsMenuFragment extends Fragment {
         if (name.equals("")) showToastMessage(mainMenuActivity, view, 2, getString(R.string.account_settings_menu_error_not_name));
         else Executors.newSingleThreadExecutor().execute(() -> {
             try {
-                response = new API("http://thespecterlife.com:3501/api/method/account.edit?v=1.0&name=" + name, accessToken).call();
+                response = new API("http://95.163.236.254:3501/api/method/account.edit?v=0.7&name=" + name, accessToken).call();
             } catch (IOException e) {
                 throw new RuntimeException(e);
             } finally {
@@ -122,13 +122,13 @@ public class AccountSettingsMenuFragment extends Fragment {
         else if (shortLink.length() < 4) showToastMessage(mainMenuActivity, view, 2, getString(R.string.account_settings_menu_error_small_short_link));
         else Executors.newSingleThreadExecutor().execute(() -> {
             try {
-                response = new API("http://thespecterlife.com:3501/api/method/account.edit?v=1.0&short_link=" + shortLink, accessToken).call();
+                response = new API("http://95.163.236.254:3501/api/method/account.edit?v=0.7&short_link=" + shortLink, accessToken).call();
             } catch (IOException e) {
                 throw new RuntimeException(e);
             } finally {
                 new Handler(Looper.getMainLooper()).post(() -> {
                     if (response.getError() != null) {
-                        if (response.getError().getErrorCode() == 51) showToastMessage(mainMenuActivity, view, 2, getString(R.string.account_settings_menu_error_already_in_use));
+                        if (response.getError().getCode() == 51) showToastMessage(mainMenuActivity, view, 2, getString(R.string.account_settings_menu_error_already_in_use));
                         else showToastMessage(mainMenuActivity, view, 2, getString(R.string.unknown_error));
                     } else {
                         putUserShortLink(mainMenuActivity, shortLink);

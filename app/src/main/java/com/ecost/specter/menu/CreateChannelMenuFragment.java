@@ -58,16 +58,16 @@ public class CreateChannelMenuFragment extends Fragment {
             else if (shortLink.length() < 4) showToastMessage(mainMenuActivity, view, 2, getString(R.string.create_channel_menu_error_small_short_link));
             else Executors.newSingleThreadExecutor().execute(() -> {
                 try {
-                    response = new API("http://thespecterlife.com:3501/api/method/channels.create?v=1.0&title=" + title + "&short_link=" + shortLink + (category != 0 ? "&category=" + category : "") + (description.length() != 0 ? "&description=" + description : ""), accessToken).call();
+                    response = new API("http://95.163.236.254:3501/api/method/channels.create?v=0.7&title=" + title + "&short_link=" + shortLink + (category != 0 ? "&category=" + category : "") + "&description=" + (description.length() != 0 ? description : "%20"), accessToken).call();
                 } catch (IOException e) {
                     throw new RuntimeException(e);
                 } finally {
                     new Handler(Looper.getMainLooper()).post(() -> {
                         if (response.getError() != null) {
-                            if (response.getError().getErrorCode() == 51) showToastMessage(mainMenuActivity, view, 2, getString(R.string.create_channel_menu_error_already_in_use));
+                            if (response.getError().getCode() == 51) showToastMessage(mainMenuActivity, view, 2, getString(R.string.create_channel_menu_error_already_in_use));
                             else showToastMessage(mainMenuActivity, view, 2, getString(R.string.unknown_error));
                         } else {
-                            mainMenuActivity.openChannel(response.getChannelRes());
+                            mainMenuActivity.openChannel(response.getChannel());
                             mainMenuActivity.getSupportFragmentManager().popBackStack();
                         }
                     });

@@ -61,7 +61,7 @@ public class ChannelsSearchFragment extends Fragment {
                 if (!searchString.equals("")) {
                     Executors.newSingleThreadExecutor().execute(() -> {
                         try {
-                            response = new API("http://thespecterlife.com:3501/api/method/channels.search?v=1.0&q=" + searchString, accessToken).call();
+                            response = new API("http://95.163.236.254:3501/api/method/channels.search?v=0.7&q=" + searchString, accessToken).call();
                         } catch (IOException e) {
                             throw new RuntimeException(e);
                         } finally {
@@ -69,7 +69,7 @@ public class ChannelsSearchFragment extends Fragment {
                                 if (response.getError() != null) showToastMessage(mainMenuActivity, inflaterView, 2, getString(R.string.unknown_error));
                                 else {
                                     channels.clear();
-                                    channels.addAll(Arrays.asList(response.getChannelsRes()));
+                                    channels.addAll(Arrays.asList(response.getChannels()));
                                     for (Channel channel : channels) channel.setBody(getString(R.string.symbol_at) + channel.getShortLink());
                                     channelsAdapter.notifyDataSetChanged();
                                 }

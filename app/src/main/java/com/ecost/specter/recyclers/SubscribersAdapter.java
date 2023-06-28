@@ -41,9 +41,9 @@ public class SubscribersAdapter extends RecyclerView.Adapter<SubscriberViewHolde
     @SuppressLint("SetTextI18n")
     @Override
     public void onBindViewHolder(@NonNull SubscriberViewHolder holder, int position) {
-        holder.tvName.setText(subscribers.get(position).getName());
-        holder.tvShortLink.setText(context.getString(R.string.symbol_at) + subscribers.get(position).getShortLink());
-        if (!subscribers.get(position).isAdmin()) holder.ibSetAdmin.setVisibility(View.VISIBLE);
+        holder.tvName.setText(subscribers.get(position).getUser().getName());
+        holder.tvShortLink.setText(context.getString(R.string.symbol_at) + subscribers.get(position).getUser().getShortLink());
+        if (subscribers.get(position).getIsAdmin() == 0) holder.ibSetAdmin.setVisibility(View.VISIBLE);
         holder.ibSetAdmin.setOnClickListener(view -> {
             onClickListener.onSetAdminClick(position);
             holder.ibSetAdmin.setVisibility(View.GONE);

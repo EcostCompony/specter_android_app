@@ -74,7 +74,7 @@ public class CommentsFragment extends Fragment {
                 else if (item.getItemId() == R.id.delete) {
                     Executors.newSingleThreadExecutor().execute(() -> {
                         try {
-                            response = new API("http://thespecterlife.com:3501/api/method/comments.delete?v=1.0&channel_id=" + channelActivity.channelId + "&post_id=" + postId + "&comment_id=" + comment.getId(), accessToken).call();
+                            response = new API("http://95.163.236.254:3501/api/method/comments.delete?v=0.7&channel_id=" + channelActivity.channelId + "&post_id=" + postId + "&comment_id=" + comment.getId(), accessToken).call();
                         } catch (IOException e) {
                             throw new RuntimeException(e);
                         } finally {
@@ -87,7 +87,7 @@ public class CommentsFragment extends Fragment {
                 }
                 return true;
             }, menu -> inflaterView.findViewById(R.id.dim_layout).setVisibility(View.INVISIBLE));
-            if (!channelActivity.userAdmin && comment.getAuthorId() != userId) {
+            if (!channelActivity.userAdmin && comment.getAuthor().getId() != userId) {
                 popupMenu.getMenu().findItem(R.id.edit).setVisible(false);
                 popupMenu.getMenu().findItem(R.id.delete).setVisible(false);
             }
@@ -106,14 +106,14 @@ public class CommentsFragment extends Fragment {
             if (text.equals("")) return;
             Executors.newSingleThreadExecutor().execute(() -> {
                 try {
-                    response = new API(commentEditable == null ? ("http://thespecterlife.com:3501/api/method/comments.create?v=1.0&channel_id=" + channelActivity.channelId + "&post_id=" + postId + "&text=" + text) : ("http://thespecterlife.com:3501/api/method/comments.edit?v=1.0&channel_id=" + channelActivity.channelId + "&post_id=" + postId + "&comment_id=" + commentEditable.getId() + "&text=" + text), accessToken).call();
+                    response = new API(commentEditable == null ? ("http://95.163.236.254:3501/api/method/comments.create?v=0.7&channel_id=" + channelActivity.channelId + "&post_id=" + postId + "&text=" + text) : ("http://95.163.236.254:3501/api/method/comments.edit?v=0.7&channel_id=" + channelActivity.channelId + "&post_id=" + postId + "&comment_id=" + commentEditable.getId() + "&text=" + text), accessToken).call();
                 } catch (IOException e) {
                     throw new RuntimeException(e);
                 } finally {
                     new Handler(Looper.getMainLooper()).post(() -> {
                         if (response.getError() != null) showToastMessage(channelActivity, inflaterView, 2, getString(R.string.unknown_error));
                         else if (commentEditable == null) {
-                            comments.add(response.getPostRes());
+                            comments.add(response.getPost());
                             postsAdapter.notifyItemInserted(comments.size() - 1);
                             rvCommentsList.scrollToPosition(comments.size() - 1);
                             etComment.setText("");
@@ -135,7 +135,7 @@ public class CommentsFragment extends Fragment {
     private void showComments(View view) {
         Executors.newSingleThreadExecutor().execute(() -> {
             try {
-                response = new API("http://thespecterlife.com:3501/api/method/comments.get?v=1.0&channel_id=" + channelActivity.channelId + "&post_id=" + postId, accessToken).call();
+                response = new API("http://95.163.236.254:3501/api/method/comments.get?v=0.7&channel_id=" + channelActivity.channelId + "&post_id=" + postId, accessToken).call();
             } catch (IOException e) {
                 throw new RuntimeException(e);
             } finally {
@@ -143,7 +143,7 @@ public class CommentsFragment extends Fragment {
                     if (response.getError() != null) showToastMessage(channelActivity, view, 2, getString(R.string.unknown_error));
                     else {
                         comments.clear();
-                        comments.addAll(Arrays.asList(response.getPostsRes()));
+                        comments.addAll(Arrays.asList(response.getPosts()));
                         postsAdapter.notifyDataSetChanged();
                         rvCommentsList.scrollToPosition(comments.size() - 1);
                     }

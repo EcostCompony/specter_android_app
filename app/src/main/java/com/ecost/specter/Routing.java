@@ -52,8 +52,8 @@ public class Routing extends AppCompatActivity {
 
         Executors.newSingleThreadExecutor().execute(() -> {
             try {
-                response = new API("http://thespecterlife.com:3501/api/method/utils.getAndroidAppMinimumSupportedVersionCode?v=1.0").call();
-                response1 = new API("http://thespecterlife.com:3501/api/method/account.get?v=1.0", accessToken).call();
+                response = new API("http://95.163.236.254:3501/api/method/utils.getAndroidAppMinimumSupportedVersionCode?v=0.7").call();
+                response1 = new API("http://95.163.236.254:3501/api/method/account.get?v=0.7", accessToken).call();
             } catch (IOException e) {
                 startActivity(new Intent(this, NoInternetActivity.class));
                 finish();
@@ -66,9 +66,9 @@ public class Routing extends AppCompatActivity {
                         putAccessToken(this, null);
                         startActivity(new Intent(this, AuthActivity.class));
                     } else {
-                        putUserId(this, response1.getRes().getId());
-                        putUserName(this, response1.getRes().getName());
-                        putUserShortLink(this, response1.getRes().getShortLink());
+                        putUserId(this, response1.getUser().getId());
+                        putUserName(this, response1.getUser().getName());
+                        putUserShortLink(this, response1.getUser().getShortLink());
                         startActivity(new Intent(this, MainMenuActivity.class));
                     }
                     finish();

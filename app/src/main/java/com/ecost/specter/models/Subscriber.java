@@ -5,40 +5,23 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class Subscriber {
 
-    private Integer user_id;
-    private String name, short_link;
-    private boolean admin;
+    private User user;
+    private int is_admin;
 
-    public Integer getUserId() {
-        return user_id;
+    public User getUser() {
+        return user;
     }
 
-    public void setUser_id(Integer user_id) {
-        this.user_id = user_id;
+    public void setUser(User user) {
+        this.user = user;
     }
 
-    public String getName() {
-        return name;
+    public int getIsAdmin() {
+        return is_admin;
     }
 
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public String getShortLink() {
-        return short_link;
-    }
-
-    public void setShort_link(String short_link) {
-        this.short_link = short_link;
-    }
-
-    public boolean isAdmin() {
-        return admin;
-    }
-
-    public void setAdmin(boolean admin) {
-        this.admin = admin;
+    public void setIs_admin(int is_admin) {
+        this.is_admin = is_admin;
     }
 
 }

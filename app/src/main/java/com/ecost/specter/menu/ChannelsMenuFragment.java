@@ -43,14 +43,14 @@ public class ChannelsMenuFragment extends Fragment {
 
         Executors.newSingleThreadExecutor().execute(() -> {
             try {
-                response = new API("http://thespecterlife.com:3501/api/method/channels.get?v=1.0", accessToken).call();
+                response = new API("http://95.163.236.254:3501/api/method/channels.get?v=0.7", accessToken).call();
             } catch (IOException e) {
                 throw new RuntimeException(e);
             } finally {
                 new Handler(Looper.getMainLooper()).post(() -> {
                     if (response.getError() != null) showToastMessage(mainMenuActivity, super.getView(), 2, getString(R.string.unknown_error));
                     else {
-                        Channel[] channels1 = response.getChannelsRes();
+                        Channel[] channels1 = response.getChannels();
                         for (Channel channel : channels1) if (channel.getBody().equals("%CHANNEL_CREATED%")) channel.setBody(getString(R.string.channels_menu_channel_body_channel_created));
                         channels.addAll(Arrays.asList(channels1));
                         channelsAdapter.notifyDataSetChanged();

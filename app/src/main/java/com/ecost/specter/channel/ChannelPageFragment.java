@@ -54,7 +54,7 @@ public class ChannelPageFragment extends Fragment {
 
         ibSubscribe.setOnClickListener(view -> Executors.newSingleThreadExecutor().execute(() -> {
             try {
-                new API((channelActivity.userSubscribe ? "http://thespecterlife.com:3501/api/method/channels.unsubscribe?v=1.0&channel_id=" : "http://thespecterlife.com:3501/api/method/channels.subscribe?v=1.0&channel_id=") + channelActivity.channelId, accessToken).call();
+                new API((channelActivity.userSubscribe ? "http://95.163.236.254:3501/api/method/channels.unsubscribe?v=0.7&channel_id=" : "http://95.163.236.254:3501/api/method/channels.subscribe?v=0.7&channel_id=") + channelActivity.channelId, accessToken).call();
             } catch (IOException e) {
                 throw new RuntimeException(e);
             } finally {
