@@ -36,21 +36,22 @@
             </LinearLayout>
         </FrameLayout>
 
-        <FrameLayout
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="match_parent"
+            android:orientation="vertical">
 
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/recycler_comments_list"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="65dp"
+                android:layout_height="0dp"
+                android:layout_weight="1"
                 android:layout_gravity="bottom"
                 android:overScrollMode="never" />
 
             <FrameLayout
                 android:layout_width="match_parent"
-                android:layout_height="70dp"
+                android:layout_height="wrap_content"
                 android:layout_gravity="bottom">
 
                 <TextView
@@ -67,12 +68,14 @@
                 <EditText
                     android:id="@+id/input_comment"
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent"
+                    android:layout_height="wrap_content"
+                    android:minHeight="43dp"
                     android:layout_marginTop="18dp"
                     android:layout_marginBottom="10dp"
                     android:layout_marginStart="13dp"
                     android:layout_marginEnd="50dp"
-                    android:inputType="text"
+                    android:inputType="textCapSentences|textMultiLine"
+                    android:maxLines="8"
                     android:importantForAutofill="no"
                     android:background="@drawable/input"
                     android:paddingHorizontal="14dp"
@@ -85,8 +88,8 @@
                 <FrameLayout
                     android:id="@+id/hitbox_button_send"
                     android:layout_width="50dp"
-                    android:layout_height="match_parent"
-                    android:layout_gravity="end">
+                    android:layout_height="65dp"
+                    android:layout_gravity="end|bottom">
 
                     <View
                         android:layout_width="20dp"
@@ -96,7 +99,7 @@
                         android:background="@drawable/icon_arrow_right" />
                 </FrameLayout>
             </FrameLayout>
-        </FrameLayout>
+        </LinearLayout>
     </LinearLayout>
 
     <FrameLayout

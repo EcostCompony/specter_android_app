@@ -97,11 +97,7 @@ public class PasswordSignUpFragment extends Fragment {
                     if (response.getError() != null) showToastMessage(authActivity, view, 2, getString(R.string.unknown_error));
                     else {
                         authActivity.getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container_view, new SignInFragment()).commit();
-                        SpecterStartFragment specterStartFragment = new SpecterStartFragment();
-                        Bundle bundle = new Bundle();
-                        bundle.putString("TOKEN", response.getRes().getServiceAuthToken());
-                        specterStartFragment.setArguments(bundle);
-                        specterStartFragment.show(authActivity.getSupportFragmentManager(), specterStartFragment.getTag());
+                        showToastMessage(authActivity, view, 1, "Теперь войдите в аккаунт");
                     }
                 });
             }
