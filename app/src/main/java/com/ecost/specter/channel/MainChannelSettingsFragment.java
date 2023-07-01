@@ -18,7 +18,6 @@ import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.Spinner;
-import android.widget.Toast;
 
 import androidx.fragment.app.Fragment;
 
@@ -116,7 +115,6 @@ public class MainChannelSettingsFragment extends Fragment {
                 throw new RuntimeException(e);
             } finally {
                 new Handler(Looper.getMainLooper()).post(() -> {
-                    Toast.makeText(channelActivity.getApplicationContext(), String.valueOf(response.getError().getCode()), Toast.LENGTH_LONG).show();
                     if (response.getError() != null) showToastMessage(channelActivity, view, 2, getString(R.string.unknown_error));
                     else {
                         channelActivity.channelCategory = sCategory.getSelectedItemPosition();
