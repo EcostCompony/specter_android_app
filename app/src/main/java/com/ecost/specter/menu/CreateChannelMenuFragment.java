@@ -17,8 +17,8 @@ import android.widget.Spinner;
 import androidx.fragment.app.Fragment;
 
 import com.ecost.specter.R;
-import com.ecost.specter.api.API;
 import com.ecost.specter.api.Response;
+import com.ecost.specter.api.SpecterAPI;
 
 import java.io.IOException;
 import java.util.concurrent.Executors;
@@ -58,7 +58,7 @@ public class CreateChannelMenuFragment extends Fragment {
             else if (shortLink.length() < 4) showToastMessage(mainMenuActivity, view, 2, getString(R.string.create_channel_menu_error_small_short_link));
             else Executors.newSingleThreadExecutor().execute(() -> {
                 try {
-                    response = new API("http://95.163.236.254:3501/api/method/channels.create?v=0.7&title=" + title + "&short_link=" + shortLink + (category != 0 ? "&category=" + category : "") + "&description=" + (description.length() != 0 ? description : "%20"), accessToken).call();
+                    response = new SpecterAPI("channels.create", "&title=" + title + "&short_link=" + shortLink + (category != 0 ? "&category=" + category : "") + "&description=" + (description.length() != 0 ? description : "%20"), accessToken).call();
                 } catch (IOException e) {
                     throw new RuntimeException(e);
                 } finally {

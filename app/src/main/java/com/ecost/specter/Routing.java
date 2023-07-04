@@ -21,12 +21,14 @@ import android.widget.LinearLayout;
 import android.widget.PopupMenu;
 import android.widget.PopupWindow;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.splashscreen.SplashScreen;
 
-import com.ecost.specter.api.API;
+import com.ecost.specter.api.EcostAPI;
 import com.ecost.specter.api.Response;
+import com.ecost.specter.api.SpecterAPI;
 import com.ecost.specter.auth.AuthActivity;
 import com.ecost.specter.menu.MainMenuActivity;
 
@@ -52,8 +54,8 @@ public class Routing extends AppCompatActivity {
 
         Executors.newSingleThreadExecutor().execute(() -> {
             try {
-                response = new API("http://95.163.236.254:3501/api/method/utils.getAndroidAppMinimumSupportedVersionCode?v=0.7").call();
-                response1 = new API("http://95.163.236.254:3501/api/method/account.get?v=0.7", accessToken).call();
+                response = new SpecterAPI("utils.getAndroidAppMinimumSupportedVersionCode", "").call();
+                response1 = new SpecterAPI("account.get", "", accessToken).call();
             } catch (IOException e) {
                 startActivity(new Intent(this, NoInternetActivity.class));
                 finish();

@@ -25,8 +25,9 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.ecost.specter.R;
-import com.ecost.specter.api.API;
+import com.ecost.specter.api.EcostAPI;
 import com.ecost.specter.api.Response;
+import com.ecost.specter.api.SpecterAPI;
 import com.ecost.specter.models.Post;
 import com.ecost.specter.recyclers.PostsAdapter;
 
@@ -61,7 +62,7 @@ public class CommentsFragment extends Fragment {
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(channelActivity);
         linearLayoutManager.setStackFromEnd(true);
         rvCommentsList.setLayoutManager(linearLayoutManager);
-        postsAdapter = new PostsAdapter(channelActivity, comments, (comment, position, view) -> {
+        postsAdapter = new PostsAdapter(channelActivity, channelActivity.channelTitle, comments, (comment, position, view) -> {
             PopupMenu popupMenu = showPopupMenu(channelActivity, view, R.menu.popup_menu_comment, item -> {
                 if (item.getItemId() == R.id.edit) {
                     commentEditable = comment;
@@ -74,7 +75,7 @@ public class CommentsFragment extends Fragment {
                 else if (item.getItemId() == R.id.delete) {
                     Executors.newSingleThreadExecutor().execute(() -> {
                         try {
-                            response = new API("http://95.163.236.254:3501/api/method/comments.delete?v=0.7&channel_id=" + channelActivity.channelId + "&post_id=" + postId + "&comment_id=" + comment.getId(), accessToken).call();
+                            response = new SpecterAPI("comments.delete", "&channel_id=" + channelActivity.channelId + "&post_id=" + postId + "&comment_id=" + comment.getId(), accessToken).call();
                         } catch (IOException e) {
                             throw new RuntimeException(e);
                         } finally {
@@ -87,7 +88,7 @@ public class CommentsFragment extends Fragment {
                 }
                 return true;
             }, menu -> inflaterView.findViewById(R.id.dim_layout).setVisibility(View.INVISIBLE));
-            if (!channelActivity.userAdmin && comment.getAuthor().getId() != userId) {
+            if (!channelActivity.userAdmin && comment.getAuthorId() != userId) {
                 popupMenu.getMenu().findItem(R.id.edit).setVisible(false);
                 popupMenu.getMenu().findItem(R.id.delete).setVisible(false);
             }
@@ -106,7 +107,7 @@ public class CommentsFragment extends Fragment {
             if (text.equals("")) return;
             Executors.newSingleThreadExecutor().execute(() -> {
                 try {
-                    response = new API(commentEditable == null ? ("http://95.163.236.254:3501/api/method/comments.create?v=0.7&channel_id=" + channelActivity.channelId + "&post_id=" + postId + "&text=" + text) : ("http://95.163.236.254:3501/api/method/comments.edit?v=0.7&channel_id=" + channelActivity.channelId + "&post_id=" + postId + "&comment_id=" + commentEditable.getId() + "&text=" + text), accessToken).call();
+                    response = new SpecterAPI(commentEditable == null ? "comments.create" : "comments.edit", commentEditable == null ? ("&channel_id=" + channelActivity.channelId + "&post_id=" + postId + "&text=" + text) : ("&channel_id=" + channelActivity.channelId + "&post_id=" + postId + "&comment_id=" + commentEditable.getId() + "&text=" + text), accessToken).call();
                 } catch (IOException e) {
                     throw new RuntimeException(e);
                 } finally {
@@ -135,7 +136,7 @@ public class CommentsFragment extends Fragment {
     private void showComments(View view) {
         Executors.newSingleThreadExecutor().execute(() -> {
             try {
-                response = new API("http://95.163.236.254:3501/api/method/comments.get?v=0.7&channel_id=" + channelActivity.channelId + "&post_id=" + postId, accessToken).call();
+                response = new SpecterAPI("comments.get", "&channel_id=" + channelActivity.channelId + "&post_id=" + postId, accessToken).call();
             } catch (IOException e) {
                 throw new RuntimeException(e);
             } finally {

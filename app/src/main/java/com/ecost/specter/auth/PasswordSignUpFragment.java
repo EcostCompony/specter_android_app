@@ -18,7 +18,7 @@ import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 
 import com.ecost.specter.R;
-import com.ecost.specter.api.API;
+import com.ecost.specter.api.EcostAPI;
 import com.ecost.specter.api.Response;
 
 import java.io.IOException;
@@ -89,7 +89,7 @@ public class PasswordSignUpFragment extends Fragment {
         else if (!password.equals(confirmPassword)) showToastMessage(authActivity, view, 2, getString(R.string.password_sign_up_error_different_passwords));
         else Executors.newSingleThreadExecutor().execute(() -> {
             try {
-                response = new API("http://95.163.236.254:3500/api/auth/method/signup?v=1.0&password=" + password, token).call();
+                response = new EcostAPI("signup", "&password=" + password, token).call();
             } catch (IOException e) {
                 throw new RuntimeException(e);
             } finally {

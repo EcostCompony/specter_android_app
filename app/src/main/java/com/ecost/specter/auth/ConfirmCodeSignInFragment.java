@@ -18,7 +18,7 @@ import androidx.fragment.app.Fragment;
 
 import com.ecost.specter.R;
 import com.ecost.specter.Routing;
-import com.ecost.specter.api.API;
+import com.ecost.specter.api.EcostAPI;
 import com.ecost.specter.api.Response;
 
 import java.io.IOException;
@@ -59,7 +59,7 @@ public class ConfirmCodeSignInFragment extends Fragment {
         if (code.length() != 4) showToastMessage(authActivity, view, 2, getString(R.string.confirm_code_sign_in_error_incorrect_code));
         else Executors.newSingleThreadExecutor().execute(() -> {
             try {
-                response = new API("http://95.163.236.254:3500/api/auth/method/signin.checkConfirmCode?v=1.0&code=" + code, token).call();
+                response = new EcostAPI("signin.checkConfirmCode", "&code=" + code, token).call();
             } catch (IOException e) {
                 throw new RuntimeException(e);
             } finally {

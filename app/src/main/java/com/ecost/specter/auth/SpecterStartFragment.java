@@ -16,8 +16,9 @@ import android.widget.EditText;
 
 import com.ecost.specter.R;
 import com.ecost.specter.Routing;
-import com.ecost.specter.api.API;
+import com.ecost.specter.api.EcostAPI;
 import com.ecost.specter.api.Response;
+import com.ecost.specter.api.SpecterAPI;
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment;
 
 import java.io.IOException;
@@ -63,7 +64,7 @@ public class SpecterStartFragment extends BottomSheetDialogFragment {
         else if (shortLink.length() < 4) showToastMessage(authActivity, view, 2, getString(R.string.specter_start_error_small_short_link));
         else Executors.newSingleThreadExecutor().execute(() -> {
             try {
-                response = new API("http://95.163.236.254:3501/api/method/auth?v=0.7&name=" + name + "&short_link=" + shortLink, token).call();
+                response = new SpecterAPI("auth", "&name=" + name + "&short_link=" + shortLink, token).call();
             } catch (IOException e) {
                 throw new RuntimeException(e);
             } finally {

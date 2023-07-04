@@ -16,7 +16,8 @@ import android.widget.TextView;
 import androidx.fragment.app.Fragment;
 
 import com.ecost.specter.R;
-import com.ecost.specter.api.API;
+import com.ecost.specter.api.EcostAPI;
+import com.ecost.specter.api.SpecterAPI;
 
 import java.io.IOException;
 import java.util.concurrent.Executors;
@@ -54,7 +55,7 @@ public class ChannelPageFragment extends Fragment {
 
         ibSubscribe.setOnClickListener(view -> Executors.newSingleThreadExecutor().execute(() -> {
             try {
-                new API((channelActivity.userSubscribe ? "http://95.163.236.254:3501/api/method/channels.unsubscribe?v=0.7&channel_id=" : "http://95.163.236.254:3501/api/method/channels.subscribe?v=0.7&channel_id=") + channelActivity.channelId, accessToken).call();
+                new SpecterAPI(channelActivity.userSubscribe ? "channels.unsubscribe" : "channels.subscribe", "&channel_id=" + channelActivity.channelId, accessToken).call();
             } catch (IOException e) {
                 throw new RuntimeException(e);
             } finally {

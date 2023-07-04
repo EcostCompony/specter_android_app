@@ -16,8 +16,9 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.ecost.specter.R;
-import com.ecost.specter.api.API;
+import com.ecost.specter.api.EcostAPI;
 import com.ecost.specter.api.Response;
+import com.ecost.specter.api.SpecterAPI;
 import com.ecost.specter.models.Channel;
 import com.ecost.specter.recyclers.ChannelsAdapter;
 
@@ -43,7 +44,7 @@ public class ChannelsMenuFragment extends Fragment {
 
         Executors.newSingleThreadExecutor().execute(() -> {
             try {
-                response = new API("http://95.163.236.254:3501/api/method/channels.get?v=0.7", accessToken).call();
+                response = new SpecterAPI("channels.get", "", accessToken).call();
             } catch (IOException e) {
                 throw new RuntimeException(e);
             } finally {

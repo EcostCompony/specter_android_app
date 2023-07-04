@@ -25,8 +25,8 @@ import android.widget.ImageButton;
 import androidx.fragment.app.Fragment;
 
 import com.ecost.specter.R;
-import com.ecost.specter.api.API;
 import com.ecost.specter.api.Response;
+import com.ecost.specter.api.SpecterAPI;
 import com.ecost.specter.auth.AuthActivity;
 
 import java.io.IOException;
@@ -100,7 +100,7 @@ public class AccountSettingsMenuFragment extends Fragment {
         if (name.equals("")) showToastMessage(mainMenuActivity, view, 2, getString(R.string.account_settings_menu_error_not_name));
         else Executors.newSingleThreadExecutor().execute(() -> {
             try {
-                response = new API("http://95.163.236.254:3501/api/method/account.edit?v=0.7&name=" + name, accessToken).call();
+                response = new SpecterAPI("account.edit", "&name=" + name, accessToken).call();
             } catch (IOException e) {
                 throw new RuntimeException(e);
             } finally {
@@ -122,7 +122,7 @@ public class AccountSettingsMenuFragment extends Fragment {
         else if (shortLink.length() < 4) showToastMessage(mainMenuActivity, view, 2, getString(R.string.account_settings_menu_error_small_short_link));
         else Executors.newSingleThreadExecutor().execute(() -> {
             try {
-                response = new API("http://95.163.236.254:3501/api/method/account.edit?v=0.7&short_link=" + shortLink, accessToken).call();
+                response = new SpecterAPI("account.edit", "&short_link=" + shortLink, accessToken).call();
             } catch (IOException e) {
                 throw new RuntimeException(e);
             } finally {

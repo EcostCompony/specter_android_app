@@ -15,7 +15,7 @@ import android.widget.EditText;
 import androidx.fragment.app.Fragment;
 
 import com.ecost.specter.R;
-import com.ecost.specter.api.API;
+import com.ecost.specter.api.EcostAPI;
 import com.ecost.specter.api.Response;
 
 import java.io.IOException;
@@ -57,7 +57,7 @@ public class PhoneNumberSignUpFragment extends Fragment {
         else if (phoneNumber.length() < 3) showToastMessage(authActivity, view, 2, getString(R.string.phone_number_sign_up_error_incorrect_phone_number));
         else Executors.newSingleThreadExecutor().execute(() -> {
             try {
-                response = new API("http://95.163.236.254:3500/api/auth/method/signup.confirmPhoneNumber?v=1.0&service=specter&phone_number=" + phoneNumber).call();
+                response = new EcostAPI("signup.confirmPhoneNumber", "&service=specter&phone_number=" + phoneNumber).call();
             } catch (IOException e) {
                 throw new RuntimeException(e);
             } finally {

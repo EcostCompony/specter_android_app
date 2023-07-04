@@ -9,8 +9,8 @@ import android.os.Looper;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.ecost.specter.R;
-import com.ecost.specter.api.API;
 import com.ecost.specter.api.Response;
+import com.ecost.specter.api.SpecterAPI;
 
 import java.io.IOException;
 import java.util.concurrent.Executors;
@@ -37,7 +37,7 @@ public class ChannelActivity extends AppCompatActivity {
 
         Executors.newSingleThreadExecutor().execute(() -> {
             try {
-                response = new API("http://95.163.236.254:3501/api/method/channels.getById?v=0.7&channel_id=" + channelId, accessToken).call();
+                response = new SpecterAPI("channels.getById", "&channel_id=" + channelId, accessToken).call();
             } catch (IOException e) {
                 throw new RuntimeException(e);
             } finally {

@@ -19,8 +19,9 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.ecost.specter.R;
-import com.ecost.specter.api.API;
+import com.ecost.specter.api.EcostAPI;
 import com.ecost.specter.api.Response;
+import com.ecost.specter.api.SpecterAPI;
 import com.ecost.specter.models.Subscriber;
 import com.ecost.specter.recyclers.SubscribersAdapter;
 
@@ -49,7 +50,7 @@ public class SubscribersChannelSettingsFragment extends Fragment {
         rvSubscribersList.setLayoutManager(new LinearLayoutManager(channelActivity));
         subscribersAdapter = new SubscribersAdapter(channelActivity, subscribers, position -> Executors.newSingleThreadExecutor().execute(() -> {
             try {
-                response = new API("http://95.163.236.254:3501/api/method/subscribers.setAdmin?v=0.7&channel_id=" + channelActivity.channelId + "&user_id=" + subscribers.get(position).getUser().getId(), accessToken).call();
+                response = new SpecterAPI("subscribers.setAdmin", "&channel_id=" + channelActivity.channelId + "&user_id=" + subscribers.get(position).getUserId(), accessToken).call();
             } catch (IOException e) {
                 throw new RuntimeException(e);
             }
@@ -66,7 +67,7 @@ public class SubscribersChannelSettingsFragment extends Fragment {
                 if (!searchString.equals("")) {
                     Executors.newSingleThreadExecutor().execute(() -> {
                         try {
-                            response = new API("http://95.163.236.254:3501/api/method/subscribers.search?v=0.7&channel_id=" + channelActivity.channelId + "&q=" + searchString, accessToken).call();
+                            response = new SpecterAPI("subscribers.search", "&channel_id=" + channelActivity.channelId + "&q=" + searchString, accessToken).call();
                         } catch (IOException e) {
                             throw new RuntimeException(e);
                         } finally {
@@ -94,7 +95,7 @@ public class SubscribersChannelSettingsFragment extends Fragment {
     private void showSubscribers(View view) {
         Executors.newSingleThreadExecutor().execute(() -> {
             try {
-                response = new API("http://95.163.236.254:3501/api/method/subscribers.get?v=0.7&channel_id=" + channelActivity.channelId, accessToken).call();
+                response = new SpecterAPI("subscribers.get", "&channel_id=" + channelActivity.channelId, accessToken).call();
             } catch (IOException e) {
                 throw new RuntimeException(e);
             } finally {

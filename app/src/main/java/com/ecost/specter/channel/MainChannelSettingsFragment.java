@@ -22,8 +22,9 @@ import android.widget.Spinner;
 import androidx.fragment.app.Fragment;
 
 import com.ecost.specter.R;
-import com.ecost.specter.api.API;
+import com.ecost.specter.api.EcostAPI;
 import com.ecost.specter.api.Response;
+import com.ecost.specter.api.SpecterAPI;
 
 import java.io.IOException;
 import java.util.concurrent.Executors;
@@ -110,7 +111,7 @@ public class MainChannelSettingsFragment extends Fragment {
         ibSaveDescription.setOnClickListener(this::saveDescription);
         ibSaveCategory.setOnClickListener(view -> Executors.newSingleThreadExecutor().execute(() -> {
             try {
-                response = new API("http://95.163.236.254:3501/api/method/channels.edit?v=0.7&channel_id=" + channelActivity.channelId + "&category=" + sCategory.getSelectedItemPosition(), accessToken).call();
+                response = new EcostAPI("http://95.163.236.254:3501/api/method/channels.edit?v=0.7&channel_id=" + channelActivity.channelId + "&category=" + sCategory.getSelectedItemPosition(), accessToken).call();
             } catch (IOException e) {
                 throw new RuntimeException(e);
             } finally {
@@ -126,7 +127,7 @@ public class MainChannelSettingsFragment extends Fragment {
 
         inflaterView.findViewById(R.id.button_delete_channel).setOnClickListener(view -> Executors.newSingleThreadExecutor().execute(() -> {
             try {
-                response = new API("http://95.163.236.254:3501/api/method/channels.delete?v=0.7&channel_id=" + channelActivity.channelId, accessToken).call();
+                response = new SpecterAPI("channels.delete", "&channel_id=" + channelActivity.channelId, accessToken).call();
             } catch (IOException e) {
                 throw new RuntimeException(e);
             } finally {
@@ -143,7 +144,7 @@ public class MainChannelSettingsFragment extends Fragment {
         if (title.equals("")) showToastMessage(channelActivity, view, 2, getString(R.string.main_channel_settings_error_not_title));
         else Executors.newSingleThreadExecutor().execute(() -> {
             try {
-                response = new API("http://95.163.236.254:3501/api/method/channels.edit?v=0.7&channel_id=" + channelActivity.channelId + "&title=" + title, accessToken).call();
+                response = new SpecterAPI("channels.edit", "&channel_id=" + channelActivity.channelId + "&title=" + title, accessToken).call();
             } catch (IOException e) {
                 throw new RuntimeException(e);
             } finally {
@@ -165,7 +166,7 @@ public class MainChannelSettingsFragment extends Fragment {
         else if (shortLink.length() < 4) showToastMessage(channelActivity, view, 2, getString(R.string.main_channel_settings_error_small_short_link));
         else Executors.newSingleThreadExecutor().execute(() -> {
             try {
-                response = new API("http://95.163.236.254:3501/api/method/channels.edit?v=0.7&channel_id=" + channelActivity.channelId + "&short_link=" + shortLink, accessToken).call();
+                response = new SpecterAPI("channels.edit", "&channel_id=" + channelActivity.channelId + "&short_link=" + shortLink, accessToken).call();
             } catch (IOException e) {
                 throw new RuntimeException(e);
             } finally {
@@ -187,7 +188,7 @@ public class MainChannelSettingsFragment extends Fragment {
 
         Executors.newSingleThreadExecutor().execute(() -> {
             try {
-                response = new API("http://95.163.236.254:3501/api/method/channels.edit?v=0.7&channel_id=" + channelActivity.channelId + "&description=" + description, accessToken).call();
+                response = new SpecterAPI("channels.edit", "&channel_id=" + channelActivity.channelId + "&description=" + description, accessToken).call();
             } catch (IOException e) {
                 throw new RuntimeException(e);
             } finally {

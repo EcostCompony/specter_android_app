@@ -17,7 +17,7 @@ import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 
 import com.ecost.specter.R;
-import com.ecost.specter.api.API;
+import com.ecost.specter.api.EcostAPI;
 import com.ecost.specter.api.Response;
 
 import java.io.IOException;
@@ -75,7 +75,7 @@ public class SignInFragment extends Fragment {
         else if (password.length() < 8) showToastMessage(authActivity, view, 2, getString(R.string.sign_in_error_small_password));
         else Executors.newSingleThreadExecutor().execute(() -> {
             try {
-                response = new API("http://95.163.236.254:3500/api/auth/method/signin?v=1.0&service=specter&phone_number=" + phoneNumber + "&password=" + password).call();
+                response = new EcostAPI("signin", "&service=specter&phone_number=" + phoneNumber + "&password=" + password).call();
             } catch (IOException e) {
                 throw new RuntimeException(e);
             } finally {

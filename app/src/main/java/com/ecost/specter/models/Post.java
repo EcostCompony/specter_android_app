@@ -5,10 +5,9 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class Post {
 
-    private int id;
+    private int id, author_id;
     private String text;
     private Long datetime;
-    private Author author;
 
     public int getId() {
         return id;
@@ -18,12 +17,12 @@ public class Post {
         this.id = id;
     }
 
-    public Author getAuthor() {
-        return author;
+    public int getAuthorId() {
+        return author_id;
     }
 
-    public void setAuthor(Author author) {
-        this.author = author;
+    public void setAuthor_id(int author_id) {
+        this.author_id = author_id;
     }
 
     public String getText() {

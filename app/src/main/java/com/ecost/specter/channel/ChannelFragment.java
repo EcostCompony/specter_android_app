@@ -27,8 +27,8 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.ecost.specter.R;
-import com.ecost.specter.api.API;
 import com.ecost.specter.api.Response;
+import com.ecost.specter.api.SpecterAPI;
 import com.ecost.specter.models.Post;
 import com.ecost.specter.recyclers.PostsAdapter;
 
@@ -66,7 +66,7 @@ public class ChannelFragment extends Fragment {
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(channelActivity);
         linearLayoutManager.setStackFromEnd(true);
         rvPostsList.setLayoutManager(linearLayoutManager);
-        postsAdapter = new PostsAdapter(channelActivity, posts, (post, position, view) -> {
+        postsAdapter = new PostsAdapter(channelActivity, channelActivity.channelTitle, posts, (post, position, view) -> {
             PopupMenu popupMenu = showPopupMenu(channelActivity, view, R.menu.popup_menu_post, item -> {
                 if (item.getItemId() == R.id.comments) {
                     CommentsFragment commentsFragment = new CommentsFragment();
@@ -85,7 +85,7 @@ public class ChannelFragment extends Fragment {
                 else if (item.getItemId() == R.id.delete) {
                     Executors.newSingleThreadExecutor().execute(() -> {
                         try {
-                            response = new API("http://95.163.236.254:3501/api/method/posts.delete?v=0.7&channel_id=" + channelActivity.channelId + "&post_id=" + post.getId(), accessToken).call();
+                            response = new SpecterAPI("posts.delete", "&channel_id=" + channelActivity.channelId + "&post_id=" + post.getId(), accessToken).call();
                         } catch (IOException e) {
                             throw new RuntimeException(e);
                         } finally {
@@ -113,7 +113,7 @@ public class ChannelFragment extends Fragment {
 
         bSubscribe.setOnClickListener(view -> Executors.newSingleThreadExecutor().execute(() -> {
             try {
-                response = new API("http://95.163.236.254:3501/api/method/channels.subscribe?v=0.7&channel_id=" + channelActivity.channelId, accessToken).call();
+                response = new SpecterAPI("channels.subscribe", "&channel_id=" + channelActivity.channelId, accessToken).call();
             } catch (IOException e) {
                 throw new RuntimeException(e);
             } finally {
@@ -135,7 +135,7 @@ public class ChannelFragment extends Fragment {
             if (text.equals("")) return;
             Executors.newSingleThreadExecutor().execute(() -> {
                 try {
-                    response = new API(postEditable == null ? ("http://95.163.236.254:3501/api/method/posts.create?v=0.7&channel_id=" + channelActivity.channelId + "&text=" + text + "&author=1") : ("http://95.163.236.254:3501/api/method/posts.edit?v=0.7&channel_id=" + channelActivity.channelId + "&post_id=" + postEditable.getId() + "&text=" + text), accessToken).call();
+                    response = new SpecterAPI(postEditable == null ? "posts.create" : "posts.edit", postEditable == null ? ("&author=1&channel_id=" + channelActivity.channelId + "&text=" + text) : ("&channel_id=" + channelActivity.channelId + "&post_id=" + postEditable.getId() + "&text=" + text), accessToken).call();
                 } catch (IOException e) {
                     throw new RuntimeException(e);
                 } finally {
@@ -158,13 +158,13 @@ public class ChannelFragment extends Fragment {
         });
 
         flSend.setOnLongClickListener(view -> {
-            showPopupMenu(channelActivity, view, R.menu.popup_menu_send_post, item -> {
+            PopupMenu popupMenu = showPopupMenu(channelActivity, view, R.menu.popup_menu_send_post, item -> {
                 String text = etBroadcast.getText().toString().trim();
 
                 if (text.equals("") || postEditable != null) return false;
                 Executors.newSingleThreadExecutor().execute(() -> {
                     try {
-                        response = new API("http://95.163.236.254:3501/api/method/posts.create?v=0.7&channel_id=" + channelActivity.channelId + "&text=" + text + "&author=2", accessToken).call();
+                        response = new SpecterAPI("posts.create", "&author=2&channel_id=" + channelActivity.channelId + "&text=" + text, accessToken).call();
                     } catch (IOException e) {
                         throw new RuntimeException(e);
                     } finally {
@@ -181,6 +181,7 @@ public class ChannelFragment extends Fragment {
                 });
                 return true;
             }, menu -> inflaterView.findViewById(R.id.dim_layout).setVisibility(View.INVISIBLE));
+            popupMenu.show();
             inflaterView.findViewById(R.id.dim_layout).setVisibility(View.VISIBLE);
             return false;
         });
@@ -192,7 +193,7 @@ public class ChannelFragment extends Fragment {
     private void showPosts(View view) {
         Executors.newSingleThreadExecutor().execute(() -> {
             try {
-                response = new API("http://95.163.236.254:3501/api/method/posts.get?v=0.7&channel_id=" + channelActivity.channelId, accessToken).call();
+                response = new SpecterAPI("posts.get", "&channel_id=" + channelActivity.channelId, accessToken).call();
             } catch (IOException e) {
                 throw new RuntimeException(e);
             } finally {
