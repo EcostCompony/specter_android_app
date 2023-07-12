@@ -16,7 +16,6 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.ecost.specter.R;
-import com.ecost.specter.api.EcostAPI;
 import com.ecost.specter.api.Response;
 import com.ecost.specter.api.SpecterAPI;
 import com.ecost.specter.models.Channel;
@@ -51,8 +50,7 @@ public class ChannelsMenuFragment extends Fragment {
                 new Handler(Looper.getMainLooper()).post(() -> {
                     if (response.getError() != null) showToastMessage(mainMenuActivity, super.getView(), 2, getString(R.string.unknown_error));
                     else {
-                        Channel[] channels1 = response.getChannels();
-                        for (Channel channel : channels1) if (channel.getBody().equals("%CHANNEL_CREATED%")) channel.setBody(getString(R.string.channels_menu_channel_body_channel_created));
+                        Channel[] channels1 = response.getList().getChannels();
                         channels.addAll(Arrays.asList(channels1));
                         channelsAdapter.notifyDataSetChanged();
                     }

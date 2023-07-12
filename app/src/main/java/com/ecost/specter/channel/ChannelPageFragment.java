@@ -16,7 +16,6 @@ import android.widget.TextView;
 import androidx.fragment.app.Fragment;
 
 import com.ecost.specter.R;
-import com.ecost.specter.api.EcostAPI;
 import com.ecost.specter.api.SpecterAPI;
 
 import java.io.IOException;
@@ -35,7 +34,7 @@ public class ChannelPageFragment extends Fragment {
 
         ((TextView) inflaterView.findViewById(R.id.title)).setText(channelActivity.channelTitle);
         ((TextView) inflaterView.findViewById(R.id.short_link)).setText(getText(R.string.symbol_at) + channelActivity.channelShortLink);
-        ((TextView) inflaterView.findViewById(R.id.number_subscribers)).setText(pluralForm(channelActivity.channelSubscriberNumbers, getResources().getStringArray(R.array.subscribers)));
+        ((TextView) inflaterView.findViewById(R.id.number_subscribers)).setText(pluralForm(channelActivity.channelSubscribersCount, getResources().getStringArray(R.array.subscribers)));
         if (channelActivity.userSubscribe) ibSubscribe.setImageResource(R.drawable.icon_profile_delete);
         if (channelActivity.userAdmin) {
             ibChannelSettings.setVisibility(View.VISIBLE);

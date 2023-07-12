@@ -6,7 +6,7 @@
     android:background="@color/background">
 
     <EditText
-        android:id="@+id/input_search_string"
+        android:id="@+id/input_short_link"
         android:layout_width="match_parent"
         android:layout_height="38dp"
         android:layout_marginTop="15dp"

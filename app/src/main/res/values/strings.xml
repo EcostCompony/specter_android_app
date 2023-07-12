@@ -188,7 +188,7 @@
     <string name="main_channel_settings_spinner_category_header">Category</string>
     <string name="main_channel_settings_input_description_header">Description</string>
     <string name="main_channel_settings_button_delete_channel">Delete channel</string>
-    <string name="subscribers_channel_settings_input_search_string_hint">Name or short link</string>
+    <string name="subscribers_channel_settings_input_search_string_hint">User\'s short link</string>
 
     <!-- comments -->
     <string name="comments_editing_mode">Editing</string>

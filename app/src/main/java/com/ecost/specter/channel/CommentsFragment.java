@@ -25,7 +25,6 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.ecost.specter.R;
-import com.ecost.specter.api.EcostAPI;
 import com.ecost.specter.api.Response;
 import com.ecost.specter.api.SpecterAPI;
 import com.ecost.specter.models.Post;
@@ -60,7 +59,7 @@ public class CommentsFragment extends Fragment {
         postId = getArguments().getInt("POST_ID");
 
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(channelActivity);
-        linearLayoutManager.setStackFromEnd(true);
+        linearLayoutManager.setReverseLayout(true);
         rvCommentsList.setLayoutManager(linearLayoutManager);
         postsAdapter = new PostsAdapter(channelActivity, channelActivity.channelTitle, comments, (comment, position, view) -> {
             PopupMenu popupMenu = showPopupMenu(channelActivity, view, R.menu.popup_menu_comment, item -> {
@@ -88,7 +87,7 @@ public class CommentsFragment extends Fragment {
                 }
                 return true;
             }, menu -> inflaterView.findViewById(R.id.dim_layout).setVisibility(View.INVISIBLE));
-            if (!channelActivity.userAdmin && comment.getAuthorId() != userId) {
+            if (!channelActivity.userAdmin && comment.getAuthor().getId() != userId) {
                 popupMenu.getMenu().findItem(R.id.edit).setVisible(false);
                 popupMenu.getMenu().findItem(R.id.delete).setVisible(false);
             }
@@ -114,8 +113,8 @@ public class CommentsFragment extends Fragment {
                     new Handler(Looper.getMainLooper()).post(() -> {
                         if (response.getError() != null) showToastMessage(channelActivity, inflaterView, 2, getString(R.string.unknown_error));
                         else if (commentEditable == null) {
-                            comments.add(response.getPost());
-                            postsAdapter.notifyItemInserted(comments.size() - 1);
+                            comments.add(0, response.getPost());
+                            postsAdapter.notifyItemInserted(0);
                             rvCommentsList.scrollToPosition(comments.size() - 1);
                             etComment.setText("");
                         } else {
@@ -144,7 +143,7 @@ public class CommentsFragment extends Fragment {
                     if (response.getError() != null) showToastMessage(channelActivity, view, 2, getString(R.string.unknown_error));
                     else {
                         comments.clear();
-                        comments.addAll(Arrays.asList(response.getPosts()));
+                        comments.addAll(Arrays.asList(response.getList().getPosts()));
                         postsAdapter.notifyDataSetChanged();
                         rvCommentsList.scrollToPosition(comments.size() - 1);
                     }

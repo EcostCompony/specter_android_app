@@ -64,7 +64,7 @@ public class Routing extends AppCompatActivity {
                     if (response == null || response1 == null) return;
                     if (Integer.parseInt(response.getRes().getValue()) > BuildConfig.VERSION_CODE) startActivity(new Intent(this, HardUpdateActivity.class));
                     else if (accessToken == null) startActivity(new Intent(this, AuthActivity.class));
-                    else if (response1.getError() != null || response1.getRes() == null) {
+                    else if (response1.getError() != null || response1.getUser() == null) {
                         putAccessToken(this, null);
                         startActivity(new Intent(this, AuthActivity.class));
                     } else {

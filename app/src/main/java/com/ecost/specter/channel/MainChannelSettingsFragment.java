@@ -81,7 +81,7 @@ public class MainChannelSettingsFragment extends Fragment {
 
                 ibSaveTitle.setVisibility(title.equals(channelActivity.channelTitle) || title.equals("") ? View.GONE : View.VISIBLE);
                 ibSaveShortLink.setVisibility(shortLink.equals(channelActivity.channelShortLink) || shortLink.length() < 4 || !Pattern.compile("^[a-z][a-z\\d_.]{2,30}[a-z\\d]$", Pattern.CASE_INSENSITIVE).matcher(shortLink).find() || (float) Pattern.compile("[a-z]", Pattern.CASE_INSENSITIVE).matcher(shortLink).replaceAll("").length() / (float) shortLink.length() * 100 > 40 ? View.GONE : View.VISIBLE);
-                ibSaveDescription.setVisibility(etDescription.getText().toString().trim().equals(channelActivity.channelDescription) ? View.GONE : View.VISIBLE);
+                ibSaveDescription.setVisibility(etDescription.getText().toString().trim().equals(channelActivity.channelDescription) || (etDescription.getText().toString().trim().equals("") && channelActivity.channelDescription == null) ? View.GONE : View.VISIBLE);
             }
 
             @Override public void beforeTextChanged(CharSequence s, int start, int count, int after) { }
@@ -111,7 +111,7 @@ public class MainChannelSettingsFragment extends Fragment {
         ibSaveDescription.setOnClickListener(this::saveDescription);
         ibSaveCategory.setOnClickListener(view -> Executors.newSingleThreadExecutor().execute(() -> {
             try {
-                response = new EcostAPI("http://95.163.236.254:3501/api/method/channels.edit?v=0.7&channel_id=" + channelActivity.channelId + "&category=" + sCategory.getSelectedItemPosition(), accessToken).call();
+                response = new SpecterAPI("channels.edit", "&channel_id=" + channelActivity.channelId + "&category=" + sCategory.getSelectedItemPosition(), accessToken).call();
             } catch (IOException e) {
                 throw new RuntimeException(e);
             } finally {
@@ -188,7 +188,7 @@ public class MainChannelSettingsFragment extends Fragment {
 
         Executors.newSingleThreadExecutor().execute(() -> {
             try {
-                response = new SpecterAPI("channels.edit", "&channel_id=" + channelActivity.channelId + "&description=" + description, accessToken).call();
+                response = new SpecterAPI("channels.edit", "&channel_id=" + channelActivity.channelId + "&description=" + (description.equals("") ? "%20" : description), accessToken).call();
             } catch (IOException e) {
                 throw new RuntimeException(e);
             } finally {

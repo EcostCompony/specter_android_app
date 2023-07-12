@@ -69,7 +69,7 @@ public class ChannelsSearchFragment extends Fragment {
                                 if (response.getError() != null) showToastMessage(mainMenuActivity, inflaterView, 2, getString(R.string.unknown_error));
                                 else {
                                     channels.clear();
-                                    channels.addAll(Arrays.asList(response.getChannels()));
+                                    channels.addAll(Arrays.asList(response.getList().getChannels()));
                                     for (Channel channel : channels) channel.setBody(getString(R.string.symbol_at) + channel.getShortLink());
                                     channelsAdapter.notifyDataSetChanged();
                                 }

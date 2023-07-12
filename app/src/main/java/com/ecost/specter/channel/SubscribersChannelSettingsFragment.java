@@ -19,7 +19,6 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.ecost.specter.R;
-import com.ecost.specter.api.EcostAPI;
 import com.ecost.specter.api.Response;
 import com.ecost.specter.api.SpecterAPI;
 import com.ecost.specter.models.Subscriber;
@@ -43,14 +42,14 @@ public class SubscribersChannelSettingsFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View inflaterView = inflater.inflate(R.layout.fragment_subscribers_channel_settings, container, false);
 
-        EditText etSearchString = inflaterView.findViewById(R.id.input_search_string);
+        EditText etShortLink = inflaterView.findViewById(R.id.input_short_link);
         RecyclerView rvSubscribersList = inflaterView.findViewById(R.id.recycler_subscribers_list);
         channelActivity = (ChannelActivity) requireActivity();
 
         rvSubscribersList.setLayoutManager(new LinearLayoutManager(channelActivity));
         subscribersAdapter = new SubscribersAdapter(channelActivity, subscribers, position -> Executors.newSingleThreadExecutor().execute(() -> {
             try {
-                response = new SpecterAPI("subscribers.setAdmin", "&channel_id=" + channelActivity.channelId + "&user_id=" + subscribers.get(position).getUserId(), accessToken).call();
+                response = new SpecterAPI("subscribers.setAdmin", "&channel_id=" + channelActivity.channelId + "&user_id=" + subscribers.get(position).getUser().getId(), accessToken).call();
             } catch (IOException e) {
                 throw new RuntimeException(e);
             }
@@ -58,16 +57,16 @@ public class SubscribersChannelSettingsFragment extends Fragment {
         rvSubscribersList.setAdapter(subscribersAdapter);
         showSubscribers(inflaterView);
 
-        etSearchString.addTextChangedListener(new TextWatcher() {
+        etShortLink.addTextChangedListener(new TextWatcher() {
             @SuppressLint("NotifyDataSetChanged")
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
-                String searchString = etSearchString.getText().toString().trim();
+                String shortLink = etShortLink.getText().toString().trim();
 
-                if (!searchString.equals("")) {
+                if (!shortLink.equals("")) {
                     Executors.newSingleThreadExecutor().execute(() -> {
                         try {
-                            response = new SpecterAPI("subscribers.search", "&channel_id=" + channelActivity.channelId + "&q=" + searchString, accessToken).call();
+                            response = new SpecterAPI("subscribers.search", "&channel_id=" + channelActivity.channelId + "&short_link=" + shortLink, accessToken).call();
                         } catch (IOException e) {
                             throw new RuntimeException(e);
                         } finally {
@@ -75,7 +74,7 @@ public class SubscribersChannelSettingsFragment extends Fragment {
                                 if (response.getError() != null) showToastMessage(channelActivity, inflaterView, 2, getString(R.string.unknown_error));
                                 else {
                                     subscribers.clear();
-                                    subscribers.addAll(Arrays.asList(response.getSubscribers()));
+                                    subscribers.add(response.getSubscriber());
                                     subscribersAdapter.notifyDataSetChanged();
                                 }
                             });
@@ -103,7 +102,7 @@ public class SubscribersChannelSettingsFragment extends Fragment {
                     if (response.getError() != null) showToastMessage(channelActivity, view, 2, getString(R.string.unknown_error));
                     else {
                         subscribers.clear();
-                        subscribers.addAll(Arrays.asList(response.getSubscribers()));
+                        subscribers.addAll(Arrays.asList(response.getList().getSubscribers()));
                         subscribersAdapter.notifyDataSetChanged();
                     }
                 });

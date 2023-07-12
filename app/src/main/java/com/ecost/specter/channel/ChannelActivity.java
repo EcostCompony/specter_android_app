@@ -17,7 +17,7 @@ import java.util.concurrent.Executors;
 
 public class ChannelActivity extends AppCompatActivity {
 
-    public Integer channelId, channelCategory, channelSubscriberNumbers;
+    public Integer channelId, channelCategory, channelSubscribersCount;
     public String channelTitle, channelShortLink, channelDescription;
     public boolean userSubscribe;
     public boolean userAdmin;
@@ -31,19 +31,19 @@ public class ChannelActivity extends AppCompatActivity {
         channelId = getIntent().getIntExtra("CHANNEL_ID", 0);
         channelTitle = getIntent().getStringExtra("CHANNEL_TITLE");
         channelShortLink = getIntent().getStringExtra("CHANNEL_SHORT_LINK");
-        channelCategory = getIntent().getIntExtra("CHANNEL_CATEGORY", 0);
-        channelDescription = getIntent().getStringExtra("CHANNEL_DESCRIPTION");
-        channelSubscriberNumbers = getIntent().getIntExtra("CHANNEL_SUBSCRIBER_NUMBERS", 0);
 
         Executors.newSingleThreadExecutor().execute(() -> {
             try {
-                response = new SpecterAPI("channels.getById", "&channel_id=" + channelId, accessToken).call();
+                response = new SpecterAPI("channels.getById", "&channel_id=" + channelId + "&fields=category description subscribers_count", accessToken).call();
             } catch (IOException e) {
                 throw new RuntimeException(e);
             } finally {
                 new Handler(Looper.getMainLooper()).post(() -> {
                     if (response.getError() != null) finish();
                     else {
+                        channelCategory = response.getChannel().getCategory();
+                        channelDescription = response.getChannel().getDescription();
+                        channelSubscribersCount = response.getChannel().getSubscribersCount();
                         userSubscribe = response.getChannel().getIsSubscriber() == 1;
                         userAdmin = response.getChannel().getIsAdmin() == 1;
                         getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container_view, new ChannelFragment()).commit();

@@ -16,7 +16,6 @@ import android.widget.EditText;
 
 import com.ecost.specter.R;
 import com.ecost.specter.Routing;
-import com.ecost.specter.api.EcostAPI;
 import com.ecost.specter.api.Response;
 import com.ecost.specter.api.SpecterAPI;
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment;

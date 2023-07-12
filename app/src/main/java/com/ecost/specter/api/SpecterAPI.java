@@ -24,8 +24,7 @@ public class SpecterAPI implements Callable<Response> {
         HttpURLConnection connection = null;
 
         try {
-            // TODO: ПРИ ПУБЛИКАЦИИ ИЗМЕНИТЬ ПОРТ НА 3501
-            URL url = new URL("http://thespecterlife.com:4001/api/method/" + strings[0] + "?v=0.7" + strings[1]);
+            URL url = new URL("http://thespecterlife.com:3501/api/method/" + strings[0] + "?v=0.8" + strings[1]);
             connection = (HttpURLConnection) url.openConnection();
             if (strings.length == 3) connection.setRequestProperty("Authorization", strings[2]);
             connection.connect();

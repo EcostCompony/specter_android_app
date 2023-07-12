@@ -52,21 +52,10 @@ public class PostsAdapter extends RecyclerView.Adapter<PostViewHolder> {
     @Override
     public void onBindViewHolder(@NonNull PostViewHolder holder, int position) {
         Post post = posts.get(position);
-        Executors.newSingleThreadExecutor().execute(() -> {
-            try {
-                response = new SpecterAPI("users.getById", "&user_id=" + post.getAuthorId(), accessToken).call();
-            } catch (IOException e) {
-                throw new RuntimeException(e);
-            } finally {
-                new Handler(Looper.getMainLooper()).post(() -> {
-                    if (response.getError() != null) holder.tvAuthor.setText(channelTitle);
-                    else holder.tvAuthor.setText(response.getUser().getName());
-                    holder.tvText.setText(post.getText());
-                    holder.tvTime.setText(new SimpleDateFormat("HH:mm", Locale.getDefault()).format(new java.util.Date(post.getDatetime())));
-                    holder.itemView.setOnLongClickListener(v -> onLongClickListener.onPostLongClick(post, position, holder.itemView));
-                });
-            }
-        });
+        holder.tvAuthor.setText(post.getAuthor().getName().equals("%CHANNEL_TITLE%") ? channelTitle : post.getAuthor().getName());
+        holder.tvText.setText(post.getText());
+        holder.tvTime.setText(new SimpleDateFormat("HH:mm", Locale.getDefault()).format(new java.util.Date(post.getDatetime())));
+        holder.itemView.setOnLongClickListener(v -> onLongClickListener.onPostLongClick(post, position, holder.itemView));
     }
 
     @Override

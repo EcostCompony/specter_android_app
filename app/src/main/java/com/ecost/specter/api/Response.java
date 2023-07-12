@@ -25,20 +25,16 @@ public class Response {
         return new ObjectMapper().convertValue(res, Post.class);
     }
 
-    public Post[] getPosts() {
-        return new ObjectMapper().convertValue(res, Post[].class);
-    }
-
-    public Subscriber[] getSubscribers() {
-        return new ObjectMapper().convertValue(res, Subscriber[].class);
-    }
-
-    public Channel[] getChannels() {
-        return new ObjectMapper().convertValue(res, Channel[].class);
+    public Subscriber getSubscriber() {
+        return new ObjectMapper().convertValue(res, Subscriber.class);
     }
 
     public User getUser() {
         return new ObjectMapper().convertValue(res, User.class);
+    }
+
+    public ResponseList getList() {
+        return new ObjectMapper().convertValue(res, ResponseList.class);
     }
 
     public ResponseError getError() {

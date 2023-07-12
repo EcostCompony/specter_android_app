@@ -59,12 +59,12 @@ public class ChannelFragment extends Fragment {
         channelActivity = (ChannelActivity) requireActivity();
 
         ((TextView) inflaterView.findViewById(R.id.title)).setText(channelActivity.channelTitle);
-        ((TextView) inflaterView.findViewById(R.id.number_subscribers)).setText(pluralForm(channelActivity.channelSubscriberNumbers, getResources().getStringArray(R.array.subscribers)));
+        ((TextView) inflaterView.findViewById(R.id.number_subscribers)).setText(pluralForm(channelActivity.channelSubscribersCount, getResources().getStringArray(R.array.subscribers)));
         if (!channelActivity.userSubscribe) bSubscribe.setVisibility(View.VISIBLE);
         if (channelActivity.userAdmin) inflaterView.findViewById(R.id.admin_panel).setVisibility(View.VISIBLE);
 
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(channelActivity);
-        linearLayoutManager.setStackFromEnd(true);
+        linearLayoutManager.setReverseLayout(true);
         rvPostsList.setLayoutManager(linearLayoutManager);
         postsAdapter = new PostsAdapter(channelActivity, channelActivity.channelTitle, posts, (post, position, view) -> {
             PopupMenu popupMenu = showPopupMenu(channelActivity, view, R.menu.popup_menu_post, item -> {
@@ -142,8 +142,8 @@ public class ChannelFragment extends Fragment {
                     new Handler(Looper.getMainLooper()).post(() -> {
                         if (response.getError() != null) showToastMessage(channelActivity, inflaterView, 2, getString(R.string.unknown_error));
                         else if (postEditable == null) {
-                            posts.add(response.getPost());
-                            postsAdapter.notifyItemInserted(posts.size() - 1);
+                            posts.add(0, response.getPost());
+                            postsAdapter.notifyItemInserted(0);
                             rvPostsList.scrollToPosition(posts.size() - 1);
                             etBroadcast.setText("");
                         } else {
@@ -171,8 +171,8 @@ public class ChannelFragment extends Fragment {
                         new Handler(Looper.getMainLooper()).post(() -> {
                             if (response.getError() != null) showToastMessage(channelActivity, inflaterView, 2, getString(R.string.unknown_error));
                             else {
-                                posts.add(response.getPost());
-                                postsAdapter.notifyItemInserted(posts.size() - 1);
+                                posts.add(0, response.getPost());
+                                postsAdapter.notifyItemInserted(0);
                                 rvPostsList.scrollToPosition(posts.size() - 1);
                                 etBroadcast.setText("");
                             }
@@ -201,7 +201,7 @@ public class ChannelFragment extends Fragment {
                     if (response.getError() != null) showToastMessage(channelActivity, view, 2, getString(R.string.unknown_error));
                     else {
                         posts.clear();
-                        posts.addAll(Arrays.asList(response.getPosts()));
+                        posts.addAll(Arrays.asList(response.getList().getPosts()));
                         postsAdapter.notifyDataSetChanged();
                         rvPostsList.scrollToPosition(posts.size() - 1);
                     }

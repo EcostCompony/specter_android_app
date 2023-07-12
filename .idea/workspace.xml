@@ -11,8 +11,9 @@
     <option name="autoReloadType" value="NONE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="9b5b6967-9ca6-411a-be37-b65b22f6951c" name="Changes" comment="fixed a critical bug">
-      <change afterPath="$PROJECT_DIR$/app/src/main/java/com/ecost/specter/api/SpecterAPI.java" afterDir="false" />
+    <list default="true" id="9b5b6967-9ca6-411a-be37-b65b22f6951c" name="Changes" comment="preparing for the transition to the new version of the API. subscriber, post and comment objects have been changed">
+      <change afterPath="$PROJECT_DIR$/app/src/main/java/com/ecost/specter/api/ResponseList.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/src/main/java/com/ecost/specter/models/Author.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/8.0/executionHistory/executionHistory.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/8.0/executionHistory/executionHistory.bin" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/8.0/executionHistory/executionHistory.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/8.0/executionHistory/executionHistory.lock" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/8.0/fileHashes/fileHashes.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/8.0/fileHashes/fileHashes.bin" afterDir="false" />
@@ -21,13 +22,11 @@
       <change beforePath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/file-system.probe" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/file-system.probe" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/build.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/app/build.gradle" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/src/main/java/com/ecost/specter/Routing.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/ecost/specter/Routing.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/ecost/specter/api/API.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/ecost/specter/api/EcostAPI.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/ecost/specter/auth/ConfirmCodeSignInFragment.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/ecost/specter/auth/ConfirmCodeSignInFragment.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/ecost/specter/auth/ConfirmCodeSignUpFragment.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/ecost/specter/auth/ConfirmCodeSignUpFragment.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/ecost/specter/auth/PasswordSignUpFragment.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/ecost/specter/auth/PasswordSignUpFragment.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/ecost/specter/auth/PhoneNumberSignUpFragment.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/ecost/specter/auth/PhoneNumberSignUpFragment.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/ecost/specter/auth/SignInFragment.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/ecost/specter/auth/SignInFragment.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/ecost/specter/api/EcostAPI.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/ecost/specter/api/EcostAPI.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/ecost/specter/api/Response.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/ecost/specter/api/Response.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/ecost/specter/api/SpecterAPI.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/ecost/specter/api/SpecterAPI.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/src/main/java/com/ecost/specter/auth/SpecterStartFragment.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/ecost/specter/auth/SpecterStartFragment.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/src/main/java/com/ecost/specter/channel/ChannelActivity.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/ecost/specter/channel/ChannelActivity.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/src/main/java/com/ecost/specter/channel/ChannelFragment.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/ecost/specter/channel/ChannelFragment.java" afterDir="false" />
@@ -35,15 +34,18 @@
       <change beforePath="$PROJECT_DIR$/app/src/main/java/com/ecost/specter/channel/CommentsFragment.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/ecost/specter/channel/CommentsFragment.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/src/main/java/com/ecost/specter/channel/MainChannelSettingsFragment.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/ecost/specter/channel/MainChannelSettingsFragment.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/src/main/java/com/ecost/specter/channel/SubscribersChannelSettingsFragment.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/ecost/specter/channel/SubscribersChannelSettingsFragment.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/ecost/specter/menu/AccountSettingsMenuFragment.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/ecost/specter/menu/AccountSettingsMenuFragment.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/src/main/java/com/ecost/specter/menu/ChannelsMenuFragment.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/ecost/specter/menu/ChannelsMenuFragment.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/src/main/java/com/ecost/specter/menu/ChannelsSearchFragment.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/ecost/specter/menu/ChannelsSearchFragment.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/ecost/specter/menu/CreateChannelMenuFragment.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/ecost/specter/menu/CreateChannelMenuFragment.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/ecost/specter/models/Author.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/ecost/specter/menu/MainMenuActivity.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/ecost/specter/menu/MainMenuActivity.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/ecost/specter/models/Channel.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/ecost/specter/models/Channel.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/src/main/java/com/ecost/specter/models/Post.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/ecost/specter/models/Post.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/src/main/java/com/ecost/specter/models/Subscriber.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/ecost/specter/models/Subscriber.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/ecost/specter/recyclers/ChannelsAdapter.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/ecost/specter/recyclers/ChannelsAdapter.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/src/main/java/com/ecost/specter/recyclers/PostsAdapter.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/ecost/specter/recyclers/PostsAdapter.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/src/main/java/com/ecost/specter/recyclers/SubscribersAdapter.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/ecost/specter/recyclers/SubscribersAdapter.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/fragment_subscribers_channel_settings.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/fragment_subscribers_channel_settings.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/res/values-ru/strings.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/values-ru/strings.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/res/values/strings.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/values/strings.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -277,13 +279,6 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1674677968572</updated>
-    </task>
-    <task id="LOCAL-00072" summary="developed by recycler appeals">
-      <created>1679502324885</created>
-      <option name="number" value="00072" />
-      <option name="presentableId" value="LOCAL-00072" />
-      <option name="project" value="LOCAL" />
-      <updated>1679502324885</updated>
     </task>
     <task id="LOCAL-00073" summary="sending messages to support has been developed">
       <created>1679503476859</created>
@@ -621,7 +616,14 @@
       <option name="project" value="LOCAL" />
       <updated>1688254815493</updated>
     </task>
-    <option name="localTasksCounter" value="121" />
+    <task id="LOCAL-00121" summary="preparing for the transition to the new version of the API. subscriber, post and comment objects have been changed">
+      <created>1688483151603</created>
+      <option name="number" value="00121" />
+      <option name="presentableId" value="LOCAL-00121" />
+      <option name="project" value="LOCAL" />
+      <updated>1688483151603</updated>
+    </task>
+    <option name="localTasksCounter" value="122" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -654,7 +656,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="the possibility of administration has been developed" />
     <MESSAGE value="bug fix with duplicate subscribers after the search" />
     <MESSAGE value="changed the appearance of the floating context menu" />
     <MESSAGE value="bug fix with password entry fields in alertdialog" />
@@ -679,6 +680,7 @@
     <MESSAGE value="changing the app for api version 0.7" />
     <MESSAGE value="bug fixes" />
     <MESSAGE value="fixed a critical bug" />
-    <option name="LAST_COMMIT_MESSAGE" value="fixed a critical bug" />
+    <MESSAGE value="preparing for the transition to the new version of the API. subscriber, post and comment objects have been changed" />
+    <option name="LAST_COMMIT_MESSAGE" value="preparing for the transition to the new version of the API. subscriber, post and comment objects have been changed" />
   </component>
 </project>

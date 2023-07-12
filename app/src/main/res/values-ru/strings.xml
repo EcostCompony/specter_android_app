@@ -178,7 +178,7 @@
     <string name="main_channel_settings_spinner_category_header">Категория</string>
     <string name="main_channel_settings_input_description_header">Описание</string>
     <string name="main_channel_settings_button_delete_channel">Удалить канал</string>
-    <string name="subscribers_channel_settings_input_search_string_hint">Имя или короткая ссылка</string>
+    <string name="subscribers_channel_settings_input_search_string_hint">Короткая ссылка пользователя</string>
 
     <!-- comments -->
     <string name="comments_editing_mode">Редактирование</string>

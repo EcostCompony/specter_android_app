@@ -1,11 +1,13 @@
 package com.ecost.specter.models;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.databind.ObjectMapper;
 
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class Post {
 
-    private int id, author_id;
+    private int id;
+    private Object author;
     private String text;
     private Long datetime;
 
@@ -17,12 +19,12 @@ public class Post {
         this.id = id;
     }
 
-    public int getAuthorId() {
-        return author_id;
+    public Author getAuthor() {
+        return new ObjectMapper().convertValue(author, Author.class);
     }
 
-    public void setAuthor_id(int author_id) {
-        this.author_id = author_id;
+    public void setAuthor(Author author) {
+        this.author = author;
     }
 
     public String getText() {
