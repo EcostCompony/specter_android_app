@@ -158,9 +158,12 @@
     <string name="settings_menu_section_account">Account</string>
     <string name="settings_menu_section_app">App</string>
 
+    <string name="account_settings_menu_email_support_description">Did you find a problem or have a question?</string>
+    <string name="account_settings_menu_email_support_email" translatable="false">specter.sup@gmail.com</string>
     <string name="account_settings_menu_input_name_header">Name</string>
     <string name="account_settings_menu_input_short_link_header">Short link</string>
     <string name="account_settings_menu_button_sign_out">Sign out</string>
+    <string name="account_settings_menu_email_support_notif_email_copied">The email address was copied</string>
 
     <string name="app_settings_menu_spinner_theme_header">Theme</string>
     <string name="app_settings_menu_spinner_languages_header">Language</string>

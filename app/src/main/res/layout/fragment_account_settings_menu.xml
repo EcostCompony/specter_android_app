@@ -6,6 +6,32 @@
     android:background="@color/background"
     android:gravity="center_horizontal">
 
+    <LinearLayout
+        android:id="@+id/email_support"
+        android:layout_width="340dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="15dp"
+        android:orientation="vertical"
+        android:gravity="center"
+        android:paddingVertical="11dp"
+        android:background="@drawable/input">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/inter_semi_bold"
+            android:textSize="12sp"
+            android:text="@string/account_settings_menu_email_support_description" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/inter_bold"
+            android:textColor="@color/main_color"
+            android:textSize="12sp"
+            android:text="@string/account_settings_menu_email_support_email" />
+    </LinearLayout>
+
     <TextView
         android:layout_width="340dp"
         android:layout_height="wrap_content"

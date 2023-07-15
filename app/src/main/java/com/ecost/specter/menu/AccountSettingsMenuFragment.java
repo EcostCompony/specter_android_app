@@ -8,6 +8,9 @@ import static com.ecost.specter.Routing.showToastMessage;
 import static com.ecost.specter.Routing.userName;
 import static com.ecost.specter.Routing.userShortLink;
 
+import android.content.ClipData;
+import android.content.ClipboardManager;
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
@@ -80,6 +83,11 @@ public class AccountSettingsMenuFragment extends Fragment {
         etShortLink.setOnKeyListener((view, keyCode, event) -> {
             if (keyCode == KeyEvent.KEYCODE_ENTER && !etShortLink.getText().toString().equals(userShortLink)) saveShortLink(view);
             return keyCode == KeyEvent.KEYCODE_ENTER;
+        });
+
+        inflaterView.findViewById(R.id.email_support).setOnClickListener(view -> {
+            showToastMessage(mainMenuActivity, view, 1, getString(R.string.account_settings_menu_email_support_notif_email_copied));
+            ((ClipboardManager) mainMenuActivity.getSystemService(Context.CLIPBOARD_SERVICE)).setPrimaryClip(ClipData.newPlainText("email", getString(R.string.account_settings_menu_email_support_email)));
         });
 
         ibSaveName.setOnClickListener(this::saveName);

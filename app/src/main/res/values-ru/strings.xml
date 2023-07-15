@@ -148,6 +148,7 @@
     <string name="settings_menu_section_account">Аккаунт</string>
     <string name="settings_menu_section_app">Приложение</string>
 
+    <string name="account_settings_menu_email_support_description">Нашли проблему или возник вопрос?</string>
     <string name="account_settings_menu_input_name_header">Имя</string>
     <string name="account_settings_menu_input_short_link_header">Короткая ссылка</string>
     <string name="account_settings_menu_button_sign_out">Выйти из аккаунта</string>
@@ -183,4 +184,5 @@
     <!-- comments -->
     <string name="comments_editing_mode">Редактирование</string>
     <string name="comments_input_comment_hint">Комментарий</string>
+    <string name="account_settings_menu_email_support_notif_email_copied">Адрес электронной почты был скопирован</string>
 </resources>
